@@ -3,398 +3,35 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>elyrac Ai — Intelligence with Grace</title>
-<meta name="description" content="elyrac Ai is an AI studio making artificial intelligence accessible, ethical, and transformative for businesses worldwide."/>
+<title>elyrac AI — Custom AI Development</title>
+<meta name="description" content="elyrac AI builds fully customized AI software systems engineered for your specific business needs. Not off-the-shelf. Not generic. Yours."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/shared.css"/>
 <style>
-  :root {
-    --navy: #1B3A6B;
-    --navy-deep: #122952;
-    --navy-dark: #0D1F3C;
-    --navy-darker: #090F1E;
-    --blue: #4A7FD4;
-    --blue-bright: #5B9BF5;
-    --blue-electric: #6EBBFF;
-    --blue-glow: rgba(91,155,245,0.15);
-    --white: #FFFFFF;
-    --white-soft: rgba(255,255,255,0.88);
-    --white-dim: rgba(255,255,255,0.5);
-    --white-ghost: rgba(255,255,255,0.08);
-    --white-line: rgba(255,255,255,0.1);
-    --gold: #F5A623;
-    --serif: "Playfair Display", Georgia, serif;
-    --sans: "Outfit", sans-serif;
-    --display: "Raleway", sans-serif;
-  }
-  body.light-mode {
-    --navy: #E8EFF8;
-    --navy-deep: #D4E2F2;
-    --navy-dark: #EBF2FC;
-    --navy-darker: #DCE9F7;
-    --blue: #2A5FAA;
-    --blue-bright: #2B72D8;
-    --blue-electric: #1A5FC8;
-    --white: #0D1F3C;
-    --white-soft: rgba(13,31,60,0.88);
-    --white-dim: rgba(13,31,60,0.5);
-    --white-ghost: rgba(13,31,60,0.06);
-    --white-line: rgba(13,31,60,0.1);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--sans);
-    background: var(--navy-darker);
-    color: var(--white);
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 99990;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-  }
-
-  /* ===================== CURSOR ===================== */
-  #cursor {
-    width: 10px; height: 10px;
-    background: var(--blue-electric);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%,-50%);
-    mix-blend-mode: screen;
-  }
-  #cursor-ring {
-    width: 36px; height: 36px;
-    border: 1.5px solid var(--blue-electric);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 99998;
-    transform: translate(-50%,-50%);
-    opacity: 0.5;
-    transition: width 0.3s cubic-bezier(.34,1.56,.64,1), height 0.3s cubic-bezier(.34,1.56,.64,1);
-  }
-  body.cursor-hover #cursor { transform: translate(-50%,-50%) scale(2.8); }
-  body.cursor-hover #cursor-ring { width: 56px; height: 56px; opacity: 0.3; }
-  body.light-mode #cursor { mix-blend-mode: normal; background: #4A7FD4; }
-
-  /* ===================== PAGES ===================== */
-  .page { display: none; }
-  .page.active { display: block; }
-
-  /* ===================== SCROLL REVEAL ===================== */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.85s ease, transform 0.85s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-d1 { transition-delay: 0.09s; }
-  .reveal-d2 { transition-delay: 0.18s; }
-  .reveal-d3 { transition-delay: 0.27s; }
-  .reveal-d4 { transition-delay: 0.36s; }
-  .reveal-d5 { transition-delay: 0.45s; }
-
-  /* ===================== NAVBAR ===================== */
-  #nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 40px;
-    transition: background 0.3s ease, padding 0.3s ease;
-  }
-  #nav.scrolled {
-    background: rgba(9,15,30,0.85);
-    backdrop-filter: blur(24px);
-    border-bottom: 1px solid var(--white-line);
-    padding: 14px 40px;
-  }
-  body.light-mode #nav.scrolled {
-    background: rgba(235,242,252,0.95);
-  }
-  .nav-logo { height: 40px; width: auto; display: block; }
-  .nav-pill {
-    background: var(--white-ghost);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--white-line);
-    border-radius: 999px;
-    padding: 10px 28px;
-  }
-  .nav-center {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
-  .nav-center a {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--white-soft);
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 2px;
-  }
-  .nav-center a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0; right: 0;
-    height: 1px;
-    background: var(--blue-electric);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-  .nav-center a:hover { color: var(--white); }
-  .nav-center a:hover::after { transform: scaleX(1); }
-  .nav-cta {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    background: var(--white);
-    color: var(--navy-dark);
-    padding: 10px 24px;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: background 0.25s ease, color 0.25s ease;
-  }
-  .nav-cta:hover { background: var(--blue-electric); color: var(--navy-darker); }
-  .nav-hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 8px;
-  }
-  .nav-hamburger span {
-    width: 24px; height: 2px;
-    background: var(--white);
-    border-radius: 2px;
-    display: block;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-  @media (max-width: 768px) {
-    .nav-pill, .nav-cta { display: none; }
-    .nav-hamburger { display: flex; }
-    #nav { padding: 16px 20px; }
-    #nav.scrolled { padding: 14px 20px; }
-  }
-
-  /* ===================== MOBILE MENU ===================== */
-  #mobile-menu {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 99995;
-    background: rgba(9,15,30,0.97);
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 32px;
-  }
-  #mobile-menu.open { display: flex; }
-  .mobile-menu-close {
-    position: absolute;
-    top: 24px; right: 24px;
-    width: 44px; height: 44px;
-    border: 1px solid var(--white-line);
-    border-radius: 50%;
-    background: transparent;
-    color: var(--white);
-    font-size: 20px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-  }
-  #mobile-menu a {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 22px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--white-soft);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  #mobile-menu a:hover { color: var(--blue-electric); }
-  .mobile-cta {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    background: var(--blue-bright);
-    color: var(--white);
-    padding: 14px 36px;
-    border-radius: 999px;
-    text-decoration: none;
-    margin-top: 16px;
-    transition: background 0.25s ease;
-  }
-  .mobile-cta:hover { background: var(--blue-electric); }
-
-  /* ===================== BUTTONS ===================== */
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    background: var(--blue-bright);
-    color: var(--white);
-    padding: 14px 32px;
-    border-radius: 4px;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), opacity 0.25s ease;
-  }
-  .btn-primary:hover { transform: translateY(-2px); opacity: 0.92; }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-primary:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; }
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    background: transparent;
-    color: var(--white-soft);
-    padding: 14px 32px;
-    border-radius: 4px;
-    border: 1px solid var(--white-line);
-    text-decoration: none;
-    cursor: pointer;
-    transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), border-color 0.25s ease, color 0.25s ease;
-  }
-  .btn-ghost:hover { transform: translateY(-2px); border-color: var(--blue-electric); color: var(--blue-electric); }
-  .btn-ghost:active { transform: translateY(0); }
-  .btn-ghost:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; }
-
-  /* ===================== SECTION COMMON ===================== */
-  .section-label {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 32px; height: 1px;
-    background: var(--blue-bright);
-    flex-shrink: 0;
-  }
-  .section-h2 {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.2;
-    margin-bottom: 16px;
-  }
-  .section-h2 em {
-    font-style: italic;
-    color: var(--blue-bright);
-  }
-  .section-sub {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.85;
-    color: var(--white-dim);
-    max-width: 520px;
-  }
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-  @media (max-width: 768px) {
-    .container { padding: 0 20px; }
-  }
-  section { padding: 100px 0; }
-  @media (max-width: 768px) {
-    section { padding: 70px 0; }
-  }
-
-  /* ===================== HERO ===================== */
-  #hero {
+  /* ---- HERO HOME ---- */
+  #home-hero {
     min-height: 100vh;
-    background: radial-gradient(ellipse at 30% 40%, rgba(26,63,107,0.8) 0%, var(--navy-darker) 70%);
+    background: radial-gradient(ellipse at 25% 40%, rgba(26,63,107,0.75) 0%, var(--navy-darker) 65%);
     display: flex;
     align-items: center;
-    position: relative;
-    overflow: hidden;
     padding-top: 120px;
     padding-bottom: 60px;
-  }
-  body.light-mode #hero {
-    background: radial-gradient(ellipse at 30% 40%, rgba(196,218,246,0.9) 0%, var(--navy-darker) 70%);
-  }
-  #constellation-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-inner {
     position: relative;
-    z-index: 1;
+    overflow: hidden;
+  }
+  #home-hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .hero-inner {
+    position: relative; z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
     width: 100%;
   }
-  @media (max-width: 768px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  }
-  .hero-left {
-    animation: fadeSlideUp 0.8s cubic-bezier(.34,1.56,.64,1) 0.3s both;
-  }
-  .hero-right {
-    animation: fadeSlideUp 0.8s cubic-bezier(.34,1.56,.64,1) 0.48s both;
-  }
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(32px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; gap: 48px; } }
   .hero-eyebrow {
     font-family: var(--display);
     font-weight: 700;
@@ -404,18 +41,13 @@
     color: var(--blue-bright);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 24px;
   }
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 32px; height: 1px;
-    background: var(--blue-bright);
-  }
+  .hero-eyebrow::before { content: '—'; color: var(--blue-electric); }
   .hero-h1 {
     font-family: var(--serif);
-    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    font-size: clamp(3rem, 5.5vw, 5rem);
     font-weight: 700;
     color: var(--white);
     line-height: 1.1;
@@ -428,2467 +60,644 @@
     font-size: 17px;
     line-height: 1.85;
     color: var(--white-dim);
-    margin-bottom: 40px;
     max-width: 460px;
+    margin-bottom: 40px;
   }
-  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-  .hero-tagline {
-    font-family: var(--serif);
-    font-size: clamp(1.5rem, 2.2vw, 2.2rem);
-    font-weight: 500;
-    color: var(--white-soft);
-    line-height: 1.35;
-    margin-bottom: 48px;
-  }
-  .hero-tagline em { font-style: italic; color: var(--blue-bright); }
-  .hero-stats { display: flex; flex-direction: column; gap: 0; }
-  .hero-stat-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--white-line);
-    position: relative;
-    overflow: hidden;
-    cursor: default;
-  }
-  .hero-stat-row::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0; height: 2px;
-    background: var(--blue-bright);
-    transition: width 0.4s ease;
-  }
-  .hero-stat-row:hover::after { width: 100%; }
-  .hero-stat-num {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--blue-bright);
-    min-width: 32px;
-  }
-  .hero-stat-label {
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 15px;
-    color: var(--white-soft);
-  }
-
-  /* ===================== TICKER ===================== */
-  #ticker {
-    background: var(--navy-deep);
-    overflow: hidden;
-    padding: 18px 0;
-    border-top: 1px solid var(--white-line);
-    border-bottom: 1px solid var(--white-line);
-  }
-  .ticker-track {
-    display: flex;
-    gap: 0;
-    width: max-content;
-    animation: ticker-scroll 30s linear infinite;
-  }
-  #ticker:hover .ticker-track { animation-play-state: paused; }
-  @keyframes ticker-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  .ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 32px;
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--white-dim);
-    white-space: nowrap;
-  }
-  .ticker-star { color: var(--blue-bright); font-size: 16px; }
-
-  /* ===================== COMPANIES SECTION ===================== */
-  #companies {
-    background: var(--navy-dark);
-  }
-  .companies-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-  @media (max-width: 768px) {
-    .companies-inner { grid-template-columns: 1fr; gap: 48px; }
-  }
-  .stat-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
-  .stat-card {
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    border-radius: 12px;
-    padding: 24px 28px;
-  }
-  .stat-card-num {
-    font-family: var(--serif);
-    font-size: 3rem;
-    font-weight: 700;
-    letter-spacing: -2px;
-    color: var(--blue-bright);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .stat-card-label {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 14px;
-    color: var(--white-dim);
-  }
-  .logo-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1px;
-    border: 1px solid var(--white-line);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-top: 40px;
-  }
-  @media (max-width: 640px) {
-    .logo-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .logo-grid-item {
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    padding: 18px 12px;
-    text-align: center;
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  /* hero right — circuit SVG */
+  .hero-visual {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 6px;
-    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), background 0.25s ease;
-    cursor: default;
+    position: relative;
   }
-  .logo-grid-item:hover { transform: scale(1.04); background: var(--blue-glow); }
-  .logo-grid-item span {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--white-dim);
+  .hero-svg { width: 100%; max-width: 520px; animation: hero-float 6s ease-in-out infinite; }
+  @keyframes hero-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
   }
-  .logo-icon { font-size: 20px; margin-bottom: 2px; }
+  .pulse-ring {
+    animation: svg-pulse 3s ease-out infinite;
+    transform-origin: center;
+  }
+  @keyframes svg-pulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.8; }
+  }
+  .hero-right-anim { animation: fadeSlideUp 0.8s cubic-bezier(.34,1.56,.64,1) 0.48s both; }
+  .hero-left-anim { animation: fadeSlideUp 0.8s cubic-bezier(.34,1.56,.64,1) 0.2s both; }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (max-width: 900px) { .hero-visual { display: none; } }
 
-  /* ===================== PROBLEMS ===================== */
-  #problems {
-    background: var(--navy-darker);
-  }
-  .problem-sub { color: #FF6B6B; }
-  .problem-cards {
+  /* ---- TRUST BAR EXTENDED ---- */
+  .trust-full { background: var(--navy-dark); padding: 80px 0; }
+  .trust-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 52px; }
+  @media (max-width: 768px) { .trust-top { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* ---- WHAT WE BUILD ---- */
+  #what-we-build { background: var(--navy-darker); }
+
+  /* ---- WHY ELYRAC ---- */
+  #why-us { background: var(--navy-dark); }
+
+  /* ---- TECH ---- */
+  #tech { background: var(--navy-darker); overflow: hidden; }
+
+  /* ---- WORK ---- */
+  #work { background: var(--navy-dark); }
+  .work-cta { text-align: center; margin-top: 60px; }
+  .work-cta p { font-family: var(--sans); font-size: 18px; font-weight: 300; color: var(--white-dim); margin-bottom: 20px; }
+
+  /* ---- FAQ HOME ---- */
+  #home-faq { background: var(--navy-darker); }
+  .faq-home-inner {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 48px;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    align-items: start;
   }
-  @media (max-width: 768px) {
-    .problem-cards { grid-template-columns: 1fr; }
-  }
-  .problem-card {
+  @media (max-width: 768px) { .faq-home-inner { grid-template-columns: 1fr; gap: 40px; } }
+  .faq-stats { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .faq-stat {
     background: var(--white-ghost);
     border: 1px solid var(--white-line);
-    border-radius: 16px;
-    padding: 32px;
-    transition: border-color 0.25s ease, transform 0.25s cubic-bezier(.34,1.56,.64,1);
-    cursor: default;
-  }
-  .problem-card:hover { border-color: var(--blue-bright); transform: translateY(-4px); }
-  .problem-card:focus-within { border-color: var(--blue-electric); }
-  .problem-emoji { font-size: 32px; margin-bottom: 16px; display: block; }
-  .problem-title {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .problem-arrow {
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 13px;
-    color: #FF6B6B;
-    margin-bottom: 12px;
-  }
-  .problem-desc {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--white-dim);
-  }
-
-  /* ===================== SOLUTIONS ===================== */
-  #solutions {
-    background: var(--navy-dark);
-  }
-  .solutions-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 48px;
-  }
-  @media (max-width: 768px) {
-    .solutions-grid { grid-template-columns: 1fr; }
-  }
-  .service-card {
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    border-radius: 16px;
-    padding: 36px;
-    transition: border-color 0.25s ease, transform 0.25s cubic-bezier(.34,1.56,.64,1);
-    cursor: default;
-  }
-  .service-card:hover {
-    border-color: var(--blue-bright);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(91,155,245,0.35);
-  }
-  .service-card:focus-within { border-color: var(--blue-electric); }
-  .service-num {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--blue-bright);
-    margin-bottom: 16px;
-  }
-  .service-title {
-    font-family: var(--serif);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 12px;
-  }
-  .service-desc {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--white-dim);
-    margin-bottom: 20px;
-  }
-  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .service-tag {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    background: var(--blue-glow);
-    color: var(--blue-electric);
-    border: 1px solid rgba(110,187,255,0.2);
-    padding: 5px 12px;
-    border-radius: 999px;
-  }
-
-  /* ===================== TECH STACK ===================== */
-  #tech {
-    background: var(--navy-darker);
-    overflow: hidden;
-  }
-  .tech-scroll-wrapper { overflow: hidden; margin-top: 48px; }
-  .tech-row {
-    display: flex;
-    width: max-content;
-    gap: 12px;
-    padding: 8px 0;
-  }
-  .tech-row-1 { animation: ticker-scroll 25s linear infinite; }
-  .tech-row-2 { animation: ticker-scroll-reverse 30s linear infinite; }
-  @keyframes ticker-scroll-reverse {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
-  }
-  .tech-chip {
+    border-radius: 12px;
+    padding: 20px 22px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    border-radius: 999px;
-    padding: 10px 20px;
-    white-space: nowrap;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 13px;
-    color: var(--white-soft);
-    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), border-color 0.25s ease;
-    cursor: default;
+    gap: 16px;
   }
-  .tech-chip:hover { transform: scale(1.06); border-color: var(--blue-bright); }
-
-  /* ===================== PORTFOLIO ===================== */
-  #portfolio {
-    background: var(--navy-dark);
-  }
-  .portfolio-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-    margin-bottom: 80px;
-    padding-bottom: 80px;
-    border-bottom: 1px solid var(--white-line);
-  }
-  .portfolio-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .portfolio-item.reverse { direction: rtl; }
-  .portfolio-item.reverse > * { direction: ltr; }
-  @media (max-width: 768px) {
-    .portfolio-item, .portfolio-item.reverse { grid-template-columns: 1fr; direction: ltr; }
-  }
-  .portfolio-img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    border-radius: 16px;
-    object-fit: cover;
-    border: 1px solid var(--white-line);
-  }
-  .portfolio-badge {
-    display: inline-block;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    background: var(--blue-glow);
-    color: var(--blue-electric);
-    border: 1px solid rgba(110,187,255,0.25);
-    padding: 5px 14px;
-    border-radius: 999px;
-    margin-bottom: 20px;
-  }
-  .portfolio-title {
+  .faq-stat-num {
     font-family: var(--serif);
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--white);
-    margin-bottom: 16px;
-    line-height: 1.25;
-  }
-  .portfolio-points { margin-bottom: 24px; display: flex; flex-direction: column; gap: 10px; }
-  .portfolio-point {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--white-dim);
-  }
-  .portfolio-point .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 6px;
-  }
-  .dot-red { background: #FF6B6B; }
-  .dot-green { background: #4ECC8E; }
-  .portfolio-stats { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 24px; }
-  .portfolio-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .portfolio-stat-num {
-    font-family: var(--serif);
-    font-size: 1.6rem;
-    font-weight: 700;
     letter-spacing: -1px;
     color: var(--blue-bright);
+    min-width: 80px;
   }
-  .portfolio-stat-label {
+  .faq-stat-label {
     font-family: var(--display);
     font-weight: 600;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--white-dim);
-  }
-
-  /* ===================== PRICING ===================== */
-  #pricing {
-    background: var(--navy-darker);
-  }
-  .pricing-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    margin-top: 48px;
-  }
-  @media (max-width: 768px) {
-    .pricing-inner { grid-template-columns: 1fr; }
-  }
-  .pricing-tabs { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 1px solid var(--white-line); }
-  .pricing-tab {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--white-dim);
-    padding: 12px 20px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: color 0.25s ease, border-color 0.25s ease;
-  }
-  .pricing-tab.active { color: var(--blue-electric); border-bottom-color: var(--blue-electric); }
-  .pricing-tab:hover { color: var(--white-soft); }
-  .pricing-tab:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 2px; }
-  .pricing-tab-panel { display: none; }
-  .pricing-tab-panel.active { display: block; }
-  .service-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    border: 1px solid var(--white-line);
-    border-radius: 10px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    transition: border-color 0.25s ease, background 0.25s ease;
-    user-select: none;
-  }
-  .service-row:hover { border-color: var(--blue-bright); background: var(--blue-glow); }
-  .service-row.selected { border-color: var(--blue-electric); background: var(--blue-glow); }
-  .service-row:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 2px; }
-  .service-row-check {
-    width: 20px; height: 20px;
-    border: 1.5px solid var(--white-line);
-    border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px;
-    flex-shrink: 0;
-    transition: border-color 0.25s ease, background 0.25s ease;
-  }
-  .service-row.selected .service-row-check {
-    border-color: var(--blue-electric);
-    background: var(--blue-electric);
-    color: var(--navy-darker);
-  }
-  .service-row-name {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 14px;
-    color: var(--white-soft);
-    flex: 1;
-    padding: 0 14px;
-  }
-  .service-row-price {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--blue-bright);
-  }
-  .pricing-panel {
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    border-radius: 20px;
-    padding: 36px;
-    position: sticky;
-    top: 100px;
-  }
-  .pricing-panel-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    margin-bottom: 24px;
-  }
-  .pricing-selected-list { min-height: 80px; margin-bottom: 24px; }
-  .pricing-selected-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--white-line);
-    font-family: var(--sans);
-    font-size: 14px;
-    color: var(--white-soft);
-  }
-  .pricing-selected-item:last-child { border-bottom: none; }
-  .pricing-empty {
-    font-family: var(--sans);
-    font-size: 14px;
-    color: var(--white-dim);
-    font-style: italic;
-  }
-  .pricing-total-label {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--white-dim);
-    margin-bottom: 4px;
-  }
-  .pricing-total {
-    font-family: var(--serif);
-    font-size: 3rem;
-    font-weight: 700;
-    letter-spacing: -2px;
-    color: var(--blue-bright);
-    margin-bottom: 28px;
-  }
-  .pricing-ctas { display: flex; flex-direction: column; gap: 12px; }
-  .pricing-ctas .btn-primary { justify-content: center; }
-  .pricing-ctas .btn-ghost { justify-content: center; }
-
-  /* ===================== FAQ ===================== */
-  #faq {
-    background: var(--navy-dark);
-  }
-  .faq-inner {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 80px;
-    align-items: start;
-  }
-  @media (max-width: 768px) {
-    .faq-inner { grid-template-columns: 1fr; gap: 48px; }
-  }
-  .faq-stat-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-  .faq-badge {
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    border-radius: 8px;
-    padding: 12px 18px;
-    text-align: center;
-  }
-  .faq-badge-num {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--blue-bright);
-    display: block;
-    margin-bottom: 2px;
-  }
-  .faq-badge-label {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--white-dim);
-  }
-  .accordion { display: flex; flex-direction: column; gap: 0; }
-  .accordion-item {
-    border-bottom: 1px solid var(--white-line);
-  }
-  .accordion-toggle {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px 0;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    gap: 16px;
-  }
-  .accordion-toggle:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 2px; }
-  .accordion-q {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 16px;
-    color: var(--white-soft);
-    line-height: 1.4;
-  }
-  .accordion-chevron {
-    width: 24px; height: 24px;
-    border: 1px solid var(--white-line);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    font-size: 12px;
-    color: var(--blue-bright);
-    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), border-color 0.25s ease;
-  }
-  .accordion-item.open .accordion-chevron { transform: rotate(180deg); border-color: var(--blue-bright); }
-  .accordion-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-  }
-  .accordion-item.open .accordion-body { max-height: 300px; }
-  .accordion-ans {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.85;
-    color: var(--white-dim);
-    padding-bottom: 20px;
-  }
-
-  /* ===================== CTA BANNER ===================== */
-  .cta-banner {
-    background: var(--navy-darker);
-    position: relative;
-    overflow: hidden;
-    padding: 80px 0;
-  }
-  .cta-banner::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px; height: 400px;
-    background: radial-gradient(ellipse, rgba(91,155,245,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cta-card {
-    position: relative;
-    z-index: 1;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--white-line);
-    border-radius: 24px;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 64px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-  }
-  @media (max-width: 768px) {
-    .cta-card { grid-template-columns: 1fr; gap: 40px; padding: 36px 28px; }
-  }
-  .cta-eyebrow {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    margin-bottom: 16px;
-  }
-  .cta-h2 {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 16px;
-    line-height: 1.2;
-  }
-  .cta-h2 em { font-style: italic; color: var(--blue-bright); }
-  .cta-body {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 1.85;
-    color: var(--white-dim);
-    margin-bottom: 28px;
-  }
-  .cta-mini-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .cta-mini-card {
-    background: #f4f8ff;
-    border-radius: 12px;
-    padding: 18px;
-    color: #0D1F3C;
-  }
-  .cta-mini-icon { font-size: 22px; margin-bottom: 8px; display: block; }
-  .cta-mini-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #0D1F3C;
-    line-height: 1.3;
-  }
-
-  /* ===================== FOOTER ===================== */
-  .site-footer {
-    background: #060e1c;
-    padding: 80px 0 0;
-    border-top: 1px solid var(--white-line);
-  }
-  .footer-inner {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 64px;
-    margin-bottom: 60px;
-  }
-  @media (max-width: 768px) {
-    .footer-inner { grid-template-columns: 1fr; gap: 40px; }
-  }
-  .footer-logo { height: 36px; margin-bottom: 20px; }
-  .footer-desc {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.85;
-    color: var(--white-dim);
-    max-width: 280px;
-    margin-bottom: 24px;
-  }
-  .footer-socials { display: flex; gap: 10px; }
-  .footer-social {
-    width: 36px; height: 36px;
-    border: 1px solid var(--white-line);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--white-dim);
-    text-decoration: none;
-    font-size: 14px;
-    transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(.34,1.56,.64,1);
-  }
-  .footer-social:hover { border-color: var(--blue-electric); color: var(--blue-electric); transform: translateY(-2px); }
-  .footer-social:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; }
-  .footer-col-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    margin-bottom: 20px;
-  }
-  .footer-links { display: flex; flex-direction: column; gap: 12px; list-style: none; }
-  .footer-links a {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 14px;
-    color: var(--white-dim);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .footer-links a:hover { color: var(--blue-electric); }
-  .footer-links a:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 2px; }
-  .footer-bar {
-    border-top: 1px solid var(--white-line);
-    padding: 24px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .footer-bar-text {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 13px;
-    color: var(--white-dim);
-  }
-  .footer-bar-email {
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 13px;
-    color: var(--blue-bright);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .footer-bar-email:hover { color: var(--blue-electric); }
-
-  /* ===================== THEME TOGGLE ===================== */
-  #theme-toggle {
-    position: fixed;
-    bottom: 100px; right: 24px;
-    z-index: 9997;
-    width: 44px; height: 44px;
-    border-radius: 999px;
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    backdrop-filter: blur(12px);
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
-  }
-  #theme-toggle:hover { transform: scale(1.12) rotate(20deg); }
-  #theme-toggle:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; }
-
-  /* ===================== CHATBOT ===================== */
-  #chat-btn {
-    position: fixed;
-    bottom: 32px; right: 24px;
-    z-index: 9996;
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue-bright), var(--blue-electric));
-    border: none;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    box-shadow: 0 8px 32px rgba(91,155,245,0.35);
-    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
-  }
-  #chat-btn::before {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 2px solid rgba(110,187,255,0.4);
-    animation: chat-pulse 2s ease-out infinite;
-  }
-  @keyframes chat-pulse {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.5); opacity: 0; }
-  }
-  #chat-btn:hover { transform: scale(1.1); }
-  #chat-btn:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; }
-  #chat-panel {
-    position: fixed;
-    bottom: 100px; right: 24px;
-    z-index: 9996;
-    width: 380px;
-    max-height: 600px;
-    background: rgba(13,20,40,0.96);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(110,187,255,0.2);
-    border-radius: 24px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-    transform-origin: bottom right;
-    transform: scale(0.85);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.35s ease;
-  }
-  #chat-panel.open {
-    transform: scale(1);
-    opacity: 1;
-    pointer-events: all;
-  }
-  @media (max-width: 480px) {
-    #chat-panel { width: calc(100vw - 32px); right: 16px; bottom: 96px; }
-  }
-  .chat-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid rgba(110,187,255,0.1);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-  }
-  .chat-avatar {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--blue-bright), var(--blue-electric));
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .chat-name {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: var(--white);
-  }
-  .chat-online {
-    font-family: var(--sans);
-    font-size: 11px;
-    color: #4ECC8E;
-    display: flex; align-items: center; gap: 5px;
-  }
-  .chat-online::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: #4ECC8E;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  .chat-close {
-    margin-left: auto;
-    background: transparent;
-    border: none;
-    color: var(--white-dim);
-    cursor: pointer;
-    font-size: 18px;
-    padding: 4px;
-    border-radius: 4px;
-    transition: color 0.2s ease;
-  }
-  .chat-close:hover { color: var(--white); }
-  .chat-close:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 2px; }
-  .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-height: 0;
-  }
-  .chat-messages::-webkit-scrollbar { width: 4px; }
-  .chat-messages::-webkit-scrollbar-track { background: transparent; }
-  .chat-messages::-webkit-scrollbar-thumb { background: var(--white-line); border-radius: 2px; }
-  .chat-bubble {
-    max-width: 85%;
-    padding: 10px 14px;
-    border-radius: 16px;
-    font-family: var(--sans);
-    font-size: 13px;
-    line-height: 1.65;
-  }
-  .chat-bubble.bot {
-    background: rgba(91,155,245,0.12);
-    border: 1px solid rgba(91,155,245,0.15);
-    color: var(--white-soft);
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-  }
-  .chat-bubble.user {
-    background: var(--blue-bright);
-    color: #fff;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-  }
-  .chat-bubble a { color: var(--blue-electric); text-decoration: underline; }
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    padding: 10px 14px;
-    background: rgba(91,155,245,0.12);
-    border: 1px solid rgba(91,155,245,0.15);
-    border-radius: 16px;
-    border-bottom-left-radius: 4px;
-    align-self: flex-start;
-    width: fit-content;
-  }
-  .typing-dot {
-    width: 6px; height: 6px;
-    background: var(--blue-bright);
-    border-radius: 50%;
-    animation: dot-bounce 1.2s ease infinite;
-  }
-  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes dot-bounce {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-6px); }
-  }
-  .chat-chips {
-    padding: 10px 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    border-top: 1px solid rgba(110,187,255,0.08);
-    flex-shrink: 0;
-  }
-  .chat-chip {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    background: rgba(91,155,245,0.1);
-    border: 1px solid rgba(91,155,245,0.2);
-    color: var(--blue-electric);
-    padding: 6px 12px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s cubic-bezier(.34,1.56,.64,1);
-    white-space: nowrap;
-  }
-  .chat-chip:hover { background: rgba(91,155,245,0.2); transform: scale(1.04); }
-  .chat-chip:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 2px; }
-  .chat-input-row {
-    padding: 12px 16px;
-    border-top: 1px solid rgba(110,187,255,0.08);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-  .chat-input-row input[type="text"] {
-    flex: 1;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 999px;
-    padding: 9px 16px;
-    font-family: var(--sans);
-    font-size: 13px;
-    color: var(--white);
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
-  .chat-input-row input[type="text"]::placeholder { color: var(--white-dim); }
-  .chat-input-row input[type="text"]:focus { border-color: var(--blue-bright); }
-  .chat-icon-btn {
-    width: 32px; height: 32px;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--white-dim);
-    flex-shrink: 0;
-    transition: border-color 0.2s ease, color 0.2s ease;
-  }
-  .chat-icon-btn:hover { border-color: var(--blue-electric); color: var(--blue-electric); }
-  .chat-icon-btn:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 2px; }
-  .chat-icon-btn.recording { border-color: #FF6B6B; color: #FF6B6B; }
-  .chat-send {
-    width: 32px; height: 32px;
-    background: linear-gradient(135deg, var(--blue-bright), var(--blue-electric));
-    border: none;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    font-size: 13px;
-    color: #fff;
-    flex-shrink: 0;
-    transition: transform 0.2s cubic-bezier(.34,1.56,.64,1);
-  }
-  .chat-send:hover { transform: scale(1.1); }
-  .chat-send:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 2px; }
-  .siri-bars {
-    display: none;
-    gap: 3px;
-    align-items: center;
-    height: 20px;
-    padding: 0 8px;
-  }
-  .siri-bars.active { display: flex; }
-  .siri-bar {
-    width: 3px;
-    background: var(--blue-electric);
-    border-radius: 2px;
-    animation: siri-anim 0.8s ease-in-out infinite alternate;
-  }
-  .siri-bar:nth-child(1) { height: 6px; animation-delay: 0s; }
-  .siri-bar:nth-child(2) { height: 14px; animation-delay: 0.1s; }
-  .siri-bar:nth-child(3) { height: 20px; animation-delay: 0.2s; }
-  .siri-bar:nth-child(4) { height: 14px; animation-delay: 0.3s; }
-  .siri-bar:nth-child(5) { height: 6px; animation-delay: 0.4s; }
-  @keyframes siri-anim {
-    from { transform: scaleY(0.4); }
-    to { transform: scaleY(1); }
-  }
-
-  /* ===================== ABOUT PAGE ===================== */
-  #about-hero {
-    min-height: 60vh;
-    background: radial-gradient(ellipse at 50% 60%, rgba(26,63,107,0.7) 0%, var(--navy-darker) 70%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-top: 120px;
-    padding-bottom: 60px;
-  }
-  .about-stats-row {
-    background: var(--navy-dark);
-    padding: 60px 0;
-  }
-  .about-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-  }
-  @media (max-width: 768px) {
-    .about-stats-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  .about-stat-card {
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-  }
-  .about-stat-num {
-    font-family: var(--serif);
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-    color: var(--blue-bright);
-    margin-bottom: 6px;
-  }
-  .about-stat-label {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 13px;
-    color: var(--white-dim);
-  }
-  #about-mission { background: var(--navy-darker); }
-  .mission-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: start;
-  }
-  @media (max-width: 768px) {
-    .mission-inner { grid-template-columns: 1fr; gap: 40px; }
-  }
-  .pillar-cards { display: flex; flex-direction: column; gap: 16px; }
-  .pillar-card {
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    border-radius: 12px;
-    padding: 20px 24px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    transition: border-color 0.25s ease, transform 0.25s cubic-bezier(.34,1.56,.64,1);
-  }
-  .pillar-card:hover { border-color: var(--blue-bright); transform: translateX(4px); }
-  .pillar-icon { font-size: 24px; flex-shrink: 0; }
-  .pillar-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    margin-bottom: 4px;
-  }
-  .pillar-desc {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--white-dim);
-  }
-  #about-values { background: var(--navy-dark); }
-  .values-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 40px;
-  }
-  @media (max-width: 640px) {
-    .values-grid { grid-template-columns: 1fr; }
-  }
-  .value-card {
-    background: var(--white-ghost);
-    border: 1px solid var(--white-line);
-    border-radius: 14px;
-    padding: 28px;
-    transition: border-color 0.25s ease, transform 0.25s cubic-bezier(.34,1.56,.64,1);
-    cursor: default;
-  }
-  .value-card:hover { border-color: var(--blue-bright); transform: translateY(-3px); }
-  .value-icon { font-size: 28px; margin-bottom: 12px; display: block; }
-  .value-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .value-desc {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--white-dim);
-  }
-
-  /* ===================== UTILITIES ===================== */
-  a { cursor: none; }
-  button { cursor: none; }
-  *:focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; }
-
-  @media (max-width: 768px) {
-    .hero-h1 { font-size: clamp(2.4rem, 8vw, 3.5rem); }
   }
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
+<!-- Cursor -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<!-- Navbar -->
+<!-- NAV -->
 <nav id="nav">
-  <a href="#" onclick="showPage('home'); return false;" style="text-decoration:none;">
-    <img id="nav-logo" class="nav-logo" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac Ai"/>
-  </a>
+  <a href="index.html"><img class="nav-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/></a>
   <div class="nav-pill">
     <ul class="nav-center">
-      <li><a href="#" onclick="showPage('about'); return false;">About Us</a></li>
-      <li><a href="#" onclick="scrollToSection('#solutions'); return false;">Solutions</a></li>
-      <li><a href="#" onclick="scrollToSection('#portfolio'); return false;">Portfolio</a></li>
-      <li><a href="#" onclick="scrollToSection('#faq'); return false;">FAQ</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="solutions.html" class="nav-link">Solutions</a></li>
+      <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="faq.html" class="nav-link">FAQ</a></li>
     </ul>
   </div>
-  <a class="nav-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
-  <div class="nav-hamburger" onclick="openMobileMenu()" role="button" aria-label="Open menu" tabindex="0">
+  <div class="nav-right">
+    <a class="nav-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+    <button id="theme-btn" aria-label="Toggle theme">🌙</button>
+  </div>
+  <div class="nav-hamburger" role="button" aria-label="Open menu" tabindex="0">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
-  <a href="#" onclick="showPage('about'); closeMobileMenu(); return false;">About Us</a>
-  <a href="#" onclick="scrollToSection('#solutions'); closeMobileMenu(); return false;">Solutions</a>
-  <a href="#" onclick="scrollToSection('#portfolio'); closeMobileMenu(); return false;">Portfolio</a>
-  <a href="#" onclick="scrollToSection('#faq'); closeMobileMenu(); return false;">FAQ</a>
-  <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
+<div id="mobile-menu">
+  <button class="mobile-close" aria-label="Close">✕</button>
+  <a href="about.html">About Us</a>
+  <a href="solutions.html">Solutions</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
 </div>
 
 <!-- ============================================================ -->
-<!-- HOME PAGE -->
+<!-- SECTION 1 — HERO -->
 <!-- ============================================================ -->
-<div class="page active" id="page-home">
-
-  <!-- Hero -->
-  <section id="hero">
-    <canvas id="constellation-canvas"></canvas>
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-left">
-          <div class="hero-eyebrow">AI-First Studio</div>
-          <h1 class="hero-h1">Intelligence<br>with <em>Grace.</em></h1>
-          <p class="hero-sub">We make artificial intelligence accessible, ethical, and transformative — turning complex technology into your most powerful strategic advantage.</p>
-          <div class="hero-btns">
-            <a class="btn-primary" href="#" onclick="scrollToSection('#solutions'); return false;">Our Solutions</a>
-            <a class="btn-ghost" href="#" onclick="scrollToSection('#process'); return false;">How We Work</a>
-          </div>
+<section id="home-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="container">
+    <div class="hero-inner">
+      <!-- Left -->
+      <div class="hero-left-anim">
+        <div class="hero-eyebrow">CUSTOM AI DEVELOPMENT</div>
+        <h1 class="hero-h1"><span class="word-wrap">We</span> <span class="word-wrap">Build</span> <span class="word-wrap">AI</span> <span class="word-wrap">Systems</span> <em><span class="word-wrap">Engineered</span> <span class="word-wrap">for</span> <span class="word-wrap">Your</span> <span class="word-wrap">Business.</span></em></h1>
+        <p class="hero-sub">Not off-the-shelf tools. Not generic chatbots. Fully customized AI software built around your specific operations and goals.</p>
+        <div class="hero-btns">
+          <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Schedule a Free Strategy Call →</a>
+          <a class="btn-ghost" href="portfolio.html">View Our Work →</a>
         </div>
-        <div class="hero-right">
-          <p class="hero-tagline">Empowering businesses to <em>grow with AI.</em></p>
-          <div class="hero-stats">
-            <div class="hero-stat-row">
-              <span class="hero-stat-num">01</span>
-              <span class="hero-stat-label">Think — Strategy &amp; Discovery</span>
-            </div>
-            <div class="hero-stat-row">
-              <span class="hero-stat-num">02</span>
-              <span class="hero-stat-label">Build — Engineering &amp; Development</span>
-            </div>
-            <div class="hero-stat-row">
-              <span class="hero-stat-num">03</span>
-              <span class="hero-stat-label">Move — Deploy &amp; Integrate</span>
-            </div>
-            <div class="hero-stat-row">
-              <span class="hero-stat-num">04</span>
-              <span class="hero-stat-label">Grow — Scale &amp; Sustain</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ticker -->
-  <div id="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span class="ticker-item">AI Strategy &amp; Audit <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Intelligent Automation <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Custom AI Agents <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Team Education <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Continuous Support <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Ethical AI Design <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Workflow Architecture <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Scalable Systems <span class="ticker-star">✦</span></span>
-      <!-- duplicate for seamless loop -->
-      <span class="ticker-item">AI Strategy &amp; Audit <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Intelligent Automation <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Custom AI Agents <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Team Education <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Continuous Support <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Ethical AI Design <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Workflow Architecture <span class="ticker-star">✦</span></span>
-      <span class="ticker-item">Scalable Systems <span class="ticker-star">✦</span></span>
-    </div>
-  </div>
-
-  <!-- Companies / Social Proof -->
-  <section id="companies">
-    <div class="container">
-      <div class="companies-inner">
-        <div>
-          <div class="section-label reveal">COMPANIES GROWING WITH US</div>
-          <h2 class="section-h2 reveal reveal-d1">A Growth Partner to <em>50+ Companies</em></h2>
-          <p class="section-sub reveal reveal-d2">Trusted by startups, growing businesses, and government institutions — companies that chose speed over uncertainty.</p>
-          <div class="logo-grid reveal reveal-d3" style="margin-top:40px;">
-            <div class="logo-grid-item"><span class="logo-icon">🏦</span><span>FinTech Co</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">🏥</span><span>MediCore</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">🏛️</span><span>GovLink</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">🛒</span><span>RetailAI</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">🌍</span><span>GlobeOps</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">⚡</span><span>EnergyX</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">🎓</span><span>EduBase</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">📦</span><span>LogiFlow</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">🌱</span><span>AgriTech</span></div>
-            <div class="logo-grid-item"><span class="logo-icon">📡</span><span>TeleNova</span></div>
-          </div>
-        </div>
-        <div class="stat-cards reveal reveal-d2">
-          <div class="stat-card">
-            <div class="stat-card-num">1,000+</div>
-            <div class="stat-card-label">AI-powered tasks automated monthly across our client portfolio</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card-num">50%</div>
-            <div class="stat-card-label">Average reduction in operational overhead after AI implementation</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Problems -->
-  <section id="problems">
-    <div class="container">
-      <div class="section-label reveal">MOST BUSINESS PROBLEMS</div>
-      <h2 class="section-h2 reveal reveal-d1">Most MVPs Fail <em>Before They Start</em></h2>
-      <p class="section-sub reveal reveal-d2 problem-sub" style="max-width:520px;">90% of businesses fail due to these common pitfalls — are you falling into the same traps?</p>
-      <div class="problem-cards">
-        <div class="problem-card reveal reveal-d1">
-          <span class="problem-emoji">⏳</span>
-          <div class="problem-title">Endless Development</div>
-          <div class="problem-arrow">→ Lost market opportunity</div>
-          <p class="problem-desc">Projects drag on for months with no clear end in sight. Your competitors ship while you're still planning. Every delay costs more than just time.</p>
-        </div>
-        <div class="problem-card reveal reveal-d2">
-          <span class="problem-emoji">⚠️</span>
-          <div class="problem-title">Technical Debt Trap</div>
-          <div class="problem-arrow">→ Stuck with legacy code</div>
-          <p class="problem-desc">Quick hacks become permanent fixtures. Your system grows increasingly fragile, making every new feature a risky gamble. Scaling becomes nearly impossible.</p>
-        </div>
-        <div class="problem-card reveal reveal-d3">
-          <span class="problem-emoji">💸</span>
-          <div class="problem-title">Budget Drain</div>
-          <div class="problem-arrow">→ Running out of resources</div>
-          <p class="problem-desc">Costs spiral beyond projections. Hiring specialized AI talent is expensive and slow. The ROI timeline keeps pushing further into the future.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Solutions / Process -->
-  <section id="solutions">
-    <div id="process" style="position:relative;top:-80px;visibility:hidden;"></div>
-    <div class="container">
-      <div class="section-label reveal">OUR SOLUTIONS</div>
-      <h2 class="section-h2 reveal reveal-d1">A <em>Different</em> Approach</h2>
-      <p class="section-sub reveal reveal-d2">Why settle for generic solutions when you can have a battle-tested, AI-accelerated approach designed specifically for your business challenges?</p>
-      <div class="solutions-grid">
-        <div class="service-card reveal reveal-d1">
-          <div class="service-num">01 · STRATEGY</div>
-          <div class="service-title">AI Strategy &amp; Audit</div>
-          <p class="service-desc">We analyze your current processes, identify high-impact AI opportunities, and build a clear roadmap from where you are to where you need to be. No fluff, just actionable intelligence.</p>
-          <div class="service-tags">
-            <span class="service-tag">Discovery</span>
-            <span class="service-tag">Roadmap</span>
-            <span class="service-tag">Audit</span>
-          </div>
-        </div>
-        <div class="service-card reveal reveal-d2">
-          <div class="service-num">02 · BUILD</div>
-          <div class="service-title">AI Development</div>
-          <p class="service-desc">Custom AI agents, intelligent automation pipelines, and purpose-built systems. We engineer solutions that actually work in the real world — scalable, maintainable, and measurable.</p>
-          <div class="service-tags">
-            <span class="service-tag">Agents</span>
-            <span class="service-tag">Automation</span>
-            <span class="service-tag">Custom Build</span>
-          </div>
-        </div>
-        <div class="service-card reveal reveal-d3">
-          <div class="service-num">03 · EDUCATE</div>
-          <div class="service-title">AI Education</div>
-          <p class="service-desc">We train your team to not just use AI tools, but to think with AI. Workshops, hands-on sessions, and ongoing enablement that transforms your workforce into an AI-capable team.</p>
-          <div class="service-tags">
-            <span class="service-tag">Workshops</span>
-            <span class="service-tag">Training</span>
-            <span class="service-tag">Enablement</span>
-          </div>
-        </div>
-        <div class="service-card reveal reveal-d4">
-          <div class="service-num">04 · SUSTAIN</div>
-          <div class="service-title">Continuous Support</div>
-          <p class="service-desc">AI doesn't stop evolving, and neither do we. Ongoing monitoring, performance iteration, and strategic support to ensure your AI systems keep delivering value as you grow.</p>
-          <div class="service-tags">
-            <span class="service-tag">Monitoring</span>
-            <span class="service-tag">Scale</span>
-            <span class="service-tag">Iteration</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tech Stack -->
-  <section id="tech">
-    <div class="container">
-      <div class="section-label reveal">TOOLS WE USE</div>
-      <h2 class="section-h2 reveal reveal-d1">Built With <em>Proven Tools</em></h2>
-      <p class="section-sub reveal reveal-d2">We use modern, battle-tested technology stacks that stand the test of time and scale with your growth.</p>
-    </div>
-    <div class="tech-scroll-wrapper reveal reveal-d3" style="margin-top:40px;">
-      <div class="tech-row tech-row-1">
-        <div class="tech-chip">⚛️ React</div>
-        <div class="tech-chip">📘 TypeScript</div>
-        <div class="tech-chip">🐍 Python</div>
-        <div class="tech-chip">🟩 Node.js</div>
-        <div class="tech-chip">🐘 PostgreSQL</div>
-        <div class="tech-chip">🐳 Docker</div>
-        <div class="tech-chip">☁️ AWS</div>
-        <div class="tech-chip">▲ Next.js</div>
-        <div class="tech-chip">🎨 Tailwind</div>
-        <div class="tech-chip">🔴 Redis</div>
-        <!-- duplicate -->
-        <div class="tech-chip">⚛️ React</div>
-        <div class="tech-chip">📘 TypeScript</div>
-        <div class="tech-chip">🐍 Python</div>
-        <div class="tech-chip">🟩 Node.js</div>
-        <div class="tech-chip">🐘 PostgreSQL</div>
-        <div class="tech-chip">🐳 Docker</div>
-        <div class="tech-chip">☁️ AWS</div>
-        <div class="tech-chip">▲ Next.js</div>
-        <div class="tech-chip">🎨 Tailwind</div>
-        <div class="tech-chip">🔴 Redis</div>
-      </div>
-      <div class="tech-row tech-row-2" style="margin-top:12px;">
-        <div class="tech-chip">🦜 LangChain</div>
-        <div class="tech-chip">🦙 Ollama</div>
-        <div class="tech-chip">⚙️ n8n</div>
-        <div class="tech-chip">💎 Prisma</div>
-        <div class="tech-chip">🚀 FastAPI</div>
-        <div class="tech-chip">🤖 OpenAI</div>
-        <div class="tech-chip">🔥 Firebase</div>
-        <div class="tech-chip">📱 Flutter</div>
-        <div class="tech-chip">◉ GraphQL</div>
-        <div class="tech-chip">🏗️ NestJS</div>
-        <!-- duplicate -->
-        <div class="tech-chip">🦜 LangChain</div>
-        <div class="tech-chip">🦙 Ollama</div>
-        <div class="tech-chip">⚙️ n8n</div>
-        <div class="tech-chip">💎 Prisma</div>
-        <div class="tech-chip">🚀 FastAPI</div>
-        <div class="tech-chip">🤖 OpenAI</div>
-        <div class="tech-chip">🔥 Firebase</div>
-        <div class="tech-chip">📱 Flutter</div>
-        <div class="tech-chip">◉ GraphQL</div>
-        <div class="tech-chip">🏗️ NestJS</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio -->
-  <section id="portfolio">
-    <div class="container">
-      <div class="section-label reveal">WORK WE'RE PROUD OF</div>
-      <h2 class="section-h2 reveal reveal-d1">Recent <em>Work</em></h2>
-      <p class="section-sub reveal reveal-d2">Real results for real businesses. Here's a glimpse at what we've built and the impact it delivered.</p>
-
-      <div style="margin-top:64px;">
-        <!-- Item 1 -->
-        <div class="portfolio-item reveal">
+        <div style="display:flex;gap:32px;margin-top:36px;padding-top:32px;border-top:1px solid var(--white-line);">
           <div>
-            <img class="portfolio-img" src="https://placehold.co/640x480/0D1F3C/5B9BF5?text=Workflow+Platform" alt="Intelligent Workflow Platform"/>
+            <div style="font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--white);letter-spacing:-1px;" data-count="30" data-suffix="+">30+</div>
+            <div style="font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--white-dim);margin-top:4px;">Projects</div>
           </div>
           <div>
-            <span class="portfolio-badge">Automation</span>
-            <h3 class="portfolio-title">Intelligent Workflow Platform</h3>
-            <div class="portfolio-points">
-              <div class="portfolio-point"><span class="dot dot-red"></span><span><strong style="color:var(--white-soft);">Challenge:</strong> A logistics company was spending 40+ hours/week on manual document processing and approval chains with no visibility into bottlenecks.</span></div>
-              <div class="portfolio-point"><span class="dot dot-green"></span><span><strong style="color:var(--white-soft);">Result:</strong> Built a custom AI agent that classifies, routes, and processes documents automatically — reducing human touchpoints by 87% within the first month.</span></div>
-            </div>
-            <div class="portfolio-stats">
-              <div class="portfolio-stat"><span class="portfolio-stat-num">87%</span><span class="portfolio-stat-label">Time Saved</span></div>
-              <div class="portfolio-stat"><span class="portfolio-stat-num">5k+</span><span class="portfolio-stat-label">Tasks/Month</span></div>
-              <div class="portfolio-stat"><span class="portfolio-stat-num">3mo</span><span class="portfolio-stat-label">Delivered In</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="portfolio-item reverse reveal">
-          <div>
-            <img class="portfolio-img" src="https://placehold.co/640x480/122952/6EBBFF?text=Analytics+Dashboard" alt="Government Analytics Dashboard"/>
+            <div style="font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--white);letter-spacing:-1px;" data-count="95" data-suffix="%">95%</div>
+            <div style="font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--white-dim);margin-top:4px;">Retention</div>
           </div>
           <div>
-            <span class="portfolio-badge">Government</span>
-            <h3 class="portfolio-title">Government Analytics Dashboard</h3>
-            <div class="portfolio-points">
-              <div class="portfolio-point"><span class="dot dot-red"></span><span><strong style="color:var(--white-soft);">Challenge:</strong> A government agency managing 60+ institutions had no centralized visibility into performance metrics, leading to delayed decisions and resource waste.</span></div>
-              <div class="portfolio-point"><span class="dot dot-green"></span><span><strong style="color:var(--white-soft);">Result:</strong> Designed and deployed a real-time AI analytics platform with predictive reporting, reducing decision latency by 75% across all institutions.</span></div>
-            </div>
-            <div class="portfolio-stats">
-              <div class="portfolio-stat"><span class="portfolio-stat-num">75%</span><span class="portfolio-stat-label">Efficiency Gain</span></div>
-              <div class="portfolio-stat"><span class="portfolio-stat-num">60+</span><span class="portfolio-stat-label">Institutions</span></div>
-              <div class="portfolio-stat"><span class="portfolio-stat-num">4mo</span><span class="portfolio-stat-label">Delivered In</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="portfolio-item reveal">
-          <div>
-            <img class="portfolio-img" src="https://placehold.co/640x480/090F1E/4ECC8E?text=Healthcare+AI" alt="Healthcare AI System"/>
-          </div>
-          <div>
-            <span class="portfolio-badge">Health</span>
-            <h3 class="portfolio-title">Healthcare AI System</h3>
-            <div class="portfolio-points">
-              <div class="portfolio-point"><span class="dot dot-red"></span><span><strong style="color:var(--white-soft);">Challenge:</strong> Four clinics were overwhelmed by patient intake paperwork, scheduling conflicts, and follow-up management, leading to high administrative costs and patient dissatisfaction.</span></div>
-              <div class="portfolio-point"><span class="dot dot-green"></span><span><strong style="color:var(--white-soft);">Result:</strong> Deployed AI-powered intake, scheduling, and follow-up automation — cutting administrative costs by 80% while improving patient experience scores significantly.</span></div>
-            </div>
-            <div class="portfolio-stats">
-              <div class="portfolio-stat"><span class="portfolio-stat-num">80%</span><span class="portfolio-stat-label">Cost Reduction</span></div>
-              <div class="portfolio-stat"><span class="portfolio-stat-num">4</span><span class="portfolio-stat-label">Clinics</span></div>
-              <div class="portfolio-stat"><span class="portfolio-stat-num">3mo</span><span class="portfolio-stat-label">Delivered In</span></div>
-            </div>
+            <div style="font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--white);letter-spacing:-1px;" data-count="6" data-suffix="+">6+</div>
+            <div style="font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--white-dim);margin-top:4px;">Years</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing">
-    <div class="container">
-      <div class="section-label reveal">PRICING</div>
-      <h2 class="section-h2 reveal reveal-d1">Fair And <em>Transparent</em> Pricing</h2>
-      <p class="section-sub reveal reveal-d2">No hidden fees, no surprises. Select what you need and get a clear picture of your investment before we even start.</p>
-      <div class="pricing-inner">
-        <!-- Left: tabs + selectors -->
-        <div class="reveal reveal-d1">
-          <div class="pricing-tabs">
-            <button class="pricing-tab active" onclick="switchPricingTab(0)" id="ptab-0">01. Scope</button>
-            <button class="pricing-tab" onclick="switchPricingTab(1)" id="ptab-1">02. Configure</button>
-            <button class="pricing-tab" onclick="switchPricingTab(2)" id="ptab-2">03. Add-ons</button>
-          </div>
-          <div class="pricing-tab-panel active" id="ppanel-0">
-            <p style="font-family:var(--sans);font-size:14px;color:var(--white-dim);margin-bottom:20px;line-height:1.7;">Select the services you need. You can choose multiple — we'll tailor the engagement to fit.</p>
-            <div class="service-row" onclick="toggleService('strategy', 500, this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
-              <div class="service-row-check">✓</div>
-              <span class="service-row-name">AI Strategy &amp; Audit</span>
-              <span class="service-row-price">$500</span>
-            </div>
-            <div class="service-row" onclick="toggleService('development', 1500, this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
-              <div class="service-row-check"></div>
-              <span class="service-row-name">AI Development</span>
-              <span class="service-row-price">$1,500</span>
-            </div>
-            <div class="service-row" onclick="toggleService('education', 800, this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
-              <div class="service-row-check"></div>
-              <span class="service-row-name">AI Education</span>
-              <span class="service-row-price">$800</span>
-            </div>
-            <div class="service-row" onclick="toggleService('support', 300, this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
-              <div class="service-row-check"></div>
-              <span class="service-row-name">Continuous Support</span>
-              <span class="service-row-price">$300/mo</span>
-            </div>
-          </div>
-          <div class="pricing-tab-panel" id="ppanel-1">
-            <p style="font-family:var(--sans);font-size:14px;color:var(--white-dim);margin-bottom:20px;line-height:1.7;">Configure your engagement model — timeline, team size, and delivery format.</p>
-            <div style="background:var(--white-ghost);border:1px solid var(--white-line);border-radius:12px;padding:24px;">
-              <label style="font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--blue-bright);display:block;margin-bottom:12px;">Timeline</label>
-              <select style="width:100%;background:transparent;border:1px solid var(--white-line);border-radius:8px;padding:10px 14px;color:var(--white-soft);font-family:var(--sans);font-size:14px;margin-bottom:16px;" onchange="updatePricingNote(this.value)">
-                <option value="standard" style="background:#0D1F3C;">Standard (4–8 weeks)</option>
-                <option value="fast" style="background:#0D1F3C;">Fast Track (2–4 weeks, +20%)</option>
-                <option value="flexible" style="background:#0D1F3C;">Flexible (ongoing retainer)</option>
-              </select>
-              <label style="font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--blue-bright);display:block;margin-bottom:12px;">Team Size</label>
-              <select style="width:100%;background:transparent;border:1px solid var(--white-line);border-radius:8px;padding:10px 14px;color:var(--white-soft);font-family:var(--sans);font-size:14px;" onchange="">
-                <option style="background:#0D1F3C;">Solo Founder / Small Team</option>
-                <option style="background:#0D1F3C;">Growing Business (10–50 people)</option>
-                <option style="background:#0D1F3C;">Enterprise (50+ people)</option>
-              </select>
-            </div>
-          </div>
-          <div class="pricing-tab-panel" id="ppanel-2">
-            <p style="font-family:var(--sans);font-size:14px;color:var(--white-dim);margin-bottom:20px;line-height:1.7;">Enhance your engagement with optional add-ons.</p>
-            <div class="service-row" onclick="toggleService('reporting', 200, this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
-              <div class="service-row-check"></div>
-              <span class="service-row-name">Monthly Reporting &amp; Analytics</span>
-              <span class="service-row-price">$200/mo</span>
-            </div>
-            <div class="service-row" onclick="toggleService('priority', 400, this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
-              <div class="service-row-check"></div>
-              <span class="service-row-name">Priority Support &amp; SLA</span>
-              <span class="service-row-price">$400/mo</span>
-            </div>
-            <div class="service-row" onclick="toggleService('training', 600, this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
-              <div class="service-row-check"></div>
-              <span class="service-row-name">Extended Team Training</span>
-              <span class="service-row-price">$600</span>
-            </div>
-          </div>
-        </div>
-        <!-- Right: estimation panel -->
-        <div class="reveal reveal-d2">
-          <div class="pricing-panel">
-            <div class="pricing-panel-title">YOUR ESTIMATE</div>
-            <div class="pricing-selected-list" id="pricing-selected-list">
-              <div class="pricing-empty" id="pricing-empty-msg">Select services to see your estimate</div>
-            </div>
-            <div style="border-top:1px solid var(--white-line);padding-top:20px;margin-top:8px;">
-              <div class="pricing-total-label">ESTIMATED TOTAL</div>
-              <div class="pricing-total" id="pricing-total">$0</div>
-            </div>
-            <p style="font-family:var(--sans);font-size:12px;color:var(--white-dim);margin-bottom:24px;line-height:1.6;">Prices are starting estimates. Final quote based on your specific requirements after a discovery call.</p>
-            <div class="pricing-ctas">
-              <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">Get a Custom Quote</a>
-              <a class="btn-ghost" href="#" onclick="scrollToSection('#faq'); return false;" style="text-decoration:none;">Have Questions?</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="container">
-      <div class="faq-inner">
-        <div>
-          <div class="section-label reveal">COMMON QUESTIONS</div>
-          <h2 class="section-h2 reveal reveal-d1">Frequently Asked <em>Questions</em></h2>
-          <div class="faq-stat-badges reveal reveal-d2">
-            <div class="faq-badge"><span class="faq-badge-num">50+</span><span class="faq-badge-label">Clients</span></div>
-            <div class="faq-badge"><span class="faq-badge-num">3+</span><span class="faq-badge-label">Years</span></div>
-            <div class="faq-badge"><span class="faq-badge-num">100%</span><span class="faq-badge-label">On Time</span></div>
-            <div class="faq-badge"><span class="faq-badge-num">98%</span><span class="faq-badge-label">Success Rate</span></div>
-          </div>
-        </div>
-        <div class="accordion reveal reveal-d1">
-          <div class="accordion-item open">
-            <button class="accordion-toggle" onclick="toggleAccordion(this)">
-              <span class="accordion-q">How quickly can you deliver an AI solution?</span>
-              <span class="accordion-chevron">▼</span>
-            </button>
-            <div class="accordion-body">
-              <p class="accordion-ans">Most solutions are delivered within 3–8 weeks depending on complexity. Simple automation workflows can be live in as little as 2 weeks. We prioritize speed without compromising quality — that's why we start every engagement with a focused discovery sprint to eliminate guesswork before writing a single line of code.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-toggle" onclick="toggleAccordion(this)">
-              <span class="accordion-q">What if my project is complex or unique?</span>
-              <span class="accordion-chevron">▼</span>
-            </button>
-            <div class="accordion-body">
-              <p class="accordion-ans">Complexity is what we thrive on. The more nuanced your challenge, the more value a tailored AI solution can deliver. We've worked across logistics, government, healthcare, fintech, and education — each with unique constraints. We start with a deep-dive audit to fully understand your environment before proposing a solution.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-toggle" onclick="toggleAccordion(this)">
-              <span class="accordion-q">How do you handle integrations with existing systems?</span>
-              <span class="accordion-chevron">▼</span>
-            </button>
-            <div class="accordion-body">
-              <p class="accordion-ans">Integration is a first-class concern in everything we build. We design AI systems to plug into your existing stack — whether that's CRMs, ERPs, databases, or custom-built tools. We use industry-standard APIs and webhook architectures to ensure smooth data flow without disrupting your current operations.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-toggle" onclick="toggleAccordion(this)">
-              <span class="accordion-q">Do you offer ongoing support after deployment?</span>
-              <span class="accordion-chevron">▼</span>
-            </button>
-            <div class="accordion-body">
-              <p class="accordion-ans">Absolutely. AI systems need ongoing care as your business evolves and the underlying models improve. Our Continuous Support service includes monthly performance reviews, model updates, feature iterations, and direct access to your dedicated point of contact. We treat your AI system like a live product, not a one-time delivery.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-toggle" onclick="toggleAccordion(this)">
-              <span class="accordion-q">What industries do you work with?</span>
-              <span class="accordion-chevron">▼</span>
-            </button>
-            <div class="accordion-body">
-              <p class="accordion-ans">We're industry-agnostic at the core. Our AI-first methodology adapts to any domain. We have hands-on experience in healthcare, government, logistics, financial services, education, e-commerce, agriculture, and telecoms. If your business creates data and has operational processes, there's an AI opportunity waiting — and we'll help you find and capture it.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Banner -->
-  <div class="cta-banner">
-    <div class="container">
-      <div class="cta-card reveal">
-        <div>
-          <div class="cta-eyebrow">GET STARTED</div>
-          <h2 class="cta-h2">Ready To <em>Start?</em></h2>
-          <p class="cta-body">Let's have a real conversation about your biggest AI opportunity. No sales pitch — just a focused 30-minute call to see if and how we can help you move faster.</p>
-          <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">Book a Free Call →</a>
-        </div>
-        <div class="cta-mini-grid">
-          <div class="cta-mini-card">
-            <span class="cta-mini-icon">🎧</span>
-            <div class="cta-mini-title">1-on-1 Call</div>
-          </div>
-          <div class="cta-mini-card">
-            <span class="cta-mini-icon">🤝</span>
-            <div class="cta-mini-title">30 Minutes</div>
-          </div>
-          <div class="cta-mini-card">
-            <span class="cta-mini-icon">🏷️</span>
-            <div class="cta-mini-title">Free Consultation</div>
-          </div>
-          <div class="cta-mini-card">
-            <span class="cta-mini-icon">🔍</span>
-            <div class="cta-mini-title">Feasibility Check</div>
-          </div>
-        </div>
+      <!-- Right — circuit SVG -->
+      <div class="hero-visual hero-right-anim" data-parallax="0.12">
+        <svg class="hero-svg" viewBox="0 0 520 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="glow1"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="glow2"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(91,155,245,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+          </defs>
+          <!-- Background glow -->
+          <ellipse cx="260" cy="230" rx="240" ry="200" fill="url(#bg-grad)"/>
+          <!-- Outer hex -->
+          <polygon points="260,30 440,120 440,310 260,400 80,310 80,120" stroke="rgba(91,155,245,0.2)" stroke-width="1" fill="none"/>
+          <!-- Mid hex -->
+          <polygon points="260,75 385,145 385,285 260,355 135,285 135,145" stroke="rgba(91,155,245,0.35)" stroke-width="1" fill="none"/>
+          <!-- Inner hex -->
+          <polygon points="260,120 325,158 325,234 260,272 195,234 195,158" stroke="rgba(110,187,255,0.55)" stroke-width="1.5" fill="none"/>
+          <!-- Center circle -->
+          <circle cx="260" cy="196" r="44" stroke="rgba(91,155,245,0.6)" stroke-width="1.5" fill="rgba(91,155,245,0.06)" filter="url(#glow2)" class="pulse-ring"/>
+          <circle cx="260" cy="196" r="26" stroke="rgba(110,187,255,0.8)" stroke-width="1" fill="rgba(110,187,255,0.08)" filter="url(#glow1)"/>
+          <circle cx="260" cy="196" r="8" fill="rgba(110,187,255,0.9)" filter="url(#glow1)"/>
+          <!-- Radial lines from center to inner hex corners -->
+          <line x1="260" y1="170" x2="260" y2="120" stroke="rgba(110,187,255,0.5)" stroke-width="1"/>
+          <line x1="260" y1="222" x2="260" y2="272" stroke="rgba(110,187,255,0.5)" stroke-width="1"/>
+          <line x1="239" y1="183" x2="195" y2="158" stroke="rgba(110,187,255,0.5)" stroke-width="1"/>
+          <line x1="281" y1="183" x2="325" y2="158" stroke="rgba(110,187,255,0.5)" stroke-width="1"/>
+          <line x1="239" y1="209" x2="195" y2="234" stroke="rgba(110,187,255,0.5)" stroke-width="1"/>
+          <line x1="281" y1="209" x2="325" y2="234" stroke="rgba(110,187,255,0.5)" stroke-width="1"/>
+          <!-- Extended circuit lines -->
+          <line x1="260" y1="75" x2="260" y2="30" stroke="rgba(91,155,245,0.4)" stroke-width="1"/>
+          <line x1="260" y1="355" x2="260" y2="400" stroke="rgba(91,155,245,0.4)" stroke-width="1"/>
+          <line x1="135" y1="145" x2="80" y2="120" stroke="rgba(91,155,245,0.4)" stroke-width="1"/>
+          <line x1="385" y1="145" x2="440" y2="120" stroke="rgba(91,155,245,0.4)" stroke-width="1"/>
+          <line x1="135" y1="285" x2="80" y2="310" stroke="rgba(91,155,245,0.4)" stroke-width="1"/>
+          <line x1="385" y1="285" x2="440" y2="310" stroke="rgba(91,155,245,0.4)" stroke-width="1"/>
+          <!-- Horizontal circuit traces -->
+          <path d="M80 120 L40 120 L40 200 L20 200" stroke="rgba(91,155,245,0.3)" stroke-width="1" fill="none"/>
+          <path d="M440 120 L480 120 L480 80 L510 80" stroke="rgba(91,155,245,0.3)" stroke-width="1" fill="none"/>
+          <path d="M80 310 L40 310 L40 370 L60 370" stroke="rgba(91,155,245,0.25)" stroke-width="1" fill="none"/>
+          <path d="M440 310 L480 310 L480 390 L500 390" stroke="rgba(91,155,245,0.25)" stroke-width="1" fill="none"/>
+          <path d="M260 30 L260 10 L320 10" stroke="rgba(91,155,245,0.25)" stroke-width="1" fill="none"/>
+          <path d="M260 400 L260 420 L180 420 L180 440" stroke="rgba(91,155,245,0.25)" stroke-width="1" fill="none"/>
+          <!-- Nodes at hex corners -->
+          <circle cx="260" cy="75" r="4" fill="rgba(110,187,255,0.9)" filter="url(#glow2)"/>
+          <circle cx="385" cy="145" r="4" fill="rgba(110,187,255,0.9)" filter="url(#glow2)"/>
+          <circle cx="385" cy="285" r="4" fill="rgba(110,187,255,0.9)" filter="url(#glow2)"/>
+          <circle cx="260" cy="355" r="4" fill="rgba(110,187,255,0.9)" filter="url(#glow2)"/>
+          <circle cx="135" cy="285" r="4" fill="rgba(110,187,255,0.9)" filter="url(#glow2)"/>
+          <circle cx="135" cy="145" r="4" fill="rgba(110,187,255,0.9)" filter="url(#glow2)"/>
+          <!-- Outer corner nodes -->
+          <circle cx="80" cy="120" r="3" fill="rgba(91,155,245,0.7)" filter="url(#glow2)"/>
+          <circle cx="440" cy="120" r="3" fill="rgba(91,155,245,0.7)" filter="url(#glow2)"/>
+          <circle cx="80" cy="310" r="3" fill="rgba(91,155,245,0.7)" filter="url(#glow2)"/>
+          <circle cx="440" cy="310" r="3" fill="rgba(91,155,245,0.7)" filter="url(#glow2)"/>
+          <circle cx="260" cy="30" r="3" fill="rgba(91,155,245,0.7)" filter="url(#glow2)"/>
+          <circle cx="260" cy="400" r="3" fill="rgba(91,155,245,0.7)" filter="url(#glow2)"/>
+          <!-- Endpoint dots on traces -->
+          <circle cx="20" cy="200" r="3" fill="rgba(110,187,255,0.6)" filter="url(#glow2)"/>
+          <circle cx="510" cy="80" r="3" fill="rgba(110,187,255,0.6)" filter="url(#glow2)"/>
+          <circle cx="60" cy="370" r="3" fill="rgba(91,155,245,0.5)" filter="url(#glow2)"/>
+          <circle cx="500" cy="390" r="3" fill="rgba(91,155,245,0.5)" filter="url(#glow2)"/>
+          <circle cx="320" cy="10" r="3" fill="rgba(91,155,245,0.5)" filter="url(#glow2)"/>
+          <!-- Small data labels -->
+          <text x="270" y="193" font-family="monospace" font-size="9" fill="rgba(110,187,255,0.6)" text-anchor="middle">AI</text>
+        </svg>
       </div>
     </div>
   </div>
-
-  <!-- Footer Home -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div>
-          <img class="footer-logo footer-logo-img" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac Ai"/>
-          <p class="footer-desc">An AI studio making artificial intelligence accessible, ethical, and transformative for businesses worldwide. Grace in every design.</p>
-          <div class="footer-socials">
-            <a class="footer-social" href="https://www.linkedin.com/company/elyrac-ai/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-            <a class="footer-social" href="https://x.com/ElGracAi" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a class="footer-social" href="https://www.youtube.com/@elyracAi" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-            <a class="footer-social" href="https://www.instagram.com/elyracai/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-            </a>
-            <a class="footer-social" href="mailto:info@elyracai.com" aria-label="Email">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-col-title">Company</div>
-          <ul class="footer-links">
-            <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
-            <li><a href="#" onclick="showPage('about'); return false;">About Us</a></li>
-            <li><a href="#" onclick="scrollToSection('#portfolio'); return false;">Portfolio</a></li>
-            <li><a href="#">Careers</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">Services</div>
-          <ul class="footer-links">
-            <li><a href="#" onclick="scrollToSection('#solutions'); return false;">AI Strategy</a></li>
-            <li><a href="#" onclick="scrollToSection('#solutions'); return false;">AI Development</a></li>
-            <li><a href="#" onclick="scrollToSection('#solutions'); return false;">AI Education</a></li>
-            <li><a href="#" onclick="scrollToSection('#solutions'); return false;">Continuous Support</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bar">
-        <span class="footer-bar-text">© 2026 elyrac Ai — Grace in Design. All rights reserved.</span>
-        <a class="footer-bar-email" href="mailto:info@elyracai.com">info@elyracai.com</a>
-      </div>
-    </div>
-  </footer>
-
-</div><!-- end page-home -->
-
+</section>
 
 <!-- ============================================================ -->
-<!-- ABOUT PAGE -->
+<!-- SECTION 2 — TRUST BAR -->
 <!-- ============================================================ -->
-<div class="page" id="page-about">
-
-  <!-- About Hero -->
-  <section id="about-hero">
-    <div class="container" style="text-align:center;">
-      <div class="section-label reveal" style="justify-content:center;">ABOUT ELYRAC AI</div>
-      <h1 class="section-h2 reveal reveal-d1" style="font-size:clamp(2.5rem,5vw,4.2rem);max-width:700px;margin:0 auto 20px;">Intelligence with <em>Purpose.</em></h1>
-      <p class="reveal reveal-d2" style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.85;color:var(--white-dim);max-width:600px;margin:0 auto 36px;">Founded in 2021, elyrac Ai was born from a simple conviction: AI shouldn't be a privilege for the few. Our mission is to democratize artificial intelligence — making it practical, ethical, and transformative for every business, regardless of size or sector.</p>
-      <a class="btn-primary reveal reveal-d3" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:inline-flex;">Book a Free Call</a>
+<div class="trust-full">
+  <div class="container">
+    <div class="trust-top">
+      <div class="reveal">
+        <p class="trust-para">We partner with businesses to architect, build, and deploy AI systems that create real operational advantages. Every engagement starts with a deep understanding of how your business actually works — so the AI we build fits your reality, not a template.</p>
+      </div>
+      <div class="reveal reveal-d1">
+        <div class="trust-stats-row">
+          <div class="trust-stat">
+            <div class="trust-stat-num" data-count="30" data-suffix="+">30+</div>
+            <div class="trust-stat-label">Projects Delivered</div>
+          </div>
+          <div class="trust-stat">
+            <div class="trust-stat-num" data-count="95" data-suffix="%">95%</div>
+            <div class="trust-stat-label">Client Retention</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
+    <div class="logo-row reveal reveal-d2">
+      <div class="logo-box"><span class="logo-box-icon">🏦</span><span class="logo-box-text">FinTech</span></div>
+      <div class="logo-box"><span class="logo-box-icon">🏥</span><span class="logo-box-text">MedCore</span></div>
+      <div class="logo-box"><span class="logo-box-icon">⚖️</span><span class="logo-box-text">LegalAI</span></div>
+      <div class="logo-box"><span class="logo-box-icon">🛒</span><span class="logo-box-text">RetailX</span></div>
+      <div class="logo-box"><span class="logo-box-icon">🏗️</span><span class="logo-box-text">BuildTech</span></div>
+      <div class="logo-box"><span class="logo-box-icon">🌍</span><span class="logo-box-text">GlobeOps</span></div>
+    </div>
+  </div>
+</div>
 
-  <!-- About Stats Row -->
-  <div class="about-stats-row">
-    <div class="container">
-      <div class="about-stats-grid">
-        <div class="about-stat-card reveal">
-          <div class="about-stat-num">150+</div>
-          <div class="about-stat-label">Systems Built</div>
+<!-- ============================================================ -->
+<!-- SECTION 3 — WHAT WE BUILD -->
+<!-- ============================================================ -->
+<section id="what-we-build">
+  <div class="container">
+    <div class="section-eyebrow reveal">WHAT WE BUILD</div>
+    <h2 class="section-h2 reveal reveal-d1">Custom AI Systems <em>For Every Business Need.</em></h2>
+    <div class="services-grid">
+      <div class="service-card tilt-card reveal reveal-d1">
+        <div class="tilt-inner">
+          <span class="service-icon">⚙️</span>
+          <div class="service-title">AI Workflow Automation</div>
+          <p class="service-desc">Eliminate repetitive manual processes with intelligent automation systems that work 24/7 inside your existing operations.</p>
         </div>
-        <div class="about-stat-card reveal reveal-d1">
-          <div class="about-stat-num">40+</div>
-          <div class="about-stat-label">Industries Served</div>
+      </div>
+      <div class="service-card tilt-card reveal reveal-d2">
+        <div class="tilt-inner">
+          <span class="service-icon">🧠</span>
+          <div class="service-title">Custom LLM Applications</div>
+          <p class="service-desc">Purpose-built language model applications trained on your data — not generic prompts layered over ChatGPT.</p>
         </div>
-        <div class="about-stat-card reveal reveal-d2">
-          <div class="about-stat-num">2021</div>
-          <div class="about-stat-label">Year Founded</div>
+      </div>
+      <div class="service-card tilt-card reveal reveal-d3">
+        <div class="tilt-inner">
+          <span class="service-icon">🔗</span>
+          <div class="service-title">Intelligent Data Pipelines</div>
+          <p class="service-desc">Structured pipelines that collect, clean, enrich, and route your business data to the right AI models at the right time.</p>
         </div>
-        <div class="about-stat-card reveal reveal-d3">
-          <div class="about-stat-num">🌍</div>
-          <div class="about-stat-label">Globally Scalable</div>
+      </div>
+      <div class="service-card tilt-card reveal reveal-d1">
+        <div class="tilt-inner">
+          <span class="service-icon">👁️</span>
+          <div class="service-title">Computer Vision Systems</div>
+          <p class="service-desc">Visual AI that can inspect products, analyze footage, read documents, and extract insights from images at scale.</p>
+        </div>
+      </div>
+      <div class="service-card tilt-card reveal reveal-d2">
+        <div class="tilt-inner">
+          <span class="service-icon">💬</span>
+          <div class="service-title">Conversational AI Agents</div>
+          <p class="service-desc">AI agents that handle real customer conversations, support tickets, and internal queries — with context, memory, and escalation logic.</p>
+        </div>
+      </div>
+      <div class="service-card tilt-card reveal reveal-d3">
+        <div class="tilt-inner">
+          <span class="service-icon">🚀</span>
+          <div class="service-title">AI-Powered SaaS Products</div>
+          <p class="service-desc">Full-stack AI product development — from architecture to launch-ready software you can sell or deploy as a platform.</p>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Mission Section -->
-  <section id="about-mission">
-    <div class="container">
-      <div class="mission-inner">
-        <div>
-          <div class="section-label reveal">OUR MISSION</div>
-          <h2 class="section-h2 reveal reveal-d1">Why <em>elyrac Ai</em> Exists</h2>
-          <p style="font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.85;color:var(--white-dim);margin-bottom:20px;" class="reveal reveal-d2">We started elyrac Ai because we saw a gap between the promise of artificial intelligence and the reality most businesses experience. The AI industry was full of hype, complexity, and gatekeeping — and the businesses that needed it most were being left behind.</p>
-          <p style="font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.85;color:var(--white-dim);" class="reveal reveal-d3">We believe AI should be a tool for growth, not a source of confusion. That's why we built a studio that combines deep technical expertise with strategic thinking — delivering AI solutions that are not just technically excellent, but genuinely useful, ethical, and designed with grace.</p>
-        </div>
-        <div class="pillar-cards">
-          <div class="pillar-card reveal reveal-d1">
-            <span class="pillar-icon">🌐</span>
-            <div>
-              <div class="pillar-title">Accessible</div>
-              <p class="pillar-desc">AI shouldn't be locked behind complexity or massive budgets. We make it reachable for businesses of all sizes, translating technical depth into clear, actionable outcomes.</p>
-            </div>
-          </div>
-          <div class="pillar-card reveal reveal-d2">
-            <span class="pillar-icon">🛡️</span>
-            <div>
-              <div class="pillar-title">Ethical</div>
-              <p class="pillar-desc">Every solution we build is grounded in responsible AI principles. We consider bias, privacy, transparency, and long-term impact — because trust is non-negotiable.</p>
-            </div>
-          </div>
-          <div class="pillar-card reveal reveal-d3">
-            <span class="pillar-icon">⚡</span>
-            <div>
-              <div class="pillar-title">Transformative</div>
-              <p class="pillar-desc">We don't build AI for its own sake. We engineer systems that create measurable change — in efficiency, revenue, customer experience, and competitive positioning.</p>
-            </div>
-          </div>
+<!-- ============================================================ -->
+<!-- SECTION 4 — WHY ELYRAC AI -->
+<!-- ============================================================ -->
+<section id="why-us">
+  <div class="container">
+    <div class="section-eyebrow reveal">WHY CHOOSE US</div>
+    <h2 class="section-h2 reveal reveal-d1">A Different <em>Kind of Partner.</em></h2>
+    <div class="diff-grid">
+      <div class="diff-card tilt-card reveal reveal-d1">
+        <div class="tilt-inner">
+          <div class="diff-num">01</div>
+          <div class="diff-title">Built Around You</div>
+          <p class="diff-desc">Every system is architected from scratch around your data, your workflows, and your goals. Nothing generic. Nothing recycled from a previous project. Your AI is yours alone.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Values Grid -->
-  <section id="about-values">
-    <div class="container">
-      <div class="section-label reveal">WHAT WE STAND FOR</div>
-      <h2 class="section-h2 reveal reveal-d1">Our <em>Values</em></h2>
-      <div class="values-grid">
-        <div class="value-card reveal reveal-d1">
-          <span class="value-icon">🌐</span>
-          <div class="value-title">Accessibility</div>
-          <p class="value-desc">We design every solution to be understandable and usable by the people who matter most — your team. No black boxes, no jargon walls.</p>
-        </div>
-        <div class="value-card reveal reveal-d2">
-          <span class="value-icon">🛡️</span>
-          <div class="value-title">Ethics First</div>
-          <p class="value-desc">We hold ourselves to a high standard when it comes to data privacy, algorithmic fairness, and responsible deployment. If it's not ethical, it's not elyrac.</p>
-        </div>
-        <div class="value-card reveal reveal-d3">
-          <span class="value-icon">⚡</span>
-          <div class="value-title">Continuous Innovation</div>
-          <p class="value-desc">The AI landscape evolves at breakneck speed. We stay at the frontier so you don't have to — and bring those advances to your business as they become relevant.</p>
-        </div>
-        <div class="value-card reveal reveal-d4">
-          <span class="value-icon">🤝</span>
-          <div class="value-title">Long-term Partnership</div>
-          <p class="value-desc">We measure our success by your success. We're not project vendors — we're strategic partners invested in your long-term growth and AI maturity.</p>
+      <div class="diff-card tilt-card reveal reveal-d2">
+        <div class="tilt-inner">
+          <div class="diff-num">02</div>
+          <div class="diff-title">End-to-End Delivery</div>
+          <p class="diff-desc">From first conversation to live deployment — we own the entire build so you never have to coordinate between vendors, manage freelancers, or translate between technical and business teams.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- About CTA Banner -->
-  <div class="cta-banner">
-    <div class="container">
-      <div class="cta-card reveal">
-        <div>
-          <div class="cta-eyebrow">WORK WITH US</div>
-          <h2 class="cta-h2">Let's Build Something <em>Remarkable.</em></h2>
-          <p class="cta-body">You've read about who we are and what we believe. Now let's talk about what we can build together. One call can change the trajectory of your business.</p>
-          <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">Start the Conversation →</a>
+      <div class="diff-card tilt-card reveal reveal-d3">
+        <div class="tilt-inner">
+          <div class="diff-num">03</div>
+          <div class="diff-title">Real Results, Not Demos</div>
+          <p class="diff-desc">We measure success by the business outcomes our systems create, not by features shipped. If it doesn't move a real number in your business, it doesn't count.</p>
         </div>
-        <div class="cta-mini-grid">
-          <div class="cta-mini-card">
-            <span class="cta-mini-icon">🎧</span>
-            <div class="cta-mini-title">1-on-1 Call</div>
-          </div>
-          <div class="cta-mini-card">
-            <span class="cta-mini-icon">🤝</span>
-            <div class="cta-mini-title">30 Minutes</div>
-          </div>
-          <div class="cta-mini-card">
-            <span class="cta-mini-icon">🏷️</span>
-            <div class="cta-mini-title">Free Consultation</div>
-          </div>
-          <div class="cta-mini-card">
-            <span class="cta-mini-icon">🔍</span>
-            <div class="cta-mini-title">Feasibility Check</div>
-          </div>
+      </div>
+      <div class="diff-card tilt-card reveal reveal-d4">
+        <div class="tilt-inner">
+          <div class="diff-num">04</div>
+          <div class="diff-title">Long-Term Partnership</div>
+          <p class="diff-desc">We don't disappear after launch. Your AI system grows and evolves with your business. We monitor performance, iterate, and scale alongside you.</p>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Footer About -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div>
-          <img class="footer-logo footer-logo-img" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac Ai"/>
-          <p class="footer-desc">An AI studio making artificial intelligence accessible, ethical, and transformative for businesses worldwide. Grace in every design.</p>
-          <div class="footer-socials">
-            <a class="footer-social" href="https://www.linkedin.com/company/elyrac-ai/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-            <a class="footer-social" href="https://x.com/ElGracAi" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a class="footer-social" href="https://www.youtube.com/@elyracAi" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-            <a class="footer-social" href="https://www.instagram.com/elyracai/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-            </a>
-            <a class="footer-social" href="mailto:info@elyracai.com" aria-label="Email">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            </a>
+<!-- ============================================================ -->
+<!-- SECTION 5 — TOOLS WE USE -->
+<!-- ============================================================ -->
+<section id="tech">
+  <div class="container">
+    <div class="section-eyebrow reveal">TOOLS WE USE</div>
+    <h2 class="section-h2 reveal reveal-d1">Built With <em>Proven Tools.</em></h2>
+    <p class="section-sub reveal reveal-d2">We use modern, battle-tested technology stacks that scale with your growth.</p>
+  </div>
+  <div class="tech-wrapper reveal reveal-d3">
+    <div class="tech-row tech-row-fwd">
+      <div class="tech-chip">🐍 Python</div><div class="tech-chip">📘 TypeScript</div><div class="tech-chip">⚛️ React</div><div class="tech-chip">🟩 Node.js</div><div class="tech-chip">▲ Next.js</div><div class="tech-chip">🐘 PostgreSQL</div><div class="tech-chip">🐳 Docker</div><div class="tech-chip">☁️ AWS</div><div class="tech-chip">🦜 LangChain</div><div class="tech-chip">🤖 OpenAI</div>
+      <div class="tech-chip">🐍 Python</div><div class="tech-chip">📘 TypeScript</div><div class="tech-chip">⚛️ React</div><div class="tech-chip">🟩 Node.js</div><div class="tech-chip">▲ Next.js</div><div class="tech-chip">🐘 PostgreSQL</div><div class="tech-chip">🐳 Docker</div><div class="tech-chip">☁️ AWS</div><div class="tech-chip">🦜 LangChain</div><div class="tech-chip">🤖 OpenAI</div>
+    </div>
+    <div class="tech-row tech-row-rev">
+      <div class="tech-chip">📌 Pinecone</div><div class="tech-chip">🚀 FastAPI</div><div class="tech-chip">🏗️ NestJS</div><div class="tech-chip">◉ GraphQL</div><div class="tech-chip">🟦 Supabase</div><div class="tech-chip">🔴 Redis</div><div class="tech-chip">⚙️ n8n</div><div class="tech-chip">🔥 Firebase</div><div class="tech-chip">📱 Flutter</div><div class="tech-chip">🦙 Ollama</div>
+      <div class="tech-chip">📌 Pinecone</div><div class="tech-chip">🚀 FastAPI</div><div class="tech-chip">🏗️ NestJS</div><div class="tech-chip">◉ GraphQL</div><div class="tech-chip">🟦 Supabase</div><div class="tech-chip">🔴 Redis</div><div class="tech-chip">⚙️ n8n</div><div class="tech-chip">🔥 Firebase</div><div class="tech-chip">📱 Flutter</div><div class="tech-chip">🦙 Ollama</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6 — RECENT WORK -->
+<!-- ============================================================ -->
+<section id="work">
+  <div class="container">
+    <div class="section-eyebrow reveal">RECENT WORK</div>
+    <h2 class="section-h2 reveal reveal-d1">Projects That <em>Delivered Results.</em></h2>
+
+    <div class="portfolio-cards">
+
+      <!-- Card 1 -->
+      <div class="portfolio-card reveal">
+        <div class="portfolio-mockup">
+          <div class="portfolio-mockup-inner">
+            <div class="portfolio-mockup-icon">📦</div>
+            <div class="portfolio-mockup-lines">
+              <div class="portfolio-mockup-line"></div>
+              <div class="portfolio-mockup-line"></div>
+              <div class="portfolio-mockup-line"></div>
+            </div>
           </div>
         </div>
         <div>
-          <div class="footer-col-title">Company</div>
-          <ul class="footer-links">
-            <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
-            <li><a href="#" onclick="showPage('about'); return false;">About Us</a></li>
-            <li><a href="#" onclick="scrollToSection('#portfolio'); return false;">Portfolio</a></li>
-            <li><a href="#">Careers</a></li>
-          </ul>
+          <span class="portfolio-badge">AI Automation</span>
+          <h3 class="portfolio-title">Inventory AI System</h3>
+          <div class="portfolio-row"><span class="portfolio-row-label">Challenge:</span><span>Manual stock tracking causing costly overstock waste and constant supply shortfalls across a regional distribution network.</span></div>
+          <div class="portfolio-row"><span class="portfolio-row-label">Result:</span><span>AI prediction system that forecasts demand, auto-triggers reorders, and flags anomalies — reducing waste by 78%.</span></div>
+          <div class="portfolio-metrics">
+            <div class="portfolio-metric"><div class="portfolio-metric-num" data-count="78" data-suffix="%">78%</div><div class="portfolio-metric-label">Waste Reduction</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num" data-count="12" data-suffix="K+">12K+</div><div class="portfolio-metric-label">SKUs Managed</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">2 mo</div><div class="portfolio-metric-label">Time to Ship</div></div>
+          </div>
+          <div class="stack-pills">
+            <span class="stack-pill">Python</span><span class="stack-pill">PostgreSQL</span><span class="stack-pill">FastAPI</span><span class="stack-pill">React</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="portfolio-card reverse reveal">
+        <div class="portfolio-mockup">
+          <div class="portfolio-mockup-inner">
+            <div class="portfolio-mockup-icon">⚖️</div>
+            <div class="portfolio-mockup-lines">
+              <div class="portfolio-mockup-line"></div>
+              <div class="portfolio-mockup-line"></div>
+              <div class="portfolio-mockup-line"></div>
+            </div>
+          </div>
         </div>
         <div>
-          <div class="footer-col-title">Services</div>
-          <ul class="footer-links">
-            <li><a href="#" onclick="scrollToSection('#solutions'); return false;">AI Strategy</a></li>
-            <li><a href="#" onclick="scrollToSection('#solutions'); return false;">AI Development</a></li>
-            <li><a href="#" onclick="scrollToSection('#solutions'); return false;">AI Education</a></li>
-            <li><a href="#" onclick="scrollToSection('#solutions'); return false;">Continuous Support</a></li>
-          </ul>
+          <span class="portfolio-badge">LLM Application</span>
+          <h3 class="portfolio-title">Legal Document Assistant</h3>
+          <div class="portfolio-row"><span class="portfolio-row-label">Challenge:</span><span>Legal team spending 6–8 hours daily manually reviewing contracts, NDAs, and compliance documents before any meaningful analysis.</span></div>
+          <div class="portfolio-row"><span class="portfolio-row-label">Result:</span><span>AI assistant that reads, summarizes, flags risk clauses, and cross-references precedents — cutting review time by 85%.</span></div>
+          <div class="portfolio-metrics">
+            <div class="portfolio-metric"><div class="portfolio-metric-num" data-count="85" data-suffix="%">85%</div><div class="portfolio-metric-label">Time Saved</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num" data-count="200" data-suffix="+">200+</div><div class="portfolio-metric-label">Docs Per Day</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">6 wk</div><div class="portfolio-metric-label">Time to Ship</div></div>
+          </div>
+          <div class="stack-pills">
+            <span class="stack-pill">LangChain</span><span class="stack-pill">OpenAI</span><span class="stack-pill">Next.js</span><span class="stack-pill">Supabase</span>
+          </div>
         </div>
       </div>
-      <div class="footer-bar">
-        <span class="footer-bar-text">© 2026 elyrac Ai — Grace in Design. All rights reserved.</span>
-        <a class="footer-bar-email" href="mailto:info@elyracai.com">info@elyracai.com</a>
+
+      <!-- Card 3 -->
+      <div class="portfolio-card reveal">
+        <div class="portfolio-mockup">
+          <div class="portfolio-mockup-inner">
+            <div class="portfolio-mockup-icon">🎧</div>
+            <div class="portfolio-mockup-lines">
+              <div class="portfolio-mockup-line"></div>
+              <div class="portfolio-mockup-line"></div>
+              <div class="portfolio-mockup-line"></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="portfolio-badge">AI Agent</span>
+          <h3 class="portfolio-title">Customer Support AI Agent</h3>
+          <div class="portfolio-row"><span class="portfolio-row-label">Challenge:</span><span>Support team overwhelmed with hundreds of daily tickets across email, chat, and WhatsApp, with 14-hour average response times.</span></div>
+          <div class="portfolio-row"><span class="portfolio-row-label">Result:</span><span>AI agent autonomously handles 70% of all incoming tickets end-to-end — with full context, escalation logic, and a 98% satisfaction score.</span></div>
+          <div class="portfolio-metrics">
+            <div class="portfolio-metric"><div class="portfolio-metric-num" data-count="70" data-suffix="%">70%</div><div class="portfolio-metric-label">Auto-Resolved</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">24/7</div><div class="portfolio-metric-label">Coverage</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num" data-count="98" data-suffix="%">98%</div><div class="portfolio-metric-label">Satisfaction</div></div>
+          </div>
+          <div class="stack-pills">
+            <span class="stack-pill">Node.js</span><span class="stack-pill">Redis</span><span class="stack-pill">OpenAI</span><span class="stack-pill">NestJS</span>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
 
-</div><!-- end page-about -->
+    <div class="work-cta reveal">
+      <p>Have a project in mind?</p>
+      <a class="btn-primary" href="contact.html">Let's Talk →</a>
+    </div>
+  </div>
+</section>
 
+<!-- ============================================================ -->
+<!-- SECTION 7 — FAQ -->
+<!-- ============================================================ -->
+<section id="home-faq">
+  <div class="container">
+    <div class="faq-home-inner">
+      <!-- Left: stats -->
+      <div>
+        <div class="section-eyebrow reveal">FREQUENTLY ASKED QUESTIONS</div>
+        <h2 class="section-h2 reveal reveal-d1">Common <em>Questions.</em></h2>
+        <div class="faq-stats">
+          <div class="faq-stat reveal reveal-d1">
+            <div class="faq-stat-num" data-count="30" data-suffix="+">30+</div>
+            <div class="faq-stat-label">Projects Delivered</div>
+          </div>
+          <div class="faq-stat reveal reveal-d2">
+            <div class="faq-stat-num" data-count="6" data-suffix="+">6+</div>
+            <div class="faq-stat-label">Years Experience</div>
+          </div>
+          <div class="faq-stat reveal reveal-d3">
+            <div class="faq-stat-num" data-count="100" data-suffix="%">100%</div>
+            <div class="faq-stat-label">Custom Built</div>
+          </div>
+          <div class="faq-stat reveal reveal-d4">
+            <div class="faq-stat-num" data-count="98" data-suffix="%">98%</div>
+            <div class="faq-stat-label">On-Time Delivery</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: accordion -->
+      <div class="accordion reveal reveal-d1">
+        <div class="accordion-item open">
+          <button class="accordion-btn"><span class="accordion-q">How is elyrac AI different from using off-the-shelf AI tools?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Off-the-shelf tools are built for everyone, which means they're optimized for no one. We build AI systems engineered specifically for your business — your data, your workflows, your edge cases. The difference is like buying a suit versus having one tailored. Ours fits perfectly because it was designed to.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">Do you work with businesses that have no technical team?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Absolutely. We work with founders and business owners who have no technical staff all the time. We own the entire build — from architecture through deployment — so you never need to manage developers or coordinate between vendors. You just describe the outcome you want, and we engineer it.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">What industries do you work with?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">We're industry-agnostic. We've built AI systems for legal, healthcare, retail, logistics, fintech, education, hospitality, real estate, and more. If your business generates data and has repeatable processes, there's an AI opportunity — and we'll help you find and capture it.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">How do you handle data privacy and security?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Security is a first-class concern in everything we build. We follow industry best practices: encryption at rest and in transit, role-based access controls, data minimization, and audit logging. We design every system to comply with relevant regulations and never use your data to train third-party models without explicit permission.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">Can you integrate AI into our existing systems?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Integration is a core part of every project. We design AI systems to connect with your existing stack — CRMs, ERPs, databases, APIs, and custom-built tools. We use industry-standard integration patterns so your new AI layer works alongside what you have, not instead of it.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">How do we get started?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Book a free 30-minute strategy call. We'll learn about your business, identify the highest-impact AI opportunity, and give you a clear picture of what's possible — no commitment required. Most clients leave that first call with a concrete idea of what to build and what it would deliver.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- Theme Toggle -->
-<button id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">🌙</button>
+<!-- ============================================================ -->
+<!-- SECTION 8 — CTA BANNER -->
+<!-- ============================================================ -->
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2 class="cta-title">Ready to Build Your <em>AI System?</em></h2>
+      <p class="cta-sub">Book a free 30-minute strategy call. No commitment. Just clarity on what's possible for your business.</p>
+      <div class="cta-btns">
+        <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Free Strategy Call</a>
+        <a class="btn-ghost" href="contact.html">Send Us a Message</a>
+        <a class="btn-ghost" href="portfolio.html">View Our Work</a>
+      </div>
+      <div class="trust-badges">
+        <span class="trust-badge">Free Consultation</span>
+        <span class="trust-badge">No Commitment</span>
+        <span class="trust-badge">Quick Response</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/>
+        <p class="footer-tagline">We build fully customized AI software systems engineered around your specific business needs.</p>
+        <div class="footer-socials">
+          <a class="footer-social" href="https://www.linkedin.com/company/elyrac-ai/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a class="footer-social" href="https://x.com/ElGracAi" target="_blank" rel="noopener" aria-label="X">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="footer-social" href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="solutions.html">AI Automation</a></li>
+          <li><a href="solutions.html">LLM Development</a></li>
+          <li><a href="solutions.html">Data Systems</a></li>
+          <li><a href="solutions.html">Computer Vision</a></li>
+          <li><a href="solutions.html">Conversational AI</a></li>
+          <li><a href="solutions.html">AI SaaS</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get In Touch</div>
+        <a class="footer-contact-email" href="mailto:info@elyracai.com">info@elyracai.com</a>
+        <a class="footer-wa" href="https://wa.me/256700000000" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="display:inline-flex;font-size:11px;padding:10px 22px;">Book a Call →</a>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-bar-text">© 2025 elyrac AI. All rights reserved.</span>
+      <div class="footer-bar-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <!-- Chatbot -->
-<button id="chat-btn" aria-label="Open chat with Elac" title="Chat with Elac">✦</button>
-<div id="chat-panel" role="dialog" aria-label="Chat with Elac" aria-modal="true">
+<button id="chat-btn" aria-label="Chat with elyrac AI">✦</button>
+<div id="chat-panel">
   <div class="chat-header">
-    <div class="chat-avatar">✦</div>
-    <div>
-      <div class="chat-name">ELAC</div>
-      <div class="chat-online">Online</div>
+    <img class="chat-avatar" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="elyrac AI"/>
+    <div class="chat-info">
+      <div class="chat-name">elyrac AI</div>
+      <div class="chat-status">Online</div>
     </div>
-    <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
+    <button class="chat-close" id="chat-close" aria-label="Close chat">✕</button>
   </div>
   <div class="chat-messages" id="chat-messages"></div>
-  <div class="chat-chips" id="chat-chips">
-    <button class="chat-chip" onclick="sendChip('Our Services')">Our Services</button>
-    <button class="chat-chip" onclick="sendChip('Book a Call')">Book a Call</button>
-    <button class="chat-chip" onclick="sendChip('How it works')">How it works</button>
-    <button class="chat-chip" onclick="sendChip('Pricing')">Pricing</button>
-  </div>
   <div class="chat-input-row">
-    <label for="chat-file-input" class="chat-icon-btn" title="Attach file" tabindex="0" onkeydown="if(event.key==='Enter'){document.getElementById('chat-file-input').click();}">📎</label>
-    <input type="file" id="chat-file-input" style="display:none;" onchange="handleFileAttach(this)"/>
-    <div class="siri-bars" id="siri-bars">
-      <div class="siri-bar"></div>
-      <div class="siri-bar"></div>
-      <div class="siri-bar"></div>
-      <div class="siri-bar"></div>
-      <div class="siri-bar"></div>
-    </div>
-    <button class="chat-icon-btn" id="mic-btn" title="Voice input" onclick="toggleVoice()">🎤</button>
-    <input type="text" id="chat-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendMessage()"/>
-    <button class="chat-send" onclick="sendMessage()" aria-label="Send message">➤</button>
+    <input class="chat-input" id="chat-input" type="text" placeholder="Ask anything…" autocomplete="off"/>
+    <button class="chat-send" id="chat-send" aria-label="Send">➤</button>
   </div>
 </div>
 
-
-<script>
-  // ============================================================
-  // PAGE SYSTEM
-  // ============================================================
-  let obs;
-
-  function showPage(name) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById("page-" + name).classList.add("active");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => {
-      document.querySelectorAll(".reveal:not(.visible)").forEach(r => obs && obs.observe(r));
-    }, 50);
-  }
-
-  function scrollToSection(selector) {
-    const homeEl = document.getElementById("page-home");
-    if (homeEl && !homeEl.classList.contains("active")) {
-      showPage("home");
-      setTimeout(() => {
-        const el = document.querySelector(selector);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 150);
-    } else {
-      const el = document.querySelector(selector);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }
-
-  // ============================================================
-  // CUSTOM CURSOR
-  // ============================================================
-  const cursor = document.getElementById("cursor");
-  const cursorRing = document.getElementById("cursor-ring");
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
-
-  document.addEventListener("mousemove", e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + "px";
-    cursor.style.top = mouseY + "px";
-  });
-
-  (function animateRing() {
-    ringX += (mouseX - ringX) * 0.1;
-    ringY += (mouseY - ringY) * 0.1;
-    cursorRing.style.left = ringX + "px";
-    cursorRing.style.top = ringY + "px";
-    requestAnimationFrame(animateRing);
-  })();
-
-  document.querySelectorAll("a, button, [tabindex], .service-card, .problem-card, .value-card, .logo-grid-item, .tech-chip").forEach(el => {
-    el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
-    el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
-  });
-
-  // ============================================================
-  // SCROLL REVEAL
-  // ============================================================
-  obs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
-
-  // ============================================================
-  // NAVBAR SCROLL
-  // ============================================================
-  window.addEventListener("scroll", () => {
-    const nav = document.getElementById("nav");
-    if (window.scrollY > 60) {
-      nav.classList.add("scrolled");
-    } else {
-      nav.classList.remove("scrolled");
-    }
-  }, { passive: true });
-
-  // ============================================================
-  // MOBILE MENU
-  // ============================================================
-  function openMobileMenu() {
-    const mm = document.getElementById("mobile-menu");
-    mm.classList.add("open");
-    document.body.style.overflow = "hidden";
-  }
-  function closeMobileMenu() {
-    const mm = document.getElementById("mobile-menu");
-    mm.classList.remove("open");
-    document.body.style.overflow = "";
-  }
-
-  // ============================================================
-  // THEME TOGGLE
-  // ============================================================
-  const themeBtn = document.getElementById("theme-toggle");
-  const savedTheme = localStorage.getItem("elyrac-theme");
-  if (savedTheme === "light") {
-    document.body.classList.add("light-mode");
-    themeBtn.textContent = "☀️";
-    setLogoMode("light");
-  }
-
-  function setLogoMode(mode) {
-    const logos = document.querySelectorAll(".nav-logo, .footer-logo-img");
-    logos.forEach(logo => {
-      if (mode === "light") {
-        logo.src = "Brand assets/Elyrac Ai-05.png";
-      } else {
-        logo.src = "Brand assets/Elyrac Ai-06 (1).png";
-      }
-    });
-  }
-
-  themeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-    const isLight = document.body.classList.contains("light-mode");
-    themeBtn.textContent = isLight ? "☀️" : "🌙";
-    localStorage.setItem("elyrac-theme", isLight ? "light" : "dark");
-    setLogoMode(isLight ? "light" : "dark");
-  });
-
-  // ============================================================
-  // CONSTELLATION CANVAS
-  // ============================================================
-  (function initConstellation() {
-    const canvas = document.getElementById("constellation-canvas");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    let W, H, dots = [];
-    const DOT_COUNT = 80;
-    const CONNECT_DIST = 120;
-
-    function resize() {
-      W = canvas.width = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
-    }
-
-    function randomDot() {
-      return {
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 1.5 + 0.5
-      };
-    }
-
-    function init() {
-      resize();
-      dots = Array.from({ length: DOT_COUNT }, randomDot);
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      // Update
-      dots.forEach(d => {
-        d.x += d.vx;
-        d.y += d.vy;
-        if (d.x < 0 || d.x > W) d.vx *= -1;
-        if (d.y < 0 || d.y > H) d.vy *= -1;
-      });
-      // Connections
-      for (let i = 0; i < dots.length; i++) {
-        for (let j = i + 1; j < dots.length; j++) {
-          const dx = dots[i].x - dots[j].x;
-          const dy = dots[i].y - dots[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.25;
-            ctx.strokeStyle = `rgba(91,155,245,${alpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(dots[i].x, dots[i].y);
-            ctx.lineTo(dots[j].x, dots[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      // Dots
-      dots.forEach(d => {
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(110,187,255,0.6)";
-        ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-
-    window.addEventListener("resize", () => { resize(); }, { passive: true });
-    init();
-    draw();
-  })();
-
-  // ============================================================
-  // ACCORDION
-  // ============================================================
-  function toggleAccordion(btn) {
-    const item = btn.closest(".accordion-item");
-    const isOpen = item.classList.contains("open");
-    // Close all
-    document.querySelectorAll(".accordion-item.open").forEach(i => i.classList.remove("open"));
-    // Open clicked if it was closed
-    if (!isOpen) item.classList.add("open");
-  }
-
-  // ============================================================
-  // PRICING
-  // ============================================================
-  const selectedServices = {};
-
-  function toggleService(id, price, row) {
-    if (selectedServices[id]) {
-      delete selectedServices[id];
-      row.classList.remove("selected");
-      row.querySelector(".service-row-check").textContent = "";
-    } else {
-      selectedServices[id] = { name: row.querySelector(".service-row-name").textContent, price };
-      row.classList.add("selected");
-      row.querySelector(".service-row-check").textContent = "✓";
-    }
-    updatePricingPanel();
-  }
-
-  function updatePricingPanel() {
-    const list = document.getElementById("pricing-selected-list");
-    const totalEl = document.getElementById("pricing-total");
-    const emptyMsg = document.getElementById("pricing-empty-msg");
-    const keys = Object.keys(selectedServices);
-
-    if (keys.length === 0) {
-      list.innerHTML = '<div class="pricing-empty" id="pricing-empty-msg">Select services to see your estimate</div>';
-      totalEl.textContent = "$0";
-      return;
-    }
-
-    let total = 0;
-    let html = "";
-    keys.forEach(k => {
-      const s = selectedServices[k];
-      total += s.price;
-      html += `<div class="pricing-selected-item"><span>${s.name}</span><span style="color:var(--blue-bright);font-family:var(--serif);">$${s.price.toLocaleString()}</span></div>`;
-    });
-    list.innerHTML = html;
-    totalEl.textContent = "$" + total.toLocaleString();
-  }
-
-  function switchPricingTab(index) {
-    document.querySelectorAll(".pricing-tab").forEach((t, i) => {
-      t.classList.toggle("active", i === index);
-    });
-    document.querySelectorAll(".pricing-tab-panel").forEach((p, i) => {
-      p.classList.toggle("active", i === index);
-    });
-  }
-
-  function updatePricingNote(val) {
-    // Could add note to pricing panel in future iterations
-  }
-
-  // Initialize first service as selected
-  (function() {
-    const firstRow = document.querySelector(".service-row");
-    if (firstRow) {
-      firstRow.classList.add("selected");
-      firstRow.querySelector(".service-row-check").textContent = "✓";
-      selectedServices["strategy"] = { name: "AI Strategy & Audit", price: 500 };
-      updatePricingPanel();
-    }
-  })();
-
-  // ============================================================
-  // CHATBOT ELAC
-  // ============================================================
-  let chatOpen = false;
-  let isRecording = false;
-  let recognition = null;
-
-  const chatBtn = document.getElementById("chat-btn");
-  const chatPanel = document.getElementById("chat-panel");
-  const chatMessages = document.getElementById("chat-messages");
-  const chatInput = document.getElementById("chat-input");
-
-  // Initial bot greeting
-  setTimeout(() => {
-    addBotMessage("Hello! I'm Elac, your elyrac Ai assistant. 👋<br>How can I help you today? You can ask me about our services, pricing, or book a call.");
-  }, 500);
-
-  function toggleChat() {
-    chatOpen = !chatOpen;
-    chatPanel.classList.toggle("open", chatOpen);
-    if (chatOpen) {
-      setTimeout(() => chatInput.focus(), 300);
-    }
-  }
-
-  chatBtn.addEventListener("click", toggleChat);
-
-  function addBotMessage(html) {
-    const bubble = document.createElement("div");
-    bubble.className = "chat-bubble bot";
-    bubble.innerHTML = html;
-    chatMessages.appendChild(bubble);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function addUserMessage(text) {
-    const bubble = document.createElement("div");
-    bubble.className = "chat-bubble user";
-    bubble.textContent = text;
-    chatMessages.appendChild(bubble);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function showTyping() {
-    const typing = document.createElement("div");
-    typing.className = "typing-indicator";
-    typing.id = "typing-indicator";
-    typing.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-    chatMessages.appendChild(typing);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    return typing;
-  }
-
-  function removeTyping() {
-    const t = document.getElementById("typing-indicator");
-    if (t) t.remove();
-  }
-
-  function getBotResponse(msg) {
-    const m = msg.toLowerCase();
-    if (m.includes("our services") || m.includes("what do you do") || m.includes("services")) {
-      return "We offer 4 core services:<br><br>1. <strong>AI Strategy &amp; Audit</strong> — Discovery, roadmap, process audit<br>2. <strong>AI Development</strong> — Custom agents, automation pipelines<br>3. <strong>AI Education</strong> — Team workshops &amp; enablement<br>4. <strong>Continuous Support</strong> — Monitoring, iteration, scaling<br><br>Which would you like to know more about?";
-    }
-    if (m.includes("book") || m.includes("call") || m.includes("meeting") || m.includes("schedule")) {
-      return 'Let\'s connect! Book a free 30-minute discovery call here:<br><br><a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener noreferrer">📅 Schedule on Calendly →</a><br><br>It\'s completely free and there\'s no obligation.';
-    }
-    if (m.includes("how does it work") || m.includes("how it works") || m.includes("process")) {
-      return "Our process is straightforward:<br><br><strong>01 Think</strong> — We audit your workflows and identify AI opportunities<br><strong>02 Build</strong> — We engineer your custom solution<br><strong>03 Move</strong> — We deploy and integrate with your existing stack<br><strong>04 Grow</strong> — We monitor, improve, and scale with you<br><br>Most projects go live within 3–8 weeks.";
-    }
-    if (m.includes("pricing") || m.includes("cost") || m.includes("price") || m.includes("how much")) {
-      return "Here's a quick overview of our pricing:<br><br>💼 AI Strategy &amp; Audit — <strong>$500</strong><br>⚙️ AI Development — <strong>$1,500+</strong><br>🎓 AI Education — <strong>$800</strong><br>🔄 Continuous Support — <strong>$300/mo</strong><br><br>These are starting rates. Final pricing depends on scope. Book a call for a custom quote!";
-    }
-    if (m.includes("hello") || m.includes("hi") || m.includes("hey") || m.includes("good")) {
-      return "Hello! Great to meet you. 👋 I\'m Elac, here to help you explore what elyrac Ai can do for your business.<br><br>What brings you here today?";
-    }
-    if (m.includes("about") || m.includes("who are you") || m.includes("company")) {
-      return "elyrac Ai is an AI studio founded in 2021. We believe AI should be accessible, ethical, and transformative for <em>every</em> business — not just the big ones.<br><br>We've built 150+ AI systems across 40+ industries. Our motto: <strong>Grace in Design.</strong>";
-    }
-    if (m.includes("contact") || m.includes("email") || m.includes("reach")) {
-      return "You can reach us at:<br><br>📧 <a href=\"mailto:info@elyracai.com\">info@elyracai.com</a><br>📅 <a href=\"https://calendly.com/ceo-elyracai/30min\" target=\"_blank\" rel=\"noopener noreferrer\">Book a Call on Calendly</a><br><br>We typically respond within 24 hours.";
-    }
-    return "I can help you with:<br><br>• <strong>Our Services</strong> — What we build and how<br>• <strong>How It Works</strong> — Our 4-step process<br>• <strong>Pricing</strong> — Starting rates for each service<br>• <strong>Book a Call</strong> — Free 30-min discovery call<br>• <strong>About Us</strong> — Our story and values<br><br>What would you like to explore?";
-  }
-
-  function sendMessage() {
-    const val = chatInput.value.trim();
-    if (!val) return;
-    chatInput.value = "";
-    addUserMessage(val);
-    const typing = showTyping();
-    setTimeout(() => {
-      removeTyping();
-      addBotMessage(getBotResponse(val));
-    }, 900);
-  }
-
-  function sendChip(text) {
-    if (!chatOpen) toggleChat();
-    addUserMessage(text);
-    const typing = showTyping();
-    setTimeout(() => {
-      removeTyping();
-      addBotMessage(getBotResponse(text));
-    }, 900);
-  }
-
-  function handleFileAttach(input) {
-    if (!input.files.length) return;
-    const file = input.files[0];
-    addUserMessage("📎 Attached: " + file.name);
-    const typing = showTyping();
-    setTimeout(() => {
-      removeTyping();
-      addBotMessage("Thanks for sharing <strong>" + file.name + "</strong>! A member of our team will review it. Meanwhile, feel free to <a href=\"https://calendly.com/ceo-elyracai/30min\" target=\"_blank\" rel=\"noopener noreferrer\">book a call</a> to discuss your project in detail.");
-    }, 900);
-    input.value = "";
-  }
-
-  function toggleVoice() {
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      addBotMessage("Voice input isn't supported in your browser. Please type your message instead.");
-      return;
-    }
-    const micBtn = document.getElementById("mic-btn");
-    const siriEl = document.getElementById("siri-bars");
-    if (isRecording) {
-      isRecording = false;
-      micBtn.classList.remove("recording");
-      siriEl.classList.remove("active");
-      chatInput.style.display = "";
-      if (recognition) recognition.stop();
-      return;
-    }
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SR();
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    isRecording = true;
-    micBtn.classList.add("recording");
-    siriEl.classList.add("active");
-    chatInput.style.display = "none";
-    recognition.start();
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      isRecording = false;
-      micBtn.classList.remove("recording");
-      siriEl.classList.remove("active");
-      chatInput.style.display = "";
-      chatInput.value = transcript;
-      sendMessage();
-    };
-    recognition.onerror = recognition.onend = () => {
-      isRecording = false;
-      micBtn.classList.remove("recording");
-      siriEl.classList.remove("active");
-      chatInput.style.display = "";
-    };
-  }
-
-  // ============================================================
-  // CURSOR HOVER — add more interactive elements
-  // ============================================================
-  function addCursorHover() {
-    document.querySelectorAll("a, button, [tabindex='0'], .service-card, .problem-card, .value-card, .logo-grid-item, .tech-chip, .portfolio-item, .accordion-toggle, .service-row, .pillar-card").forEach(el => {
-      el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
-      el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
-    });
-  }
-  addCursorHover();
-
-  // Re-observe reveals when switching pages
-  document.querySelectorAll(".page").forEach(page => {
-    const mutObs = new MutationObserver(() => {
-      if (page.classList.contains("active")) {
-        page.querySelectorAll(".reveal:not(.visible)").forEach(r => obs.observe(r));
-      }
-    });
-    mutObs.observe(page, { attributes: true, attributeFilter: ["class"] });
-  });
-</script>
+<script src="js/shared.js"></script>
 </body>
 </html>

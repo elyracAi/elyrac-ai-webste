@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio — elyrac AI</title>
+<meta name="description" content="Real AI systems built for real businesses. See the case studies, the challenges, and the results."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/shared.css"/>
+<style>
+  #portfolio-section { background: var(--navy-darker); }
+  .project-section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--white-line);
+  }
+  .project-section:last-child { border-bottom: none; }
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  @media (max-width: 768px) { .project-grid { grid-template-columns: 1fr; gap: 36px; } }
+  .project-grid.reverse { direction: rtl; }
+  .project-grid.reverse > * { direction: ltr; }
+  @media (max-width: 768px) { .project-grid.reverse { direction: ltr; } }
+  .project-visual {
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(13,31,60,0.85), rgba(9,15,30,0.95));
+    border: 1px solid var(--white-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(91,155,245,0.1), transparent 60%);
+  }
+  .project-visual-icon { font-size: 56px; opacity: 0.65; position: relative; z-index: 1; }
+  .project-visual-label {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(110,187,255,0.5);
+    position: relative; z-index: 1;
+  }
+  .project-num {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 72px;
+    letter-spacing: -4px;
+    color: rgba(91,155,245,0.08);
+    line-height: 1;
+    margin-bottom: -20px;
+  }
+  .project-detail-row {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--white-line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .project-detail-row:last-of-type { border-bottom: none; }
+  .project-detail-label {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+  }
+  .project-detail-text {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--white-dim);
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="index.html"><img class="nav-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/></a>
+  <div class="nav-pill">
+    <ul class="nav-center">
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="solutions.html" class="nav-link">Solutions</a></li>
+      <li><a href="portfolio.html" class="nav-link active">Portfolio</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="faq.html" class="nav-link">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a class="nav-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+    <button id="theme-btn" aria-label="Toggle theme">🌙</button>
+  </div>
+  <div class="nav-hamburger" role="button" aria-label="Open menu" tabindex="0"><span></span><span></span><span></span></div>
+</nav>
+
+<div id="mobile-menu">
+  <button class="mobile-close" aria-label="Close">✕</button>
+  <a href="about.html">About Us</a>
+  <a href="solutions.html">Solutions</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="page-hero-inner">
+    <div class="section-eyebrow reveal" style="justify-content:center;">RECENT WORK</div>
+    <h1 class="reveal reveal-d1">Our <em>Work Speaks.</em></h1>
+    <p class="reveal reveal-d2">Real problems. Real systems. Real results. Here's a look at what we've built and what it delivered for the businesses that trusted us to build it.</p>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="portfolio-section">
+  <div class="container">
+
+    <!-- Project 1 -->
+    <div class="project-section">
+      <div class="project-grid reveal">
+        <div class="project-visual">
+          <div class="project-visual-icon">📦</div>
+          <div class="project-visual-label">Inventory AI System</div>
+        </div>
+        <div>
+          <div class="project-num">01</div>
+          <span class="portfolio-badge">AI Automation · Supply Chain</span>
+          <h2 class="portfolio-title">Inventory AI System</h2>
+          <div class="project-detail-row">
+            <div class="project-detail-label">The Problem</div>
+            <p class="project-detail-text">A regional distribution company was managing over 12,000 SKUs manually — relying on spreadsheets and gut instinct to decide what to order and when. The result was constant overstock on slow-moving items and frustrating stockouts on fast movers, costing them tens of thousands monthly in waste and lost sales.</p>
+          </div>
+          <div class="project-detail-row">
+            <div class="project-detail-label">What We Built</div>
+            <p class="project-detail-text">A demand forecasting and inventory optimization system that ingests historical sales data, seasonal patterns, and supplier lead times to predict required stock levels for each SKU up to 8 weeks ahead. The system auto-triggers reorder requests and flags anomalies in real time.</p>
+          </div>
+          <div class="project-detail-row">
+            <div class="project-detail-label">The Result</div>
+            <p class="project-detail-text">Waste reduced by 78% in the first 90 days. Stockout events dropped by 64%. The operations team now spends their time on exceptions rather than manual counting — and they shipped the system in under 2 months.</p>
+          </div>
+          <div class="portfolio-metrics" style="margin-top:24px;">
+            <div class="portfolio-metric"><div class="portfolio-metric-num">78%</div><div class="portfolio-metric-label">Waste Reduction</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">12K+</div><div class="portfolio-metric-label">SKUs Managed</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">64%</div><div class="portfolio-metric-label">Fewer Stockouts</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">2 mo</div><div class="portfolio-metric-label">Time to Deploy</div></div>
+          </div>
+          <div class="stack-pills">
+            <span class="stack-pill">Python</span><span class="stack-pill">PostgreSQL</span><span class="stack-pill">FastAPI</span><span class="stack-pill">React</span><span class="stack-pill">Docker</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-section">
+      <div class="project-grid reverse reveal">
+        <div class="project-visual">
+          <div class="project-visual-icon">⚖️</div>
+          <div class="project-visual-label">Legal Document Assistant</div>
+        </div>
+        <div>
+          <div class="project-num">02</div>
+          <span class="portfolio-badge">LLM Application · Legal</span>
+          <h2 class="portfolio-title">Legal Document Assistant</h2>
+          <div class="project-detail-row">
+            <div class="project-detail-label">The Problem</div>
+            <p class="project-detail-text">A legal services firm was receiving over 200 documents per day — NDAs, contracts, compliance reports, and regulatory filings. Junior associates were spending 6–8 hours daily on first-pass review before any substantive legal work could begin. The bottleneck was eating into capacity and increasing client wait times.</p>
+          </div>
+          <div class="project-detail-row">
+            <div class="project-detail-label">What We Built</div>
+            <p class="project-detail-text">An AI document assistant that reads any incoming legal document, extracts key clauses and obligations, flags risk sections based on customizable risk criteria, cross-references against a proprietary precedent library, and produces a structured summary in under 60 seconds. Fully integrated into their existing document management workflow.</p>
+          </div>
+          <div class="project-detail-row">
+            <div class="project-detail-label">The Result</div>
+            <p class="project-detail-text">First-pass review time dropped by 85%. Associates can now process the full daily document load in under an hour, spending the remaining time on high-value analysis. The system processes 200+ documents per day without performance degradation.</p>
+          </div>
+          <div class="portfolio-metrics" style="margin-top:24px;">
+            <div class="portfolio-metric"><div class="portfolio-metric-num">85%</div><div class="portfolio-metric-label">Time Saved</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">200+</div><div class="portfolio-metric-label">Docs Per Day</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">&lt;60s</div><div class="portfolio-metric-label">Per Document</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">6 wk</div><div class="portfolio-metric-label">Time to Deploy</div></div>
+          </div>
+          <div class="stack-pills">
+            <span class="stack-pill">LangChain</span><span class="stack-pill">OpenAI</span><span class="stack-pill">Pinecone</span><span class="stack-pill">Next.js</span><span class="stack-pill">Supabase</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-section">
+      <div class="project-grid reveal">
+        <div class="project-visual">
+          <div class="project-visual-icon">🎧</div>
+          <div class="project-visual-label">Customer Support Agent</div>
+        </div>
+        <div>
+          <div class="project-num">03</div>
+          <span class="portfolio-badge">Conversational AI · E-commerce</span>
+          <h2 class="portfolio-title">Customer Support AI Agent</h2>
+          <div class="project-detail-row">
+            <div class="project-detail-label">The Problem</div>
+            <p class="project-detail-text">A fast-growing e-commerce brand was receiving 400–600 support tickets daily across email, website chat, and WhatsApp. Their 5-person support team was underwater, response times had ballooned to 14 hours, and customer satisfaction scores were dropping. Hiring more agents wasn't a sustainable solution.</p>
+          </div>
+          <div class="project-detail-row">
+            <div class="project-detail-label">What We Built</div>
+            <p class="project-detail-text">A multi-channel AI agent with full product catalog access, order tracking integration, return policy knowledge, and contextual memory across a conversation. The agent handles entire support interactions end-to-end, escalates to humans only when genuinely needed, and logs everything structured for analysis. Deployed across WhatsApp, email, and website chat simultaneously.</p>
+          </div>
+          <div class="project-detail-row">
+            <div class="project-detail-label">The Result</div>
+            <p class="project-detail-text">70% of all tickets are now resolved autonomously without any human involvement. Average response time dropped from 14 hours to under 2 minutes. Customer satisfaction scores recovered to 98%. The support team now handles only complex escalations — which freed them to work on retention instead of firefighting.</p>
+          </div>
+          <div class="portfolio-metrics" style="margin-top:24px;">
+            <div class="portfolio-metric"><div class="portfolio-metric-num">70%</div><div class="portfolio-metric-label">Auto-Resolved</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">&lt;2min</div><div class="portfolio-metric-label">Response Time</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">98%</div><div class="portfolio-metric-label">Satisfaction</div></div>
+            <div class="portfolio-metric"><div class="portfolio-metric-num">24/7</div><div class="portfolio-metric-label">Coverage</div></div>
+          </div>
+          <div class="stack-pills">
+            <span class="stack-pill">Node.js</span><span class="stack-pill">NestJS</span><span class="stack-pill">Redis</span><span class="stack-pill">OpenAI</span><span class="stack-pill">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2 class="cta-title">Your Project <em>Could Be Next.</em></h2>
+      <p class="cta-sub">Start a conversation. Tell us the problem you're trying to solve — we'll tell you what we can build and what it would deliver.</p>
+      <div class="cta-btns">
+        <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Start a Conversation →</a>
+        <a class="btn-ghost" href="contact.html">Send a Message</a>
+      </div>
+      <div class="trust-badges">
+        <span class="trust-badge">Free Consultation</span>
+        <span class="trust-badge">No Commitment</span>
+        <span class="trust-badge">Quick Response</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><img class="footer-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/><p class="footer-tagline">We build fully customized AI software systems engineered around your specific business needs.</p><div class="footer-socials"><a class="footer-social" href="https://www.linkedin.com/company/elyrac-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a class="footer-social" href="https://x.com/ElGracAi" target="_blank" rel="noopener" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="solutions.html">AI Automation</a></li><li><a href="solutions.html">LLM Development</a></li><li><a href="solutions.html">Data Systems</a></li><li><a href="solutions.html">Computer Vision</a></li><li><a href="solutions.html">Conversational AI</a></li><li><a href="solutions.html">AI SaaS</a></li></ul></div>
+      <div><div class="footer-col-title">Get In Touch</div><a class="footer-contact-email" href="mailto:info@elyracai.com">info@elyracai.com</a><br/><a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="display:inline-flex;font-size:11px;padding:10px 22px;margin-top:12px;">Book a Call →</a></div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-bar-text">© 2025 elyrac AI. All rights reserved.</span>
+      <div class="footer-bar-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="chat-btn" aria-label="Chat with elyrac AI">✦</button>
+<div id="chat-panel">
+  <div class="chat-header">
+    <img class="chat-avatar" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="elyrac AI"/>
+    <div class="chat-info"><div class="chat-name">elyrac AI</div><div class="chat-status">Online</div></div>
+    <button class="chat-close" id="chat-close" aria-label="Close">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" type="text" placeholder="Ask anything…" autocomplete="off"/>
+    <button class="chat-send" id="chat-send" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script src="js/shared.js"></script>
+</body>
+</html>

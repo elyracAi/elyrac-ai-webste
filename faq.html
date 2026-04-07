@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FAQ — elyrac AI</title>
+<meta name="description" content="Answers to common questions about elyrac AI's custom AI development process, pricing, integrations, and getting started."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/shared.css"/>
+<style>
+  #faq-section { background: var(--navy-darker); }
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .faq-layout { grid-template-columns: 1fr; gap: 48px; } }
+  .faq-sidebar { position: sticky; top: 100px; }
+  .faq-sidebar-stats { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+  .faq-sidebar-stat {
+    background: var(--white-ghost);
+    border: 1px solid var(--white-line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .faq-sidebar-stat-num {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--blue-bright);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .faq-sidebar-stat-label {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white-dim);
+  }
+  .faq-category-label {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    padding: 24px 0 8px;
+    margin-top: 8px;
+    border-top: 1px solid var(--white-line);
+  }
+  .faq-category-label:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="index.html"><img class="nav-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/></a>
+  <div class="nav-pill">
+    <ul class="nav-center">
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="solutions.html" class="nav-link">Solutions</a></li>
+      <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="faq.html" class="nav-link active">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a class="nav-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+    <button id="theme-btn" aria-label="Toggle theme">🌙</button>
+  </div>
+  <div class="nav-hamburger" role="button" aria-label="Open menu" tabindex="0"><span></span><span></span><span></span></div>
+</nav>
+
+<div id="mobile-menu">
+  <button class="mobile-close" aria-label="Close">✕</button>
+  <a href="about.html">About Us</a>
+  <a href="solutions.html">Solutions</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="page-hero-inner">
+    <div class="section-eyebrow reveal" style="justify-content:center;">FREQUENTLY ASKED QUESTIONS</div>
+    <h1 class="reveal reveal-d1">Common <em>Questions.</em></h1>
+    <p class="reveal reveal-d2">Everything you need to know before you decide to work with us. Can't find your answer? Just send us a message.</p>
+  </div>
+</div>
+
+<!-- FAQ SECTION -->
+<section id="faq-section">
+  <div class="container">
+    <div class="faq-layout">
+
+      <!-- Sidebar -->
+      <div class="faq-sidebar reveal">
+        <div class="section-eyebrow">BY THE NUMBERS</div>
+        <div class="faq-sidebar-stats">
+          <div class="faq-sidebar-stat">
+            <div class="faq-sidebar-stat-num">30+</div>
+            <div class="faq-sidebar-stat-label">Projects Delivered</div>
+          </div>
+          <div class="faq-sidebar-stat">
+            <div class="faq-sidebar-stat-num">6+</div>
+            <div class="faq-sidebar-stat-label">Years Building AI</div>
+          </div>
+          <div class="faq-sidebar-stat">
+            <div class="faq-sidebar-stat-num">100%</div>
+            <div class="faq-sidebar-stat-label">Custom Built</div>
+          </div>
+          <div class="faq-sidebar-stat">
+            <div class="faq-sidebar-stat-num">98%</div>
+            <div class="faq-sidebar-stat-label">On-Time Delivery</div>
+          </div>
+        </div>
+        <div style="margin-top:32px;background:var(--blue-glow);border:1px solid rgba(110,187,255,0.2);border-radius:14px;padding:24px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.35;">Still have questions?</div>
+          <p style="font-family:var(--sans);font-size:13px;color:var(--white-dim);margin-bottom:16px;line-height:1.65;">Book a free 30-minute call and ask us anything directly.</p>
+          <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="width:100%;justify-content:center;font-size:11px;">Talk to Us →</a>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <div class="accordion reveal reveal-d1">
+
+        <div class="faq-category-label">About elyrac AI</div>
+
+        <div class="accordion-item open">
+          <button class="accordion-btn"><span class="accordion-q">How is elyrac AI different from using off-the-shelf AI tools?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Off-the-shelf AI tools are built for everyone — which means they're optimized for no one specific. We build AI systems engineered specifically for your business: your data, your workflows, your edge cases, your goals. The difference is like buying a suit versus having one tailored to fit you exactly. Ours fits because it was designed to.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">Who is elyrac AI built for?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">We work with businesses of all sizes — from founder-led companies with 5 people to larger organizations with hundreds of staff. What they have in common: they have a real operational problem, they've outgrown generic tools, and they want AI that actually changes a business metric. If that sounds like you, we should talk.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">What industries do you work with?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">We're industry-agnostic at the core. Our AI engineering methodology adapts to any domain. We've built systems for legal, healthcare, retail, logistics, fintech, education, hospitality, real estate, and government. If your business generates data and has repeatable processes, there's an AI opportunity — and we'll help you find and capture it.</p></div>
+        </div>
+
+        <div class="faq-category-label">Working With Us</div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">Do you work with businesses that have no technical team?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Absolutely. We work with non-technical founders and business owners all the time. We own the entire build — from architecture through deployment — so you never need to manage developers, coordinate between vendors, or translate between technical and business teams. You describe the business problem. We solve it.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">What does the engagement process look like?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">It starts with a free 30-minute strategy call where we learn about your business and identify the highest-impact AI opportunity. From there, we move into a scoping phase where we define the system architecture and scope. Once aligned, we begin building — and most projects go from kickoff to deployed system in 4–10 weeks depending on complexity.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">Can you integrate AI into our existing systems?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Integration is a core part of every project. We design AI systems to work alongside your existing stack — CRMs, ERPs, databases, APIs, and custom-built tools. We use industry-standard integration patterns and webhooks so your new AI layer fits into what you already have rather than replacing it.</p></div>
+        </div>
+
+        <div class="faq-category-label">Technical & Security</div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">How do you handle data privacy and security?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Data privacy and security are first-class concerns in everything we build. We follow industry best practices: encryption at rest and in transit, role-based access controls, data minimization, and full audit logging. We design every system to comply with relevant regulations, and we never use your data to train third-party models without explicit permission.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">Do I own the AI system after it's built?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Yes. Full IP ownership transfers to you at the end of every project. You get complete access to the codebase, infrastructure configuration, deployment scripts, and documentation. The system is yours to run, modify, and extend — with or without us.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">What AI models do you use — OpenAI, open source, something else?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">We're model-agnostic and choose based on what's right for the specific use case. We regularly work with OpenAI, Anthropic, and Google models for commercial applications, and open-source models like Llama and Mistral for use cases that require data sovereignty or self-hosted deployment. The model choice is a consequence of the requirements, not the starting point.</p></div>
+        </div>
+
+        <div class="faq-category-label">Getting Started</div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">How do we get started?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Book a free 30-minute strategy call. We'll learn about your business, identify the highest-impact AI opportunity, and give you a clear picture of what we'd build and what it would deliver. No commitment required. Most clients leave that first call with a concrete idea of what to build and what it would mean for their business.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn"><span class="accordion-q">Do you offer ongoing support after launch?</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body"><p class="accordion-ans">Yes. We offer ongoing maintenance and support engagements post-launch. AI systems need care as your business evolves — retraining on new data, iterating on performance, adapting to new requirements. We treat every system like a live product, not a one-time delivery. Ongoing support is available as a retainer and scoped to what your system actually needs.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2 class="cta-title">Still Have <em>Questions?</em></h2>
+      <p class="cta-sub">The fastest way to get real answers is a 30-minute call. We'll talk through your specific situation and tell you exactly what we can do.</p>
+      <div class="cta-btns">
+        <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Talk to Us →</a>
+        <a class="btn-ghost" href="contact.html">Send a Message</a>
+      </div>
+      <div class="trust-badges">
+        <span class="trust-badge">Free Consultation</span>
+        <span class="trust-badge">No Commitment</span>
+        <span class="trust-badge">Quick Response</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><img class="footer-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/><p class="footer-tagline">We build fully customized AI software systems engineered around your specific business needs.</p><div class="footer-socials"><a class="footer-social" href="https://www.linkedin.com/company/elyrac-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a class="footer-social" href="https://x.com/ElGracAi" target="_blank" rel="noopener" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="solutions.html">AI Automation</a></li><li><a href="solutions.html">LLM Development</a></li><li><a href="solutions.html">Data Systems</a></li><li><a href="solutions.html">Computer Vision</a></li><li><a href="solutions.html">Conversational AI</a></li><li><a href="solutions.html">AI SaaS</a></li></ul></div>
+      <div><div class="footer-col-title">Get In Touch</div><a class="footer-contact-email" href="mailto:info@elyracai.com">info@elyracai.com</a><br/><a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="display:inline-flex;font-size:11px;padding:10px 22px;margin-top:12px;">Book a Call →</a></div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-bar-text">© 2025 elyrac AI. All rights reserved.</span>
+      <div class="footer-bar-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="chat-btn" aria-label="Chat with elyrac AI">✦</button>
+<div id="chat-panel">
+  <div class="chat-header">
+    <img class="chat-avatar" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="elyrac AI"/>
+    <div class="chat-info"><div class="chat-name">elyrac AI</div><div class="chat-status">Online</div></div>
+    <button class="chat-close" id="chat-close" aria-label="Close">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" type="text" placeholder="Ask anything…" autocomplete="off"/>
+    <button class="chat-send" id="chat-send" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script src="js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Us — elyrac AI</title>
+<meta name="description" content="Learn about elyrac AI — a custom AI development company building fully tailored AI systems for specific business needs."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/shared.css"/>
+<style>
+  #about-story { background: var(--navy-darker); }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .story-text p {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--white-dim);
+    margin-bottom: 18px;
+  }
+  #about-team { background: var(--navy-dark); }
+  #about-values-section { background: var(--navy-darker); }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="index.html"><img class="nav-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/></a>
+  <div class="nav-pill">
+    <ul class="nav-center">
+      <li><a href="about.html" class="nav-link active">About Us</a></li>
+      <li><a href="solutions.html" class="nav-link">Solutions</a></li>
+      <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="faq.html" class="nav-link">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a class="nav-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+    <button id="theme-btn" aria-label="Toggle theme">🌙</button>
+  </div>
+  <div class="nav-hamburger" role="button" aria-label="Open menu" tabindex="0"><span></span><span></span><span></span></div>
+</nav>
+
+<div id="mobile-menu">
+  <button class="mobile-close" aria-label="Close">✕</button>
+  <a href="about.html">About Us</a>
+  <a href="solutions.html">Solutions</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="page-hero-inner">
+    <div class="section-eyebrow reveal" style="justify-content:center;">ABOUT ELYRAC AI</div>
+    <h1 class="reveal reveal-d1">We Build AI That <em>Works For You.</em></h1>
+    <p class="reveal reveal-d2">We're a custom AI development company. Not a consultancy. Not an AI tool reseller. We build fully tailored AI software systems engineered around how your business actually works.</p>
+    <a class="btn-primary reveal reveal-d3" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Free Call →</a>
+  </div>
+</div>
+
+<!-- STORY -->
+<section id="about-story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text">
+        <div class="section-eyebrow reveal">OUR STORY</div>
+        <h2 class="section-h2 reveal reveal-d1">Why <em>elyrac AI</em> Exists</h2>
+        <div class="reveal reveal-d2">
+          <p>elyrac AI was built from a simple observation: most businesses trying to adopt AI end up with generic chatbots, half-working automations, and tools that weren't designed for their specific problems. The AI industry is full of hype and abstraction — and the businesses that need results most are being left behind.</p>
+          <p>We believe every business deserves AI that's actually built for them. That means starting from your workflows, your data, your goals — and engineering something that fits. Not off-the-shelf. Not repurposed from another industry. Yours.</p>
+          <p>From our first project to our thirtieth, that's been the one thing we never compromise on.</p>
+        </div>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="stats-row" style="flex-direction:column;gap:0;">
+          <div class="faq-stat" style="background:var(--white-ghost);border:1px solid var(--white-line);border-radius:12px;padding:22px 24px;display:flex;gap:16px;align-items:center;margin-bottom:12px;">
+            <div style="font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--blue-bright);min-width:72px;">30+</div>
+            <div style="font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white-dim);">Custom AI Systems Built</div>
+          </div>
+          <div class="faq-stat" style="background:var(--white-ghost);border:1px solid var(--white-line);border-radius:12px;padding:22px 24px;display:flex;gap:16px;align-items:center;margin-bottom:12px;">
+            <div style="font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--blue-bright);min-width:72px;">6+</div>
+            <div style="font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white-dim);">Years of AI Engineering</div>
+          </div>
+          <div class="faq-stat" style="background:var(--white-ghost);border:1px solid var(--white-line);border-radius:12px;padding:22px 24px;display:flex;gap:16px;align-items:center;margin-bottom:12px;">
+            <div style="font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--blue-bright);min-width:72px;">95%</div>
+            <div style="font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white-dim);">Client Retention Rate</div>
+          </div>
+          <div class="faq-stat" style="background:var(--white-ghost);border:1px solid var(--white-line);border-radius:12px;padding:22px 24px;display:flex;gap:16px;align-items:center;">
+            <div style="font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--blue-bright);min-width:72px;">10+</div>
+            <div style="font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white-dim);">Industries Served</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="about-team">
+  <div class="container">
+    <div class="section-eyebrow reveal">THE TEAM</div>
+    <h2 class="section-h2 reveal reveal-d1">The Person <em>Behind the Work.</em></h2>
+    <p class="section-sub reveal reveal-d2">Every system we build carries the fingerprint of deep technical care and a genuine commitment to making it work for your business.</p>
+    <div class="team-card reveal reveal-d2">
+      <img class="team-photo" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="Vine — Founder & AI Engineer"/>
+      <div>
+        <div class="team-name">Vine</div>
+        <div class="team-role">Founder &amp; AI Engineer</div>
+        <p class="team-bio">I build AI systems that solve real business problems — not demos, not prototypes. Every project is a long-term commitment to making it work. When I'm not engineering, I'm studying what the next generation of AI systems will look like.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="about-values-section">
+  <div class="container">
+    <div class="section-eyebrow reveal">WHAT WE STAND FOR</div>
+    <h2 class="section-h2 reveal reveal-d1">Our <em>Values.</em></h2>
+    <div class="value-cards">
+      <div class="value-card reveal reveal-d1">
+        <span class="value-icon">🎯</span>
+        <div class="value-name">Precision</div>
+        <p class="value-desc">We don't ship AI that almost works. Every system is tested against real operational conditions before it goes live. Close enough isn't good enough when the system touches your business.</p>
+      </div>
+      <div class="value-card reveal reveal-d2">
+        <span class="value-icon">🔍</span>
+        <div class="value-name">Transparency</div>
+        <p class="value-desc">No black boxes. No jargon. We explain what we're building, why, and how it works — so you understand the system you're running in your business. You'll never be dependent on us to explain your own AI.</p>
+      </div>
+      <div class="value-card reveal reveal-d3">
+        <span class="value-icon">⚡</span>
+        <div class="value-name">Impact</div>
+        <p class="value-desc">We measure our work by the outcomes it creates — reduced costs, reclaimed hours, better decisions, new revenue. If a system doesn't move a real number, it doesn't count.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2 class="cta-title">Want to <em>Work With Us?</em></h2>
+      <p class="cta-sub">Let's spend 30 minutes understanding your business. We'll tell you exactly what's possible and what we'd build.</p>
+      <div class="cta-btns">
+        <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call →</a>
+        <a class="btn-ghost" href="contact.html">Send a Message</a>
+      </div>
+      <div class="trust-badges">
+        <span class="trust-badge">Free Consultation</span>
+        <span class="trust-badge">No Commitment</span>
+        <span class="trust-badge">Quick Response</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/>
+        <p class="footer-tagline">We build fully customized AI software systems engineered around your specific business needs.</p>
+        <div class="footer-socials">
+          <a class="footer-social" href="https://www.linkedin.com/company/elyrac-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a class="footer-social" href="https://x.com/ElGracAi" target="_blank" rel="noopener" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a class="footer-social" href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+        </div>
+      </div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="solutions.html">AI Automation</a></li><li><a href="solutions.html">LLM Development</a></li><li><a href="solutions.html">Data Systems</a></li><li><a href="solutions.html">Computer Vision</a></li><li><a href="solutions.html">Conversational AI</a></li><li><a href="solutions.html">AI SaaS</a></li></ul></div>
+      <div><div class="footer-col-title">Get In Touch</div><a class="footer-contact-email" href="mailto:info@elyracai.com">info@elyracai.com</a><a class="footer-wa" href="https://wa.me/256700000000" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a><a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="display:inline-flex;font-size:11px;padding:10px 22px;margin-top:4px;">Book a Call →</a></div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-bar-text">© 2025 elyrac AI. All rights reserved.</span>
+      <div class="footer-bar-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="chat-btn" aria-label="Chat with elyrac AI">✦</button>
+<div id="chat-panel">
+  <div class="chat-header">
+    <img class="chat-avatar" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="elyrac AI"/>
+    <div class="chat-info"><div class="chat-name">elyrac AI</div><div class="chat-status">Online</div></div>
+    <button class="chat-close" id="chat-close" aria-label="Close">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" type="text" placeholder="Ask anything…" autocomplete="off"/>
+    <button class="chat-send" id="chat-send" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script src="js/shared.js"></script>
+</body>
+</html>

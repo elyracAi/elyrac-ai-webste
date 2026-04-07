@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Blog — elyrac AI</title>
+<meta name="description" content="Insights on AI development, automation, and building custom AI systems for business."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/shared.css"/>
+<style>
+  #blog-section { background: var(--navy-darker); }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="index.html"><img class="nav-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/></a>
+  <div class="nav-pill">
+    <ul class="nav-center">
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="solutions.html" class="nav-link">Solutions</a></li>
+      <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+      <li><a href="blog.html" class="nav-link active">Blog</a></li>
+      <li><a href="faq.html" class="nav-link">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a class="nav-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+    <button id="theme-btn" aria-label="Toggle theme">🌙</button>
+  </div>
+  <div class="nav-hamburger" role="button" aria-label="Open menu" tabindex="0"><span></span><span></span><span></span></div>
+</nav>
+
+<div id="mobile-menu">
+  <button class="mobile-close" aria-label="Close">✕</button>
+  <a href="about.html">About Us</a>
+  <a href="solutions.html">Solutions</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="page-hero-inner">
+    <div class="section-eyebrow reveal" style="justify-content:center;">INSIGHTS</div>
+    <h1 class="reveal reveal-d1">Insights on <em>AI &amp; Technology</em></h1>
+    <p class="reveal reveal-d2">Practical thinking on building AI systems, automating business operations, and the decisions that make or break a custom AI project.</p>
+  </div>
+</div>
+
+<!-- BLOG GRID -->
+<section id="blog-section">
+  <div class="container">
+    <div class="blog-grid">
+
+      <div class="blog-card reveal reveal-d1">
+        <div class="blog-card-thumb" style="background:linear-gradient(135deg,rgba(13,31,60,0.9),rgba(9,15,30,1));">🧠</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">LLM Development</span>
+          <div class="blog-meta">April 2, 2025 · 6 min read</div>
+          <h3 class="blog-title">Why RAG Beats Fine-Tuning for Most Business AI Applications</h3>
+          <p class="blog-excerpt">The debate between retrieval-augmented generation and fine-tuning isn't as complicated as it sounds. Here's how to choose the right approach for your specific use case.</p>
+          <a class="blog-read-more" href="blog-post.html">Read More →</a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal reveal-d2">
+        <div class="blog-card-thumb" style="background:linear-gradient(135deg,rgba(9,15,30,1),rgba(13,31,60,0.9));">⚙️</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Automation</span>
+          <div class="blog-meta">March 28, 2025 · 5 min read</div>
+          <h3 class="blog-title">The 5 Business Processes You Should Automate With AI First</h3>
+          <p class="blog-excerpt">Not all automation is created equal. These five process categories consistently deliver the fastest ROI when you apply AI to them — and most businesses are sitting on at least two of them right now.</p>
+          <a class="blog-read-more" href="blog-post.html">Read More →</a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal reveal-d3">
+        <div class="blog-card-thumb" style="background:linear-gradient(135deg,rgba(13,25,55,0.9),rgba(9,15,30,1));">🔒</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Data & Security</span>
+          <div class="blog-meta">March 19, 2025 · 7 min read</div>
+          <h3 class="blog-title">How to Think About Data Privacy When You're Building Custom AI</h3>
+          <p class="blog-excerpt">Your data goes somewhere when you use AI tools. Here's what you need to know about data flows, model training, and what questions to ask any AI vendor before you sign anything.</p>
+          <a class="blog-read-more" href="blog-post.html">Read More →</a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal reveal-d1">
+        <div class="blog-card-thumb" style="background:linear-gradient(135deg,rgba(9,15,30,1),rgba(18,41,82,0.9));">📊</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Strategy</span>
+          <div class="blog-meta">March 10, 2025 · 8 min read</div>
+          <h3 class="blog-title">How to Measure the ROI of a Custom AI System Before You Build It</h3>
+          <p class="blog-excerpt">The biggest mistake businesses make before starting an AI project is skipping the ROI calculation. Here's a framework for estimating value before a single line of code is written.</p>
+          <a class="blog-read-more" href="blog-post.html">Read More →</a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal reveal-d2">
+        <div class="blog-card-thumb" style="background:linear-gradient(135deg,rgba(13,31,60,0.85),rgba(9,15,30,0.95));">💬</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Conversational AI</span>
+          <div class="blog-meta">February 28, 2025 · 5 min read</div>
+          <h3 class="blog-title">What Makes a Customer Support AI Agent Actually Good (And What Doesn't)</h3>
+          <p class="blog-excerpt">There's a massive gap between a support bot that deflects tickets and one that actually resolves them. Here's what separates the two — and why most companies end up with the wrong one.</p>
+          <a class="blog-read-more" href="blog-post.html">Read More →</a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal reveal-d3">
+        <div class="blog-card-thumb" style="background:linear-gradient(135deg,rgba(9,15,30,1),rgba(13,31,60,0.9));">🚀</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Product Development</span>
+          <div class="blog-meta">February 14, 2025 · 6 min read</div>
+          <h3 class="blog-title">Building AI Into Your SaaS: What to Ship in v1 and What to Wait On</h3>
+          <p class="blog-excerpt">AI feature bloat is real. The hardest part of building an AI-powered product is deciding what's core and what's noise. Here's how we scope AI products that actually ship.</p>
+          <a class="blog-read-more" href="blog-post.html">Read More →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2 class="cta-title">Ready to Build <em>Something Real?</em></h2>
+      <p class="cta-sub">Reading about AI is useful. Building it is where the real advantage comes from. Let's talk about what we can build for your business.</p>
+      <div class="cta-btns">
+        <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Free Strategy Call</a>
+        <a class="btn-ghost" href="contact.html">Send a Message</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><img class="footer-logo logo-swap" src="Brand assets/Elyrac Ai-06 (1).png" alt="elyrac AI"/><p class="footer-tagline">We build fully customized AI software systems engineered around your specific business needs.</p><div class="footer-socials"><a class="footer-social" href="https://www.linkedin.com/company/elyrac-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a class="footer-social" href="https://x.com/ElGracAi" target="_blank" rel="noopener" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="solutions.html">AI Automation</a></li><li><a href="solutions.html">LLM Development</a></li><li><a href="solutions.html">Data Systems</a></li><li><a href="solutions.html">Computer Vision</a></li><li><a href="solutions.html">Conversational AI</a></li><li><a href="solutions.html">AI SaaS</a></li></ul></div>
+      <div><div class="footer-col-title">Get In Touch</div><a class="footer-contact-email" href="mailto:info@elyracai.com">info@elyracai.com</a><br/><a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="display:inline-flex;font-size:11px;padding:10px 22px;margin-top:12px;">Book a Call →</a></div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-bar-text">© 2025 elyrac AI. All rights reserved.</span>
+      <div class="footer-bar-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="chat-btn" aria-label="Chat with elyrac AI">✦</button>
+<div id="chat-panel">
+  <div class="chat-header">
+    <img class="chat-avatar" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="elyrac AI"/>
+    <div class="chat-info"><div class="chat-name">elyrac AI</div><div class="chat-status">Online</div></div>
+    <button class="chat-close" id="chat-close" aria-label="Close">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" type="text" placeholder="Ask anything…" autocomplete="off"/>
+    <button class="chat-send" id="chat-send" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script src="js/shared.js"></script>
+</body>
+</html>
