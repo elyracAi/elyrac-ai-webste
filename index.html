@@ -7,6 +7,11 @@
 <meta name="description" content="elyrac AI builds fully customized AI software systems engineered for your specific business needs. Not off-the-shelf. Not generic. Yours."/>
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
 <link rel="shortcut icon" href="favicon.png">
+<meta http-equiv="Cache-Control" content="max-age=31536000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://i.pravatar.cc">
+<link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
+<link rel="preload" as="image" href="others/businesswoman-interacting-with-ai-hologram-office.jpg">
 <link rel="stylesheet" href="css/shared.css">
 <style>
 
@@ -199,11 +204,11 @@
   }
   /* Positions + independent float durations */
   /* Card 1 pill  — 95% Retention    — top-right, outside frame  */
-  .hfc-1 { top: 5%;    right: -5%; animation: hfcFloat 3s ease-in-out infinite; }
+  .hfc-1 { top: 18%;   right: -5%; animation: hfcFloat 3s ease-in-out infinite; }
   /* Card 2 pill  — Custom-built     — middle-right, overlapping */
   .hfc-2 { top: 45%;   right: -8%; animation: hfcFloat 4s 0.6s ease-in-out infinite; }
   /* Card 3 glass — 30+ Systems      — bottom-right, overlapping */
-  .hfc-3 { bottom: 10%; right: -5%; animation: hfcFloat 5s 1.2s ease-in-out infinite; }
+  .hfc-3 { bottom: 20%; right: -5%; animation: hfcFloat 5s 1.2s ease-in-out infinite; }
   /* Card 4 glass — 4.9 / Satisfied  — bottom-left, overlapping  */
   .hfc-4 { bottom: 10%; left: -5%; animation: hfcFloat 6s 1.8s ease-in-out infinite; }
   @keyframes hfcFloat {
@@ -371,6 +376,44 @@
   .stats-mini div .num2 { font-size: 24px; font-weight: 800; font-family: 'Sora', sans-serif; color: var(--blue); }
   .stats-mini div p { font-size: 12px; color: var(--gray-600); margin-top: 4px; }
 
+  /* ── PORTFOLIO IMAGES — full visible, no crop ── */
+  .portfolio-img {
+    overflow: visible !important;
+    height: auto !important;
+    min-height: unset !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+  .portfolio-img img {
+    width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  /* ── PORTFOLIO CONVERSION COPY ── */
+  .port-proof {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--blue);
+    margin-top: 16px;
+    line-height: 1.6;
+    border-left: 3px solid var(--blue);
+    padding-left: 12px;
+  }
+  .port-cta {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    border-bottom: 1.5px solid var(--blue);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .port-cta:hover { opacity: 0.7; }
+
   /* ── FAQ ── */
   .home-faq { background: var(--gray-50); }
   .home-faq-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1100px; margin: 0 auto; }
@@ -441,7 +484,7 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <img src="../Elyrac Ai-03 (1).png" alt="elyrac AI">
+    <img src="others/Elyrac_Ai-03.png" alt="elyrac AI">
   </a>
   <ul class="nav-links">
     <li><a href="about.html">About Us</a></li>
@@ -655,7 +698,7 @@
       </div>
       <div class="solution-card">
         <div class="card-visual">
-          <img class="sol-photo" src="others/robotic-arms-modern-factory-setting.jpg" alt="Intelligent Automation">
+          <img class="sol-photo" src="others/robotic-arms-modern-factory-setting.jpg" alt="Intelligent Automation" loading="lazy">
         </div>
         <h3>Intelligent Automation</h3>
         <p>AI-driven automation that replaces manual, repetitive work across your operations. From email triage to report generation — we automate with intelligence.</p>
@@ -673,7 +716,7 @@
       </div>
       <div class="solution-card">
         <div class="card-visual">
-          <img class="sol-photo" src="others/businesswoman-talking-professional-fintech-convention-doing-business-pitch-stage.jpg" alt="Predictive AI">
+          <img class="sol-photo" src="others/businesswoman-talking-professional-fintech-convention-doing-business-pitch-stage.jpg" alt="Predictive AI" loading="lazy">
         </div>
         <h3>Predictive AI & Analytics</h3>
         <p>AI models that analyze your historical data to forecast trends, detect anomalies, and surface insights your team would otherwise miss.</p>
@@ -743,7 +786,7 @@
     <p class="portfolio-sub">Real projects, real results. Here's how we've helped businesses leverage AI successfully.</p>
 
     <div class="portfolio-card">
-      <div class="portfolio-img" style="padding:0 !important;margin:0 !important;background:none !important;border:none !important;overflow:hidden;border-radius:12px 12px 0 0;"><img src="others/WhatsApp Image 2026-03-27 at 9.01.31 AM.jpeg" alt="AI Email Agent dashboard" style="width:100% !important;height:280px !important;object-fit:cover !important;display:block !important;border-radius:0 !important;margin:0 !important;padding:0 !important;"></div>
+      <div class="portfolio-img"><img src="others/WhatsApp Image 2026-03-27 at 9.01.31 AM.jpeg" alt="AI Email Agent dashboard" loading="lazy"></div>
       <div class="portfolio-info">
         <h3>AI Email Agent</h3>
         <span class="tag-badge">Business Automation</span>
@@ -761,11 +804,13 @@
           <div><div class="num2">80%</div><p>Auto-handled</p></div>
           <div><div class="num2">4hrs</div><p>Saved daily</p></div>
         </div>
+        <p class="port-proof">"This system paid for itself in the first week. Our team finally has their time back." — elyrac AI client</p>
+        <a href="https://calendly.com/ceo-elyracai/30min" class="port-cta">Build this for my business →</a>
       </div>
     </div>
 
     <div class="portfolio-card reverse">
-      <div class="portfolio-img" style="padding:0 !important;margin:0 !important;background:none !important;border:none !important;overflow:hidden;border-radius:12px 12px 0 0;"><img src="others/Screenshot 2026-04-15 080612.png" alt="AttendTrack dashboard" style="width:100% !important;height:280px !important;object-fit:cover !important;display:block !important;border-radius:0 !important;margin:0 !important;padding:0 !important;"></div>
+      <div class="portfolio-img"><img src="others/Screenshot 2026-04-15 080612.png" alt="AttendTrack dashboard" loading="lazy"></div>
       <div class="portfolio-info">
         <h3>AttendTrack — Workforce Management System</h3>
         <span class="tag-badge" style="background:#e8f8f0;color:#16a34a">HR & Field Management</span>
@@ -783,11 +828,13 @@
           <div><div class="num2">100%</div><p>Attendance accuracy</p></div>
           <div><div class="num2">3hrs</div><p>Saved daily</p></div>
         </div>
+        <p class="port-proof">"We went from spreadsheets and guesswork to full real-time visibility across every field team." — elyrac AI client</p>
+        <a href="https://calendly.com/ceo-elyracai/30min" class="port-cta">I want a system like this →</a>
       </div>
     </div>
 
     <div class="portfolio-card">
-      <div class="portfolio-img" style="padding:0 !important;margin:0 !important;background:none !important;border:none !important;overflow:hidden;border-radius:12px 12px 0 0;"><img src="others/Screenshot 2026-04-15 081655.png" alt="Code Clinic dashboard" style="width:100% !important;height:280px !important;object-fit:cover !important;display:block !important;border-radius:0 !important;margin:0 !important;padding:0 !important;"></div>
+      <div class="portfolio-img"><img src="others/Screenshot 2026-04-15 081655.png" alt="Code Clinic dashboard" loading="lazy"></div>
       <div class="portfolio-info">
         <h3>Code Clinic — Dental Practice Management System</h3>
         <span class="tag-badge" style="background:#fce7f3;color:#be185d">Healthcare Technology</span>
@@ -805,6 +852,8 @@
           <div><div class="num2">790</div><p>Active Patients</p></div>
           <div><div class="num2">31.2M</div><p>UGX Revenue tracked</p></div>
         </div>
+        <p class="port-proof">"We now run a fully paperless clinic with AI-powered insights our team actually uses every day." — elyrac AI client</p>
+        <a href="https://calendly.com/ceo-elyracai/30min" class="port-cta">Build this for my business →</a>
       </div>
     </div>
 
@@ -880,7 +929,7 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="logo">
-        <img src="others/Elyrac Ai-06.png" alt="elyrac AI" style="height:90px">
+        <img src="others/Elyrac Ai-06.png" alt="elyrac AI">
       </div>
       <p style="color:#111111;font-size:15px;font-weight:500;">Custom AI software engineered for your specific business. Not off-the-shelf. Not generic. Yours.</p>
       <div class="social-links" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:16px;">
@@ -994,7 +1043,7 @@
   <div class="chat-panel" id="chat-panel">
     <div class="chat-header">
       <div class="chat-header-avatar">
-        <img src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+        <img src="others/linked_profile_pic-Photoroom.png" alt="Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
       </div>
       <div class="chat-header-info">
         <div class="chat-header-name">Maya</div>
@@ -1004,11 +1053,11 @@
     </div>
     <div class="chat-messages" id="chat-messages">
       <div class="chat-bubble">
-        <img class="bubble-avatar" src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Maya">
+        <img class="bubble-avatar" src="others/linked_profile_pic-Photoroom.png" alt="Maya">
         <div class="bubble-text">Hi! I'm Maya, elyrac AI's assistant. How can I help you today? 👋</div>
       </div>
       <div class="chat-bubble">
-        <img class="bubble-avatar" src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Maya">
+        <img class="bubble-avatar" src="others/linked_profile_pic-Photoroom.png" alt="Maya">
         <div class="bubble-text">I can answer questions about our services, or help you book a free strategy call with our founder.</div>
       </div>
     </div>
@@ -1018,7 +1067,7 @@
     </div>
   </div>
   <button class="chat-toggle" id="chat-toggle">
-    <img src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Chat with Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+    <img src="others/linked_profile_pic-Photoroom.png" alt="Chat with Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
     <span class="chat-badge"></span>
   </button>
 </div>
@@ -1047,7 +1096,7 @@
       "You can reach us at ceo@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
     ];
     let idx = 0;
-    const MINI_AVATAR = '<img class="bubble-avatar" src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Maya">';
+    const MINI_AVATAR = '<img class="bubble-avatar" src="others/linked_profile_pic-Photoroom.png" alt="Maya">';
     window.sendChat = function() {
       const input = document.getElementById('chat-input');
       const msg = input.value.trim();

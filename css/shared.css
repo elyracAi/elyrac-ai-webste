@@ -453,7 +453,7 @@ footer {
   display: flex; align-items: center; gap: 8px;
   margin-bottom: 14px;
 }
-.footer-brand .logo img { height: 32px; width: auto; }
+.footer-brand .logo img { height: 110px; width: auto; }
 .footer-brand .logo-text {
   font-family: var(--font-heading); font-size: 16px; font-weight: 500;
   color: var(--gray-800); letter-spacing: -0.02em;
@@ -499,6 +499,9 @@ footer {
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
 .faq-a.open { max-height: 300px; }
 .faq-a p { font-size: 14px; color: var(--gray-600); line-height: 1.7; padding-bottom: 20px; }
+
+/* ── PERFORMANCE: will-change for animated elements only ── */
+.hero-blob, .hfc, .chat-toggle { will-change: transform; }
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
