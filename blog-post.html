@@ -1,220 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Why RAG Beats Fine-Tuning for Most Business AI — elyrac AI Blog</title>
-<meta name="description" content="The debate between retrieval-augmented generation and fine-tuning isn't as complicated as it sounds. Here's how to choose the right approach."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="css/shared.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why RAG Beats Fine-Tuning for Most Business AI — elyrac AI</title>
+<meta name="description" content="The debate between retrieval-augmented generation and fine-tuning. Here's how to choose the right approach for your specific use case."/>
+<link rel="stylesheet" href="css/shared.css">
 <style>
-  #post-hero {
-    background: radial-gradient(ellipse at 50% 60%, rgba(26,63,107,0.6) 0%, var(--navy-darker) 70%);
-    padding-top: 140px;
-    padding-bottom: 72px;
-    border-bottom: 1px solid var(--white-line);
+  /* ── ARTICLE ── */
+  .article-section { background: var(--white); }
+  .article-inner {
+    display: grid; grid-template-columns: 1fr 320px;
+    gap: 64px; align-items: start;
+    max-width: 1100px; margin: 0 auto;
   }
-  .post-hero-inner { max-width: 760px; margin: 0 auto; }
-  .post-hero-title {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4.5vw, 3.6rem);
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.15;
+
+  /* Article header */
+  .article-header { margin-bottom: 40px; }
+  .article-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .article-tag {
+    background: var(--blue-light); color: var(--blue);
+    font-size: 11px; font-weight: 700; border-radius: 100px;
+    padding: 4px 12px; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .article-date { font-size: 13px; color: var(--gray-400); }
+  .article-read { font-size: 13px; color: var(--gray-400); }
+  .article-header h1 {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 800; line-height: 1.2; color: var(--gray-800);
     margin-bottom: 20px;
   }
-  .post-hero-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    font-family: var(--display);
-    font-size: 12px;
-    color: var(--white-dim);
-    letter-spacing: 0.5px;
+  .article-lede {
+    font-size: 17px; color: var(--gray-600);
+    line-height: 1.75; border-left: 3px solid var(--blue);
+    padding-left: 20px; margin-bottom: 36px;
   }
-  .post-hero-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--white-dim); }
-  #post-content { background: var(--navy-darker); padding: 80px 0; }
+  .article-author {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 0; border-top: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--blue-light); display: flex;
+    align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .author-name { font-size: 14px; font-weight: 600; }
+  .author-title { font-size: 12px; color: var(--gray-500); }
+
+  /* Article body */
+  .article-body { padding-top: 40px; }
+  .article-body h2 {
+    font-size: 22px; font-weight: 800; color: var(--gray-800);
+    margin-bottom: 16px; margin-top: 40px;
+  }
+  .article-body h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; margin-top: 28px; }
+  .article-body p { font-size: 15px; color: var(--gray-700); line-height: 1.85; margin-bottom: 20px; }
+  .article-body ul, .article-body ol { margin: 0 0 20px 24px; }
+  .article-body li { font-size: 15px; color: var(--gray-700); line-height: 1.8; margin-bottom: 8px; }
+  .article-body strong { color: var(--gray-800); font-weight: 600; }
+
+  .callout {
+    background: var(--blue-light); border-left: 3px solid var(--blue);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px; margin: 28px 0;
+    font-size: 14px; color: var(--gray-700); line-height: 1.7;
+  }
+  .callout strong { color: var(--blue); }
+
+  .comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+  .comparison-table th {
+    background: var(--gray-50); padding: 12px 16px; text-align: left;
+    font-family: 'Sora', sans-serif; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.05em; color: var(--gray-800); border: 1px solid var(--gray-200);
+  }
+  .comparison-table td { padding: 12px 16px; border: 1px solid var(--gray-200); color: var(--gray-700); line-height: 1.5; }
+  .comparison-table tr:nth-child(even) td { background: var(--gray-50); }
+  .badge-green { color: var(--green); font-weight: 600; }
+  .badge-red { color: var(--red); font-weight: 600; }
+
+  /* Sidebar */
+  .article-sidebar { position: sticky; top: 100px; }
+  .sidebar-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; margin-bottom: 20px; }
+  .sidebar-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+  .toc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .toc-list a { font-size: 13px; color: var(--gray-600); transition: color 0.2s; }
+  .toc-list a:hover { color: var(--blue); }
+
+  .related-post { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
+  .related-post:last-child { border-bottom: none; padding-bottom: 0; }
+  .related-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .related-title { font-size: 13px; font-weight: 600; color: var(--gray-800); line-height: 1.35; }
+  .related-title a { color: inherit; transition: color 0.2s; }
+  .related-title a:hover { color: var(--blue); }
+  .related-tag { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .article-inner { grid-template-columns: 1fr; }
+    .article-sidebar { position: static; }
+  }
+  @media (max-width: 600px) {
+    .page-hero { padding: 100px 16px 52px !important; }
+  }
 </style>
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
-<nav id="nav">
-  <a href="index.html"><img class="nav-logo logo-swap" src="Brand assets/Elyrac Ai-03 (1).png" alt="elyrac AI"/></a>
-  <div class="nav-pill">
-    <ul class="nav-center">
-      <li><a href="about.html" class="nav-link">About Us</a></li>
-      <li><a href="solutions.html" class="nav-link">Solutions</a></li>
-      <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-      <li><a href="blog.html" class="nav-link active">Blog</a></li>
-      <li><a href="faq.html" class="nav-link">FAQ</a></li>
-    </ul>
-  </div>
-  <div class="nav-right">
-    <a class="nav-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
-    <button id="theme-btn" aria-label="Toggle theme">🌙</button>
-  </div>
-  <div class="nav-hamburger" role="button" aria-label="Open menu" tabindex="0"><span></span><span></span><span></span></div>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="others/Elyrac Ai-06.png" alt="elyrac AI">
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="solutions.html">Solutions</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+  </ul>
+  <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-book">Book a Call</a>
+  <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
 
+<!-- Mobile Menu -->
 <div id="mobile-menu">
-  <button class="mobile-close" aria-label="Close">✕</button>
+  <button class="mobile-close" id="mobile-close">✕</button>
   <a href="about.html">About Us</a>
   <a href="solutions.html">Solutions</a>
   <a href="portfolio.html">Portfolio</a>
   <a href="blog.html">Blog</a>
-  <a href="faq.html">FAQ</a>
   <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
 </div>
 
-<!-- POST HERO -->
-<div id="post-hero">
-  <div class="container">
-    <div class="post-hero-inner">
-      <a class="back-link" href="blog.html">← Back to Blog</a>
-      <span class="blog-tag" style="margin-bottom:16px;display:inline-block;">LLM Development</span>
-      <h1 class="post-hero-title">Why RAG Beats Fine-Tuning for Most Business AI Applications</h1>
-      <div class="post-hero-meta">
-        <span>April 2, 2025</span>
-        <div class="dot"></div>
-        <span>6 min read</span>
-        <div class="dot"></div>
-        <span>By Vine</span>
-      </div>
-    </div>
+<!-- PAGE HERO (minimal) -->
+<div class="page-hero" style="min-height:36vh;padding:120px 48px 60px">
+  <div class="page-hero-lines">
+    <svg viewBox="0 0 800 600" fill="none" preserveAspectRatio="none">
+      <path d="M0 400 Q200 200 400 300 T800 150" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="page-hero-inner">
+    <div class="section-label">LLM DEVELOPMENT</div>
+    <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:0;animation:none">April 2, 2025 &nbsp;·&nbsp; 6 min read &nbsp;·&nbsp; <a href="blog.html" style="color:rgba(255,255,255,0.65)">← Back to Blog</a></p>
   </div>
 </div>
 
-<!-- POST CONTENT -->
-<section id="post-content">
-  <div class="container">
-    <div class="post-layout">
-      <!-- Article -->
-      <article>
-        <div class="post-body reveal">
-          <p>When businesses start exploring custom AI, one of the first technical forks they hit is this: should we fine-tune a model on our data, or build a retrieval-augmented generation (RAG) system? The framing is usually wrong — these aren't alternatives, they're tools for different jobs. But for most business use cases, RAG wins. Here's why.</p>
+<!-- ARTICLE -->
+<section class="article-section">
+  <div class="article-inner">
 
-          <h2>What's the Actual Difference?</h2>
-          <p><strong>Fine-tuning</strong> means taking a pre-trained language model (like GPT-4 or Llama 3) and continuing to train it on your own data. The goal is to bake your domain knowledge, tone, or reasoning patterns into the model's weights.</p>
-          <p><strong>RAG</strong> takes a different approach: instead of changing the model, you give it access to an external knowledge base at inference time. When someone asks a question, the system first retrieves relevant documents from your knowledge store, then passes them to the model as context.</p>
-
-          <h2>Why Fine-Tuning Sounds Better Than It Is</h2>
-          <p>Fine-tuning has an intuitive appeal: train the model on your data, and it "learns" your business. But in practice, this creates several problems that most businesses don't anticipate:</p>
-          <ul>
-            <li><strong>Knowledge becomes stale immediately.</strong> Once a model is fine-tuned, its knowledge is frozen. When your product catalog changes, your policies update, or new data comes in — you have to fine-tune again.</li>
-            <li><strong>It's expensive and slow.</strong> Fine-tuning requires significant compute, careful dataset curation, evaluation cycles, and re-training pipelines. For most businesses, this is a continuous cost that doesn't fit their operational cadence.</li>
-            <li><strong>It doesn't solve hallucination.</strong> This is the big myth. Fine-tuning doesn't stop the model from making things up — it just biases it toward making things up in a way that sounds more like your domain.</li>
-            <li><strong>You lose interpretability.</strong> When a fine-tuned model gives a wrong answer, it's genuinely hard to trace why. With RAG, you can inspect exactly what documents the model retrieved and used to generate its answer.</li>
-          </ul>
-
-          <h2>Where RAG Wins</h2>
-          <p>For business applications — internal knowledge bases, document Q&A, customer support agents, policy lookup systems — RAG addresses every one of these problems:</p>
-          <ul>
-            <li>Knowledge updates don't require re-training. Update the document store, and the system immediately reflects the new information.</li>
-            <li>Answers are grounded in retrieved source documents, which dramatically reduces hallucination on domain-specific facts.</li>
-            <li>You can audit every answer by looking at the source documents that were retrieved.</li>
-            <li>The retrieval layer can be tuned independently of the model — improving search quality doesn't require touching the LLM.</li>
-          </ul>
-
-          <h2>When Fine-Tuning Actually Makes Sense</h2>
-          <p>Fine-tuning does have a legitimate role. The cases where it wins are specific:</p>
-          <ul>
-            <li><strong>Tone and style consistency</strong> — when you want the model to write in a very specific voice that's hard to specify in a system prompt</li>
-            <li><strong>Task-specific reasoning</strong> — when the model needs to learn a complex reasoning pattern that isn't well-represented in its base training</li>
-            <li><strong>Structured output formatting</strong> — when you consistently need output in a very specific schema</li>
-          </ul>
-          <p>Even in these cases, the right answer is often a hybrid: fine-tune for style and format, use RAG for factual retrieval.</p>
-
-          <h2>The Practical Decision Framework</h2>
-          <p>When we scope a new AI project, here's the quick framework we run through:</p>
-          <ul>
-            <li>Does the system need to answer questions from a changing knowledge base? → RAG</li>
-            <li>Does the system need to learn a specific reasoning pattern? → Consider fine-tuning</li>
-            <li>Do we need to audit answers and cite sources? → RAG</li>
-            <li>Is latency critical and the knowledge base small? → Fine-tuning might help</li>
-            <li>Is the data highly sensitive and we want to avoid external API calls? → Self-hosted RAG with open-source models</li>
-          </ul>
-          <p>For 80% of the business applications we see, RAG is the right answer. It's faster to build, cheaper to maintain, easier to audit, and more reliable in production. Fine-tuning is powerful — but it's a solution to a different set of problems than most businesses actually have.</p>
+    <!-- Main content -->
+    <article>
+      <div class="article-header">
+        <div class="article-meta">
+          <span class="article-tag">LLM Development</span>
+          <span class="article-date">April 2, 2025</span>
+          <span class="article-read">6 min read</span>
         </div>
-
-        <!-- Author -->
-        <div class="author-card reveal">
-          <img class="author-photo" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="Vine"/>
+        <h1>Why RAG Beats Fine-Tuning for Most Business AI Applications</h1>
+        <p class="article-lede">The debate between retrieval-augmented generation and fine-tuning isn't as complicated as it sounds. Here's how to choose the right approach — and why most businesses get this decision wrong.</p>
+        <div class="article-author">
+          <div class="author-avatar">👤</div>
           <div>
             <div class="author-name">Vine</div>
-            <div class="author-role">Founder &amp; AI Engineer, elyrac AI</div>
+            <div class="author-title">Founder &amp; AI Engineer, elyrac AI</div>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- Sidebar -->
-      <aside class="post-sidebar reveal reveal-d2">
-        <div class="sidebar-cta">
-          <div class="value-icon" style="font-size:28px;margin-bottom:12px;">🧠</div>
-          <div class="sidebar-cta-title">Enjoyed this? Let's build something together.</div>
-          <p class="sidebar-cta-body">We build custom RAG systems, fine-tuned models, and full-stack LLM applications for businesses that need more than off-the-shelf tools.</p>
-          <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="width:100%;justify-content:center;">Book a Call →</a>
+      <div class="article-body">
+        <p>When businesses start exploring custom AI, one of the first technical questions they inevitably hit is: <strong>should we fine-tune a model, or use retrieval-augmented generation (RAG)?</strong></p>
+        <p>It's a legitimate question — and the answer has significant implications for cost, accuracy, maintenance burden, and how quickly you can actually go live. After building AI systems across 30+ projects, here's what we've learned.</p>
+
+        <h2 id="what-is">What Are We Actually Comparing?</h2>
+        <h3>Fine-Tuning</h3>
+        <p>Fine-tuning means taking a pre-trained language model (like GPT-4 or Llama) and continuing to train it on your own data. The goal is to make the model "learn" your domain — your products, your terminology, your tone of voice.</p>
+        <h3>Retrieval-Augmented Generation (RAG)</h3>
+        <p>RAG works differently. Rather than teaching the model new information, you give it access to a searchable database of your documents at query time. When a user asks a question, the system retrieves the most relevant content and feeds it to the model as context — so the model answers based on your actual data.</p>
+        <div class="callout">
+          <strong>The key insight:</strong> Fine-tuning changes what the model knows. RAG changes what the model can access. These are very different problems — and most businesses actually have the second problem, not the first.
         </div>
-        <div style="margin-top:20px;background:var(--white-ghost);border:1px solid var(--white-line);border-radius:14px;padding:24px;">
-          <div class="footer-col-title" style="margin-bottom:14px;">More Articles</div>
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <a href="blog-post.html" style="text-decoration:none;">
-              <div style="font-family:var(--sans);font-size:13px;color:var(--white-soft);line-height:1.5;margin-bottom:4px;">The 5 Business Processes You Should Automate With AI First</div>
-              <div style="font-family:var(--display);font-size:10px;color:var(--white-dim);letter-spacing:0.5px;">5 min read</div>
-            </a>
-            <a href="blog-post.html" style="text-decoration:none;">
-              <div style="font-family:var(--sans);font-size:13px;color:var(--white-soft);line-height:1.5;margin-bottom:4px;">How to Think About Data Privacy When You're Building Custom AI</div>
-              <div style="font-family:var(--display);font-size:10px;color:var(--white-dim);letter-spacing:0.5px;">7 min read</div>
-            </a>
-            <a href="blog-post.html" style="text-decoration:none;">
-              <div style="font-family:var(--sans);font-size:13px;color:var(--white-soft);line-height:1.5;margin-bottom:4px;">How to Measure the ROI of a Custom AI System Before You Build It</div>
-              <div style="font-family:var(--display);font-size:10px;color:var(--white-dim);letter-spacing:0.5px;">8 min read</div>
-            </a>
+
+        <h2 id="comparison">The Honest Comparison</h2>
+        <table class="comparison-table">
+          <thead>
+            <tr><th>Factor</th><th>Fine-Tuning</th><th>RAG</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cost to implement</td><td class="badge-red">High ($10k–$100k+)</td><td class="badge-green">Moderate ($2k–$20k)</td></tr>
+            <tr><td>Time to deploy</td><td class="badge-red">Weeks to months</td><td class="badge-green">Days to weeks</td></tr>
+            <tr><td>Data freshness</td><td class="badge-red">Static at training time</td><td class="badge-green">Real-time updates</td></tr>
+            <tr><td>Source citations</td><td class="badge-red">Cannot cite sources</td><td class="badge-green">Full traceability</td></tr>
+            <tr><td>Best for</td><td>Style, tone, specialized tasks</td><td>Knowledge Q&A, document search</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="when-rag">When RAG Wins (Most of the Time)</h2>
+        <p>For the majority of business use cases, RAG is the right choice. Here's why:</p>
+        <ul>
+          <li><strong>Your data changes frequently.</strong> Product catalogs, policies, case files, contracts — this content updates regularly. Fine-tuned models can't adapt without expensive retraining. RAG systems update instantly.</li>
+          <li><strong>You need traceability.</strong> In healthcare, legal, and finance, knowing where an AI answer came from is non-negotiable. RAG systems can cite the exact source document. Fine-tuned models can't.</li>
+          <li><strong>You want to go live fast.</strong> A RAG system can be built and deployed in 2–4 weeks. Fine-tuning a model properly takes months of data prep, training, evaluation, and iteration.</li>
+          <li><strong>Your problem is knowledge access, not capability.</strong> Most businesses don't need a fundamentally smarter model — they need an existing smart model to have access to their specific information.</li>
+        </ul>
+
+        <h2 id="when-finetune">When Fine-Tuning Makes Sense</h2>
+        <p>Fine-tuning does shine in specific scenarios:</p>
+        <ul>
+          <li>You need the model to adopt a very specific writing style or format consistently</li>
+          <li>You're doing a specialized task where general models perform poorly (e.g., medical coding, legal clause extraction)</li>
+          <li>You have millions of examples and the budget to train at scale</li>
+          <li>Latency is critical and you can't afford the extra retrieval step</li>
+        </ul>
+        <div class="callout">
+          <strong>Our recommendation for most businesses:</strong> Start with RAG. It's faster, cheaper, more maintainable, and solves the actual problem — which is almost always "the AI doesn't know our stuff," not "the AI isn't smart enough."
+        </div>
+
+        <h2 id="hybrid">The Hybrid Approach</h2>
+        <p>The most sophisticated AI systems often combine both. You might fine-tune a smaller model for specialized extraction tasks, then use RAG to provide it with up-to-date context. But for 90% of businesses we work with, RAG alone is the right starting point.</p>
+        <p>The best time to consider fine-tuning is after you've deployed a RAG system, measured its performance, and identified specific failure modes that retrieval alone can't solve.</p>
+
+        <h2 id="conclusion">The Bottom Line</h2>
+        <p>The fine-tuning vs. RAG debate is often framed as a technical question, but it's really a business question. What problem are you actually trying to solve? In almost every case, the answer points clearly to RAG.</p>
+        <p>If you're evaluating AI approaches for your business, <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" style="color:var(--blue)">book a free call</a> and we'll give you an honest assessment of which approach fits your specific situation — and why.</p>
+      </div>
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="article-sidebar">
+      <div class="sidebar-card">
+        <h4>Table of Contents</h4>
+        <ul class="toc-list">
+          <li><a href="#what-is">What Are We Comparing?</a></li>
+          <li><a href="#comparison">The Honest Comparison</a></li>
+          <li><a href="#when-rag">When RAG Wins</a></li>
+          <li><a href="#when-finetune">When Fine-Tuning Makes Sense</a></li>
+          <li><a href="#hybrid">The Hybrid Approach</a></li>
+          <li><a href="#conclusion">The Bottom Line</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h4>Related Articles</h4>
+        <div class="related-post">
+          <div class="related-icon">⚙️</div>
+          <div>
+            <div class="related-title"><a href="blog-post.html">The 3 Business Processes Most Ready for AI Automation</a></div>
+            <div class="related-tag">Automation · 5 min</div>
           </div>
         </div>
-      </aside>
-    </div>
+        <div class="related-post">
+          <div class="related-icon">🤖</div>
+          <div>
+            <div class="related-title"><a href="blog-post.html">AI Agents in 2025: What They Can Actually Do</a></div>
+            <div class="related-tag">AI Agents · 8 min</div>
+          </div>
+        </div>
+        <div class="related-post">
+          <div class="related-icon">📊</div>
+          <div>
+            <div class="related-title"><a href="blog-post.html">How to Write an AI Brief That Gets Built Correctly</a></div>
+            <div class="related-tag">Strategy · 7 min</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-card" style="background:var(--navy);border-color:transparent">
+        <div class="section-label" style="color:rgba(255,255,255,0.6)">APPLY THIS</div>
+        <h4 style="color:white;font-size:16px;margin-bottom:8px">Build Your Own RAG System</h4>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:16px;line-height:1.6">Let's discuss which approach fits your specific business challenge.</p>
+        <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-primary" style="display:flex;justify-content:center;font-size:13px">Book a Free Call →</a>
+      </div>
+    </aside>
+
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div><img class="footer-logo logo-swap" src="Brand assets/Elyrac Ai-03 (1).png" alt="elyrac AI"/><p class="footer-tagline">We build fully customized AI software systems engineered around your specific business needs.</p><div class="footer-socials"><a class="footer-social" href="https://www.linkedin.com/company/elyrac-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a class="footer-social" href="https://x.com/ElGracAi" target="_blank" rel="noopener" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div>
-      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="blog.html">Blog</a></li></ul></div>
-      <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="solutions.html">AI Automation</a></li><li><a href="solutions.html">LLM Development</a></li><li><a href="solutions.html">Data Systems</a></li><li><a href="solutions.html">Computer Vision</a></li><li><a href="solutions.html">Conversational AI</a></li><li><a href="solutions.html">AI SaaS</a></li></ul></div>
-      <div><div class="footer-col-title">Get In Touch</div><a class="footer-contact-email" href="mailto:info@elyracai.com">info@elyracai.com</a><br/><a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="display:inline-flex;font-size:11px;padding:10px 22px;margin-top:12px;">Book a Call →</a></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <img src="others/Elyrac Ai-06.png" alt="elyrac AI">
+      </div>
+      <p>Custom AI software engineered for your specific business. Not off-the-shelf. Not generic. Yours.</p>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" class="social-link">in</a>
+        <a href="mailto:ceo@elyracai.com" class="social-link">✉</a>
+        <a href="https://twitter.com" target="_blank" class="social-link">𝕏</a>
+      </div>
     </div>
-    <div class="footer-bar">
-      <span class="footer-bar-text">© 2025 elyrac AI. All rights reserved.</span>
-      <div class="footer-bar-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="solutions.html">LLM Applications</a>
+      <a href="solutions.html">AI Automation</a>
+      <a href="solutions.html">Conversational AI</a>
+      <a href="solutions.html">Predictive AI</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
     </div>
   </div>
+  <div class="footer-bottom">© 2025 elyrac AI. All rights reserved.</div>
 </footer>
 
-<button id="chat-btn" aria-label="Chat with elyrac AI">
-  <img class="chat-btn-avatar" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="Chat"/>
-</button>
-<div id="chat-panel">
-  <div class="chat-header">
-    <img class="chat-avatar" src="Brand assets/pretty-self-confident-millennial-girl-wears-pink-shirt-knitted-vest-headband-looks-directly-camera-has-walk-outside-spare-time-poses-outside.jpg" alt="elyrac AI"/>
-    <div class="chat-info"><div class="chat-name">elyrac AI</div><div class="chat-status">Online</div></div>
-    <button class="chat-close" id="chat-close" aria-label="Close">✕</button>
-  </div>
-  <div class="chat-messages" id="chat-messages"></div>
-  <div class="chat-input-row">
-    <input class="chat-input" id="chat-input" type="text" placeholder="Ask anything…" autocomplete="off"/>
-    <button class="chat-send" id="chat-send" aria-label="Send">➤</button>
-  </div>
-</div>
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.add('open');
+  });
+  document.getElementById('mobile-close').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.remove('open');
+  });
+</script>
 
-<script src="js/shared.js"></script>
+<!-- ── FLOATING CHATBOT ── -->
+<div id="chatbot-widget">
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-header">
+      <div class="chat-header-avatar">
+        <img src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Maya">
+      </div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Maya</div>
+        <div class="chat-header-status">Online · elyrac AI assistant</div>
+      </div>
+      <button class="chat-close-btn" id="chat-close">✕</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-bubble">
+        <img class="bubble-avatar" src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Maya">
+        <div class="bubble-text">Hi! I'm Maya, elyrac AI's assistant. How can I help you today? 👋</div>
+      </div>
+      <div class="chat-bubble">
+        <img class="bubble-avatar" src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Maya">
+        <div class="bubble-text">I can answer questions about our services, or help you book a free strategy call with our founder.</div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-send-btn" onclick="sendChat()">↑</button>
+    </div>
+  </div>
+  <button class="chat-toggle" id="chat-toggle">
+    <img src="../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png" alt="Chat with Maya">
+    <span class="chat-badge"></span>
+  </button>
+</div>
+<script>
+  (function() {
+    const panel = document.getElementById('chat-panel');
+    document.getElementById('chat-toggle').addEventListener('click', () => panel.classList.toggle('open'));
+    document.getElementById('chat-close').addEventListener('click', () => panel.classList.remove('open'));
+    const AVATAR = '../../email-agent Mr. Timothy/email-agent/frontend/dist/maya-avatar.png';
+    const replies = [
+      "Great question! We build fully custom AI systems — not off-the-shelf tools. Every project is engineered around your specific business.",
+      "I'd recommend booking a free 30-minute strategy call. You'll get honest, personalised advice with no commitment required.",
+      "We've built AI systems for healthcare, government, e-commerce, finance, and more. What industry are you in?",
+      "Most projects take 4–12 weeks. We scope everything upfront so there are no surprises.",
+      "You can reach us at ceo@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
+    ];
+    let idx = 0;
+    window.sendChat = function() {
+      const input = document.getElementById('chat-input');
+      const msg = input.value.trim();
+      if (!msg) return;
+      const msgs = document.getElementById('chat-messages');
+      msgs.innerHTML += `<div class="chat-bubble user"><div class="bubble-text">${msg}</div></div>`;
+      input.value = '';
+      msgs.scrollTop = msgs.scrollHeight;
+      setTimeout(() => {
+        msgs.innerHTML += `<div class="chat-bubble"><img class="bubble-avatar" src="${AVATAR}" alt="Maya"><div class="bubble-text">${replies[idx++ % replies.length]}</div></div>`;
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 820);
+    };
+  })();
+</script>
 </body>
 </html>
