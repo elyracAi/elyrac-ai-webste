@@ -2,103 +2,135 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="msapplication-TileImage" content="/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us — elyrac AI</title>
-<meta name="description" content="Learn about elyrac AI — a custom AI development company building fully tailored AI systems for specific business needs."/>
+<meta name="description" content="Meet the team behind elyrac AI — a custom AI development company building fully tailored AI systems for specific business needs."/>
 <meta http-equiv="Cache-Control" content="max-age=31536000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://i.pravatar.cc">
 <link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
 <link rel="stylesheet" href="css/shared.css">
 <style>
-  /* ── STORY ── */
-  .story { background: var(--white); }
-  .story-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1100px; margin: 0 auto; }
-  .story-text p { font-size: 15px; line-height: 1.85; color: var(--gray-600); margin-bottom: 16px; }
 
-  .stat-stack { display: flex; flex-direction: column; gap: 12px; }
-  .stat-row-card {
-    background: var(--gray-50); border: 1px solid var(--gray-200);
-    border-radius: var(--radius); padding: 22px 24px;
-    display: flex; align-items: center; gap: 20px;
-  }
-  .stat-row-card .big-num {
-    font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
-    color: var(--blue); min-width: 72px; letter-spacing: -1px;
-  }
-  .stat-row-card .label {
-    font-family: 'Sora', sans-serif; font-weight: 600;
-    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--gray-600);
-  }
+/* ── WHAT MAKES US DIFFERENT ── */
+.diff-section { background: var(--white); }
+.diff-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 28px; max-width: 1100px; margin: 48px auto 36px;
+}
+.diff-card {
+  background: var(--gray-50); border: 1px solid var(--gray-200);
+  border-radius: 16px; padding: 32px 28px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.diff-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+.diff-step-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700; font-family: var(--font-heading);
+  margin-bottom: 18px;
+}
+.diff-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--gray-800); }
+.diff-card p { font-size: 14px; color: var(--gray-600); line-height: 1.75; }
 
-  /* ── TEAM ── */
-  .team-section { background: var(--gray-50); }
-  .team-inner { max-width: 1100px; margin: 0 auto; }
-  .team-card {
-    display: flex; align-items: flex-start; gap: 40px; margin-top: 48px;
-    background: var(--white); border: 1px solid var(--gray-200);
-    border-radius: var(--radius); padding: 40px;
-    transition: box-shadow 0.2s;
-  }
-  .team-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.07); }
-  .team-photo {
-    width: 120px; height: 120px; border-radius: 50%;
-    object-fit: cover; flex-shrink: 0;
-    border: 3px solid var(--blue-light);
-  }
-  .team-photo-placeholder {
-    width: 120px; height: 120px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue-light), #c3d7ff);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 48px; flex-shrink: 0;
-  }
-  .team-name { font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 4px; }
-  .team-role { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
-  .team-bio { font-size: 15px; color: var(--gray-600); line-height: 1.75; max-width: 560px; }
+.diff-callout {
+  max-width: 1100px; margin: 0 auto;
+  background: var(--blue-light); border: 1px solid var(--blue);
+  border-radius: 16px; padding: 28px 36px;
+  display: flex; align-items: center; gap: 20px;
+}
+.diff-callout-icon { font-size: 32px; flex-shrink: 0; }
+.diff-callout p {
+  font-size: 15px; color: var(--blue); font-weight: 600;
+  line-height: 1.65; margin: 0;
+}
 
-  /* ── VALUES ── */
-  .values-section { background: var(--white); }
-  .values-inner { max-width: 1100px; margin: 0 auto; }
-  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
-  .value-card {
-    background: var(--gray-50); border: 1px solid var(--gray-200);
-    border-radius: var(--radius); padding: 36px 32px;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .value-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.07); }
-  .value-icon {
-    font-size: 36px; margin-bottom: 20px;
-    width: 64px; height: 64px; border-radius: 16px;
-    background: var(--blue-light);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .value-name { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
-  .value-desc { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+/* ── VISION & MISSION ── */
+.vm-section { background: var(--gray-50); }
+.vm-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 40px; max-width: 1100px; margin: 52px auto 0;
+}
+.vm-card {
+  background: var(--white); border: 1px solid var(--gray-200);
+  border-radius: 16px; padding: 40px 36px;
+}
+.vm-card .vm-icon { font-size: 36px; margin-bottom: 18px; }
+.vm-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 14px; color: var(--gray-800); }
+.vm-card p { font-size: 15px; color: var(--gray-600); line-height: 1.8; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .story-inner { grid-template-columns: 1fr; gap: 48px; }
-    .values-grid { grid-template-columns: 1fr; }
-    .team-card { flex-direction: column; align-items: center; text-align: center; }
-  }
-  @media (max-width: 600px) {
-    .values-grid { grid-template-columns: 1fr; }
-  }
+/* ── CORE VALUES ── */
+.values-section { background: var(--white); }
+.values-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 28px; max-width: 1100px; margin: 52px auto 0;
+}
+.value-card {
+  border-top: 3px solid var(--blue);
+  background: var(--gray-50); border-radius: 0 0 16px 16px;
+  padding: 32px 28px;
+}
+.value-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--gray-800); }
+.value-card p { font-size: 14px; color: var(--gray-600); line-height: 1.75; }
+
+/* ── TEAM ── */
+.team-section { background: var(--gray-50); }
+.team-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px; max-width: 1100px; margin: 52px auto 0;
+}
+.team-card {
+  text-align: center; padding: 36px 20px;
+  background: var(--white); border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.team-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+.team-photo {
+  width: 100px; height: 100px; border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  margin: 0 auto 16px; display: block;
+  border: 3px solid var(--blue-light);
+}
+.team-name {
+  font-size: 17px; font-weight: 700; color: var(--gray-800);
+  margin-bottom: 4px; font-family: var(--font-heading);
+}
+.team-role {
+  font-size: 12px; font-weight: 600; color: var(--blue);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+}
+.team-tagline { font-size: 13px; color: var(--gray-600); line-height: 1.55; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .diff-steps { grid-template-columns: 1fr; }
+  .vm-inner { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .diff-callout { flex-direction: column; gap: 12px; }
+}
+@media (max-width: 600px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="/" class="nav-logo">
     <img src="others/Elyrac_Ai-03.png" alt="elyrac AI">
   </a>
   <ul class="nav-links">
-    <li><a href="about.html" class="active">About Us</a></li>
-    <li><a href="solutions.html">Solutions</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="blog.html">Blog</a></li>
+    <li><a href="/about">About Us</a></li>
+    <li><a href="/solutions">Solutions</a></li>
+    <li><a href="/portfolio">Portfolio</a></li>
+    <li><a href="/blog">Blog</a></li>
   </ul>
   <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-book">Book a Call</a>
   <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
@@ -107,10 +139,10 @@
 <!-- Mobile Menu -->
 <div id="mobile-menu">
   <button class="mobile-close" id="mobile-close">✕</button>
-  <a href="about.html">About Us</a>
-  <a href="solutions.html">Solutions</a>
-  <a href="portfolio.html">Portfolio</a>
-  <a href="blog.html">Blog</a>
+  <a href="/about">About Us</a>
+  <a href="/solutions">Solutions</a>
+  <a href="/portfolio">Portfolio</a>
+  <a href="/blog">Blog</a>
   <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
 </div>
 
@@ -124,106 +156,139 @@
   </div>
   <div class="page-hero-inner">
     <div class="section-label">ABOUT ELYRAC AI</div>
-    <h1>We Build AI That <em>Works For You.</em></h1>
-    <p>We're a custom AI development company. Not a consultancy. Not an AI tool reseller. We build fully tailored AI software systems engineered around how your business actually works.</p>
-    <a class="btn-primary" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Free Strategy Call →</a>
+    <h1>We Don't Sell AI. We Build Yours.</h1>
+    <p>Every business has a unique problem. We engineer the precise AI system to solve it — from scratch, for you, built to last.</p>
+    <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-blue">Meet the Team — Book a Call</a>
   </div>
 </div>
 
-<!-- STORY -->
-<section class="story">
-  <div class="story-inner">
-    <div class="story-text">
-      <div class="section-label">OUR STORY</div>
-      <h2 class="section-title">Why <em>elyrac AI</em> Exists</h2>
-      <p>elyrac AI was built from a simple observation: most businesses trying to adopt AI end up with generic chatbots, half-working automations, and tools that weren't designed for their specific problems.</p>
-      <p>The AI industry is full of hype and abstraction — and the businesses that need results most are being left behind. We believe every business deserves AI that's actually built for them.</p>
-      <p>That means starting from your workflows, your data, your goals — and engineering something that fits. Not off-the-shelf. Not repurposed from another industry. Yours.</p>
-      <p>From our first project to our thirtieth, that's been the one thing we never compromise on.</p>
+<!-- WHAT MAKES US DIFFERENT -->
+<section class="diff-section">
+  <div class="section-label" style="text-align:center">OUR APPROACH</div>
+  <h2 class="section-title" style="text-align:center">What Makes Us Different</h2>
+  <p class="section-sub" style="text-align:center;max-width:680px;margin:0 auto">We don't patch together generic tools. We build bespoke AI systems — engineered around your specific business, your data, and your goals.</p>
+
+  <div class="diff-steps">
+    <div class="diff-card">
+      <div class="diff-step-num">1</div>
+      <h3>We Start With Your Problem</h3>
+      <p>Before a single line of code is written, we spend time understanding your business — your workflows, your bottlenecks, your customers. The AI solution comes after the diagnosis.</p>
     </div>
-    <div class="stat-stack">
-      <div class="stat-row-card">
-        <div class="big-num">30+</div>
-        <div class="label">Custom AI Systems Built</div>
-      </div>
-      <div class="stat-row-card">
-        <div class="big-num">6+</div>
-        <div class="label">Years of AI Engineering</div>
-      </div>
-      <div class="stat-row-card">
-        <div class="big-num">95%</div>
-        <div class="label">Client Retention Rate</div>
-      </div>
-      <div class="stat-row-card">
-        <div class="big-num">10+</div>
-        <div class="label">Industries Served</div>
-      </div>
+    <div class="diff-card">
+      <div class="diff-step-num">2</div>
+      <h3>We Build From Scratch</h3>
+      <p>No templates. No off-the-shelf wrappers. Every system we deliver is engineered specifically for your use case — trained on your data, integrated into your stack, and optimised for your team.</p>
+    </div>
+    <div class="diff-card">
+      <div class="diff-step-num">3</div>
+      <h3>We Stay Accountable to Results</h3>
+      <p>We don't disappear after launch. We measure performance, iterate on outcomes, and stand behind the work we deliver — because your success is how we build ours.</p>
+    </div>
+  </div>
+
+  <div class="diff-callout">
+    <div class="diff-callout-icon">💡</div>
+    <p>The result: AI that fits your business like it was made for you — because it was. No generic tools, no wasted spend, no compromise.</p>
+  </div>
+</section>
+
+<!-- VISION & MISSION -->
+<section class="vm-section">
+  <div class="section-label" style="text-align:center">OUR PURPOSE</div>
+  <h2 class="section-title" style="text-align:center">Vision &amp; Mission</h2>
+  <div class="vm-inner">
+    <div class="vm-card">
+      <div class="vm-icon">🔭</div>
+      <h3>Our Vision</h3>
+      <p>A world where every business — regardless of size or industry — can access AI that is custom-built, ethically deployed, and genuinely transformative. We believe AI's greatest value isn't in demos. It's in production systems that change how organizations operate every single day.</p>
+    </div>
+    <div class="vm-card">
+      <div class="vm-icon">🎯</div>
+      <h3>Our Mission</h3>
+      <p>To engineer fully custom AI software that solves real, specific business problems — and to do it with honesty, precision, and long-term partnership. We don't sell hype. We ship systems that work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="values-section">
+  <div class="section-label" style="text-align:center">WHAT WE STAND FOR</div>
+  <h2 class="section-title" style="text-align:center">Core Values</h2>
+  <div class="values-grid">
+    <div class="value-card">
+      <h3>Strategy Before Technology</h3>
+      <p>We never recommend AI for its own sake. Every solution starts with a clear problem statement, a measurable outcome, and a realistic path to value. We build what makes business sense — not what sounds impressive.</p>
+    </div>
+    <div class="value-card">
+      <h3>Engineering Excellence</h3>
+      <p>Our systems are built to production standards — scalable, secure, and maintainable. We don't ship prototypes dressed as products. Every deployment is engineered to perform under real conditions, at real scale.</p>
+    </div>
+    <div class="value-card">
+      <h3>Education &amp; Transparency</h3>
+      <p>We believe clients should understand what they're building. We explain our decisions in plain language, share our reasoning, and make sure your team is equipped to own and operate the systems we deliver.</p>
     </div>
   </div>
 </section>
 
 <!-- TEAM -->
 <section class="team-section">
-  <div class="team-inner">
-    <div class="section-label">THE TEAM</div>
-    <h2 class="section-title">The Person <em>Behind the Work.</em></h2>
-    <p class="section-subtitle">Every system we build carries the fingerprint of deep technical care and a genuine commitment to making it work for your business.</p>
-    <div class="team-card">
-      <div class="team-photo-placeholder">👤</div>
-      <div>
-        <div class="team-name">Vine</div>
-        <div class="team-role">Founder &amp; AI Engineer</div>
-        <p class="team-bio">I build AI systems that solve real business problems — not demos, not prototypes. Every project is a long-term commitment to making it work. When I'm not engineering, I'm studying what the next generation of AI systems will look like and how businesses can actually leverage them.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  <div class="section-label" style="text-align:center">THE PEOPLE BEHIND THE WORK</div>
+  <h2 class="section-title" style="text-align:center">Meet the Team</h2>
+  <p class="section-sub" style="text-align:center;max-width:600px;margin:0 auto">A small, focused team of AI engineers, strategists, and operators — each one deeply invested in the outcomes we build together.</p>
+  <div class="team-grid">
 
-<!-- VALUES -->
-<section class="values-section">
-  <div class="values-inner">
-    <div class="section-label">WHAT WE STAND FOR</div>
-    <h2 class="section-title">Our <em>Values.</em></h2>
-    <p class="section-subtitle">The principles that guide every project and every decision we make.</p>
-    <div class="values-grid">
-      <div class="value-card">
-        <div class="value-icon">🎯</div>
-        <div class="value-name">Precision</div>
-        <p class="value-desc">We don't ship AI that almost works. Every system is tested against real operational conditions before it goes live. Close enough isn't good enough when the system touches your business.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon">🔍</div>
-        <div class="value-name">Transparency</div>
-        <p class="value-desc">No black boxes. No jargon. We explain what we're building, why, and how it works — so you understand the system you're running. You'll never be dependent on us to explain your own AI.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon">⚡</div>
-        <div class="value-name">Impact</div>
-        <p class="value-desc">We measure success by business outcomes, not lines of code. If a system isn't producing measurable results, we go back to the drawing board — because shipping isn't enough.</p>
-      </div>
+    <div class="team-card">
+      <img class="team-photo" src="others/_MG_9878.jpg" alt="Vine Samuel" loading="lazy">
+      <div class="team-name">Vine Samuel</div>
+      <div class="team-role">CEO &amp; Founder</div>
+      <div class="team-tagline">The architect behind every AI strategy we build.</div>
     </div>
+
+    <div class="team-card">
+      <img class="team-photo" src="others/WhatsApp_Image_2026-04-14_at_5_35_40_PM.jpeg" alt="Prossy Lumusu" loading="lazy">
+      <div class="team-name">Prossy Lumusu</div>
+      <div class="team-role">COO &amp; Business Development</div>
+      <div class="team-tagline">Turning client vision into operational reality.</div>
+    </div>
+
+    <div class="team-card">
+      <img class="team-photo" src="others/1708250422142.jpg" alt="Joel Katuula" loading="lazy">
+      <div class="team-name">Joel Katuula</div>
+      <div class="team-role">CTO</div>
+      <div class="team-tagline">Engineering the systems that power our clients' growth.</div>
+    </div>
+
+    <div class="team-card">
+      <img class="team-photo" src="others/afro-american-woman-model-studio.jpg" alt="Doris Lukotanyi" loading="lazy">
+      <div class="team-name">Doris Lukotanyi</div>
+      <div class="team-role">AI Automation Engineer</div>
+      <div class="team-tagline">Automating the work so your team can focus on what matters.</div>
+    </div>
+
+    <div class="team-card">
+      <img class="team-photo" src="others/1751883384215.jpg" alt="Abraham Ndyamuhaki" loading="lazy">
+      <div class="team-name">Abraham Ndyamuhaki</div>
+      <div class="team-role">Full Stack AI Software Engineer</div>
+      <div class="team-tagline">Building the full stack that brings AI to life.</div>
+    </div>
+
+    <div class="team-card">
+      <img class="team-photo" src="others/mercy-mirembe.jpg" alt="Mercy Mirembe" loading="lazy">
+      <div class="team-name">Mercy Mirembe</div>
+      <div class="team-role">CFO</div>
+      <div class="team-tagline">Keeping the business sharp so the mission stays strong.</div>
+    </div>
+
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-inner">
-    <div>
-      <div class="section-label" style="color:rgba(255,255,255,0.7)">WORK WITH US</div>
-      <h2>Let's Build Something Meaningful.</h2>
-      <p>If you have a business challenge that AI could solve, let's talk. We'll give you an honest assessment and a clear path forward — no commitment required.</p>
-      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:28px">
-        <h4 style="color:white;font-family:'Sora',sans-serif;font-size:16px;margin-bottom:8px">Free 30-minute strategy call</h4>
-        <p style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:20px">Honest feedback. No sales pitch. Just a real conversation about your AI opportunity.</p>
-        <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-primary">📅 Book a Free Call</a>
-      </div>
-    </div>
-    <div class="cta-features">
-      <div class="cta-feat"><div class="emoji">🎧</div><h4>1-on-1 Call</h4><p>Personal attention from our founder.</p></div>
-      <div class="cta-feat"><div class="emoji">🤝</div><h4>30 Minutes</h4><p>Focused and efficient.</p></div>
-      <div class="cta-feat"><div class="emoji">🏷️</div><h4>Completely Free</h4><p>No commitment required.</p></div>
-      <div class="cta-feat"><div class="emoji">🔍</div><h4>Honest Assessment</h4><p>We'll tell you what's actually possible.</p></div>
-    </div>
+    <div class="section-label" style="color:rgba(255,255,255,0.7)">READY TO START?</div>
+    <h2>Let's Build Something That Actually Works.</h2>
+    <p>Book a free 30-minute strategy call. No sales pitch — just an honest conversation about your AI opportunity.</p>
+    <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-white">Book Your Free Call →</a>
   </div>
 </section>
 
@@ -243,19 +308,19 @@
     </div>
     <div class="footer-col">
       <h4>Company</h4>
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="blog.html">Blog</a>
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/blog">Blog</a>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
-      <a href="solutions.html">LLM Applications</a>
-      <a href="solutions.html">AI Automation</a>
-      <a href="solutions.html">Conversational AI</a>
-      <a href="solutions.html">Predictive AI</a>
-      <a href="faq.html">FAQ</a>
-      <a href="contact.html">Contact</a>
+      <a href="/solutions">LLM Applications</a>
+      <a href="/solutions">AI Automation</a>
+      <a href="/solutions">Conversational AI</a>
+      <a href="/solutions">Predictive AI</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
     </div>
   </div>
   <div class="footer-bottom">© 2025 elyrac AI. All rights reserved.</div>
@@ -267,17 +332,6 @@
   });
   document.getElementById('mobile-close').addEventListener('click', () => {
     document.getElementById('mobile-menu').classList.remove('open');
-  });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.value-card, .team-card, .stat-row-card').forEach(el => {
-    el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
   });
 </script>
 
