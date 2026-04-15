@@ -10,8 +10,7 @@
 <meta name="description" content="Meet the team behind elyrac AI — a custom AI development company building fully tailored AI systems for specific business needs."/>
 <meta http-equiv="Cache-Control" content="max-age=31536000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://i.pravatar.cc">
-<link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
+<link rel="preload" as="image" href="/others/Elyrac_Ai-03.png">
 <link rel="stylesheet" href="css/shared.css">
 <style>
 
@@ -59,23 +58,52 @@
   background: var(--white); border: 1px solid var(--gray-200);
   border-radius: 16px; padding: 40px 36px;
 }
-.vm-card .vm-icon { font-size: 36px; margin-bottom: 18px; }
 .vm-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 14px; color: var(--gray-800); }
 .vm-card p { font-size: 15px; color: var(--gray-600); line-height: 1.8; }
 
-/* ── CORE VALUES ── */
+/* ── CORE VALUES — image cards, staggered ── */
 .values-section { background: var(--white); }
 .values-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 28px; max-width: 1100px; margin: 52px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 52px auto 0;
+  align-items: start;
 }
 .value-card {
-  border-top: 3px solid var(--blue);
-  background: var(--gray-50); border-radius: 0 0 16px 16px;
-  padding: 32px 28px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  background: white;
+  transition: all 0.3s ease;
+  cursor: default;
 }
-.value-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--gray-800); }
-.value-card p { font-size: 14px; color: var(--gray-600); line-height: 1.75; }
+.value-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+}
+.value-card:nth-child(2) { margin-top: 40px; }
+.value-card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+.value-card-body {
+  padding: 24px 28px 32px;
+}
+.value-card-body h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--gray-800);
+}
+.value-card-body p {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.65;
+}
 
 /* ── TEAM ── */
 .team-section { background: var(--gray-50); }
@@ -106,13 +134,37 @@
 }
 .team-tagline { font-size: 13px; color: var(--gray-600); line-height: 1.55; }
 
+/* ── ABOUT HERO FLOATING CARDS ── */
+.about-fc {
+  position: absolute;
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: 14px;
+  padding: 14px 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  z-index: 2;
+  font-family: var(--font-body);
+}
+.about-fc-1 { top: 15%; left: 4%; animation: aboutFloat 4s ease-in-out infinite; }
+.about-fc-2 { top: 15%; right: 4%; animation: aboutFloat 5s 0.8s ease-in-out infinite; }
+.about-fc-3 { bottom: 12%; right: 6%; animation: aboutFloat 6s 1.6s ease-in-out infinite; }
+@keyframes aboutFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .diff-steps { grid-template-columns: 1fr; }
   .vm-inner { grid-template-columns: 1fr; }
   .values-grid { grid-template-columns: 1fr; }
+  .value-card:nth-child(2) { margin-top: 0; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
   .diff-callout { flex-direction: column; gap: 12px; }
+  .about-fc-1, .about-fc-2 { display: none; }
+  .about-fc-3 { display: none; }
 }
 @media (max-width: 600px) {
   .team-grid { grid-template-columns: 1fr; }
@@ -124,7 +176,7 @@
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
-    <img src="others/Elyrac_Ai-03.png" alt="elyrac AI">
+    <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI" style="height:75px;width:auto;object-fit:contain;">
   </a>
   <ul class="nav-links">
     <li><a href="/about">About Us</a></li>
@@ -132,13 +184,13 @@
     <li><a href="/portfolio">Portfolio</a></li>
     <li><a href="/blog">Blog</a></li>
   </ul>
-  <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-book">Book a Call</a>
+  <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" class="btn-book">Book a Call</a>
   <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
 
 <!-- Mobile Menu -->
 <div id="mobile-menu">
-  <button class="mobile-close" id="mobile-close">✕</button>
+  <button class="mobile-close" id="mobile-close">&#x2715;</button>
   <a href="/about">About Us</a>
   <a href="/solutions">Solutions</a>
   <a href="/portfolio">Portfolio</a>
@@ -160,11 +212,25 @@
     <p>Every business has a unique problem. We engineer the precise AI system to solve it — from scratch, for you, built to last.</p>
     <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-blue">Meet the Team — Book a Call</a>
   </div>
+
+  <!-- Floating glass cards for about hero -->
+  <div class="about-fc about-fc-1">
+    <div style="font-size:22px;font-weight:800;color:white;line-height:1">30+</div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.72);margin-top:3px">AI Systems Built</div>
+  </div>
+  <div class="about-fc about-fc-2">
+    <div style="font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:4px">CLIENT RETENTION</div>
+    <div style="font-size:22px;font-weight:800;color:white">95%</div>
+  </div>
+  <div class="about-fc about-fc-3">
+    <div style="font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:4px">STRATEGY → BUILD → TRAIN</div>
+    <div style="font-size:13px;font-weight:600;color:white">Our 3-Step Method</div>
+  </div>
 </div>
 
 <!-- WHAT MAKES US DIFFERENT -->
 <section class="diff-section">
-  <div class="section-label" style="text-align:center">OUR APPROACH</div>
+  <div class="section-label" style="justify-content:center">OUR APPROACH</div>
   <h2 class="section-title" style="text-align:center">What Makes Us Different</h2>
   <p class="section-sub" style="text-align:center;max-width:680px;margin:0 auto">We don't patch together generic tools. We build bespoke AI systems — engineered around your specific business, your data, and your goals.</p>
 
@@ -187,109 +253,125 @@
   </div>
 
   <div class="diff-callout">
-    <div class="diff-callout-icon">💡</div>
+    <div class="diff-callout-icon">&#x1f4a1;</div>
     <p>The result: AI that fits your business like it was made for you — because it was. No generic tools, no wasted spend, no compromise.</p>
   </div>
 </section>
 
 <!-- VISION & MISSION -->
 <section class="vm-section">
-  <div class="section-label" style="text-align:center">OUR PURPOSE</div>
+  <div class="section-label" style="justify-content:center">OUR PURPOSE</div>
   <h2 class="section-title" style="text-align:center">Vision &amp; Mission</h2>
   <div class="vm-inner">
     <div class="vm-card">
-      <div class="vm-icon">🔭</div>
-      <h3>Our Vision</h3>
-      <p>A world where every business — regardless of size or industry — can access AI that is custom-built, ethically deployed, and genuinely transformative. We believe AI's greatest value isn't in demos. It's in production systems that change how organizations operate every single day.</p>
+      <h3>Our Vision &#x1f30d;</h3>
+      <p>AI that works for every business — not just the biggest ones. Built right. Deployed ethically. Transformative by design.</p>
     </div>
     <div class="vm-card">
-      <div class="vm-icon">🎯</div>
-      <h3>Our Mission</h3>
-      <p>To engineer fully custom AI software that solves real, specific business problems — and to do it with honesty, precision, and long-term partnership. We don't sell hype. We ship systems that work.</p>
+      <h3>Our Mission &#x1f3af;</h3>
+      <p>We engineer custom AI systems that solve real problems, deliver real ROI, and equip your team to own them. No hype. Just systems that work.</p>
     </div>
   </div>
 </section>
 
 <!-- CORE VALUES -->
 <section class="values-section">
-  <div class="section-label" style="text-align:center">WHAT WE STAND FOR</div>
+  <div class="section-label" style="justify-content:center">WHAT WE STAND FOR</div>
   <h2 class="section-title" style="text-align:center">Core Values</h2>
   <div class="values-grid">
+
     <div class="value-card">
-      <h3>Strategy Before Technology</h3>
-      <p>We never recommend AI for its own sake. Every solution starts with a clear problem statement, a measurable outcome, and a realistic path to value. We build what makes business sense — not what sounds impressive.</p>
+      <img class="value-card-img" src="/others/robotic-arms-modern-factory-setting.jpg" alt="Strategy Before Technology" loading="lazy">
+      <div class="value-card-body">
+        <h3>Strategy Before Technology</h3>
+        <p>We never recommend AI for its own sake. Every solution starts with a clear problem statement, a measurable outcome, and a realistic path to value. We build what makes business sense — not what sounds impressive.</p>
+      </div>
     </div>
+
     <div class="value-card">
-      <h3>Engineering Excellence</h3>
-      <p>Our systems are built to production standards — scalable, secure, and maintainable. We don't ship prototypes dressed as products. Every deployment is engineered to perform under real conditions, at real scale.</p>
+      <img class="value-card-img" src="/others/businesswoman-interacting-with-ai-hologram-office.jpg" alt="Engineering Excellence" loading="lazy">
+      <div class="value-card-body">
+        <h3>Engineering Excellence</h3>
+        <p>Our systems are built to production standards — scalable, secure, and maintainable. We don't ship prototypes dressed as products. Every deployment is engineered to perform under real conditions, at real scale.</p>
+      </div>
     </div>
+
     <div class="value-card">
-      <h3>Education &amp; Transparency</h3>
-      <p>We believe clients should understand what they're building. We explain our decisions in plain language, share our reasoning, and make sure your team is equipped to own and operate the systems we deliver.</p>
+      <img class="value-card-img" src="/others/businesswoman-talking-professional-fintech-convention-doing-business-pitch-stage.jpg" alt="Education and Transparency" loading="lazy">
+      <div class="value-card-body">
+        <h3>Education &amp; Transparency</h3>
+        <p>We believe clients should understand what they're building. We explain our decisions in plain language, share our reasoning, and make sure your team is equipped to own and operate the systems we deliver.</p>
+      </div>
     </div>
+
   </div>
 </section>
 
 <!-- TEAM -->
 <section class="team-section">
-  <div class="section-label" style="text-align:center">THE PEOPLE BEHIND THE WORK</div>
+  <div class="section-label" style="justify-content:center">THE PEOPLE BEHIND THE WORK</div>
   <h2 class="section-title" style="text-align:center">Meet the Team</h2>
   <p class="section-sub" style="text-align:center;max-width:600px;margin:0 auto">A small, focused team of AI engineers, strategists, and operators — each one deeply invested in the outcomes we build together.</p>
   <div class="team-grid">
 
     <div class="team-card">
-      <img class="team-photo" src="others/_MG_9878.jpg" alt="Vine Samuel" loading="lazy">
+      <img class="team-photo" src="/others/_MG_9878.jpg" alt="Vine Samuel" loading="lazy">
       <div class="team-name">Vine Samuel</div>
       <div class="team-role">CEO &amp; Founder</div>
       <div class="team-tagline">The architect behind every AI strategy we build.</div>
     </div>
 
     <div class="team-card">
-      <img class="team-photo" src="others/WhatsApp_Image_2026-04-14_at_5_35_40_PM.jpeg" alt="Prossy Lumusu" loading="lazy">
+      <img class="team-photo" src="/others/WhatsApp_Image_2026-04-14_at_5_35_40_PM.jpeg" alt="Prossy Lumusu" loading="lazy">
       <div class="team-name">Prossy Lumusu</div>
       <div class="team-role">COO &amp; Business Development</div>
       <div class="team-tagline">Turning client vision into operational reality.</div>
     </div>
 
     <div class="team-card">
-      <img class="team-photo" src="others/1708250422142.jpg" alt="Joel Katuula" loading="lazy">
+      <img class="team-photo" src="/others/1708250422142.jpg" alt="Joel Katuula" loading="lazy">
       <div class="team-name">Joel Katuula</div>
       <div class="team-role">CTO</div>
       <div class="team-tagline">Engineering the systems that power our clients' growth.</div>
     </div>
 
     <div class="team-card">
-      <img class="team-photo" src="others/afro-american-woman-model-studio.jpg" alt="Doris Lukotanyi" loading="lazy">
+      <img class="team-photo" src="/others/afro-american-woman-model-studio.jpg" alt="Doris Lukotanyi" loading="lazy">
       <div class="team-name">Doris Lukotanyi</div>
       <div class="team-role">AI Automation Engineer</div>
       <div class="team-tagline">Automating the work so your team can focus on what matters.</div>
     </div>
 
     <div class="team-card">
-      <img class="team-photo" src="others/1751883384215.jpg" alt="Abraham Ndyamuhaki" loading="lazy">
+      <img class="team-photo" src="/others/1751883384215.jpg" alt="Abraham Ndyamuhaki" loading="lazy">
       <div class="team-name">Abraham Ndyamuhaki</div>
       <div class="team-role">Full Stack AI Software Engineer</div>
       <div class="team-tagline">Building the full stack that brings AI to life.</div>
     </div>
 
     <div class="team-card">
-      <img class="team-photo" src="others/mercy-mirembe.jpg" alt="Mercy Mirembe" loading="lazy">
+      <img class="team-photo" src="/others/mercy-mirembe.jpg" alt="Mercy Mirembe" loading="lazy">
       <div class="team-name">Mercy Mirembe</div>
       <div class="team-role">CFO</div>
       <div class="team-tagline">Keeping the business sharp so the mission stays strong.</div>
+    </div>
+
+    <div class="team-card">
+      <img class="team-photo" src="/others/young-black-girl-cheerful-hand-gesture-portrait.jpg" alt="Brenda Marie" loading="lazy">
+      <div class="team-name">Brenda Marie</div>
+      <div class="team-role">Customer Success Manager</div>
+      <div class="team-tagline">Making sure every client feels supported from day one to delivery.</div>
     </div>
 
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
-  <div class="cta-inner">
-    <div class="section-label" style="color:rgba(255,255,255,0.7)">READY TO START?</div>
-    <h2>Let's Build Something That Actually Works.</h2>
-    <p>Book a free 30-minute strategy call. No sales pitch — just an honest conversation about your AI opportunity.</p>
-    <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-white">Book Your Free Call →</a>
-  </div>
+<section style="background: linear-gradient(135deg, var(--navy) 0%, #0d2260 60%, #1a4db8 100%); padding: 100px 48px; text-align: center;">
+  <div class="section-label" style="justify-content:center; color:rgba(255,255,255,0.7);">READY TO START?</div>
+  <h2 style="font-family:var(--font-heading); font-size: clamp(32px, 4vw, 54px); color:white; font-weight:500; max-width:700px; margin: 16px auto 24px; line-height:1.15;">Let's Build Something That Actually Works.</h2>
+  <p style="color:rgba(255,255,255,0.65); font-size:16px; max-width:480px; margin: 0 auto 40px; line-height:1.7;">Book a free 30-minute strategy call. No pitch. No pressure. Just an honest conversation about what AI can do for your business.</p>
+  <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" class="btn-book" style="padding: 16px 40px; font-size: 15px; border-radius: 100px; display:inline-block;">&#x1f4c5; Book Your Free Strategy Call &rarr;</a>
 </section>
 
 <!-- FOOTER -->
@@ -297,14 +379,35 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="logo">
-        <img src="others/Elyrac Ai-06.png" alt="elyrac AI">
+        <img src="/others/Elyrac Ai-06.png" alt="elyrac AI">
       </div>
-      <p>Custom AI software engineered for your specific business. Not off-the-shelf. Not generic. Yours.</p>
-      <div class="social-links">
-        <a href="https://linkedin.com" target="_blank" class="social-link">in</a>
-        <a href="mailto:ceo@elyracai.com" class="social-link">✉</a>
-        <a href="https://twitter.com" target="_blank" class="social-link">𝕏</a>
+      <p style="color:#111111;font-size:15px;font-weight:500;">Custom AI software engineered for your specific business. Not off-the-shelf. Not generic. Yours.</p>
+      <div class="social-links" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:16px;">
+        <a href="https://www.facebook.com/elyracAi" target="_blank" title="Facebook" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#1877F2;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@elyracAi" target="_blank" title="YouTube" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#FF0000;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#FF0000"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/elyrac-ai/?viewAsMember=true" target="_blank" title="LinkedIn" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#0A66C2;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://x.com/ElGracAi" target="_blank" title="X / Twitter" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#000;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@elyracai" target="_blank" title="TikTok" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#010101;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/elyracai/" target="_blank" title="Instagram" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://wa.me/256784239786" target="_blank" title="WhatsApp" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#25D366;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </a>
       </div>
+      <p style="margin-top:10px; font-size:14px; font-weight:500; color:#000000;">
+        &#x2709; <a href="mailto:info@elyracai.com" style="color:#000000;font-weight:500;">info@elyracai.com</a>
+      </p>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
@@ -323,78 +426,88 @@
       <a href="/contact">Contact</a>
     </div>
   </div>
-  <div class="footer-bottom">© 2025 elyrac AI. All rights reserved.</div>
+  <div class="footer-bottom">&#169; 2026 elyrac AI. All rights reserved.</div>
 </footer>
 
-<script>
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.add('open');
-  });
-  document.getElementById('mobile-close').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.remove('open');
-  });
-</script>
-
-<!-- ── FLOATING CHATBOT ── -->
+<!-- &#x2500;&#x2500; FLOATING CHATBOT &#x2500;&#x2500; -->
 <div id="chatbot-widget">
   <div class="chat-panel" id="chat-panel">
     <div class="chat-header">
       <div class="chat-header-avatar">
-        <img src="others/linked_profile_pic-Photoroom.png" alt="Maya">
+        <img src="/others/linked_profile_pic-Photoroom.png" alt="Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
       </div>
       <div class="chat-header-info">
         <div class="chat-header-name">Maya</div>
-        <div class="chat-header-status">Online · elyrac AI assistant</div>
+        <div class="chat-header-status">Online &middot; elyrac AI assistant</div>
       </div>
-      <button class="chat-close-btn" id="chat-close">✕</button>
+      <button class="chat-close-btn" id="chat-close">&#x2715;</button>
     </div>
     <div class="chat-messages" id="chat-messages">
       <div class="chat-bubble">
-        <img class="bubble-avatar" src="others/linked_profile_pic-Photoroom.png" alt="Maya">
-        <div class="bubble-text">Hi! I'm Maya, elyrac AI's assistant. How can I help you today? 👋</div>
+        <img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">
+        <div class="bubble-text">Hi! I'm Maya, elyrac AI's assistant. How can I help you today? &#x1F44B;</div>
       </div>
       <div class="chat-bubble">
-        <img class="bubble-avatar" src="others/linked_profile_pic-Photoroom.png" alt="Maya">
+        <img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">
         <div class="bubble-text">I can answer questions about our services, or help you book a free strategy call with our founder.</div>
       </div>
     </div>
     <div class="chat-input-row">
       <input type="text" id="chat-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
-      <button class="chat-send-btn" onclick="sendChat()">↑</button>
+      <button class="chat-send-btn" onclick="sendChat()">&#x2191;</button>
     </div>
   </div>
   <button class="chat-toggle" id="chat-toggle">
-    <img src="others/linked_profile_pic-Photoroom.png" alt="Chat with Maya">
+    <img src="/others/linked_profile_pic-Photoroom.png" alt="Chat with Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
     <span class="chat-badge"></span>
   </button>
 </div>
 <script>
   (function() {
-    const panel = document.getElementById('chat-panel');
-    document.getElementById('chat-toggle').addEventListener('click', () => panel.classList.toggle('open'));
-    document.getElementById('chat-close').addEventListener('click', () => panel.classList.remove('open'));
-    const AVATAR = 'others/linked_profile_pic-Photoroom.png';
-    const replies = [
-      "Great question! We build fully custom AI systems — not off-the-shelf tools. Every project is engineered around your specific business.",
+    var panel = document.getElementById('chat-panel');
+    var toggle = document.getElementById('chat-toggle');
+    var widget = document.getElementById('chatbot-widget');
+    toggle.addEventListener('click', function() { panel.classList.toggle('open'); });
+    document.getElementById('chat-close').addEventListener('click', function() { panel.classList.remove('open'); });
+    document.getElementById('hamburger').addEventListener('click', function() { document.getElementById('mobile-menu').classList.add('open'); });
+    document.getElementById('mobile-close').addEventListener('click', function() { document.getElementById('mobile-menu').classList.remove('open'); });
+    var replies = [
+      "Great question! We build fully custom AI systems \u2014 not off-the-shelf tools. Every project is engineered around your specific business.",
       "I'd recommend booking a free 30-minute strategy call. You'll get honest, personalised advice with no commitment required.",
       "We've built AI systems for healthcare, government, e-commerce, finance, and more. What industry are you in?",
-      "Most projects take 4–12 weeks. We scope everything upfront so there are no surprises.",
-      "You can reach us at ceo@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
+      "Most projects take 4\u201312 weeks. We scope everything upfront so there are no surprises.",
+      "You can reach us at info@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
     ];
-    let idx = 0;
+    var idx = 0;
+    var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
     window.sendChat = function() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
+      var input = document.getElementById('chat-input');
+      var msg = input.value.trim();
       if (!msg) return;
-      const msgs = document.getElementById('chat-messages');
-      msgs.innerHTML += `<div class="chat-bubble user"><div class="bubble-text">${msg}</div></div>`;
+      var msgs = document.getElementById('chat-messages');
+      msgs.innerHTML += '<div class="chat-bubble user"><div class="bubble-text">' + msg + '</div></div>';
       input.value = '';
       msgs.scrollTop = msgs.scrollHeight;
-      setTimeout(() => {
-        msgs.innerHTML += `<div class="chat-bubble"><img class="bubble-avatar" src="${AVATAR}" alt="Maya"><div class="bubble-text">${replies[idx++ % replies.length]}</div></div>`;
+      setTimeout(function() {
+        msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + replies[idx++ % replies.length] + '</div></div>';
         msgs.scrollTop = msgs.scrollHeight;
       }, 820);
     };
+    var dragging = false, startX, startY, origRight, origBottom;
+    widget.addEventListener('mousedown', function(e) {
+      if (e.target.closest('#chat-panel')) return;
+      dragging = true; startX = e.clientX; startY = e.clientY;
+      var rect = widget.getBoundingClientRect();
+      origRight = window.innerWidth - rect.right;
+      origBottom = window.innerHeight - rect.bottom;
+      widget.style.transition = 'none'; e.preventDefault();
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (!dragging) return;
+      widget.style.right = (origRight + (startX - e.clientX)) + 'px';
+      widget.style.bottom = (origBottom + (startY - e.clientY)) + 'px';
+    });
+    document.addEventListener('mouseup', function() { dragging = false; });
   })();
 </script>
 </body>
