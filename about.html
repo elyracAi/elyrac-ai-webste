@@ -147,9 +147,9 @@
   z-index: 2;
   font-family: var(--font-body);
 }
-.about-fc-1 { top: 15%; left: 4%; animation: aboutFloat 4s ease-in-out infinite; }
-.about-fc-2 { top: 15%; right: 4%; animation: aboutFloat 5s 0.8s ease-in-out infinite; }
-.about-fc-3 { bottom: 12%; right: 6%; animation: aboutFloat 6s 1.6s ease-in-out infinite; }
+.about-fc-1 { top: 30%; left: 3%; animation: aboutFloat 4s ease-in-out infinite; }
+.about-fc-2 { top: 22%; right: 3%; animation: aboutFloat 5s 0.8s ease-in-out infinite; }
+.about-fc-3 { bottom: 22%; right: 3%; animation: aboutFloat 6s 1.6s ease-in-out infinite; }
 @keyframes aboutFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
@@ -200,6 +200,10 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
+  <div style="position:absolute;inset:0;z-index:0;overflow:hidden;">
+    <img src="/others/3d-character-emerging-from-smartphone.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center right;opacity:0.08;pointer-events:none;display:block;">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,14,43,0.97) 0%,rgba(13,34,96,0.92) 50%,rgba(26,77,184,0.85) 100%);"></div>
+  </div>
   <div class="page-hero-lines">
     <svg viewBox="0 0 800 600" fill="none" preserveAspectRatio="none">
       <path d="M0 400 Q200 200 400 300 T800 150" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none"/>
@@ -265,11 +269,11 @@
   <div class="vm-inner">
     <div class="vm-card">
       <h3>Our Vision &#x1f30d;</h3>
-      <p>AI that works for every business — not just the biggest ones. Built right. Deployed ethically. Transformative by design.</p>
+      <p>To make artificial intelligence software systems accessible, ethical, and transformative for every business and individual worldwide.</p>
     </div>
     <div class="vm-card">
       <h3>Our Mission &#x1f3af;</h3>
-      <p>We engineer custom AI systems that solve real problems, deliver real ROI, and equip your team to own them. No hype. Just systems that work.</p>
+      <p>To empower businesses and individuals by providing strategic AI guidance, scalable development, continuous innovation, and practical education enabling sustainable growth through intelligent software systems.</p>
     </div>
   </div>
 </section>
@@ -281,7 +285,7 @@
   <div class="values-grid">
 
     <div class="value-card">
-      <img class="value-card-img" src="/others/robotic-arms-modern-factory-setting.jpg" alt="Strategy Before Technology" loading="lazy">
+      <img class="value-card-img" src="/others/university-students-learning-accounting-principles-financial-analysis.jpg" alt="Strategy Before Technology" loading="lazy">
       <div class="value-card-body">
         <h3>Strategy Before Technology</h3>
         <p>We never recommend AI for its own sake. Every solution starts with a clear problem statement, a measurable outcome, and a realistic path to value. We build what makes business sense — not what sounds impressive.</p>
@@ -289,7 +293,7 @@
     </div>
 
     <div class="value-card">
-      <img class="value-card-img" src="/others/businesswoman-interacting-with-ai-hologram-office.jpg" alt="Engineering Excellence" loading="lazy">
+      <img class="value-card-img" src="/others/html-css-collage-concept-with-person.jpg" alt="Engineering Excellence" loading="lazy">
       <div class="value-card-body">
         <h3>Engineering Excellence</h3>
         <p>Our systems are built to production standards — scalable, secure, and maintainable. We don't ship prototypes dressed as products. Every deployment is engineered to perform under real conditions, at real scale.</p>
@@ -297,7 +301,7 @@
     </div>
 
     <div class="value-card">
-      <img class="value-card-img" src="/others/businesswoman-talking-professional-fintech-convention-doing-business-pitch-stage.jpg" alt="Education and Transparency" loading="lazy">
+      <img class="value-card-img" src="/others/focused-black-female-student-describing-vr-experience.jpg" alt="Education and Transparency" loading="lazy">
       <div class="value-card-body">
         <h3>Education &amp; Transparency</h3>
         <p>We believe clients should understand what they're building. We explain our decisions in plain language, share our reasoning, and make sure your team is equipped to own and operate the systems we deliver.</p>
@@ -509,6 +513,17 @@
     });
     document.addEventListener('mouseup', function() { dragging = false; });
   })();
+</script>
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll(
+    '.diff-card, .vm-card, .value-card, .team-card, .problem-card, .solution-card, .stat-card, .portfolio-card, .cta-feat, .faq-item, .tech-tile'
+  );
+  revealEls.forEach(el => el.classList.add('reveal'));
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObs.observe(el));
 </script>
 </body>
 </html>
