@@ -91,6 +91,7 @@
     .project-block { grid-template-columns: 1fr; gap: 36px; }
     .project-block.reverse { direction: ltr; }
     .project-num { font-size: 40px; }
+    [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -260,6 +261,69 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--gray-50);padding:96px 48px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <div class="section-label" style="justify-content:center;">CLIENT STORIES</div>
+      <h2 class="section-title" style="text-align:center;">What Our Clients Say</h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center;">Real businesses. Real results. Real words — unedited.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+
+      <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
+        <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;font-style:italic;">"We went from paper records and manual scheduling to a fully digital clinic management system with AI analytics built in. Our team adapted faster than I expected, and the billing accuracy alone has already paid for the system several times over."</p>
+        <div style="height:1px;background:var(--gray-200);"></div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <img src="/others/client-steven-mugabe.png" alt="Dr. Steven Mugabe" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gray-800);font-family:var(--font-heading);">Dr. Steven Mugabe</div>
+            <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">Founder & Lead Dentist</div>
+          </div>
+          <img src="/others/logo-code-clinic.png" alt="Code Clinic" style="height:32px;width:auto;object-fit:contain;margin-left:auto;opacity:0.85;">
+        </div>
+        <div style="background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;">⚙️ Dental Practice Management System</div>
+      </div>
+
+      <div class="reveal" style="background:linear-gradient(145deg,#060e2b,#0a1d52);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(0,0,0,0.3)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.8);line-height:1.75;flex:1;font-style:italic;">"Our inbox was a nightmare — the team was spending 4+ hours a day just triaging emails. Since we deployed the AI email agent, 80% of responses go out automatically and accurately. It's like hiring a full-time person who never sleeps."</p>
+        <div style="height:1px;background:rgba(255,255,255,0.1);"></div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <img src="/others/client-timothy-kasasa.png" alt="Timothy Kasasa" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(255,255,255,0.2);">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:white;font-family:var(--font-heading);">Timothy Kasasa</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px;">CEO, ioTec</div>
+          </div>
+          <img src="/others/logo-iotec.png" alt="ioTec" style="height:28px;width:auto;object-fit:contain;margin-left:auto;opacity:0.9;filter:brightness(0) invert(1);">
+        </div>
+        <div style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;border:1px solid rgba(255,255,255,0.12);">🤖 AI Email Agent System</div>
+      </div>
+
+      <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
+        <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;font-style:italic;">"The conversational AI agent we got from elyrac AI handles inbound calls and texts from dental patients completely on its own — booking appointments, answering questions, following up. It's changed how our entire product works. Patients love it."</p>
+        <div style="height:1px;background:var(--gray-200);"></div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <img src="/others/client-daniel-trivox.jpg" alt="Daniel" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gray-800);font-family:var(--font-heading);">Daniel</div>
+            <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">Founder, Trivox</div>
+          </div>
+          <img src="/others/logo-trivox.png" alt="Trivox" style="height:28px;width:auto;object-fit:contain;margin-left:auto;opacity:0.85;">
+        </div>
+        <div style="background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;">🎙️ Conversational AI Voice & Chat Agent</div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:48px;">
+      <p style="font-size:14px;color:var(--gray-500);">Join 30+ businesses already running on custom AI built by elyrac AI.</p>
+      <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" class="btn-blue" style="margin-top:16px;display:inline-flex;">Book Your Free Strategy Call →</a>
+    </div>
   </div>
 </section>
 

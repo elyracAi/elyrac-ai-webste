@@ -227,11 +227,16 @@
     .process-steps { grid-template-columns: repeat(2, 1fr); }
     .process-callout { flex-direction: column; text-align: center; }
     .tools-ticker-wrap { margin: 0 -24px; }
+    /* Who We Build For: 4-col → 2-col */
+    [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+    /* Why Work With Us: 2-col → 1-col */
+    [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; gap: 40px !important; }
   }
   @media (max-width: 600px) {
     .sol-hero-inner { padding: 90px 16px 48px; }
     .process-steps { grid-template-columns: 1fr; }
     .tools-ticker-wrap { margin: 0 -16px; }
+    [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -537,6 +542,158 @@
   </div>
 </section>
 
+<!-- WHO WE BUILD FOR -->
+<section style="background:var(--gray-50);padding:96px 48px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="section-label" style="justify-content:center;">WHO WE BUILD FOR</div>
+      <h2 class="section-title" style="text-align:center;">Our AI Solutions Are Perfect For:</h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center;">Every engagement is custom — but these are the businesses that get the most out of working with us.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+
+      <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:transform 0.25s,box-shadow 0.25s;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 48px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:32px;margin-bottom:14px;">🏢</div>
+        <h3 style="font-family:var(--font-heading);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--gray-800);">For Growing Businesses</h3>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.7;margin-bottom:16px;">You're scaling fast and your team is drowning in manual work. We build the AI systems that give you your time back — and your growth back.</p>
+        <ul style="list-style:none;padding:0;font-size:13px;color:var(--gray-700);">
+          <li style="padding:4px 0;">→ AI email & operations agents</li>
+          <li style="padding:4px 0;">→ Customer support automation</li>
+          <li style="padding:4px 0;">→ Internal workflow AI</li>
+        </ul>
+      </div>
+
+      <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:transform 0.25s,box-shadow 0.25s;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 48px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:32px;margin-bottom:14px;">🏥</div>
+        <h3 style="font-family:var(--font-heading);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--gray-800);">For Healthcare & Clinics</h3>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.7;margin-bottom:16px;">Paper records, missed appointments, and billing chaos are solvable. We build clinic management systems with AI built in from the start.</p>
+        <ul style="list-style:none;padding:0;font-size:13px;color:var(--gray-700);">
+          <li style="padding:4px 0;">→ Patient management systems</li>
+          <li style="padding:4px 0;">→ AI appointment scheduling</li>
+          <li style="padding:4px 0;">→ Billing & analytics dashboards</li>
+        </ul>
+      </div>
+
+      <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:transform 0.25s,box-shadow 0.25s;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 48px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
+        <h3 style="font-family:var(--font-heading);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--gray-800);">For Field Operations & Logistics</h3>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.7;margin-bottom:16px;">No visibility into your field teams? Lost time on payroll and attendance? We build the real-time systems that keep your operations running tight.</p>
+        <ul style="list-style:none;padding:0;font-size:13px;color:var(--gray-700);">
+          <li style="padding:4px 0;">→ GPS & attendance tracking</li>
+          <li style="padding:4px 0;">→ Automated payroll systems</li>
+          <li style="padding:4px 0;">→ Field agent management AI</li>
+        </ul>
+      </div>
+
+      <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:16px;padding:28px 24px;transition:transform 0.25s,box-shadow 0.25s;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 48px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:32px;margin-bottom:14px;">🚀</div>
+        <h3 style="font-family:var(--font-heading);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--gray-800);">For Startups & Founders</h3>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.7;margin-bottom:16px;">You have a vision and a limited runway. We help you build AI-powered products fast, efficiently, and with a clear path to revenue from day one.</p>
+        <ul style="list-style:none;padding:0;font-size:13px;color:var(--gray-700);">
+          <li style="padding:4px 0;">→ AI SaaS MVPs</li>
+          <li style="padding:4px 0;">→ LLM-powered products</li>
+          <li style="padding:4px 0;">→ Investor-ready AI demos</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY ELYRAC AI -->
+<section style="background:var(--white);padding:96px 48px;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+
+    <!-- Left -->
+    <div>
+      <div class="section-label">WHY ELYRAC AI</div>
+      <h2 class="section-title">Choose us today and enjoy<br>these <em style="font-style:normal;color:var(--blue);">real advantages.</em></h2>
+      <p style="font-size:15px;color:var(--gray-600);line-height:1.7;margin-bottom:32px;">We're not another AI vendor. We're a build partner — one that stays until the system works and your team owns it.</p>
+      <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" class="btn-blue">Book a Free Strategy Call →</a>
+    </div>
+
+    <!-- Right: numbered benefits -->
+    <div style="display:flex;flex-direction:column;gap:28px;">
+
+      <div class="reveal" style="display:flex;gap:20px;align-items:flex-start;">
+        <div style="width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--blue);flex-shrink:0;font-family:var(--font-body);">1</div>
+        <div>
+          <h4 style="font-size:16px;font-weight:700;color:var(--gray-800);margin-bottom:6px;font-family:var(--font-heading);">No Blind AI Spending</h4>
+          <p style="font-size:13px;color:var(--gray-600);line-height:1.65;margin:0;">We audit your business before recommending anything. Every system we build has a clear, measurable return. You know exactly what you're getting — and why.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="display:flex;gap:20px;align-items:flex-start;">
+        <div style="width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--blue);flex-shrink:0;font-family:var(--font-body);">2</div>
+        <div>
+          <h4 style="font-size:16px;font-weight:700;color:var(--gray-800);margin-bottom:6px;font-family:var(--font-heading);">Built Specifically For You</h4>
+          <p style="font-size:13px;color:var(--gray-600);line-height:1.65;margin:0;">No templates. No off-the-shelf tools dressed up as custom. Every system is engineered around your specific data, workflows, and goals — from scratch.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="display:flex;gap:20px;align-items:flex-start;">
+        <div style="width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--blue);flex-shrink:0;font-family:var(--font-body);">3</div>
+        <div>
+          <h4 style="font-size:16px;font-weight:700;color:var(--gray-800);margin-bottom:6px;font-family:var(--font-heading);">Your Team Gets Trained</h4>
+          <p style="font-size:13px;color:var(--gray-600);line-height:1.65;margin:0;">We don't disappear after launch. We train your team to own and operate the system with confidence — because AI only works if people actually use it.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="display:flex;gap:20px;align-items:flex-start;">
+        <div style="width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--blue);flex-shrink:0;font-family:var(--font-body);">4</div>
+        <div>
+          <h4 style="font-size:16px;font-weight:700;color:var(--gray-800);margin-bottom:6px;font-family:var(--font-heading);">We Walk the Journey With You</h4>
+          <p style="font-size:13px;color:var(--gray-600);line-height:1.65;margin:0;">AI isn't a one-time project. We stay close — monitoring, iterating, and scaling your systems as your business grows. You're never on your own.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQS -->
+<section style="background:var(--gray-50);padding:96px 48px;">
+  <div style="max-width:720px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="section-label" style="justify-content:center;">FAQS</div>
+      <h2 class="section-title" style="text-align:center;">Questions We Always Get</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long does it take to build a custom AI system? <span class="chevron">▾</span></button>
+        <div class="faq-a"><p>Most projects are delivered in 4–12 weeks depending on complexity. We define a clear timeline during our strategy session before any work begins, so you always know exactly when to expect delivery.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do I need to understand AI to work with you? <span class="chevron">▾</span></button>
+        <div class="faq-a"><p>Not at all. Most of our clients come to us with a business problem, not a technical brief. Our job is to translate your challenge into the right AI solution — you just need to understand your business. We handle the rest.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Will the AI system connect with our existing tools? <span class="chevron">▾</span></button>
+        <div class="faq-a"><p>Yes — always. We build systems that integrate with your existing CRMs, ERPs, databases, and internal tools. We never ask you to change how your business works. We make AI fit around your current stack.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What happens after the system is delivered? <span class="chevron">▾</span></button>
+        <div class="faq-a"><p>We train your team, monitor the system, and remain available for support and iteration. Most clients stay with us on a retainer because the first project always reveals more opportunities — and we know the system inside out.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How do I know this will actually return value for my business? <span class="chevron">▾</span></button>
+        <div class="faq-a"><p>We run an AI audit of your business before recommending anything. We only proceed when there's a clear, measurable outcome — like hours saved, revenue increased, or costs reduced. If we don't believe it will return value, we'll tell you honestly.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How much does a custom AI system cost? <span class="chevron">▾</span></button>
+        <div class="faq-a"><p>Every project is scoped individually because every business is different. The best way to get a clear number is to book a free 30-minute strategy call — we'll assess your challenge and give you a realistic picture of cost and timeline, no commitment required.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-inner">
@@ -700,9 +857,18 @@
   })();
 </script>
 <script>
+  function toggleFaq(btn) {
+    var answer = btn.nextElementSibling;
+    var isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a.open').forEach(function(a) { a.classList.remove('open'); });
+    document.querySelectorAll('.faq-q.open').forEach(function(q) { q.classList.remove('open'); });
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+</script>
+<script>
   // Scroll reveal
   const revealEls = document.querySelectorAll(
-    '.diff-card, .vm-card, .value-card, .team-card, .problem-card, .solution-card, .stat-card, .portfolio-card, .cta-feat, .faq-item, .tech-tile'
+    '.diff-card, .vm-card, .value-card, .team-card, .problem-card, .solution-card, .stat-card, .portfolio-card, .cta-feat, .faq-item, .tech-tile, .reveal'
   );
   revealEls.forEach(el => el.classList.add('reveal'));
   const revealObs = new IntersectionObserver((entries) => {
