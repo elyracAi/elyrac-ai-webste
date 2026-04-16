@@ -51,7 +51,7 @@
   margin-bottom: 22px;
 }
 .ow-hero h1 em {
-  font-style: italic;
+  font-style: normal;
   color: #4A90E2;
 }
 .ow-hero-sub {
@@ -311,7 +311,6 @@
   padding: 8px 0 8px 16px;
   margin: 14px 0 18px;
   font-size: 13px;
-  font-style: italic;
   color: var(--gray-500);
   line-height: 1.65;
 }
@@ -422,7 +421,7 @@
 <!-- HERO -->
 <section class="ow-hero" id="hero">
   <div class="ow-hero-label">• WORK WE'RE PROUD OF</div>
-  <h1>Real AI Systems.<br><em>Real Results.</em></h1>
+  <h1>Real AI Systems.<br><span style="color:#4A90E2;">Real Results.</span></h1>
   <p class="ow-hero-sub">Every project is a long-term partnership — here's what we've built and what it achieved.</p>
   <div class="ow-hero-btns">
     <a href="#projects" class="ow-btn-primary">View Our Work →</a>
@@ -442,9 +441,7 @@
         </div>
         <div class="ow-url-bar">elyracai.com/our-work</div>
       </div>
-      <img class="ow-browser-img" src="others/codeclinic-dashboard.png" alt="Code Clinic Dashboard"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ow-browser-placeholder" style="display:none;">🏥</div>
+      <img src="others/codeclinic-dashboard.png" style="width:100%;display:block;" alt="Dashboard preview">
     </div>
   </div>
 </section>
@@ -459,9 +456,8 @@
       <div class="project-row">
 
         <div class="project-img-col">
-          <div class="project-img-frame" style="background:#3B82F6;">
-            <img src="others/iotec-dashboard.png" alt="ioTec Email Agent Dashboard" loading="lazy"
-              onerror="this.style.display='none'">
+          <div style="min-height:420px;background:#EEF2FF;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);">
+            <img src="others/iotec-dashboard.png" alt="ioTec Dashboard" style="width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;">
           </div>
         </div>
 
@@ -508,9 +504,8 @@
       <div class="project-row reverse">
 
         <div class="project-img-col">
-          <div class="project-img-frame" style="background:#16A34A;">
-            <img src="others/attendtrack-dashboard.png" alt="AttendTrack Dashboard" loading="lazy"
-              onerror="this.style.display='none'">
+          <div style="min-height:420px;background:#DCFCE7;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);">
+            <img src="others/attendtrack-dashboard.png" alt="AttendTrack Dashboard" style="width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;">
           </div>
         </div>
 
@@ -558,9 +553,8 @@
       <div class="project-row">
 
         <div class="project-img-col">
-          <div class="project-img-frame" style="background:#7C3AED;">
-            <img src="others/codeclinic-dashboard.png" alt="Code Clinic Dashboard" loading="lazy"
-              onerror="this.style.display='none'">
+          <div style="min-height:420px;background:#EDE9FE;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);">
+            <img src="others/codeclinic-dashboard.png" alt="Code Clinic Dashboard" style="width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;">
           </div>
         </div>
 
@@ -607,9 +601,8 @@
       <div class="project-row reverse">
 
         <div class="project-img-col">
-          <div class="project-img-frame" style="background:#D97706;">
-            <img src="others/winopay-app.png" alt="WinoPay App" loading="lazy"
-              onerror="this.style.display='none'">
+          <div style="min-height:420px;background:#FEF3C7;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);">
+            <img src="others/winopay-app.png" alt="WinoPay App" style="width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;">
           </div>
         </div>
 
@@ -656,9 +649,8 @@
       <div class="project-row">
 
         <div class="project-img-col">
-          <div class="project-img-frame" style="background:#0891B2;">
-            <img src="others/trivox-dental.png" alt="Trivox AI Dental" loading="lazy"
-              onerror="this.style.display='none'">
+          <div style="min-height:420px;background:#CFFAFE;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);">
+            <img src="others/trivox-dental.png" alt="Trivox AI Dental" style="width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;">
           </div>
         </div>
 
@@ -814,7 +806,7 @@
 
       <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
-        <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;font-style:italic;">"We went from paper records and manual scheduling to a fully digital clinic management system with AI analytics built in. Our team adapted faster than I expected, and the billing accuracy alone has already paid for the system several times over."</p>
+        <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;">"We went from paper records and manual scheduling to a fully digital clinic management system with AI analytics built in. Our team adapted faster than I expected, and the billing accuracy alone has already paid for the system several times over."</p>
         <div style="height:1px;background:var(--gray-200);"></div>
         <div style="display:flex;align-items:center;gap:14px;">
           <img src="/others/client-steven-mugabe.png" alt="Dr. Steven Mugabe" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);">
@@ -829,7 +821,7 @@
 
       <div class="reveal" style="background:linear-gradient(145deg,#060e2b,#0a1d52);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(0,0,0,0.3)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
-        <p style="font-size:15px;color:rgba(255,255,255,0.8);line-height:1.75;flex:1;font-style:italic;">"Our inbox was a nightmare — the team was spending 4+ hours a day just triaging emails. Since we deployed the AI email agent, 80% of responses go out automatically and accurately. It's like hiring a full-time person who never sleeps."</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.8);line-height:1.75;flex:1;">"Our inbox was a nightmare — the team was spending 4+ hours a day just triaging emails. Since we deployed the AI email agent, 80% of responses go out automatically and accurately. It's like hiring a full-time person who never sleeps."</p>
         <div style="height:1px;background:rgba(255,255,255,0.1);"></div>
         <div style="display:flex;align-items:center;gap:14px;">
           <img src="/others/client-timothy-kasasa.png" alt="Timothy Kasasa" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(255,255,255,0.2);">
@@ -844,7 +836,7 @@
 
       <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
-        <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;font-style:italic;">"The conversational AI agent we got from elyrac AI handles inbound calls and texts from dental patients completely on its own — booking appointments, answering questions, following up. It's changed how our entire product works. Patients love it."</p>
+        <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;">"The conversational AI agent we got from elyrac AI handles inbound calls and texts from dental patients completely on its own — booking appointments, answering questions, following up. It's changed how our entire product works. Patients love it."</p>
         <div style="height:1px;background:var(--gray-200);"></div>
         <div style="display:flex;align-items:center;gap:14px;">
           <img src="/others/client-daniel-trivox.jpg" alt="Daniel" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);">
