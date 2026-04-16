@@ -1,11 +1,14 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/portfolio", "destination": "/ourwork", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/solutions", "destination": "/solutions.html" },
-    { "source": "/portfolio", "destination": "/portfolio.html" },
+    { "source": "/ourwork", "destination": "/ourwork.html" },
     { "source": "/blog", "destination": "/blog.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/faq", "destination": "/faq.html" }

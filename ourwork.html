@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="msapplication-TileImage" content="/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Work — elyrac AI</title>
+<meta name="description" content="Real AI systems built for real businesses. Case studies across healthcare, fintech, NGOs, field operations, and enterprise automation."/>
+<meta http-equiv="Cache-Control" content="max-age=31536000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
+<link rel="stylesheet" href="css/shared.css">
+<style>
+
+/* ─── HERO ─────────────────────────────────────────────── */
+.ow-hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a2e 0%, #0d1b6e 50%, #1a0a4e 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ow-hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(74,144,226,0.15);
+  border: 1px solid rgba(74,144,226,0.35);
+  color: #4A90E2;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 999px;
+  margin-bottom: 32px;
+}
+.ow-hero h1 {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: white;
+  font-family: var(--font-heading);
+  margin-bottom: 22px;
+}
+.ow-hero h1 em {
+  font-style: italic;
+  color: #4A90E2;
+}
+.ow-hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.62);
+  max-width: 560px;
+  line-height: 1.7;
+  margin: 0 auto 40px;
+}
+.ow-hero-btns {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+.ow-btn-primary {
+  background: #4A90E2;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.ow-btn-primary:hover { background: #357ABD; transform: translateY(-2px); }
+.ow-btn-outline {
+  background: transparent;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.38);
+  transition: border-color 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.ow-btn-outline:hover { border-color: white; transform: translateY(-2px); }
+
+/* Browser mockup */
+.ow-browser-wrap {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  animation: owFloat 4s ease-in-out infinite;
+}
+@keyframes owFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.ow-browser {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  background: #12122a;
+}
+.ow-browser-bar {
+  background: #1e1e38;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ow-dots { display: flex; gap: 6px; }
+.ow-dot { width: 12px; height: 12px; border-radius: 50%; }
+.ow-dot-r { background: #FF5F57; }
+.ow-dot-y { background: #FEBC2E; }
+.ow-dot-g { background: #28C840; }
+.ow-url-bar {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  font-family: monospace;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+.ow-browser-img {
+  width: 100%;
+  display: block;
+  max-height: 480px;
+  object-fit: cover;
+  object-position: top;
+}
+.ow-browser-placeholder {
+  width: 100%;
+  height: 320px;
+  background: linear-gradient(135deg, #1a2550, #0d3b8c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+/* Floating stat cards */
+.ow-stat-card {
+  position: absolute;
+  background: white;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  white-space: nowrap;
+  z-index: 10;
+  line-height: 1.3;
+}
+.ow-stat-card .sc-val { color: #4A90E2; font-weight: 800; }
+.ow-sc-1 { top: -16px; left: -70px; animation: owFloat2 3.5s ease-in-out infinite; }
+.ow-sc-2 { top: -16px; right: -70px; animation: owFloat3 4.2s ease-in-out infinite; }
+.ow-sc-3 { bottom: 50px; left: -70px; animation: owFloat2 3.8s ease-in-out 0.5s infinite; }
+.ow-sc-4 { bottom: 50px; right: -70px; animation: owFloat3 4.5s ease-in-out 0.3s infinite; }
+@keyframes owFloat2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes owFloat3 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ─── PORTFOLIO PAGE ──────────────────────────────────── */
+
+.portfolio-section { background: var(--white); }
+.portfolio-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 72px;
+}
+
+/* Project wrapper */
+.project-wrap {
+  position: relative;
+  padding: 96px 0;
+}
+.project-divider {
+  border: none;
+  border-top: 1px solid var(--gray-100);
+  margin: 0;
+}
+
+/* Ghost number */
+.ghost-num {
+  position: absolute;
+  top: 48px;
+  left: -12px;
+  font-size: 160px;
+  font-weight: 900;
+  color: rgba(0,0,0,0.038);
+  line-height: 1;
+  z-index: 0;
+  pointer-events: none;
+  font-family: var(--font-heading);
+  user-select: none;
+  letter-spacing: -6px;
+}
+
+/* Flex row */
+.project-row {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.project-row.reverse { flex-direction: row-reverse; }
+
+/* Image column */
+.project-img-col { flex: 1.05; min-width: 0; }
+.project-img-frame {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  min-height: 400px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.project-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  min-height: 400px;
+}
+
+/* Placeholder visuals */
+.project-placeholder {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.placeholder-icon { font-size: 64px; line-height: 1; }
+.placeholder-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Text column */
+.project-text-col { flex: 0.95; min-width: 0; }
+
+/* Badge */
+.project-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+/* Title */
+.project-title {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 26px;
+  color: var(--gray-800);
+  font-family: var(--font-heading);
+}
+
+/* Detail blocks */
+.detail-block { margin-bottom: 16px; }
+.detail-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.detail-text {
+  font-size: 13.5px;
+  color: var(--gray-600);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Blockquote */
+.project-quote {
+  border-left: 3px solid var(--blue);
+  padding: 8px 0 8px 16px;
+  margin: 14px 0 18px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--gray-500);
+  line-height: 1.65;
+}
+
+/* Stats */
+.stats-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.stat-box {
+  flex: 1;
+  min-width: 72px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+}
+.stat-val {
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.stat-label {
+  font-size: 10.5px;
+  color: var(--gray-500);
+  line-height: 1.4;
+}
+
+/* Want link */
+.want-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 0.2s;
+  padding-bottom: 2px;
+  text-decoration: none;
+}
+.want-link:hover { border-color: var(--blue); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .ow-sc-1, .ow-sc-2, .ow-sc-3, .ow-sc-4 { display: none; }
+}
+@media (max-width: 900px) {
+  .portfolio-inner { padding: 0 24px; }
+  .project-row,
+  .project-row.reverse { flex-direction: column; gap: 36px; }
+  .project-img-col,
+  .project-text-col { flex: none; width: 100%; }
+  .ghost-num { display: none; }
+  .project-wrap { padding: 60px 0; }
+  .project-img-frame { min-height: 260px; }
+  .project-img-frame img { min-height: 260px; }
+  .project-placeholder { min-height: 260px; }
+  [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+  .ow-hero { padding: 100px 24px 60px; }
+  .ow-hero-btns { flex-direction: column; align-items: center; }
+}
+@media (max-width: 600px) {
+  .portfolio-inner { padding: 0 16px; }
+  .project-title { font-size: 20px; }
+  .stat-val { font-size: 20px; }
+  .project-img-frame { min-height: 220px; }
+  .project-img-frame img { min-height: 220px; }
+  .project-placeholder { min-height: 220px; }
+  .project-wrap { padding: 48px 0; }
+  .stats-row { gap: 8px; }
+  .ow-hero h1 { font-size: 36px; }
+  .ow-hero-sub { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI" style="height:75px;width:auto;object-fit:contain;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="/about">About Us</a></li>
+    <li><a href="/solutions">Solutions</a></li>
+    <li><a href="/ourwork">Our Work</a></li>
+    <li><a href="/blog">Blog</a></li>
+  </ul>
+  <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" class="btn-book">Book a Call</a>
+  <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu">
+  <button class="mobile-close" id="mobile-close">✕</button>
+  <a href="/about">About Us</a>
+  <a href="/solutions">Solutions</a>
+  <a href="/ourwork">Our Work</a>
+  <a href="/blog">Blog</a>
+  <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
+</div>
+
+<!-- HERO -->
+<section class="ow-hero" id="hero">
+  <div class="ow-hero-label">• WORK WE'RE PROUD OF</div>
+  <h1>Real AI Systems.<br><em>Real Results.</em></h1>
+  <p class="ow-hero-sub">Every project is a long-term partnership — here's what we've built and what it achieved.</p>
+  <div class="ow-hero-btns">
+    <a href="#projects" class="ow-btn-primary">View Our Work →</a>
+    <a href="/contact" class="ow-btn-outline">Book a Call ↗</a>
+  </div>
+  <div class="ow-browser-wrap">
+    <div class="ow-stat-card ow-sc-1">🤖 <span class="sc-val">80%</span> Emails Automated</div>
+    <div class="ow-stat-card ow-sc-2">✅ <span class="sc-val">100%</span> Attendance Accuracy</div>
+    <div class="ow-stat-card ow-sc-3">💰 <span class="sc-val">UGX 31.2M</span> Revenue Tracked</div>
+    <div class="ow-stat-card ow-sc-4">⚡ <span class="sc-val">+40%</span> More Bookings</div>
+    <div class="ow-browser">
+      <div class="ow-browser-bar">
+        <div class="ow-dots">
+          <div class="ow-dot ow-dot-r"></div>
+          <div class="ow-dot ow-dot-y"></div>
+          <div class="ow-dot ow-dot-g"></div>
+        </div>
+        <div class="ow-url-bar">elyracai.com/our-work</div>
+      </div>
+      <img class="ow-browser-img" src="others/codeclinic-dashboard.png" alt="Code Clinic Dashboard"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ow-browser-placeholder" style="display:none;">🏥</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PORTFOLIO ══ -->
+<section class="portfolio-section" id="projects">
+  <div class="portfolio-inner">
+
+    <!-- ─── 01: ioTec Email Agent ──────────────────── -->
+    <div class="project-wrap reveal">
+      <span class="ghost-num">01</span>
+      <div class="project-row">
+
+        <div class="project-img-col">
+          <div class="project-img-frame" style="background:#3B82F6;">
+            <img src="others/iotec-dashboard.png" alt="ioTec Email Agent Dashboard" loading="lazy"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+
+        <div class="project-text-col">
+          <span class="project-badge" style="background:#EFF6FF;color:#3B82F6;">BUSINESS AUTOMATION</span>
+          <h2 class="project-title">Intelligent Email Agent for ioTec Ltd</h2>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#3B82F6;">CHALLENGE</div>
+            <p class="detail-text">The team was spending 4+ hours daily on email triage, categorization, and drafting responses to routine enquiries. The inbox had become a bottleneck, slowing down sales and support cycles.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#3B82F6;">SOLUTION</div>
+            <p class="detail-text">We built a custom AI email agent that reads incoming emails, categorizes them by intent, drafts appropriate responses, and escalates complex cases to the right team member — fully integrated with their existing inbox.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#3B82F6;">RESULT</div>
+            <p class="detail-text">80% of routine emails are now handled autonomously. The team reclaimed 3+ hours daily, response times dropped from hours to minutes, and customer satisfaction improved significantly.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-val" style="color:#3B82F6;"><span class="ctr" data-target="80">0</span><span>%</span></div>
+              <div class="stat-label">Emails Automated</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#3B82F6;"><span class="ctr" data-target="3">0</span><span>hrs</span></div>
+              <div class="stat-label">Saved Daily</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#3B82F6;"><span class="ctr" data-target="100">0</span><span>%</span></div>
+              <div class="stat-label">Response Rate</div>
+            </div>
+          </div>
+          <a href="/contact" class="want-link">I want a system like this →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="project-divider">
+
+    <!-- ─── 02: AttendTrack ────────────────────────── -->
+    <div class="project-wrap reveal">
+      <span class="ghost-num">02</span>
+      <div class="project-row reverse">
+
+        <div class="project-img-col">
+          <div class="project-img-frame" style="background:#16A34A;">
+            <img src="others/attendtrack-dashboard.png" alt="AttendTrack Dashboard" loading="lazy"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+
+        <div class="project-text-col">
+          <span class="project-badge" style="background:#F0FDF4;color:#16A34A;">HR &amp; FIELD MANAGEMENT</span>
+          <h2 class="project-title">AttendTrack — Workforce Management System</h2>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#16A34A;">CHALLENGE</div>
+            <p class="detail-text">Manual attendance tracking and zero visibility into field worker locations. HR teams relied on spreadsheets and guesswork, causing payroll errors and no accountability for field teams.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#16A34A;">SOLUTION</div>
+            <p class="detail-text">We engineered a full workforce management platform with AI-powered attendance tracking, real-time GPS geofencing for field agents, automated payroll calculation (NSSF, PAYE), and an integrated AI Copilot powered by Claude Sonnet that answers HR questions in natural language.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#16A34A;">RESULT</div>
+            <p class="detail-text">100% attendance accuracy. 3 hours saved daily on HR admin. Full real-time visibility across every field team. Payroll errors eliminated completely.</p>
+          </div>
+          <blockquote class="project-quote">"We went from spreadsheets and guesswork to full real-time visibility across every field team." — elyrac AI client</blockquote>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-val" style="color:#16A34A;"><span class="ctr" data-target="100">0</span><span>%</span></div>
+              <div class="stat-label">Attendance Accuracy</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#16A34A;"><span class="ctr" data-target="3">0</span><span>hrs</span></div>
+              <div class="stat-label">Saved Daily</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#16A34A;"><span class="ctr" data-target="0">0</span></div>
+              <div class="stat-label">Payroll Errors</div>
+            </div>
+          </div>
+          <a href="/contact" class="want-link">I want a system like this →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="project-divider">
+
+    <!-- ─── 03: Code Clinic ────────────────────────── -->
+    <div class="project-wrap reveal">
+      <span class="ghost-num">03</span>
+      <div class="project-row">
+
+        <div class="project-img-col">
+          <div class="project-img-frame" style="background:#7C3AED;">
+            <img src="others/codeclinic-dashboard.png" alt="Code Clinic Dashboard" loading="lazy"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+
+        <div class="project-text-col">
+          <span class="project-badge" style="background:#F5F3FF;color:#7C3AED;">HEALTH &amp; WELLNESS</span>
+          <h2 class="project-title">Code Clinic — Healthcare Practice Management</h2>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#7C3AED;">CHALLENGE</div>
+            <p class="detail-text">A growing dental and general practice was running on fragmented tools with no unified system. Patient records, appointments, billing, and staff management were all handled separately with no real-time visibility.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#7C3AED;">SOLUTION</div>
+            <p class="detail-text">We built a comprehensive clinic management platform covering patient records, live appointment scheduling, real-time patient flow tracking, invoicing, payroll, staff management, and a full analytics dashboard — all in one system.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#7C3AED;">RESULT</div>
+            <p class="detail-text">24 appointments managed daily with full visibility. Revenue tracked in real-time (UGX 31.2M monthly). 790 active patients managed seamlessly. Admin workload reduced by 60%.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-val" style="color:#7C3AED;"><span class="ctr" data-target="790">0</span></div>
+              <div class="stat-label">Active Patients</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#7C3AED;"><span class="ctr" data-target="60">0</span><span>%</span></div>
+              <div class="stat-label">Admin Reduction</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#7C3AED;"><span class="ctr" data-target="24">0</span></div>
+              <div class="stat-label">Daily Appointments</div>
+            </div>
+          </div>
+          <a href="/contact" class="want-link">I want a system like this →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="project-divider">
+
+    <!-- ─── 04: WinoPay ───────────────────────────── -->
+    <div class="project-wrap reveal">
+      <span class="ghost-num">04</span>
+      <div class="project-row reverse">
+
+        <div class="project-img-col">
+          <div class="project-img-frame" style="background:#D97706;">
+            <img src="others/winopay-app.png" alt="WinoPay App" loading="lazy"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+
+        <div class="project-text-col">
+          <span class="project-badge" style="background:#FFFBEB;color:#D97706;">FINTECH</span>
+          <h2 class="project-title">WinoPay — Full-Stack Fintech Platform</h2>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#D97706;">CHALLENGE</div>
+            <p class="detail-text">Building a production-grade financial platform from scratch demands the highest standards of security, data integrity, and regulatory compliance. The client needed a complete system handling real-money transactions across multiple services with zero tolerance for errors.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#D97706;">SOLUTION</div>
+            <p class="detail-text">As Lead Engineer, we owned the full system architecture end-to-end — backend API design, database structure, transaction processing logic, and the complete security layer including audit logging, role-based access control, and encryption. The platform integrates flights, hotels, bill pay, insurance, and retail — all processing real financial transactions with live users.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#D97706;">RESULT</div>
+            <p class="detail-text">A fully operational fintech platform serving live users with real payment transactions. Meets the same data integrity and compliance standards required by regulated financial institutions. Zero critical transaction failures since launch.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-val" style="color:#D97706;"><span class="ctr" data-target="100">0</span><span>%</span></div>
+              <div class="stat-label">Uptime SLA</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#D97706;"><span class="ctr" data-target="0">0</span></div>
+              <div class="stat-label">Transaction Errors</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#D97706;"><span class="ctr" data-target="8">0</span><span>+</span></div>
+              <div class="stat-label">Integrated Services</div>
+            </div>
+          </div>
+          <a href="/contact" class="want-link">I want a system like this →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="project-divider">
+
+    <!-- ─── 05: Trivox AI ─────────────────────────── -->
+    <div class="project-wrap reveal">
+      <span class="ghost-num">05</span>
+      <div class="project-row">
+
+        <div class="project-img-col">
+          <div class="project-img-frame" style="background:#0891B2;">
+            <img src="others/trivox-dental.png" alt="Trivox AI Dental" loading="lazy"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+
+        <div class="project-text-col">
+          <span class="project-badge" style="background:#ECFEFF;color:#0891B2;">AI AGENTS</span>
+          <h2 class="project-title">Trivox AI — Intelligent Dental Receptionist</h2>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#0891B2;">CHALLENGE</div>
+            <p class="detail-text">Dental clinics were losing patients due to missed calls, slow booking responses, and overwhelmed front desk staff. After-hours enquiries went completely unanswered, directly impacting new patient acquisition and revenue.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#0891B2;">SOLUTION</div>
+            <p class="detail-text">We built Trivox AI — a fully conversational AI receptionist trained on dental clinic workflows. It handles appointment booking, patient enquiries, follow-up reminders, and proactive outreach 24/7. Fully integrated with the clinic's existing calendar and patient management systems.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#0891B2;">RESULT</div>
+            <p class="detail-text">+40% more bookings captured. 24/7 availability with zero missed outreaches. Front desk workload cut in half, freeing staff to focus entirely on in-clinic patient care quality.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-val" style="color:#0891B2;"><span>+</span><span class="ctr" data-target="40">0</span><span>%</span></div>
+              <div class="stat-label">More Bookings</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#0891B2;"><span class="ctr" data-target="0">0</span></div>
+              <div class="stat-label">Missed Outreaches</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#0891B2;"><span class="ctr" data-target="2">0</span><span>x</span></div>
+              <div class="stat-label">Staff Productivity</div>
+            </div>
+          </div>
+          <a href="/contact" class="want-link">I want a system like this →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="project-divider">
+
+    <!-- ─── 06: Fraud Detection ───────────────────── -->
+    <div class="project-wrap reveal">
+      <span class="ghost-num">06</span>
+      <div class="project-row reverse">
+
+        <div class="project-img-col">
+          <div class="project-img-frame" style="background:#FEF2F2;">
+            <div class="project-placeholder">
+              <div class="placeholder-icon">🛡️</div>
+              <div class="placeholder-label" style="color:#DC2626;">FRAUD DETECTION</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-text-col">
+          <span class="project-badge" style="background:#FEF2F2;color:#DC2626;">FINTECH / REGTECH</span>
+          <h2 class="project-title">AI/ML Fraud Detection — Financial Services</h2>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#DC2626;">CHALLENGE</div>
+            <p class="detail-text">Financial institutions face growing fraud risk as transaction volumes outpace human review capacity. Legacy rule-based systems generated too many false positives while missing sophisticated emerging fraud patterns — a compliance and financial liability risk.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#DC2626;">SOLUTION</div>
+            <p class="detail-text">We engineered a purpose-built ML fraud detection pipeline — data ingestion from transaction systems, feature engineering, model training and evaluation, and real-time inference integration. The system identifies anomalous transactional behaviour with high precision, generates compliance alerts with full explanations, and maintains a complete audit trail of every detection event for regulatory review.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#DC2626;">RESULT</div>
+            <p class="detail-text">Real-time fraud detection at transaction scale. Full audit trail for regulatory compliance. Significant reduction in false positives. The model continuously improves as new transaction data flows in.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-val" style="color:#DC2626;"><span class="ctr" data-target="99">0</span><span>%+</span></div>
+              <div class="stat-label">Detection Accuracy</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#DC2626;"><span class="ctr" data-target="50">0</span><span>ms</span></div>
+              <div class="stat-label">Inference Speed</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#DC2626;"><span class="ctr" data-target="100">0</span><span>%</span></div>
+              <div class="stat-label">Audit Coverage</div>
+            </div>
+          </div>
+          <a href="/contact" class="want-link">I want a system like this →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="project-divider">
+
+    <!-- ─── 07: Women Microfinance ────────────────── -->
+    <div class="project-wrap reveal">
+      <span class="ghost-num">07</span>
+      <div class="project-row">
+
+        <div class="project-img-col">
+          <div class="project-img-frame" style="background:#FFF1F2;">
+            <div class="project-placeholder">
+              <div class="placeholder-icon">🤝</div>
+              <div class="placeholder-label" style="color:#DB2777;">MICROFINANCE SYSTEM</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-text-col">
+          <span class="project-badge" style="background:#FFF1F2;color:#DB2777;">NGO / SOCIAL IMPACT</span>
+          <h2 class="project-title">Women Microfinance Initiative — Soroti, Uganda</h2>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#DB2777;">CHALLENGE</div>
+            <p class="detail-text">A Uganda-based NGO running a microfinance program for women entrepreneurs in Soroti had no digital system. Member records, loan tracking, and financial reporting were entirely paper-based — slow, error-prone, and unscalable.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#DB2777;">SOLUTION</div>
+            <p class="detail-text">We developed a purpose-built cooperative financial management system covering member profiles, loan applications and approvals, repayment schedules with automated tracking, overdue alerts, and instant financial reporting — designed specifically for grassroots microfinance operations.</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label" style="color:#DB2777;">RESULT</div>
+            <p class="detail-text">Fully digitized operations for the cooperative. Loan repayment tracking fully automated. Financial reports now generated in seconds. Program administrators freed from manual record-keeping to focus on community impact.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-val" style="color:#DB2777;"><span class="ctr" data-target="100">0</span><span>%</span></div>
+              <div class="stat-label">Records Digitized</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#DB2777;"><span class="ctr" data-target="0">0</span></div>
+              <div class="stat-label">Manual Reports</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" style="color:#DB2777;"><span class="ctr" data-target="3">0</span><span>x</span></div>
+              <div class="stat-label">Faster Reporting</div>
+            </div>
+          </div>
+          <a href="/contact" class="want-link">I want a system like this →</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--gray-50);padding:96px 48px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <div class="section-label" style="justify-content:center;">CLIENT STORIES</div>
+      <h2 class="section-title" style="text-align:center;">What Our Clients Say</h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center;">Real businesses. Real results. Real words — unedited.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+
+      <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
+        <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;font-style:italic;">"We went from paper records and manual scheduling to a fully digital clinic management system with AI analytics built in. Our team adapted faster than I expected, and the billing accuracy alone has already paid for the system several times over."</p>
+        <div style="height:1px;background:var(--gray-200);"></div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <img src="/others/client-steven-mugabe.png" alt="Dr. Steven Mugabe" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gray-800);font-family:var(--font-heading);">Dr. Steven Mugabe</div>
+            <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">Founder & Lead Dentist</div>
+          </div>
+          <img src="/others/logo-code-clinic.png" alt="Code Clinic" style="height:32px;width:auto;object-fit:contain;margin-left:auto;opacity:0.85;">
+        </div>
+        <div style="background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;">⚙️ Dental Practice Management System</div>
+      </div>
+
+      <div class="reveal" style="background:linear-gradient(145deg,#060e2b,#0a1d52);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(0,0,0,0.3)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.8);line-height:1.75;flex:1;font-style:italic;">"Our inbox was a nightmare — the team was spending 4+ hours a day just triaging emails. Since we deployed the AI email agent, 80% of responses go out automatically and accurately. It's like hiring a full-time person who never sleeps."</p>
+        <div style="height:1px;background:rgba(255,255,255,0.1);"></div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <img src="/others/client-timothy-kasasa.png" alt="Timothy Kasasa" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(255,255,255,0.2);">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:white;font-family:var(--font-heading);">Timothy Kasasa</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px;">CEO, ioTec</div>
+          </div>
+          <img src="/others/logo-iotec.png" alt="ioTec" style="height:28px;width:auto;object-fit:contain;margin-left:auto;opacity:0.9;filter:brightness(0) invert(1);">
+        </div>
+        <div style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;border:1px solid rgba(255,255,255,0.12);">🤖 AI Email Agent System</div>
+      </div>
+
+      <div class="reveal" style="background:white;border:1px solid var(--gray-200);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:20px;transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)';this.style.boxShadow='0 24px 56px rgba(26,86,240,0.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="color:#f59e0b;font-size:18px;letter-spacing:2px;">★★★★★</div>
+        <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;font-style:italic;">"The conversational AI agent we got from elyrac AI handles inbound calls and texts from dental patients completely on its own — booking appointments, answering questions, following up. It's changed how our entire product works. Patients love it."</p>
+        <div style="height:1px;background:var(--gray-200);"></div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <img src="/others/client-daniel-trivox.jpg" alt="Daniel" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--gray-800);font-family:var(--font-heading);">Daniel</div>
+            <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">Founder, Trivox</div>
+          </div>
+          <img src="/others/logo-trivox.png" alt="Trivox" style="height:28px;width:auto;object-fit:contain;margin-left:auto;opacity:0.85;">
+        </div>
+        <div style="background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;">🎙️ Conversational AI Voice & Chat Agent</div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:48px;">
+      <p style="font-size:14px;color:var(--gray-500);">Join 30+ businesses already running on custom AI built by elyrac AI.</p>
+      <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" class="btn-blue" style="margin-top:16px;display:inline-flex;">Book Your Free Strategy Call →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div>
+      <div class="section-label" style="color:rgba(255,255,255,0.7)">YOUR PROJECT NEXT</div>
+      <h2>What Would You Build?</h2>
+      <p>Every project starts with a conversation. Tell us your business challenge and we'll tell you honestly what AI can do for it.</p>
+      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:28px">
+        <h4 style="color:white;font-family:'Sora',sans-serif;font-size:16px;margin-bottom:8px">Free 30-minute strategy call</h4>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:20px">No commitment. Just a real conversation about your opportunity.</p>
+        <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" class="btn-primary">📅 Book a Free Call</a>
+      </div>
+    </div>
+    <div class="cta-features">
+      <div class="cta-feat"><div class="emoji">🎧</div><h4>1-on-1 Call</h4><p>Personal attention from our founder.</p></div>
+      <div class="cta-feat"><div class="emoji">🤝</div><h4>30 Minutes</h4><p>Focused and efficient.</p></div>
+      <div class="cta-feat"><div class="emoji">🏷️</div><h4>Completely Free</h4><p>No commitment required.</p></div>
+      <div class="cta-feat"><div class="emoji">🔍</div><h4>Honest Assessment</h4><p>We'll tell you what's actually possible.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <img src="/others/Elyrac Ai-06.png" alt="elyrac AI">
+      </div>
+      <p style="color:#111111;font-size:15px;font-weight:500;">Custom AI software engineered for your specific business. Not off-the-shelf. Not generic. Yours.</p>
+      <div class="social-links" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:16px;">
+        <a href="https://www.facebook.com/elyracAi" target="_blank" title="Facebook" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#1877F2;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@elyracAi" target="_blank" title="YouTube" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#FF0000;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#FF0000"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/elyrac-ai/?viewAsMember=true" target="_blank" title="LinkedIn" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#0A66C2;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://x.com/ElGracAi" target="_blank" title="X / Twitter" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#000;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@elyracai" target="_blank" title="TikTok" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#010101;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/elyracai/" target="_blank" title="Instagram" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://wa.me/256784239786" target="_blank" title="WhatsApp" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#25D366;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </a>
+      </div>
+      <p style="margin-top:10px; font-size:14px; font-weight:500; color:#000000;">
+        ✉ <a href="mailto:info@elyracai.com" style="color:#000000;font-weight:500;">info@elyracai.com</a>
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/ourwork">Our Work</a>
+      <a href="/blog">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/solutions">LLM Applications</a>
+      <a href="/solutions">AI Automation</a>
+      <a href="/solutions">Conversational AI</a>
+      <a href="/solutions">Predictive AI</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 elyrac AI. All rights reserved.</div>
+</footer>
+
+<!-- ── FLOATING CHATBOT ── -->
+<div id="chatbot-widget">
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-header">
+      <div class="chat-header-avatar">
+        <img src="/others/linked_profile_pic-Photoroom.png" alt="Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+      </div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Maya</div>
+        <div class="chat-header-status">Online · elyrac AI assistant</div>
+      </div>
+      <button class="chat-close-btn" id="chat-close">✕</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-bubble">
+        <img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">
+        <div class="bubble-text">Hi! I'm Maya, elyrac AI's assistant. How can I help you today? 👋</div>
+      </div>
+      <div class="chat-bubble">
+        <img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">
+        <div class="bubble-text">I can answer questions about our services, or help you book a free strategy call with our founder.</div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-send-btn" onclick="sendChat()">↑</button>
+    </div>
+  </div>
+  <button class="chat-toggle" id="chat-toggle">
+    <img src="/others/linked_profile_pic-Photoroom.png" alt="Chat with Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+    <span class="chat-badge"></span>
+  </button>
+</div>
+
+<script>
+/* ── Chatbot + Nav ── */
+(function() {
+  var panel = document.getElementById('chat-panel');
+  var toggle = document.getElementById('chat-toggle');
+  var widget = document.getElementById('chatbot-widget');
+  toggle.addEventListener('click', function() { panel.classList.toggle('open'); });
+  document.getElementById('chat-close').addEventListener('click', function() { panel.classList.remove('open'); });
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var mobileClose = document.getElementById('mobile-close');
+  if (hamburger) hamburger.addEventListener('click', function() { mobileMenu.classList.add('open'); });
+  if (mobileClose) mobileClose.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
+  var replies = [
+    "Great question! We build fully custom AI systems — not off-the-shelf tools. Every project is engineered around your specific business.",
+    "I'd recommend booking a free 30-minute strategy call. You'll get honest, personalised advice with no commitment required.",
+    "We've built AI systems for healthcare, government, e-commerce, finance, and more. What industry are you in?",
+    "Most projects take 4–12 weeks. We scope everything upfront so there are no surprises.",
+    "You can reach us at info@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
+  ];
+  var idx = 0;
+  var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
+  window.sendChat = function() {
+    var input = document.getElementById('chat-input');
+    var msg = input.value.trim();
+    if (!msg) return;
+    var msgs = document.getElementById('chat-messages');
+    msgs.innerHTML += '<div class="chat-bubble user"><div class="bubble-text">' + msg + '</div></div>';
+    input.value = '';
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(function() {
+      msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + replies[idx++ % replies.length] + '</div></div>';
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 820);
+  };
+  var dragging = false, startX, startY, origRight, origBottom;
+  widget.addEventListener('mousedown', function(e) {
+    if (e.target.closest('#chat-panel')) return;
+    dragging = true; startX = e.clientX; startY = e.clientY;
+    var rect = widget.getBoundingClientRect();
+    origRight = window.innerWidth - rect.right;
+    origBottom = window.innerHeight - rect.bottom;
+    widget.style.transition = 'none'; e.preventDefault();
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    widget.style.right = (origRight + (startX - e.clientX)) + 'px';
+    widget.style.bottom = (origBottom + (startY - e.clientY)) + 'px';
+  });
+  document.addEventListener('mouseup', function() { dragging = false; });
+})();
+</script>
+
+<script>
+/* ── Animated counters ── */
+(function() {
+  var counters = document.querySelectorAll('.ctr');
+  var triggered = new Set();
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      if (triggered.has(el)) return;
+      triggered.add(el);
+      var target = +el.dataset.target;
+      if (target === 0) { el.textContent = '0'; obs.unobserve(el); return; }
+      var duration = 1500;
+      var start = performance.now();
+      function step(now) {
+        var progress = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) { requestAnimationFrame(step); }
+        else { el.textContent = target; }
+      }
+      requestAnimationFrame(step);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+
+<script>
+/* ── Scroll reveal ── */
+(function() {
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.project-wrap, .reveal').forEach(function(el) {
+    obs.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>
