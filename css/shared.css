@@ -254,7 +254,7 @@ body { padding-top: 70px; }
   flex-shrink: 0;
 }
 .nav-logo img {
-  height: 64px !important; max-height: 64px !important; width: auto;
+  height: 55px !important; max-height: 55px !important; width: auto !important;
   object-fit: contain;
 }
 
@@ -878,3 +878,99 @@ footer {
   transition: left 0.25s ease, right 0.25s ease;
 }
 .nav-links li a:hover::after { left: 14px; right: 14px; }
+
+/* ── MOBILE FIXES ── */
+@media (max-width: 768px) {
+  nav { padding: 0 16px !important; }
+  .nav-logo img { height: 44px !important; }
+
+  .hero-section, .sol-hero, .page-hero, .ow-hero, .blog-hero {
+    padding: 100px 20px 60px !important;
+    min-height: auto !important;
+  }
+
+  h1 { font-size: clamp(28px, 8vw, 44px) !important; line-height: 1.15 !important; }
+  h2 { font-size: clamp(22px, 6vw, 36px) !important; }
+  h3 { font-size: clamp(18px, 5vw, 26px) !important; }
+  p { font-size: 15px !important; }
+
+  .sol-hero-inner, .blog-hero-inner,
+  [style*="display:flex"][style*="gap:80px"],
+  [style*="display: flex"][style*="gap: 80px"] {
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
+
+  .sol-hero-right, .blog-hero-right,
+  .ow-sc-1, .ow-sc-2, .ow-sc-3, .ow-sc-4,
+  .ow-stat-card { display: none !important; }
+
+  .ow-browser-wrap { max-width: 100% !important; }
+
+  .solutions-grid, .portfolio-grid, .team-grid,
+  .diff-grid, .value-grid, .cta-features,
+  [style*="grid-template-columns:repeat(3"],
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns:repeat(4"],
+  [style*="grid-template-columns: repeat(4"],
+  [style*="grid-template-columns:repeat(2"],
+  [style*="grid-template-columns: repeat(2"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .blog-grid { grid-template-columns: 1fr !important; }
+  .blog-featured { grid-template-columns: 1fr !important; }
+  .blog-featured .blog-feat-img { min-height: 200px !important; }
+
+  .stats-row, .hero-stats { flex-direction: column !important; gap: 12px !important; }
+
+  .project-row, .project-row.reverse { flex-direction: column !important; gap: 28px !important; }
+  .project-img-col, .project-text-col { flex: none !important; width: 100% !important; }
+  .ghost-num { display: none !important; }
+
+  .btn-primary, .btn-blue, .ow-btn-primary {
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+  }
+  .ow-hero-btns, .sol-hero-btns { flex-direction: column !important; }
+
+  .footer-inner { flex-direction: column !important; gap: 32px !important; padding: 40px 20px !important; }
+  .footer-brand, .footer-col { width: 100% !important; }
+
+  .cta-inner { flex-direction: column !important; padding: 40px 20px !important; }
+
+  .ticker-wrap, .tools-ticker-wrap { padding: 16px 0 !important; }
+
+  .portfolio-inner { padding: 0 16px !important; }
+
+  .about-hero-inner, .vm-row { flex-direction: column !important; }
+
+  [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+
+  .article-layout { flex-direction: column !important; }
+  .article-sidebar { width: 100% !important; }
+
+  #chatbot-widget { bottom: 12px !important; right: 12px !important; }
+  .chat-toggle { width: 52px !important; height: 52px !important; }
+  .chat-panel { width: calc(100vw - 24px) !important; right: 0 !important; bottom: 70px !important; }
+
+  .solution-card { min-width: unset !important; }
+
+  .process-grid, .steps-grid { grid-template-columns: 1fr !important; }
+
+  .build-grid { grid-template-columns: 1fr 1fr !important; }
+
+  .team-grid { grid-template-columns: 1fr 1fr !important; }
+
+  section { padding-left: 16px !important; padding-right: 16px !important; }
+  .portfolio-inner, .section-inner { padding: 0 16px !important; }
+}
+
+@media (max-width: 480px) {
+  .team-grid { grid-template-columns: 1fr !important; }
+  .build-grid { grid-template-columns: 1fr !important; }
+  h1 { font-size: 26px !important; }
+}
