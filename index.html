@@ -41,42 +41,42 @@
   }
 
 
-  /* Animated blobs */
+  /* Animated blobs — low-cost: blur reduced, contain isolates repaint */
   .hero-blob {
     position: absolute; border-radius: 50%; pointer-events: none;
-    filter: blur(90px);
+    filter: blur(32px);
+    contain: layout style paint;
+    will-change: transform;
   }
   .hero-blob-1 {
-    width: 520px; height: 520px;
-    background: rgba(45,111,255,0.30);
-    top: -120px; right: -60px;
-    animation: blobFloat1 14s ease-in-out infinite;
+    width: 420px; height: 420px;
+    background: rgba(45,111,255,0.25);
+    top: -100px; right: -40px;
+    animation: blobFloat1 20s ease-in-out infinite;
   }
   .hero-blob-2 {
-    width: 400px; height: 400px;
-    background: rgba(100,160,255,0.18);
-    bottom: -80px; left: 5%;
-    animation: blobFloat2 18s ease-in-out infinite;
+    width: 320px; height: 320px;
+    background: rgba(100,160,255,0.15);
+    bottom: -60px; left: 5%;
+    animation: blobFloat2 26s ease-in-out infinite;
   }
   .hero-blob-3 {
-    width: 280px; height: 280px;
-    background: rgba(26,84,240,0.22);
+    width: 220px; height: 220px;
+    background: rgba(26,84,240,0.18);
     top: 40%; left: 42%;
-    animation: blobFloat3 22s ease-in-out infinite;
+    animation: blobFloat3 32s ease-in-out infinite;
   }
   @keyframes blobFloat1 {
-    0%, 100% { transform: translate(0,0) scale(1); }
-    33%  { transform: translate(-40px, 30px) scale(1.1); }
-    66%  { transform: translate(25px, -20px) scale(0.9); }
+    0%, 100% { transform: translate(0,0); }
+    50%  { transform: translate(-30px, 20px); }
   }
   @keyframes blobFloat2 {
     0%, 100% { transform: translate(0,0); }
-    50%  { transform: translate(50px, -60px) scale(1.12); }
+    50%  { transform: translate(40px, -40px); }
   }
   @keyframes blobFloat3 {
     0%, 100% { transform: translate(0,0); }
-    33%  { transform: translate(35px, 40px); }
-    66%  { transform: translate(-28px, -25px); }
+    50%  { transform: translate(-20px, 20px); }
   }
 
   /* ── LEFT ── */
@@ -192,11 +192,9 @@
     display: flex; align-items: center; gap: 8px;
     font-size: 13px; font-weight: 600; color: var(--gray-800);
   }
-  /* Glass blur style (cards 3 & 4) */
+  /* Glass style (cards 3 & 4) — no backdrop-filter for perf */
   .hfc-glass {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(15,35,100,0.72);
     border: 1px solid rgba(255,255,255,0.22);
     border-top: 2px solid #71C7D6;
     border-radius: 14px;
@@ -205,18 +203,14 @@
     color: white;
     min-width: 140px;
   }
-  /* Positions + independent float durations */
-  /* Card 1 pill  — 95% Retention    — top-right, outside frame  */
-  .hfc-1 { top: 18%;   right: -5%; animation: hfcFloat 3s ease-in-out infinite; }
-  /* Card 2 pill  — Custom-built     — middle-right, overlapping */
-  .hfc-2 { top: 45%;   right: -8%; animation: hfcFloat 4s 0.6s ease-in-out infinite; }
-  /* Card 3 glass — 30+ Systems      — bottom-right, overlapping */
-  .hfc-3 { bottom: 20%; right: -5%; animation: hfcFloat 5s 1.2s ease-in-out infinite; }
-  /* Card 4 glass — 4.9 / Satisfied  — bottom-left, overlapping  */
-  .hfc-4 { bottom: 10%; left: -5%; animation: hfcFloat 6s 1.8s ease-in-out infinite; }
+  /* Positions + slow float — reduced animation count */
+  .hfc-1 { top: 18%;   right: -5%; animation: hfcFloat 8s ease-in-out infinite; will-change: transform; }
+  .hfc-2 { top: 45%;   right: -8%; animation: hfcFloat 10s 1s ease-in-out infinite; will-change: transform; }
+  .hfc-3 { bottom: 20%; right: -5%; animation: hfcFloat 12s 2s ease-in-out infinite; will-change: transform; }
+  .hfc-4 { bottom: 10%; left: -5%; animation: hfcFloat 14s 3s ease-in-out infinite; will-change: transform; }
   @keyframes hfcFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-8px); }
   }
   .hfc-glass-num { font-size: 22px; font-weight: 800; color: white; line-height: 1; }
   .hfc-glass-label { font-size: 11px; color: rgba(255,255,255,0.72); margin-top: 3px; }

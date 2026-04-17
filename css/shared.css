@@ -436,7 +436,7 @@ section { padding: 96px 48px; }
   background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
   border-radius: 20px; padding: 64px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-  backdrop-filter: blur(10px); max-width: 1100px; margin: 0 auto;
+  max-width: 1100px; margin: 0 auto;
 }
 .cta-inner h2 {
   font-family: var(--font-heading);
@@ -515,8 +515,8 @@ footer {
 .faq-a.open { max-height: 300px; }
 .faq-a p { font-size: 14px; color: var(--gray-600); line-height: 1.7; padding-bottom: 20px; }
 
-/* ── PERFORMANCE: will-change for animated elements only ── */
-.hero-blob, .hfc, .chat-toggle { will-change: transform; }
+/* ── PERFORMANCE: will-change only on chatbot toggle ── */
+.chat-toggle { will-change: transform; }
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
@@ -972,3 +972,12 @@ footer {
   margin: 4px 16px;
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── REDUCED MOTION: kills all animations for accessibility + low-end devices ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
