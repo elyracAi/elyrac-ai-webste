@@ -16,12 +16,12 @@
 <style>
 
   /* ── HOMEPAGE NAV: STICKY ── */
-  body { padding-top: 0 !important; }
+  body { padding-top: 0 !important; background: #F5F8FF; }
   nav {
-    top: 20px !important;
-    z-index: 9999 !important;
+    top: 0 !important;
+    z-index: 99999 !important;
   }
-  nav .nav-logo img { height: 100px !important; }
+  nav .nav-logo img { height: 64px !important; }
 
 /* ── HERO ── */
 .hero {
@@ -450,6 +450,48 @@
   #chatbot-widget:active { cursor: grabbing; }
   #chat-panel { cursor: default; }
   .chat-toggle { animation: bubbleBounce 0.9s ease 1s both, pulseGlow 2.5s ease-in-out 2s infinite !important; }
+
+  /* ── SECTION BACKGROUNDS — break up the white monotony ── */
+  .clients  { background: #F0F5FF !important; }
+  .problems { background: #F8FBFF !important; }
+  .solutions { background: #F0F5FF !important; }
+  .tools    { background: #F0F5FF !important; border-top: 1px solid #C7DEFF; border-bottom: 1px solid #C7DEFF; }
+  .portfolio { background: #F8FBFF !important; }
+  .home-faq {
+    background: linear-gradient(135deg, #060e2b 0%, #0d2260 100%) !important;
+    padding: 96px 48px;
+  }
+  .home-faq .section-label { color: rgba(255,255,255,0.65) !important; }
+  .home-faq .section-title { color: white !important; }
+  .home-faq .section-subtitle { color: rgba(255,255,255,0.65) !important; }
+  .home-faq .faq-stat p { color: rgba(255,255,255,0.6) !important; }
+  .home-faq .num3 { color: #71C7D6 !important; }
+  .home-faq .faq-item {
+    background: rgba(255,255,255,0.06) !important;
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+  .home-faq .faq-q { color: rgba(255,255,255,0.9) !important; }
+  .home-faq .faq-a p { color: rgba(255,255,255,0.7) !important; }
+  .home-faq .chevron { color: rgba(255,255,255,0.5) !important; }
+
+  /* Hero overlay — add pastel ocean + tibet radial accents */
+  .hero {
+    background:
+      radial-gradient(circle at 20% 50%, rgba(113,199,214,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(58,114,184,0.20) 0%, transparent 40%),
+      linear-gradient(135deg, var(--navy) 0%, #0a1d52 55%, #1a4db8 100%);
+  }
+
+  /* ── CHATBOT: continuous bounce ── */
+  .chat-toggle {
+    animation: chatBounce 3s ease-in-out infinite, pulseGlow 2.5s ease-in-out infinite !important;
+  }
+  @keyframes chatBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    30%  { transform: translateY(-12px) scale(1.05); }
+    50%  { transform: translateY(-6px) scale(1.02); }
+    70%  { transform: translateY(-10px) scale(1.04); }
+  }
 
   /* ── FOOTER TEXT OVERRIDES ── */
   footer .footer-col h4 { color: #000000 !important; font-size: 13px !important; font-weight: 700 !important; }

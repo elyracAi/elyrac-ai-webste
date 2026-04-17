@@ -538,16 +538,15 @@ footer {
 
 /* Toggle button */
 .chat-toggle {
-  width: 60px; height: 60px; border-radius: 50%;
-  border: none; cursor: pointer; padding: 0;
-  box-shadow: 0 8px 28px rgba(26,86,240,0.35);
-  transition: transform 0.2s, box-shadow 0.2s;
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 3px solid white; cursor: pointer; padding: 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 8px rgba(74,144,226,0.2);
+  transition: box-shadow 0.2s;
   overflow: hidden; background: var(--white);
   position: relative;
 }
 .chat-toggle:hover {
-  transform: scale(1.08);
-  box-shadow: 0 12px 36px rgba(26,86,240,0.45);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 12px rgba(74,144,226,0.25);
 }
 .chat-toggle img {
   width: 100%; height: 100%; object-fit: cover;
@@ -561,17 +560,33 @@ footer {
 /* hide green dot sitewide */
 .chat-badge { display: none !important; }
 
-/* slow gentle bounce for chat toggle */
+/* Pulse ring behind toggle */
+.chat-toggle::before {
+  content: '';
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(74,144,226,0.5);
+  animation: chatPulse 2s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes chatPulse {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Continuous bounce for chat toggle */
 .chat-toggle {
-  animation: chatBounce 3s ease-in-out infinite, pulseGlow 3s ease-in-out infinite !important;
+  animation: chatBounce 3s ease-in-out infinite !important;
 }
 @keyframes chatBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(-12px) scale(1.05); }
+  50%  { transform: translateY(-6px) scale(1.02); }
+  70%  { transform: translateY(-10px) scale(1.04); }
 }
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 4px 20px rgba(26,86,240,0.35); }
-  50% { box-shadow: 0 8px 36px rgba(26,86,240,0.7), 0 0 0 8px rgba(26,86,240,0.08); }
+  0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 8px rgba(74,144,226,0.2); }
+  50% { box-shadow: 0 12px 40px rgba(26,86,240,0.5), 0 0 0 12px rgba(74,144,226,0.3); }
 }
 
 /* Chat panel */
