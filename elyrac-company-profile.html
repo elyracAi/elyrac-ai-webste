@@ -8,881 +8,748 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy: #060e2b;
-    --navy-mid: #0d2260;
-    --blue: #3A72B8;
-    --teal: #71C7D6;
-    --white: #ffffff;
-    --gray-50: #F8FBFF;
-    --gray-100: #F0F5FF;
-    --gray-600: #4B5563;
-    --gray-800: #1F2937;
-    --font-h: 'Sora', sans-serif;
-    --font-b: 'Inter', sans-serif;
-  }
+:root {
+  --navy: #060e2b;
+  --navy-mid: #0d2260;
+  --blue: #3A72B8;
+  --teal: #71C7D6;
+  --gold: #C9A84C;
+  --white: #ffffff;
+  --font-h: 'Sora', sans-serif;
+  --font-b: 'Inter', sans-serif;
+}
 
-  body {
-    font-family: var(--font-b);
-    background: #e8edf5;
-    color: var(--gray-800);
-  }
+body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
 
-  /* ── SCREEN CONTROLS ── */
-  .screen-only {
-    position: fixed; top: 0; left: 0; right: 0;
-    background: var(--navy);
-    padding: 16px 32px;
-    display: flex; align-items: center; justify-content: space-between;
-    z-index: 9999;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
-  }
-  .screen-only .logo-bar {
-    display: flex; align-items: center; gap: 12px;
-    color: white; font-family: var(--font-h); font-size: 15px; font-weight: 600;
-  }
-  .screen-only .logo-bar img { height: 36px; width: auto; }
-  .btn-download {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: linear-gradient(135deg, var(--blue), #1a56d6);
-    color: white; font-family: var(--font-b); font-size: 14px; font-weight: 600;
-    border: none; border-radius: 10px; padding: 10px 24px; cursor: pointer;
-    text-decoration: none; transition: opacity 0.2s;
-  }
-  .btn-download:hover { opacity: 0.88; }
-  .btn-back {
-    display: inline-flex; align-items: center; gap: 6px;
-    color: rgba(255,255,255,0.7); font-size: 13px; text-decoration: none;
-    font-family: var(--font-b); transition: color 0.2s;
-  }
-  .btn-back:hover { color: white; }
+/* ── TOP BAR ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  background: var(--navy); padding: 14px 36px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.4);
+}
+.topbar-logo { display: flex; align-items: center; gap: 10px; }
+.topbar-logo img { height: 32px; width: auto; }
+.topbar-logo span { color: rgba(255,255,255,0.7); font-size: 13px; font-family: var(--font-b); }
+.topbar-actions { display: flex; align-items: center; gap: 16px; }
+.btn-pdf {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--blue) 0%, #1a56d6 100%);
+  color: white; font-size: 13px; font-weight: 700; font-family: var(--font-b);
+  border: none; border-radius: 9px; padding: 9px 22px; cursor: pointer;
+  transition: opacity 0.2s; text-decoration: none;
+}
+.btn-pdf:hover { opacity: 0.85; }
+.btn-back { color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: none; font-family: var(--font-b); transition: color 0.2s; }
+.btn-back:hover { color: white; }
 
-  /* ── PROFILE WRAPPER ── */
-  .profile-wrapper {
-    max-width: 860px;
-    margin: 80px auto 60px;
-    display: flex; flex-direction: column; gap: 0;
-  }
+/* ── PROFILE WRAPPER ── */
+.book {
+  max-width: 900px; margin: 74px auto 60px;
+  display: flex; flex-direction: column; gap: 0;
+}
 
-  /* ── PAGE BASE ── */
-  .page {
-    width: 100%; background: white;
-    box-shadow: 0 4px 40px rgba(0,0,0,0.12);
-    position: relative; overflow: hidden;
-    page-break-after: always;
-  }
-  .page + .page { margin-top: 24px; }
+/* ── PAGE BASE ── */
+.pg {
+  width: 100%; background: white;
+  box-shadow: 0 6px 48px rgba(0,0,0,0.18);
+  position: relative; overflow: hidden;
+  page-break-after: always;
+}
+.pg + .pg { margin-top: 20px; }
 
-  /* ═══════════════════════════════════════
-     PAGE 1: COVER
-  ═══════════════════════════════════════ */
-  .cover {
-    min-height: 560px;
-    background: linear-gradient(145deg, var(--navy) 0%, var(--navy-mid) 55%, #1a3a8f 100%);
-    display: flex; flex-direction: column;
-    justify-content: space-between;
-    padding: 64px 72px;
-    position: relative;
-  }
-  .cover-blob {
-    position: absolute; border-radius: 50%;
-    pointer-events: none; opacity: 0.18;
-  }
-  .cover-blob-1 { width: 400px; height: 400px; background: #3A72B8; top: -100px; right: -80px; filter: blur(60px); }
-  .cover-blob-2 { width: 300px; height: 300px; background: #71C7D6; bottom: -60px; left: 40px; filter: blur(50px); }
+/* ══════════════════════════
+   COVER — full bleed photo
+══════════════════════════ */
+.pg-cover {
+  min-height: 580px;
+  background-image: url('/others/businesswoman-interacting-with-ai-hologram-office.jpg');
+  background-size: cover; background-position: center 30%;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative;
+}
+.pg-cover::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(6,14,43,0.88) 0%, rgba(13,34,96,0.65) 55%, rgba(26,58,143,0.35) 100%);
+}
+.cover-inner { position: relative; z-index: 1; padding: 52px 64px; display: flex; flex-direction: column; justify-content: space-between; min-height: 580px; }
+.cover-top-row { display: flex; align-items: flex-start; justify-content: space-between; }
+.cover-logo img { height: 52px; width: auto; }
+.cover-chip {
+  background: rgba(113,199,214,0.18); border: 1px solid rgba(113,199,214,0.45);
+  color: var(--teal); font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 7px 18px; border-radius: 999px; font-family: var(--font-b);
+}
+.cover-body { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 60px; }
+.cover-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; font-family: var(--font-b); }
+.cover-h1 { font-family: var(--font-h); font-size: clamp(38px, 6vw, 60px); font-weight: 900; color: white; line-height: 1.05; margin-bottom: 18px; }
+.cover-h1 em { color: var(--teal); font-style: normal; }
+.cover-sub { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 440px; font-family: var(--font-b); }
+.cover-footer-row {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  border-top: 1px solid rgba(255,255,255,0.14); padding-top: 24px; margin-top: 48px;
+}
+.cover-meta { font-size: 12px; color: rgba(255,255,255,0.45); font-family: var(--font-b); line-height: 1.9; }
+.cover-location { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.55); font-family: var(--font-b); }
 
-  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
-  .cover-logo img { height: 56px; width: auto; }
-  .cover-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(113,199,214,0.15); border: 1px solid rgba(113,199,214,0.35);
-    color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; padding: 7px 18px; border-radius: 999px;
-    font-family: var(--font-b);
-  }
+/* ══════════════════════════
+   FULL-BLEED DIVIDER PAGE
+══════════════════════════ */
+.pg-fullbleed {
+  min-height: 480px;
+  background-size: cover; background-position: center;
+  position: relative;
+}
+.pg-fullbleed::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(6,14,43,0.25) 0%, rgba(6,14,43,0.1) 40%, rgba(6,14,43,0.72) 100%);
+}
+.fullbleed-watermark {
+  position: absolute; top: 28px; right: 36px; z-index: 2;
+  font-family: var(--font-h); font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+}
+.fullbleed-caption {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+  padding: 32px 64px;
+}
+.fullbleed-caption h2 {
+  font-family: var(--font-h); font-size: 28px; font-weight: 800; color: white; margin-bottom: 8px;
+}
+.fullbleed-caption p { font-size: 14px; color: rgba(255,255,255,0.7); max-width: 500px; line-height: 1.7; font-family: var(--font-b); }
 
-  .cover-body { position: relative; z-index: 1; }
-  .cover-label {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 16px; font-family: var(--font-b);
-  }
-  .cover-title {
-    font-family: var(--font-h); font-size: clamp(36px, 6vw, 54px);
-    font-weight: 800; color: white; line-height: 1.1; margin-bottom: 20px;
-  }
-  .cover-title span { color: var(--teal); }
-  .cover-tagline {
-    font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.7;
-    max-width: 480px; font-family: var(--font-b);
-  }
+/* Navy callout overlay box (like Karveli Buffet red box) */
+.fullbleed-overlay-box {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+  background: linear-gradient(135deg, rgba(6,14,43,0.95) 0%, rgba(13,34,96,0.92) 100%);
+  padding: 32px 64px;
+  display: flex; align-items: center; gap: 40px;
+}
+.fullbleed-overlay-box h2 { font-family: var(--font-h); font-size: 22px; font-weight: 800; color: var(--teal); margin-bottom: 8px; min-width: 200px; }
+.fullbleed-overlay-box p { font-size: 13.5px; color: rgba(255,255,255,0.8); line-height: 1.75; font-family: var(--font-b); }
 
-  .cover-footer {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    border-top: 1px solid rgba(255,255,255,0.12); padding-top: 28px;
-    position: relative; z-index: 1;
-  }
-  .cover-meta { font-size: 12px; color: rgba(255,255,255,0.45); font-family: var(--font-b); line-height: 1.8; }
-  .cover-location {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: rgba(255,255,255,0.6); font-family: var(--font-b);
-  }
-  .cover-location span { font-size: 18px; }
+/* ══════════════════════════
+   INNER PAGE HEADER
+══════════════════════════ */
+.pg-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: 24px 56px; display: flex; align-items: center; justify-content: space-between;
+}
+.pg-header-label { font-family: var(--font-h); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); }
+.pg-header img { height: 28px; width: auto; opacity: 0.85; }
 
-  /* ═══════════════════════════════════════
-     INNER PAGE HEADER STRIP
-  ═══════════════════════════════════════ */
-  .page-header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    padding: 28px 56px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .page-header-title {
-    font-family: var(--font-h); font-size: 13px; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal);
-  }
-  .page-header img { height: 30px; width: auto; opacity: 0.85; }
+/* ══════════════════════════
+   SPLIT: text left, photo right
+══════════════════════════ */
+.split { display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
+.split.reverse { direction: rtl; }
+.split.reverse > * { direction: ltr; }
+.split-text { padding: 52px 48px; display: flex; flex-direction: column; justify-content: center; }
+.split-photo { background-size: cover; background-position: center; }
+.split-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* ── PAGE BODY ── */
-  .page-body { padding: 48px 56px 56px; }
+/* ══════════════════════════
+   TEXT CONTENT STYLES
+══════════════════════════ */
+.pg-body { padding: 48px 56px 52px; }
 
-  /* ── SECTION TITLE ── */
-  .sec-title {
-    font-family: var(--font-h); font-size: 26px; font-weight: 700;
-    color: var(--navy); margin-bottom: 8px;
-  }
-  .sec-sub { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin-bottom: 36px; }
-  .divider { width: 48px; height: 3px; background: var(--teal); border-radius: 3px; margin-bottom: 28px; }
+.sec-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; font-family: var(--font-b); }
+.sec-h2 { font-family: var(--font-h); font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.sec-divider { width: 42px; height: 3px; background: var(--teal); border-radius: 3px; margin: 14px 0 24px; }
+.body-p { font-size: 14px; color: #374151; line-height: 1.85; margin-bottom: 14px; font-family: var(--font-b); }
+.body-p:last-child { margin-bottom: 0; }
+.body-p strong { color: var(--navy); }
 
-  /* ─── ABOUT ─────────────────────────── */
-  .about-body {
-    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start;
-  }
-  .about-text p { font-size: 14.5px; color: var(--gray-600); line-height: 1.85; margin-bottom: 16px; }
-  .about-stats {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  }
-  .stat-box {
-    background: var(--gray-100); border: 1px solid #C7DEFF; border-radius: 14px;
-    padding: 20px 18px; text-align: center;
-  }
-  .stat-box .num {
-    font-family: var(--font-h); font-size: 30px; font-weight: 800; color: var(--blue);
-    line-height: 1;
-  }
-  .stat-box p { font-size: 11px; color: var(--gray-600); margin-top: 6px; line-height: 1.5; }
+/* ══════════════════════════
+   FULL-WIDTH BOTTOM PHOTO
+══════════════════════════ */
+.bottom-photo { width: 100%; height: 280px; object-fit: cover; object-position: center 40%; display: block; }
 
-  /* ─── MISSION / VISION ─────────────── */
-  .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
-  .mv-card {
-    border-radius: 16px; padding: 28px 24px;
-    border: 1px solid #C7DEFF;
-  }
-  .mv-card.mission { background: linear-gradient(135deg, #EFF6FF, #F0F5FF); }
-  .mv-card.vision { background: linear-gradient(135deg, #F0FDFD, #E8F8FF); }
-  .mv-icon { font-size: 28px; margin-bottom: 12px; }
-  .mv-card h4 {
-    font-family: var(--font-h); font-size: 14px; font-weight: 700;
-    color: var(--navy); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
-  }
-  .mv-card p { font-size: 13.5px; color: var(--gray-600); line-height: 1.75; }
+/* ══════════════════════════
+   3-COLUMN LAYOUT
+══════════════════════════ */
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.three-col-item { padding: 44px 36px; }
+.three-col-item:nth-child(2) { border-left: 1px solid #E5EDFF; border-right: 1px solid #E5EDFF; }
+.col-num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--navy); color: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-h); font-size: 18px; font-weight: 800;
+  margin-bottom: 16px;
+}
+.three-col-item h3 { font-family: var(--font-h); font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+.three-col-item p { font-size: 13px; color: #4B5563; line-height: 1.8; font-family: var(--font-b); }
 
-  .values-row { display: flex; gap: 14px; flex-wrap: wrap; }
-  .value-pill {
-    background: var(--navy); color: white; border-radius: 999px;
-    padding: 8px 18px; font-size: 12px; font-weight: 600; font-family: var(--font-b);
-    display: flex; align-items: center; gap: 6px;
-  }
-  .value-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+/* ══════════════════════════
+   PHOTO GRID (3-col)
+══════════════════════════ */
+.photo-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; height: 280px; }
+.photo-grid-3 div { overflow: hidden; }
+.photo-grid-3 div img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+.photo-grid-3-label { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--navy); }
+.photo-grid-3-label span { font-family: var(--font-h); font-size: 12px; font-weight: 700; color: var(--teal); padding: 14px 20px; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; }
+.photo-grid-3-label span:nth-child(2) { border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); }
 
-  /* ─── SERVICES ─────────────────────── */
-  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .svc-card {
-    border: 1px solid #C7DEFF; border-radius: 16px; padding: 24px 20px;
-    background: var(--gray-50); position: relative; overflow: hidden;
-  }
-  .svc-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--blue), var(--teal));
-  }
-  .svc-icon { font-size: 24px; margin-bottom: 10px; }
-  .svc-card h4 {
-    font-family: var(--font-h); font-size: 14px; font-weight: 700;
-    color: var(--navy); margin-bottom: 8px;
-  }
-  .svc-card p { font-size: 12.5px; color: var(--gray-600); line-height: 1.7; }
+/* ══════════════════════════
+   SERVICES
+══════════════════════════ */
+.services-list { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+.svc-item { display: flex; gap: 14px; align-items: flex-start; }
+.svc-dot { width: 32px; height: 32px; border-radius: 8px; background: var(--navy); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.svc-item h4 { font-family: var(--font-h); font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.svc-item p { font-size: 12.5px; color: #4B5563; line-height: 1.65; font-family: var(--font-b); }
 
-  /* ─── PORTFOLIO ─────────────────────── */
-  .project-card {
-    border: 1px solid #E5EDFF; border-radius: 16px; overflow: hidden;
-    margin-bottom: 20px;
-  }
-  .project-card:last-child { margin-bottom: 0; }
-  .project-header {
-    padding: 18px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid #E5EDFF;
-  }
-  .project-name {
-    font-family: var(--font-h); font-size: 15px; font-weight: 700; color: var(--navy);
-  }
-  .project-badge {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 999px;
-  }
-  .project-body { padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  .proj-col-label {
-    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-    margin-bottom: 6px; opacity: 0.7;
-  }
-  .proj-col-text { font-size: 12.5px; color: var(--gray-600); line-height: 1.7; }
-  .proj-result { background: var(--gray-100); border-radius: 10px; padding: 12px; }
-  .proj-result .proj-col-label { color: #16A34A; }
+/* ══════════════════════════
+   PORTFOLIO CARDS
+══════════════════════════ */
+.proj-card { margin-bottom: 22px; border: 1px solid #E5EDFF; border-radius: 14px; overflow: hidden; }
+.proj-card:last-child { margin-bottom: 0; }
+.proj-card-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; }
+.proj-title { font-family: var(--font-h); font-size: 14px; font-weight: 800; color: var(--navy); }
+.proj-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; }
+.proj-body { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid #E5EDFF; }
+.proj-col { padding: 16px 20px; }
+.proj-col:nth-child(2) { border-left: 1px solid #E5EDFF; border-right: 1px solid #E5EDFF; }
+.proj-col.result { background: #F0FDF4; }
+.proj-col-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; opacity: 0.65; font-family: var(--font-b); }
+.proj-col-text { font-size: 12px; color: #374151; line-height: 1.7; font-family: var(--font-b); }
+.proj-col.result .proj-col-label { color: #16A34A; }
 
-  /* ─── WHY US ─────────────────────────── */
-  .why-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  .why-card {
-    border: 1px solid #C7DEFF; border-radius: 14px; padding: 22px 18px;
-    background: white; text-align: center;
-  }
-  .why-icon { font-size: 28px; margin-bottom: 10px; }
-  .why-card h4 { font-family: var(--font-h); font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-  .why-card p { font-size: 12px; color: var(--gray-600); line-height: 1.65; }
+/* ══════════════════════════
+   PHOTO GRID 2×3
+══════════════════════════ */
+.photo-grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; gap: 3px; height: 380px; }
+.photo-grid-2x3 div { overflow: hidden; }
+.photo-grid-2x3 div img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* ─── TEAM ─────────────────────────── */
-  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .team-card {
-    border: 1px solid #E5EDFF; border-radius: 14px; padding: 20px 16px;
-    text-align: center; background: var(--gray-50);
-  }
-  .team-avatar {
-    width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 12px;
-    background: linear-gradient(135deg, var(--navy), var(--blue));
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-h); font-size: 20px; font-weight: 800; color: white;
-  }
-  .team-name { font-family: var(--font-h); font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-  .team-role { font-size: 11px; color: var(--gray-600); line-height: 1.5; }
+/* Dashboard screenshot grid */
+.dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.dash-item { border-radius: 10px; overflow: hidden; border: 1px solid #E5EDFF; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.dash-item img { width: 100%; display: block; height: 130px; object-fit: cover; object-position: center top; }
+.dash-label { font-size: 11px; font-weight: 700; color: var(--navy); padding: 9px 12px; background: #F8FBFF; font-family: var(--font-h); }
 
-  /* ─── CONTACT ─────────────────────── */
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
-  .contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
-  .contact-icon {
-    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-    background: var(--navy); display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .contact-item h5 { font-family: var(--font-h); font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
-  .contact-item p, .contact-item a {
-    font-size: 13px; color: var(--gray-600); text-decoration: none; line-height: 1.5;
-  }
-  .contact-cta {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    border-radius: 16px; padding: 36px 28px; color: white; text-align: center;
-  }
-  .contact-cta h4 { font-family: var(--font-h); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-  .contact-cta p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 20px; line-height: 1.7; }
-  .contact-cta .cta-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--teal); color: var(--navy); font-family: var(--font-b);
-    font-size: 13px; font-weight: 700; border-radius: 10px; padding: 12px 24px;
-    text-decoration: none; transition: opacity 0.2s;
-  }
-  .contact-cta .cta-btn:hover { opacity: 0.88; }
+/* ══════════════════════════
+   WHY CHOOSE US
+══════════════════════════ */
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+.why-card { border: 1px solid #C7DEFF; border-radius: 14px; padding: 22px 18px; background: white; position: relative; overflow: hidden; }
+.why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--teal)); }
+.why-icon { font-size: 26px; margin-bottom: 10px; }
+.why-card h4 { font-family: var(--font-h); font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 7px; }
+.why-card p { font-size: 12px; color: #4B5563; line-height: 1.65; font-family: var(--font-b); }
 
-  /* ─── COVER BACK ─────────────────── */
-  .cover-back {
-    min-height: 200px;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a8f 100%);
-    padding: 48px 72px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: relative; overflow: hidden;
-  }
-  .cover-back-blob {
-    position: absolute; border-radius: 50%; pointer-events: none; opacity: 0.15;
-    width: 300px; height: 300px; background: var(--teal); right: -60px; top: -80px; filter: blur(50px);
-  }
-  .cover-back-text { position: relative; z-index: 1; }
-  .cover-back-text h3 {
-    font-family: var(--font-h); font-size: 20px; font-weight: 700; color: white; margin-bottom: 6px;
-  }
-  .cover-back-text p { font-size: 13px; color: rgba(255,255,255,0.55); }
-  .cover-back-logo img { height: 44px; width: auto; position: relative; z-index: 1; }
+/* Stats band */
+.stats-band { background: var(--navy); display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat-item { padding: 28px 20px; text-align: center; border-right: 1px solid rgba(255,255,255,0.08); }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: var(--font-h); font-size: 32px; font-weight: 900; color: var(--teal); line-height: 1; margin-bottom: 6px; }
+.stat-desc { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.5; font-family: var(--font-b); }
 
-  /* ═══════════════════════════════════════
-     PRINT STYLES
-  ═══════════════════════════════════════ */
-  @media print {
-    @page { size: A4; margin: 0; }
-    body { background: white; }
-    .screen-only { display: none !important; }
-    .profile-wrapper { max-width: 100%; margin: 0; gap: 0; }
-    .page { box-shadow: none; page-break-after: always; }
-    .page + .page { margin-top: 0; }
-    .cover { min-height: 297mm; }
-    a { color: inherit !important; }
-  }
+/* ══════════════════════════
+   CONTACT PAGE
+══════════════════════════ */
+.contact-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 320px; }
+.contact-left { padding: 48px 48px 48px 56px; }
+.contact-right {
+  background-image: url('/others/startup-manager-working-with-artificial-intelligence-hologram-manager-talk-about-company-report-using-holographic-augmented-reality-have-remote-conversation-online-digital-tech.jpg');
+  background-size: cover; background-position: center;
+  position: relative;
+}
+.contact-right::before { content: ''; position: absolute; inset: 0; background: rgba(6,14,43,0.55); }
+.contact-right-inner { position: relative; z-index: 1; padding: 48px 36px; display: flex; flex-direction: column; justify-content: center; height: 100%; }
+.contact-right-inner h3 { font-family: var(--font-h); font-size: 20px; font-weight: 800; color: white; margin-bottom: 12px; }
+.contact-right-inner p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 24px; font-family: var(--font-b); }
+.cta-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--teal); color: var(--navy); font-family: var(--font-b);
+  font-size: 13px; font-weight: 700; border-radius: 9px; padding: 12px 22px;
+  text-decoration: none;
+}
+.contact-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 18px; }
+.ci { width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.contact-row h5 { font-family: var(--font-h); font-size: 11px; font-weight: 700; color: var(--navy); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.07em; }
+.contact-row a, .contact-row p { font-size: 13px; color: #374151; text-decoration: none; line-height: 1.5; font-family: var(--font-b); }
 
-  @media (max-width: 680px) {
-    .profile-wrapper { margin: 72px 0 0; }
-    .page-body { padding: 28px 24px 36px; }
-    .cover { padding: 48px 28px; }
-    .page-header { padding: 20px 24px; }
-    .about-body, .mv-grid, .services-grid, .contact-grid,
-    .why-grid, .team-grid { grid-template-columns: 1fr !important; }
-    .project-body { grid-template-columns: 1fr !important; }
-    .cover-top { flex-direction: column; gap: 16px; }
-    .cover-footer { flex-direction: column; gap: 12px; }
-  }
+/* ══════════════════════════
+   BACK COVER
+══════════════════════════ */
+.back-cover {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a8f 100%);
+  padding: 56px 64px; display: flex; align-items: center; justify-content: space-between;
+  position: relative; overflow: hidden; min-height: 180px;
+}
+.back-cover::before { content: ''; position: absolute; width: 320px; height: 320px; border-radius: 50%; background: var(--teal); opacity: 0.07; right: -60px; top: -80px; filter: blur(40px); }
+.back-cover-text { position: relative; z-index: 1; }
+.back-cover-text h3 { font-family: var(--font-h); font-size: 22px; font-weight: 800; color: white; margin-bottom: 6px; }
+.back-cover-text p { font-size: 13px; color: rgba(255,255,255,0.5); font-family: var(--font-b); }
+.back-cover img { height: 44px; width: auto; position: relative; z-index: 1; }
+
+/* ══════════════════════════
+   PRINT
+══════════════════════════ */
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: white; }
+  .topbar { display: none !important; }
+  .book { max-width: 100%; margin: 0; gap: 0; }
+  .pg { box-shadow: none; page-break-after: always; }
+  .pg + .pg { margin-top: 0; }
+}
+
+@media (max-width: 680px) {
+  .book { margin: 64px 0 0; }
+  .split, .three-col, .photo-grid-3, .proj-body, .contact-split,
+  .why-grid, .dash-grid, .stats-band { grid-template-columns: 1fr !important; }
+  .split-text, .cover-inner, .pg-body, .contact-left { padding: 28px 20px !important; }
+  .fullbleed-overlay-box { padding: 20px !important; flex-direction: column; gap: 12px; }
+  .photo-grid-2x3 { grid-template-columns: 1fr 1fr !important; height: auto !important; }
+}
 </style>
 </head>
 <body>
 
-<!-- ── SCREEN TOP BAR ── -->
-<div class="screen-only">
-  <div class="logo-bar">
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">
     <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
-    Company Profile 2025
+    <span>Company Profile 2025</span>
   </div>
-  <div style="display:flex;gap:16px;align-items:center;">
+  <div class="topbar-actions">
     <a href="/ourwork" class="btn-back">← Back to Our Work</a>
-    <button class="btn-download" onclick="window.print()">
-      ⬇ Download PDF
-    </button>
+    <button class="btn-pdf" onclick="window.print()">⬇ Download PDF</button>
   </div>
 </div>
 
-<div class="profile-wrapper">
+<div class="book">
 
-  <!-- ════════════════════════════════
-       PAGE 1: COVER
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="cover">
-      <div class="cover-blob cover-blob-1"></div>
-      <div class="cover-blob cover-blob-2"></div>
-
-      <div class="cover-top">
-        <div class="cover-logo">
-          <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI logo">
+  <!-- ══════════════════════════════════
+       PAGE 1 — COVER (full-bleed photo)
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-cover">
+      <div class="cover-inner">
+        <div class="cover-top-row">
+          <div class="cover-logo"><img src="/others/Elyrac_Ai-03.png" alt="elyrac AI"></div>
+          <div class="cover-chip">✦ Company Profile 2025</div>
         </div>
-        <div class="cover-badge">✦ Company Profile 2025</div>
-      </div>
-
-      <div class="cover-body">
-        <div class="cover-label">Custom AI Engineering</div>
-        <h1 class="cover-title">
-          Building AI Systems<br>That Actually <span>Work.</span>
-        </h1>
-        <p class="cover-tagline">
-          elyrac AI engineers fully customised artificial intelligence solutions — not templates, not off-the-shelf tools. Purpose-built AI that solves your exact business problem with precision, security, and lasting impact.
-        </p>
-      </div>
-
-      <div class="cover-footer">
-        <div class="cover-meta">
-          elyrac AI Ltd<br>
-          info@elyracai.com<br>
-          www.elyracai.com
-        </div>
-        <div class="cover-location">
-          <span>📍</span> Kampala, Uganda &nbsp;|&nbsp; Serving clients globally
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════
-       PAGE 2: ABOUT US
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="page-header">
-      <div class="page-header-title">About elyrac AI</div>
-      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
-    </div>
-    <div class="page-body">
-      <h2 class="sec-title">Who We Are</h2>
-      <div class="divider"></div>
-
-      <div class="about-body">
-        <div class="about-text">
-          <p>
-            elyrac AI is a custom artificial intelligence engineering company headquartered in Kampala, Uganda. We design, develop, and deploy fully bespoke AI systems — built specifically around the operational realities and strategic ambitions of each client we work with.
-          </p>
-          <p>
-            Unlike AI vendors selling subscriptions to generic tools, we engineer from the ground up. Every system we build is purpose-built: the architecture, the data pipeline, the model integrations, the user interface, the security layer — designed to solve your exact problem, not a hypothetical average one.
-          </p>
-          <p>
-            Our motto is <strong style="color:var(--navy)">Grace in Design</strong> — we believe that the best AI systems are not just technically excellent but thoughtfully crafted, intuitive to use, and built to last. We have delivered over 30 AI projects across healthcare, fintech, HR tech, NGOs, and enterprise operations.
-          </p>
-          <p>
-            We work with forward-thinking businesses, growing enterprises, and institutions that understand that AI is not a feature — it is infrastructure. And infrastructure deserves to be engineered properly.
-          </p>
-        </div>
-
-        <div class="about-stats">
-          <div class="stat-box">
-            <div class="num">30+</div>
-            <p>AI projects delivered across multiple industries</p>
-          </div>
-          <div class="stat-box">
-            <div class="num">95%</div>
-            <p>Client retention rate across all engagements</p>
-          </div>
-          <div class="stat-box">
-            <div class="num">5+</div>
-            <p>Countries served with deployed AI systems</p>
-          </div>
-          <div class="stat-box">
-            <div class="num">24/7</div>
-            <p>AI systems operating autonomously post-deployment</p>
+        <div class="cover-body">
+          <div class="cover-eyebrow">Custom AI Engineering · Kampala, Uganda</div>
+          <h1 class="cover-h1">COMPANY<br><em>PROFILE</em></h1>
+          <p class="cover-sub">We build fully custom artificial intelligence systems — not templates, not generic tools. Purpose-built AI engineered specifically for your business problem, your data, and your market.</p>
+          <div class="cover-footer-row">
+            <div class="cover-meta">
+              elyrac AI Ltd &nbsp;·&nbsp; info@elyracai.com<br>
+              www.elyracai.com &nbsp;·&nbsp; 2025
+            </div>
+            <div class="cover-location">📍 Kampala, Uganda &nbsp;|&nbsp; Serving clients globally</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════
-       PAGE 3: MISSION, VISION, VALUES
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="page-header">
-      <div class="page-header-title">Mission, Vision & Values</div>
-      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
-    </div>
-    <div class="page-body">
-      <h2 class="sec-title">What Drives Us</h2>
-      <div class="divider"></div>
-
-      <div class="mv-grid">
-        <div class="mv-card mission">
-          <div class="mv-icon">🎯</div>
-          <h4>Our Mission</h4>
-          <p>
-            To democratise access to world-class AI engineering — making it possible for businesses of every size, in every market, to benefit from artificial intelligence systems that are custom-built, rigorously engineered, and genuinely transformative. We exist to turn real business challenges into intelligent solutions that work.
-          </p>
-        </div>
-        <div class="mv-card vision">
-          <div class="mv-icon">🌍</div>
-          <h4>Our Vision</h4>
-          <p>
-            To be Africa's most trusted AI engineering partner — building the intelligent infrastructure that powers the next generation of businesses across the continent and beyond. We envision a future where every organisation, regardless of geography, has access to AI systems that were built specifically for them.
-          </p>
-        </div>
-      </div>
-
-      <h3 style="font-family:var(--font-h);font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Core Values</h3>
-      <div class="values-row">
-        <div class="value-pill"><span class="dot"></span>Grace in Design</div>
-        <div class="value-pill"><span class="dot"></span>Engineering Integrity</div>
-        <div class="value-pill"><span class="dot"></span>Client-First Thinking</div>
-        <div class="value-pill"><span class="dot"></span>Radical Transparency</div>
-        <div class="value-pill"><span class="dot"></span>Continuous Innovation</div>
-        <div class="value-pill"><span class="dot"></span>Long-Term Partnership</div>
+  <!-- ══════════════════════════════════
+       PAGE 2 — FULL-BLEED TRANSITION
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-fullbleed" style="background-image:url('/others/robotic-arm-interacting-with-logistics-data-interface.jpg'); min-height:480px;">
+      <div class="fullbleed-watermark">elyrac AI Company Profile</div>
+      <div class="fullbleed-caption">
+        <h2>Real AI Systems.<br>Real Results.</h2>
+        <p>Every system we build is production-grade, purpose-built, and engineered to last — not a proof of concept, not a prototype.</p>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════
-       PAGE 4: SERVICES
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="page-header">
-      <div class="page-header-title">Our Services</div>
+  <!-- ══════════════════════════════════
+       PAGE 3 — ABOUT US (split + photo)
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-header">
+      <div class="pg-header-label">01 · About Us</div>
       <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
     </div>
-    <div class="page-body">
-      <h2 class="sec-title">What We Build</h2>
-      <p class="sec-sub">Every engagement is scoped precisely to your needs. We do not do generic. We engineer AI systems that solve specific problems at production scale.</p>
-      <div class="divider"></div>
+    <div class="split">
+      <div class="split-text">
+        <div class="sec-eyebrow">Who We Are</div>
+        <h2 class="sec-h2">ABOUT US</h2>
+        <div class="sec-divider"></div>
+        <p class="body-p">elyrac AI is a custom artificial intelligence engineering company headquartered in Kampala, Uganda. We design, develop, and deploy fully bespoke AI systems — built specifically around the operational realities and strategic ambitions of each client we work with.</p>
+        <p class="body-p">Unlike vendors selling generic AI subscriptions, we engineer from the ground up. Every system is purpose-built: the architecture, data pipeline, model integrations, user interface, and security layer — designed to solve your exact problem.</p>
+        <p class="body-p">Our motto is <strong>Grace in Design</strong> — the best AI systems are not just technically excellent, but thoughtfully crafted, intuitive to use, and built to last. We have delivered over 30 AI projects across healthcare, fintech, HR tech, NGOs, and enterprise operations.</p>
+      </div>
+      <div class="split-photo">
+        <img src="/others/server-farm-manager-supervising-engineer-looking-data-analysis-graph.jpg" alt="AI Engineering" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
 
-      <div class="services-grid">
-        <div class="svc-card">
-          <div class="svc-icon">🤖</div>
-          <h4>LLM-Powered Applications</h4>
-          <p>Custom applications built on large language models — Claude, GPT-4, and open-source alternatives. We architect the full stack: model selection, prompt engineering, retrieval-augmented generation, fine-tuning, and production deployment. From internal knowledge bases to client-facing AI tools.</p>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">⚡</div>
-          <h4>AI Workflow Automation</h4>
-          <p>End-to-end automation of complex business processes using AI. Email triage agents, document processing pipelines, approval workflows, data extraction, and multi-system orchestration. We eliminate repetitive high-cost tasks so your team focuses on work that matters.</p>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">💬</div>
-          <h4>Conversational AI Systems</h4>
-          <p>AI chatbots and voice agents trained on your specific business context, products, and workflows. Not generic chatbots — intelligent agents that understand your domain, handle complex multi-turn conversations, and escalate intelligently when needed.</p>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">📊</div>
-          <h4>Predictive AI & ML Systems</h4>
-          <p>Machine learning models that turn your operational data into forward-looking intelligence. Fraud detection, demand forecasting, customer churn prediction, anomaly detection, and recommendation engines — built, trained, evaluated, and integrated into your existing systems.</p>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">🏥</div>
-          <h4>Custom Enterprise Platforms</h4>
-          <p>Full-stack business management systems with AI at their core — clinic management, workforce management, cooperative finance, and field operations platforms. Built from the ground up with the specific operational logic of your business embedded into every module.</p>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">🔒</div>
-          <h4>AI Security & Compliance</h4>
-          <p>AI systems built to meet the highest standards of data security, audit trail requirements, and regulatory compliance. Role-based access control, encrypted data handling, full audit logging, and compliance-ready architecture for fintech, healthcare, and regulated industries.</p>
-        </div>
+    <!-- Stats band -->
+    <div class="stats-band">
+      <div class="stat-item">
+        <div class="stat-num">30+</div>
+        <div class="stat-desc">AI projects delivered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">95%</div>
+        <div class="stat-desc">Client retention rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-desc">Countries served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-desc">AI systems running autonomously</div>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════
-       PAGE 5: PORTFOLIO 1–3
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="page-header">
-      <div class="page-header-title">Our Work — Case Studies</div>
+  <!-- ══════════════════════════════════
+       PAGE 4 — VISION / MISSION / OBJECTIVES
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-header">
+      <div class="pg-header-label">02 · Vision, Mission & Objectives</div>
       <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
     </div>
-    <div class="page-body">
-      <h2 class="sec-title">Selected Projects</h2>
-      <p class="sec-sub">Real AI systems built for real businesses. Every result below is measured and verified.</p>
-      <div class="divider"></div>
-
-      <!-- ioTec -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-name">01 — Intelligent Email Agent · ioTec Ltd</div>
-          <div class="project-badge" style="background:#EFF6FF;color:#3A72B8;">ENTERPRISE AI</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="proj-col-label" style="color:#3A72B8;">Challenge</div>
-            <div class="proj-col-text">The team was spending 4+ hours daily on email triage and drafting responses to routine enquiries. The inbox had become a bottleneck, slowing down sales and support cycles.</div>
-          </div>
-          <div>
-            <div class="proj-col-label" style="color:#3A72B8;">Solution</div>
-            <div class="proj-col-text">Custom AI email agent that reads, categorises, drafts responses, and escalates complex cases to the right team member — fully integrated with their existing inbox.</div>
-          </div>
-          <div class="proj-result">
-            <div class="proj-col-label">Result</div>
-            <div class="proj-col-text"><strong>80% of emails handled autonomously.</strong> 3+ hours reclaimed daily. Response times dropped from hours to minutes.</div>
-          </div>
-        </div>
+    <div class="three-col">
+      <div class="three-col-item">
+        <div class="col-num">V</div>
+        <h3>THE VISION<br><span style="color:#6B7280;font-size:12px;font-weight:400;">OF OUR COMPANY</span></h3>
+        <p>To be Africa's most trusted AI engineering partner — building the intelligent infrastructure that powers the next generation of businesses across the continent and beyond. We envision a future where every organisation, regardless of geography, has access to AI built specifically for them.</p>
       </div>
-
-      <!-- AttendTrack -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-name">02 — AttendTrack · Workforce Management System</div>
-          <div class="project-badge" style="background:#F0FDF4;color:#16A34A;">HR TECH</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="proj-col-label" style="color:#16A34A;">Challenge</div>
-            <div class="proj-col-text">Manual attendance tracking and zero visibility into field worker locations. HR teams relied on spreadsheets and guesswork, causing payroll errors.</div>
-          </div>
-          <div>
-            <div class="proj-col-label" style="color:#16A34A;">Solution</div>
-            <div class="proj-col-text">Full workforce management platform with AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot powered by Claude Sonnet.</div>
-          </div>
-          <div class="proj-result">
-            <div class="proj-col-label">Result</div>
-            <div class="proj-col-text"><strong>100% attendance accuracy.</strong> 3 hours saved daily on HR admin. Payroll errors eliminated completely.</div>
-          </div>
-        </div>
+      <div class="three-col-item" style="background:#F8FBFF;">
+        <div class="col-num">O</div>
+        <h3>OBJECTIVES<br><span style="color:#6B7280;font-size:12px;font-weight:400;">OF OUR COMPANY</span></h3>
+        <p>To provide quality AI systems that give clients measurable value for their investment. Build strong long-term partnerships. Expand into new markets and industries. Continuously improve the craft of AI engineering and set a new standard for what custom AI can achieve in African markets.</p>
       </div>
-
-      <!-- Code Clinic -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-name">03 — Code Clinic · Healthcare Practice Management</div>
-          <div class="project-badge" style="background:#F5F3FF;color:#7C3AED;">HEALTHTECH</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="proj-col-label" style="color:#7C3AED;">Challenge</div>
-            <div class="proj-col-text">Fragmented tools with no unified system. Patient records, appointments, billing, and staff management were all handled separately with no real-time visibility.</div>
-          </div>
-          <div>
-            <div class="proj-col-label" style="color:#7C3AED;">Solution</div>
-            <div class="proj-col-text">Comprehensive clinic management platform covering patient records, live appointment scheduling, invoicing, payroll, staff management, and a full analytics dashboard.</div>
-          </div>
-          <div class="proj-result">
-            <div class="proj-col-label">Result</div>
-            <div class="proj-col-text"><strong>790 active patients managed seamlessly.</strong> Revenue tracked in real-time (UGX 31.2M monthly). Admin workload reduced by 60%.</div>
-          </div>
-        </div>
+      <div class="three-col-item">
+        <div class="col-num">M</div>
+        <h3>OUR MISSION<br><span style="color:#6B7280;font-size:12px;font-weight:400;">& CORE VALUES</span></h3>
+        <p>To democratise access to world-class AI engineering — making it possible for businesses of every size to benefit from custom AI systems. We work honestly, rigorously, and with genuine care for every client's outcome. <strong>Grace in Design</strong> is not just our motto — it is our standard.</p>
       </div>
-
+    </div>
+    <!-- 3 photos below the text -->
+    <div class="photo-grid-3">
+      <div><img src="/others/businesswoman-interacting-with-ai-hologram-office.jpg" alt="AI Vision"></div>
+      <div><img src="/others/people-working-html-codes.jpg" alt="Engineering"></div>
+      <div><img src="/others/conversational-ai-hologram.jpg" alt="Conversational AI"></div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════
-       PAGE 6: PORTFOLIO 4–6
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="page-header">
-      <div class="page-header-title">Our Work — Case Studies (continued)</div>
+  <!-- ══════════════════════════════════
+       PAGE 5 — OUR SERVICES (split)
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-header">
+      <div class="pg-header-label">03 · Our Services</div>
       <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
     </div>
-    <div class="page-body">
-
-      <!-- WinoPay -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-name">04 — WinoPay · Full-Stack Fintech Platform</div>
-          <div class="project-badge" style="background:#FFFBEB;color:#D97706;">FINTECH</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="proj-col-label" style="color:#D97706;">Challenge</div>
-            <div class="proj-col-text">Building a production-grade financial platform from scratch demanding the highest standards of security, data integrity, and regulatory compliance for real-money transactions.</div>
+    <div class="split reverse">
+      <div class="split-text">
+        <div class="sec-eyebrow">What We Build</div>
+        <h2 class="sec-h2">OUR SERVICES</h2>
+        <div class="sec-divider"></div>
+        <div class="services-list">
+          <div class="svc-item">
+            <div class="svc-dot">🤖</div>
+            <div><h4>LLM-Powered Applications</h4><p>Custom apps built on Claude, GPT-4, and open-source LLMs — RAG pipelines, knowledge bases, intelligent document processing, and client-facing AI tools.</p></div>
           </div>
-          <div>
-            <div class="proj-col-label" style="color:#D97706;">Solution</div>
-            <div class="proj-col-text">Full system architecture end-to-end — backend API design, transaction processing, complete security layer with audit logging, RBAC, and encryption. Integrates flights, hotels, bill pay, insurance, and retail.</div>
+          <div class="svc-item">
+            <div class="svc-dot">⚡</div>
+            <div><h4>AI Workflow Automation</h4><p>End-to-end automation of complex business processes — email agents, document pipelines, approval workflows, data extraction, and multi-system orchestration.</p></div>
           </div>
-          <div class="proj-result">
-            <div class="proj-col-label">Result</div>
-            <div class="proj-col-text"><strong>Fully operational fintech platform serving live users.</strong> Zero critical transaction failures since launch. Meets regulated financial institution compliance standards.</div>
+          <div class="svc-item">
+            <div class="svc-dot">💬</div>
+            <div><h4>Conversational AI & Voice Agents</h4><p>Intelligent chatbots and voice agents trained on your domain — multi-turn conversations, smart escalation, 24/7 autonomous operation.</p></div>
           </div>
-        </div>
-      </div>
-
-      <!-- Trivox -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-name">05 — Trivox AI · Intelligent Dental Receptionist</div>
-          <div class="project-badge" style="background:#F0FDFE;color:#0891B2;">CONVERSATIONAL AI</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="proj-col-label" style="color:#0891B2;">Challenge</div>
-            <div class="proj-col-text">Dental clinics losing patients due to missed calls, slow booking responses, and overwhelmed front desk staff. After-hours enquiries went completely unanswered.</div>
+          <div class="svc-item">
+            <div class="svc-dot">📊</div>
+            <div><h4>Predictive AI & ML Systems</h4><p>Fraud detection, demand forecasting, churn prediction, anomaly detection — built, trained, evaluated, and integrated into your existing systems.</p></div>
           </div>
-          <div>
-            <div class="proj-col-label" style="color:#0891B2;">Solution</div>
-            <div class="proj-col-text">Fully conversational AI receptionist trained on dental clinic workflows — handles appointment booking, patient enquiries, follow-up reminders, and proactive outreach 24/7.</div>
-          </div>
-          <div class="proj-result">
-            <div class="proj-col-label">Result</div>
-            <div class="proj-col-text"><strong>+40% more bookings captured.</strong> 24/7 availability with zero missed outreaches. Front desk workload cut in half.</div>
+          <div class="svc-item">
+            <div class="svc-dot">🏥</div>
+            <div><h4>Custom Enterprise Platforms</h4><p>Full-stack business management systems with AI at their core — clinic, workforce, cooperative finance, and field operations platforms.</p></div>
           </div>
         </div>
       </div>
-
-      <!-- Fraud Detection -->
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-name">06 — AI/ML Fraud Detection · Financial Services</div>
-          <div class="project-badge" style="background:#FEF2F2;color:#DC2626;">FINTECH / REGTECH</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="proj-col-label" style="color:#DC2626;">Challenge</div>
-            <div class="proj-col-text">Legacy rule-based systems generating too many false positives while missing sophisticated fraud patterns — a compliance and financial liability risk at transaction scale.</div>
-          </div>
-          <div>
-            <div class="proj-col-label" style="color:#DC2626;">Solution</div>
-            <div class="proj-col-text">Purpose-built ML fraud detection pipeline — data ingestion, feature engineering, model training, real-time inference, compliance alerts with full explanations, and complete audit trail.</div>
-          </div>
-          <div class="proj-result">
-            <div class="proj-col-label">Result</div>
-            <div class="proj-col-text"><strong>Real-time fraud detection at transaction scale.</strong> Full regulatory audit trail. Significant reduction in false positives. Model continuously improves with new data.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════
-       PAGE 7: WHY CHOOSE US
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="page-header">
-      <div class="page-header-title">Why Choose elyrac AI</div>
-      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
-    </div>
-    <div class="page-body">
-      <h2 class="sec-title">The elyrac Difference</h2>
-      <p class="sec-sub">Every AI company claims to be different. Here is specifically how we are.</p>
-      <div class="divider"></div>
-
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-icon">🔧</div>
-          <h4>Fully Custom Engineering</h4>
-          <p>No templates. No re-skinned SaaS. Every system is engineered from scratch to match your exact operational context and business logic.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🤝</div>
-          <h4>Founder-Led Delivery</h4>
-          <p>Your project is led by our founders and senior engineers — not outsourced to junior staff. You get our best people, every time.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">📐</div>
-          <h4>Production-Grade Quality</h4>
-          <p>We build to the same standards as regulated financial institutions and enterprise software teams — audit trails, security layers, and zero-downtime deployments.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🎯</div>
-          <h4>Honest Scoping</h4>
-          <p>We tell you upfront what AI can and cannot do for your specific problem. We do not oversell and underdeliver. Our reputation is our business.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🌍</div>
-          <h4>African Market Expertise</h4>
-          <p>We understand the infrastructure, compliance, and operational realities of African markets — and we build AI systems that actually work within them.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">♾️</div>
-          <h4>Long-Term Partnership</h4>
-          <p>We do not disappear after launch. We maintain, iterate, and improve your AI system as your business grows and your needs evolve.</p>
-        </div>
+      <div class="split-photo">
+        <img src="/others/robotic-arms-modern-factory-setting.jpg" alt="AI Systems" style="width:100%;height:100%;object-fit:cover;">
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════
-       PAGE 8: TEAM
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="page-header">
-      <div class="page-header-title">Our Team</div>
-      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
-    </div>
-    <div class="page-body">
-      <h2 class="sec-title">The People Behind the Work</h2>
-      <p class="sec-sub">A multidisciplinary team of AI engineers, software architects, operations leaders, and business developers united by a single mission: building AI that works.</p>
-      <div class="divider"></div>
-
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-avatar">V</div>
-          <div class="team-name">Vine Samuel</div>
-          <div class="team-role">CEO & AI Solutions Architect</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">P</div>
-          <div class="team-name">Prossy Lumusu</div>
-          <div class="team-role">Chief Operations Officer</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">J</div>
-          <div class="team-name">Joel Katuula</div>
-          <div class="team-role">Chief Technology Officer</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">D</div>
-          <div class="team-name">Doris Lukotanyi</div>
-          <div class="team-role">AI Automation Engineer</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">A</div>
-          <div class="team-name">Abraham Ndyamuhaki</div>
-          <div class="team-role">Full Stack AI Software Engineer</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">M</div>
-          <div class="team-name">Mercy Mirembe</div>
-          <div class="team-role">Chief Financial Officer</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">B</div>
-          <div class="team-name">Brenda Marie</div>
-          <div class="team-role">Customer Success Manager</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">A</div>
-          <div class="team-name">Allan Joseph Bukenya</div>
-          <div class="team-role">Business Development Manager</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">J</div>
-          <div class="team-name">James Hudson</div>
-          <div class="team-role">International Business Developer</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════
-       PAGE 9: CONTACT / CLOSING
-  ════════════════════════════════ -->
-  <div class="page">
-    <div class="page-header">
-      <div class="page-header-title">Contact & Next Steps</div>
-      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
-    </div>
-    <div class="page-body">
-      <h2 class="sec-title">Let's Build Something Together</h2>
-      <p class="sec-sub">Every project starts with a conversation. Tell us your business challenge and we'll tell you honestly what AI can do for it.</p>
-      <div class="divider"></div>
-
-      <div class="contact-grid">
+  <!-- ══════════════════════════════════
+       PAGE 6 — FULL-BLEED: OUR WORK
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-fullbleed" style="background-image:url('/others/black-female-professional-sitting-desk-office-night-looking-business-chart.jpg'); min-height:520px;" onerror="this.style.backgroundImage=&quot;url('/others/businesswoman-talking-professional-fintech-convention-doing-business-pitch-stage.jpg')&quot;">
+      <div class="fullbleed-watermark">elyrac AI · Our Work</div>
+      <div class="fullbleed-overlay-box">
         <div>
-          <div class="contact-item">
-            <div class="contact-icon">✉️</div>
-            <div>
-              <h5>Email</h5>
-              <a href="mailto:info@elyracai.com">info@elyracai.com</a>
-            </div>
+          <h2>OUR WORK</h2>
+          <p style="color:var(--teal);font-size:11px;font-weight:700;letter-spacing:0.1em;font-family:var(--font-b);">SELECTED CASE STUDIES</p>
+        </div>
+        <p>We have engineered AI systems across healthcare, fintech, HR tech, NGOs, and enterprise operations. Every result below is measured and verified in production. Not demos. Not pilots. Live systems serving real users.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PAGE 7 — PORTFOLIO (01–03)
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-header">
+      <div class="pg-header-label">04 · Case Studies</div>
+      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
+    </div>
+    <div class="pg-body">
+
+      <!-- Dashboard previews -->
+      <div class="dash-grid" style="margin-bottom:28px;">
+        <div class="dash-item">
+          <img src="/others/iotec-dashboard.png" alt="ioTec Dashboard">
+          <div class="dash-label">ioTec Email Agent</div>
+        </div>
+        <div class="dash-item">
+          <img src="/others/attendtrack-copilot.jpeg" alt="AttendTrack">
+          <div class="dash-label">AttendTrack Platform</div>
+        </div>
+        <div class="dash-item">
+          <img src="/others/codeclinic-dashboard.png" alt="Code Clinic">
+          <div class="dash-label">Code Clinic System</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-head" style="background:#F8FBFF;">
+          <div class="proj-title">01 — Intelligent Email Agent · ioTec Ltd</div>
+          <div class="proj-badge" style="background:#EFF6FF;color:#3A72B8;">ENTERPRISE AI</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-col"><div class="proj-col-label" style="color:#3A72B8;">Challenge</div><div class="proj-col-text">4+ hours daily lost to email triage, categorisation, and drafting responses. The inbox had become a business bottleneck slowing down sales and support cycles.</div></div>
+          <div class="proj-col"><div class="proj-col-label" style="color:#3A72B8;">Solution</div><div class="proj-col-text">Custom AI email agent that reads, categorises, drafts responses, and escalates complex cases to the right team member — fully integrated into their existing inbox workflow.</div></div>
+          <div class="proj-col result"><div class="proj-col-label">Result</div><div class="proj-col-text"><strong>80% of emails handled autonomously.</strong> 3+ hours reclaimed daily. Response times dropped from hours to minutes.</div></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-head" style="background:#F0FDF4;">
+          <div class="proj-title">02 — AttendTrack · Workforce Management System</div>
+          <div class="proj-badge" style="background:#DCFCE7;color:#16A34A;">HR TECH</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-col"><div class="proj-col-label" style="color:#16A34A;">Challenge</div><div class="proj-col-text">Manual attendance tracking and zero field visibility. HR teams used spreadsheets and guesswork — causing payroll errors and no accountability for field teams.</div></div>
+          <div class="proj-col"><div class="proj-col-label" style="color:#16A34A;">Solution</div><div class="proj-col-text">Full workforce platform with AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot powered by Claude Sonnet for natural language HR queries.</div></div>
+          <div class="proj-col result"><div class="proj-col-label">Result</div><div class="proj-col-text"><strong>100% attendance accuracy.</strong> 3 hours saved daily on HR admin. Payroll errors eliminated completely.</div></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-head" style="background:#F5F3FF;">
+          <div class="proj-title">03 — Code Clinic · Healthcare Practice Management</div>
+          <div class="proj-badge" style="background:#EDE9FE;color:#7C3AED;">HEALTHTECH</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-col"><div class="proj-col-label" style="color:#7C3AED;">Challenge</div><div class="proj-col-text">Fragmented tools with no unified system. Patient records, appointments, billing, and staff management were all handled separately with no real-time visibility.</div></div>
+          <div class="proj-col"><div class="proj-col-label" style="color:#7C3AED;">Solution</div><div class="proj-col-text">Comprehensive clinic platform covering patient records, live appointment scheduling, invoicing, payroll, staff management, and a full analytics dashboard — one unified system.</div></div>
+          <div class="proj-col result"><div class="proj-col-label">Result</div><div class="proj-col-text"><strong>790 active patients managed.</strong> Revenue tracked in real-time (UGX 31.2M monthly). Admin workload reduced by 60%.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PAGE 8 — FULL-BLEED DIVIDER
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-fullbleed" style="background-image:url('/others/focused-black-female-student-describing-vr-experience.jpg'); min-height:460px;">
+      <div class="fullbleed-watermark">elyrac AI Company Profile</div>
+      <div class="fullbleed-overlay-box">
+        <div>
+          <h2>MORE SYSTEMS.<br>MORE RESULTS.</h2>
+        </div>
+        <p>From fintech platforms processing real transactions to AI receptionists booking dental appointments at midnight — every system we build operates at production scale, with zero tolerance for failure.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PAGE 9 — PORTFOLIO (04–06)
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-header">
+      <div class="pg-header-label">04 · Case Studies (continued)</div>
+      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
+    </div>
+    <div class="pg-body">
+
+      <div class="dash-grid" style="margin-bottom:28px;">
+        <div class="dash-item">
+          <img src="/others/winopay-app.png" alt="WinoPay">
+          <div class="dash-label">WinoPay Platform</div>
+        </div>
+        <div class="dash-item">
+          <img src="/others/trivox-dental.png" alt="Trivox">
+          <div class="dash-label">Trivox AI Receptionist</div>
+        </div>
+        <div class="dash-item">
+          <img src="/others/fraud-detection-team.jpg" alt="Fraud Detection" style="object-fit:cover;">
+          <div class="dash-label">ML Fraud Detection</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-head" style="background:#FFFBEB;">
+          <div class="proj-title">04 — WinoPay · Full-Stack Fintech Platform</div>
+          <div class="proj-badge" style="background:#FEF3C7;color:#D97706;">FINTECH</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-col"><div class="proj-col-label" style="color:#D97706;">Challenge</div><div class="proj-col-text">Building a production-grade financial platform from scratch — the highest standards of security, data integrity, and regulatory compliance for real-money transactions across multiple services.</div></div>
+          <div class="proj-col"><div class="proj-col-label" style="color:#D97706;">Solution</div><div class="proj-col-text">Full system architecture — backend API, database structure, transaction processing, complete security layer with audit logging, RBAC, and encryption. Integrates flights, hotels, bill pay, insurance, and retail.</div></div>
+          <div class="proj-col result"><div class="proj-col-label">Result</div><div class="proj-col-text"><strong>Zero critical transaction failures since launch.</strong> Meets regulated financial institution compliance standards.</div></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-head" style="background:#F0FDFE;">
+          <div class="proj-title">05 — Trivox AI · Intelligent Dental Receptionist</div>
+          <div class="proj-badge" style="background:#CFFAFE;color:#0891B2;">CONVERSATIONAL AI</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-col"><div class="proj-col-label" style="color:#0891B2;">Challenge</div><div class="proj-col-text">Dental clinics losing patients due to missed calls, slow booking responses, and overwhelmed front desk staff. After-hours enquiries went completely unanswered.</div></div>
+          <div class="proj-col"><div class="proj-col-label" style="color:#0891B2;">Solution</div><div class="proj-col-text">Fully conversational AI receptionist trained on dental clinic workflows — handles appointment booking, patient enquiries, follow-up reminders, and proactive outreach 24/7.</div></div>
+          <div class="proj-col result"><div class="proj-col-label">Result</div><div class="proj-col-text"><strong>+40% more bookings captured.</strong> 24/7 availability. Front desk workload cut in half.</div></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-head" style="background:#FEF2F2;">
+          <div class="proj-title">06 — AI/ML Fraud Detection · Financial Services</div>
+          <div class="proj-badge" style="background:#FEE2E2;color:#DC2626;">FINTECH / REGTECH</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-col"><div class="proj-col-label" style="color:#DC2626;">Challenge</div><div class="proj-col-text">Legacy rule-based systems generating too many false positives while missing sophisticated fraud patterns — a compliance and financial liability risk at transaction scale.</div></div>
+          <div class="proj-col"><div class="proj-col-label" style="color:#DC2626;">Solution</div><div class="proj-col-text">Purpose-built ML fraud detection pipeline — data ingestion, feature engineering, model training, real-time inference, compliance alerts with full explanations, and complete regulatory audit trail.</div></div>
+          <div class="proj-col result"><div class="proj-col-label">Result</div><div class="proj-col-text"><strong>Real-time detection at transaction scale.</strong> Full regulatory audit trail. Significant reduction in false positives.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PAGE 10 — WHY CHOOSE US (split)
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-header">
+      <div class="pg-header-label">05 · Why Choose elyrac AI</div>
+      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
+    </div>
+    <div class="split">
+      <div class="split-photo">
+        <img src="/others/business-person-using-laptop-multitasking-finish-daily-startup-tasks.jpg" alt="Why elyrac AI" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="split-text">
+        <div class="sec-eyebrow">The elyrac Difference</div>
+        <h2 class="sec-h2">WHY CHOOSE US</h2>
+        <div class="sec-divider"></div>
+        <p class="body-p" style="font-size:13px;">Every AI company claims to be different. Here is specifically how we are.</p>
+        <div class="why-grid" style="margin-top:20px;grid-template-columns:1fr 1fr;">
+          <div class="why-card">
+            <div class="why-icon">🔧</div>
+            <h4>Fully Custom</h4>
+            <p>No templates. Every system engineered from scratch to match your exact operational context.</p>
           </div>
-          <div class="contact-item">
-            <div class="contact-icon">🌐</div>
-            <div>
-              <h5>Website</h5>
-              <a href="https://elyracai.com">www.elyracai.com</a>
-            </div>
+          <div class="why-card">
+            <div class="why-icon">🎯</div>
+            <h4>Honest Scoping</h4>
+            <p>We tell you upfront what AI can and cannot do. We don't oversell and underdeliver.</p>
           </div>
-          <div class="contact-item">
-            <div class="contact-icon">📅</div>
-            <div>
-              <h5>Book a Strategy Call</h5>
-              <a href="https://calendly.com/ceo-elyracai/30min">calendly.com/ceo-elyracai/30min</a>
-            </div>
+          <div class="why-card">
+            <div class="why-icon">📐</div>
+            <h4>Production-Grade</h4>
+            <p>Same standards as regulated financial institutions — audit trails, security layers, zero-downtime.</p>
           </div>
-          <div class="contact-item">
-            <div class="contact-icon">💼</div>
-            <div>
-              <h5>LinkedIn</h5>
-              <a href="https://www.linkedin.com/company/elyrac-ai">linkedin.com/company/elyrac-ai</a>
-            </div>
+          <div class="why-card">
+            <div class="why-icon">🌍</div>
+            <h4>African Expertise</h4>
+            <p>We understand African market infrastructure, compliance, and operational realities.</p>
           </div>
-          <div class="contact-item">
-            <div class="contact-icon">📍</div>
-            <div>
-              <h5>Location</h5>
-              <p>Kampala, Uganda · Serving clients globally</p>
-            </div>
+          <div class="why-card">
+            <div class="why-icon">🤝</div>
+            <h4>Founder-Led</h4>
+            <p>Your project is led by our founders and senior engineers — not outsourced to junior staff.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">♾️</div>
+            <h4>Long-Term</h4>
+            <p>We maintain, iterate, and improve your AI system as your business grows.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="contact-cta">
-          <h4>Ready to build your AI system?</h4>
-          <p>Book a free 30-minute strategy call with our CEO Vine Samuel. We will scope your project honestly, tell you exactly what's possible, and outline a clear path forward.</p>
-          <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" class="cta-btn">
-            📅 Book a Free Call
-          </a>
-          <div style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.45);">
-            No commitment required · We respond within 24 hours
-          </div>
+  <!-- ══════════════════════════════════
+       PAGE 11 — CONTACT
+  ══════════════════════════════════ -->
+  <div class="pg">
+    <div class="pg-header">
+      <div class="pg-header-label">06 · Contact & Next Steps</div>
+      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
+    </div>
+    <div class="contact-split">
+      <div class="contact-left">
+        <div class="sec-eyebrow">Get In Touch</div>
+        <h2 class="sec-h2">LET'S BUILD<br>SOMETHING TOGETHER</h2>
+        <div class="sec-divider"></div>
+        <p class="body-p" style="margin-bottom:28px;">Every project starts with a conversation. Tell us your business challenge and we'll tell you honestly what AI can do for it.</p>
+
+        <div class="contact-row">
+          <div class="ci">✉️</div>
+          <div><h5>Email</h5><a href="mailto:info@elyracai.com">info@elyracai.com</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="ci">🌐</div>
+          <div><h5>Website</h5><a href="https://elyracai.com">www.elyracai.com</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="ci">📅</div>
+          <div><h5>Book a Free Strategy Call</h5><a href="https://calendly.com/ceo-elyracai/30min">calendly.com/ceo-elyracai/30min</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="ci">💼</div>
+          <div><h5>LinkedIn</h5><a href="https://www.linkedin.com/company/elyrac-ai">linkedin.com/company/elyrac-ai</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="ci">📍</div>
+          <div><h5>Location</h5><p>Kampala, Uganda · Serving clients globally</p></div>
+        </div>
+      </div>
+      <div class="contact-right">
+        <div class="contact-right-inner">
+          <h3>Ready to build your AI system?</h3>
+          <p>Book a free 30-minute strategy call with our CEO Vine Samuel. We will scope your project honestly, tell you exactly what's possible, and outline a clear path forward.<br><br>No commitment required. We respond within 24 hours.</p>
+          <a href="https://calendly.com/ceo-elyracai/30min" class="cta-pill">📅 Book a Free Call →</a>
         </div>
       </div>
     </div>
 
     <!-- Back cover strip -->
-    <div class="cover-back">
-      <div class="cover-back-blob"></div>
-      <div class="cover-back-text">
+    <div class="back-cover">
+      <div class="back-cover-text">
         <h3>elyrac AI — Grace in Design.</h3>
-        <p>Custom AI systems engineered for real business impact.</p>
+        <p>Custom AI systems engineered for real business impact · info@elyracai.com</p>
       </div>
-      <div class="cover-back-logo">
-        <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
-      </div>
+      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
     </div>
   </div>
 
 </div>
-
 </body>
 </html>
