@@ -20,14 +20,8 @@
   nav {
     top: 0 !important;
     z-index: 99999 !important;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
   }
-  nav.nav-scrolled {
-    background: rgba(6,14,43,0.97) !important;
-    backdrop-filter: blur(12px) !important;
-    box-shadow: 0 2px 24px rgba(0,0,0,0.25) !important;
-  }
-  nav .nav-logo img { height: 70px !important; max-height: 70px !important; }
+  nav .nav-logo img { height: 80px !important; max-height: 80px !important; }
 
 /* ── HERO ── */
 .hero {
@@ -863,10 +857,7 @@
     </div>
 
     <div class="portfolio-card reverse">
-      <div class="portfolio-img" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px;background:#f8fafc;">
-        <img src="others/attendtrack-copilot.jpeg" alt="AttendTrack Copilot" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px;">
-        <img src="others/attendtrack-gps.jpeg" alt="AttendTrack GPS" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px;">
-      </div>
+      <div class="portfolio-img"><img src="others/attendtrack-copilot.jpeg" alt="AttendTrack dashboard" loading="lazy"></div>
       <div class="portfolio-info">
         <h3>AttendTrack — Workforce Management System</h3>
         <span class="tag-badge" style="background:#e8f8f0;color:#16a34a">HR & Field Management</span>
@@ -1138,17 +1129,6 @@
   document.getElementById('mobile-close').addEventListener('click', () => {
     document.getElementById('mobile-menu').classList.remove('open');
   });
-
-  // Nav scroll background
-  (function() {
-    var nav = document.querySelector('nav');
-    function updateNav() {
-      if (window.scrollY > 10) { nav.classList.add('nav-scrolled'); }
-      else { nav.classList.remove('nav-scrolled'); }
-    }
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
-  })();
 
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
