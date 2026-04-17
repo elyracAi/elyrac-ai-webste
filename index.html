@@ -449,7 +449,7 @@
   #chatbot-widget { cursor: grab; }
   #chatbot-widget:active { cursor: grabbing; }
   #chat-panel { cursor: default; }
-  .chat-toggle { animation: bubbleBounce 0.9s ease 1s both, pulseGlow 2.5s ease-in-out 2s infinite !important; }
+  .chat-toggle { animation: chatBounce 3s ease-in-out infinite !important; }
 
   /* ── SECTION BACKGROUNDS — break up the white monotony ── */
   .clients  { background: #F0F5FF !important; }
@@ -522,6 +522,38 @@
     .hfc-3, .hfc-4 { display: none; }
     .stat-card { min-width: unset; }
     .tools-ticker-wrap { margin: 0 -16px; }
+  }
+
+  /* ── BRAND COLOR OVERRIDES — force reduce white ── */
+  body { background: #F5F8FF !important; }
+  .problems-section,
+  .how-section,
+  .stats-section,
+  .tools-section,
+  .portfolio-section,
+  .industry-section,
+  [class*="section"]:not(.hero-section):not(.cta-section) {
+    background: #F0F5FF;
+  }
+  .stats-wrap, .stats-section, .counter-section,
+  section:has(.counter), section:has(.stat-number) {
+    background: linear-gradient(135deg, #060e2b 0%, #0d2260 100%) !important;
+    color: white !important;
+  }
+  .ticker-section, section:has(.ticker-wrap) {
+    background: #F0F5FF !important;
+    border-top: 1px solid #C7DEFF !important;
+    border-bottom: 1px solid #C7DEFF !important;
+  }
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 50%, rgba(113,199,214,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 85% 20%, rgba(58,114,184,0.2) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
   }
 </style>
 </head>
@@ -1267,6 +1299,16 @@
       widget.style.bottom = (origBottom + dy) + 'px';
     });
     document.addEventListener('mouseup', () => { dragging = false; });
+
+    // Force bounce animation on chat toggle
+    var ct = document.getElementById('chat-toggle');
+    if (ct) {
+      ct.style.animation = 'chatBounce 3s ease-in-out infinite';
+      ct.style.width = '64px';
+      ct.style.height = '64px';
+      ct.style.border = '3px solid white';
+      ct.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3), 0 0 0 8px rgba(74,144,226,0.2)';
+    }
   })();
 </script>
 </body>
