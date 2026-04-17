@@ -254,7 +254,7 @@ body { padding-top: 70px; }
   flex-shrink: 0;
 }
 .nav-logo img {
-  height: 80px !important; max-height: 80px !important; width: auto !important;
+  height: 86px !important; max-height: 86px !important; width: auto !important;
   object-fit: contain;
 }
 

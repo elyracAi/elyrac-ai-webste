@@ -20,8 +20,10 @@
   nav {
     top: 0 !important;
     z-index: 99999 !important;
+    transition: transform 0.3s ease;
   }
-  nav .nav-logo img { height: 80px !important; max-height: 80px !important; }
+  nav.nav-hidden { transform: translateY(-100%) !important; }
+  nav .nav-logo img { height: 86px !important; max-height: 86px !important; }
 
 /* ── HERO ── */
 .hero {
@@ -1129,6 +1131,15 @@
   document.getElementById('mobile-close').addEventListener('click', () => {
     document.getElementById('mobile-menu').classList.remove('open');
   });
+
+  // Hide nav on scroll
+  (function() {
+    var nav = document.querySelector('nav');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 80) { nav.classList.add('nav-hidden'); }
+      else { nav.classList.remove('nav-hidden'); }
+    }, { passive: true });
+  })();
 
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
