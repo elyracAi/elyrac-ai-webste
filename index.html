@@ -8,9 +8,8 @@
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta name="msapplication-TileImage" content="/favicon.png">
-<meta http-equiv="Cache-Control" content="max-age=31536000">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://i.pravatar.cc">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://i.pravatar.cc" crossorigin>
 <link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
 <link rel="preload" as="image" href="others/businesswoman-interacting-with-ai-hologram-office.jpg">
 <link rel="stylesheet" href="css/shared.css">
@@ -197,6 +196,7 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.22);
+    border-top: 2px solid #71C7D6;
     border-radius: 14px;
     padding: 12px 18px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.25);
@@ -224,10 +224,10 @@
   .clients-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
   .stats-row { display: flex; gap: 20px; flex-wrap: wrap; }
   .stat-card {
-    background: var(--gray-50); border: 1px solid var(--gray-200);
+    background: var(--bg-soft); border: 1px solid var(--divider-blue);
     border-radius: var(--radius); padding: 24px 32px; min-width: 160px;
   }
-  .stat-card .num { font-size: 38px; font-weight: 800; font-family: 'Sora', sans-serif; color: var(--blue); }
+  .stat-card .num { font-size: 38px; font-weight: 800; font-family: 'Sora', sans-serif; color: var(--tibet-classic); }
   .stat-card p { font-size: 13px; color: var(--gray-600); margin-top: 6px; max-width: 120px; line-height: 1.5; }
   /* ── INDUSTRY TICKER ── */
   .ind-ticker-wrap {
@@ -240,6 +240,7 @@
     gap: 16px;
     width: max-content;
     animation: tickerScroll 60s linear infinite;
+    will-change: transform;
   }
   .ind-chip {
     display: inline-flex;
@@ -325,6 +326,7 @@
     gap: 16px;
     width: max-content;
     animation: toolsScroll 70s linear infinite;
+    will-change: transform;
   }
   .tech-tile {
     background: var(--white);
@@ -374,7 +376,7 @@
   .dot-red { width: 8px; height: 8px; border-radius: 50%; background: var(--red); display: inline-block; flex-shrink: 0; }
   .dot-green { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; flex-shrink: 0; }
   .stats-mini { display: flex; gap: 24px; }
-  .stats-mini div .num2 { font-size: 24px; font-weight: 800; font-family: 'Sora', sans-serif; color: var(--blue); }
+  .stats-mini div .num2 { font-size: 24px; font-weight: 800; font-family: 'Sora', sans-serif; color: var(--tibet-classic); }
   .stats-mini div p { font-size: 12px; color: var(--gray-600); margin-top: 4px; }
 
   /* ── PORTFOLIO IMAGES — full visible, no crop ── */
@@ -419,7 +421,7 @@
   .home-faq { background: var(--gray-50); }
   .home-faq-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1100px; margin: 0 auto; }
   .faq-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
-  .faq-stat .num3 { font-size: 40px; font-weight: 800; font-family: 'Sora', sans-serif; color: var(--blue); }
+  .faq-stat .num3 { font-size: 40px; font-weight: 800; font-family: 'Sora', sans-serif; color: var(--tibet-classic); }
   .faq-stat p { font-size: 13px; color: var(--gray-600); margin-top: 4px; }
 
   /* ── CHATBOT ANIMATIONS ── */
@@ -529,10 +531,10 @@
     </div>
     <div class="hero-proof">
       <div class="hero-avatars">
-        <img src="https://i.pravatar.cc/40?img=1"  alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;">
-        <img src="https://i.pravatar.cc/40?img=5"  alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;margin-left:-10px;">
-        <img src="https://i.pravatar.cc/40?img=12" alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;margin-left:-10px;">
-        <img src="https://i.pravatar.cc/40?img=18" alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;margin-left:-10px;">
+        <img src="https://i.pravatar.cc/40?img=1"  alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;" loading="lazy" decoding="async">
+        <img src="https://i.pravatar.cc/40?img=5"  alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;margin-left:-10px;" loading="lazy" decoding="async">
+        <img src="https://i.pravatar.cc/40?img=12" alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;margin-left:-10px;" loading="lazy" decoding="async">
+        <img src="https://i.pravatar.cc/40?img=18" alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;margin-left:-10px;" loading="lazy" decoding="async">
       </div>
       <div class="hero-proof-text">
         <div class="stars">★★★★★</div>
@@ -711,7 +713,7 @@
             src="others/conversational-ai.jpg"
             alt="Conversational AI"
             onerror="this.style.border='3px solid red'"
-            style="width:100%;height:260px;object-fit:cover;display:block;border-radius:12px 12px 0 0;">
+            style="width:100%;height:260px;object-fit:cover;display:block;border-radius:12px 12px 0 0;" loading="lazy" decoding="async">
         </div>
         <h3>Conversational AI Agents</h3>
         <p>Domain-trained chatbots and voice agents that understand your business context — customer support, internal Q&A, or lead qualification.</p>
@@ -737,44 +739,44 @@
     </div>
     <div class="tools-ticker-wrap">
       <div class="tools-ticker-track">
-        <div class="tech-tile"><img src="others/reactjs_logo_icon_170805.png" alt="React">React</div>
-        <div class="tech-tile"><img src="others/python_vertical_logo_icon_168039.png" alt="Python">Python</div>
-        <div class="tech-tile"><img src="others/file_type_flutter_icon_130599.png" alt="Flutter">Flutter</div>
-        <div class="tech-tile"><img src="others/fastapi_api_icon_265226.png" alt="FastAPI">FastAPI</div>
-        <div class="tech-tile"><img src="others/node_icon_198061.png" alt="Node.js">Node.js</div>
-        <div class="tech-tile"><img src="others/postgresql_plain_wordmark_logo_icon_146390.png" alt="PostgreSQL">PostgreSQL</div>
-        <div class="tech-tile"><img src="others/docker_plain_wordmark_logo_icon_146555.png" alt="Docker">Docker</div>
-        <div class="tech-tile"><img src="others/file_type_typescript_icon_130108.png" alt="TypeScript">TypeScript</div>
-        <div class="tech-tile"><img src="others/amazon_aws_logo_icon_145507.png" alt="AWS">AWS</div>
-        <div class="tech-tile"><img src="others/1702059505open-ai-logo.png" alt="OpenAI">OpenAI</div>
-        <div class="tech-tile"><img src="others/microsoft_azure_logo_icon_168977.png" alt="Azure">Azure</div>
-        <div class="tech-tile"><img src="others/javascript_vertical_logo_icon_168606.png" alt="JavaScript">JavaScript</div>
+        <div class="tech-tile"><img src="others/reactjs_logo_icon_170805.png" alt="React" loading="lazy" decoding="async">React</div>
+        <div class="tech-tile"><img src="others/python_vertical_logo_icon_168039.png" alt="Python" loading="lazy" decoding="async">Python</div>
+        <div class="tech-tile"><img src="others/file_type_flutter_icon_130599.png" alt="Flutter" loading="lazy" decoding="async">Flutter</div>
+        <div class="tech-tile"><img src="others/fastapi_api_icon_265226.png" alt="FastAPI" loading="lazy" decoding="async">FastAPI</div>
+        <div class="tech-tile"><img src="others/node_icon_198061.png" alt="Node.js" loading="lazy" decoding="async">Node.js</div>
+        <div class="tech-tile"><img src="others/postgresql_plain_wordmark_logo_icon_146390.png" alt="PostgreSQL" loading="lazy" decoding="async">PostgreSQL</div>
+        <div class="tech-tile"><img src="others/docker_plain_wordmark_logo_icon_146555.png" alt="Docker" loading="lazy" decoding="async">Docker</div>
+        <div class="tech-tile"><img src="others/file_type_typescript_icon_130108.png" alt="TypeScript" loading="lazy" decoding="async">TypeScript</div>
+        <div class="tech-tile"><img src="others/amazon_aws_logo_icon_145507.png" alt="AWS" loading="lazy" decoding="async">AWS</div>
+        <div class="tech-tile"><img src="others/1702059505open-ai-logo.png" alt="OpenAI" loading="lazy" decoding="async">OpenAI</div>
+        <div class="tech-tile"><img src="others/microsoft_azure_logo_icon_168977.png" alt="Azure" loading="lazy" decoding="async">Azure</div>
+        <div class="tech-tile"><img src="others/javascript_vertical_logo_icon_168606.png" alt="JavaScript" loading="lazy" decoding="async">JavaScript</div>
         <!-- Copy 2 -->
-        <div class="tech-tile"><img src="others/reactjs_logo_icon_170805.png" alt="React">React</div>
-        <div class="tech-tile"><img src="others/python_vertical_logo_icon_168039.png" alt="Python">Python</div>
-        <div class="tech-tile"><img src="others/file_type_flutter_icon_130599.png" alt="Flutter">Flutter</div>
-        <div class="tech-tile"><img src="others/fastapi_api_icon_265226.png" alt="FastAPI">FastAPI</div>
-        <div class="tech-tile"><img src="others/node_icon_198061.png" alt="Node.js">Node.js</div>
-        <div class="tech-tile"><img src="others/postgresql_plain_wordmark_logo_icon_146390.png" alt="PostgreSQL">PostgreSQL</div>
-        <div class="tech-tile"><img src="others/docker_plain_wordmark_logo_icon_146555.png" alt="Docker">Docker</div>
-        <div class="tech-tile"><img src="others/file_type_typescript_icon_130108.png" alt="TypeScript">TypeScript</div>
-        <div class="tech-tile"><img src="others/amazon_aws_logo_icon_145507.png" alt="AWS">AWS</div>
-        <div class="tech-tile"><img src="others/1702059505open-ai-logo.png" alt="OpenAI">OpenAI</div>
-        <div class="tech-tile"><img src="others/microsoft_azure_logo_icon_168977.png" alt="Azure">Azure</div>
-        <div class="tech-tile"><img src="others/javascript_vertical_logo_icon_168606.png" alt="JavaScript">JavaScript</div>
+        <div class="tech-tile"><img src="others/reactjs_logo_icon_170805.png" alt="React" loading="lazy" decoding="async">React</div>
+        <div class="tech-tile"><img src="others/python_vertical_logo_icon_168039.png" alt="Python" loading="lazy" decoding="async">Python</div>
+        <div class="tech-tile"><img src="others/file_type_flutter_icon_130599.png" alt="Flutter" loading="lazy" decoding="async">Flutter</div>
+        <div class="tech-tile"><img src="others/fastapi_api_icon_265226.png" alt="FastAPI" loading="lazy" decoding="async">FastAPI</div>
+        <div class="tech-tile"><img src="others/node_icon_198061.png" alt="Node.js" loading="lazy" decoding="async">Node.js</div>
+        <div class="tech-tile"><img src="others/postgresql_plain_wordmark_logo_icon_146390.png" alt="PostgreSQL" loading="lazy" decoding="async">PostgreSQL</div>
+        <div class="tech-tile"><img src="others/docker_plain_wordmark_logo_icon_146555.png" alt="Docker" loading="lazy" decoding="async">Docker</div>
+        <div class="tech-tile"><img src="others/file_type_typescript_icon_130108.png" alt="TypeScript" loading="lazy" decoding="async">TypeScript</div>
+        <div class="tech-tile"><img src="others/amazon_aws_logo_icon_145507.png" alt="AWS" loading="lazy" decoding="async">AWS</div>
+        <div class="tech-tile"><img src="others/1702059505open-ai-logo.png" alt="OpenAI" loading="lazy" decoding="async">OpenAI</div>
+        <div class="tech-tile"><img src="others/microsoft_azure_logo_icon_168977.png" alt="Azure" loading="lazy" decoding="async">Azure</div>
+        <div class="tech-tile"><img src="others/javascript_vertical_logo_icon_168606.png" alt="JavaScript" loading="lazy" decoding="async">JavaScript</div>
         <!-- Copy 3 -->
-        <div class="tech-tile"><img src="others/reactjs_logo_icon_170805.png" alt="React">React</div>
-        <div class="tech-tile"><img src="others/python_vertical_logo_icon_168039.png" alt="Python">Python</div>
-        <div class="tech-tile"><img src="others/file_type_flutter_icon_130599.png" alt="Flutter">Flutter</div>
-        <div class="tech-tile"><img src="others/fastapi_api_icon_265226.png" alt="FastAPI">FastAPI</div>
-        <div class="tech-tile"><img src="others/node_icon_198061.png" alt="Node.js">Node.js</div>
-        <div class="tech-tile"><img src="others/postgresql_plain_wordmark_logo_icon_146390.png" alt="PostgreSQL">PostgreSQL</div>
-        <div class="tech-tile"><img src="others/docker_plain_wordmark_logo_icon_146555.png" alt="Docker">Docker</div>
-        <div class="tech-tile"><img src="others/file_type_typescript_icon_130108.png" alt="TypeScript">TypeScript</div>
-        <div class="tech-tile"><img src="others/amazon_aws_logo_icon_145507.png" alt="AWS">AWS</div>
-        <div class="tech-tile"><img src="others/1702059505open-ai-logo.png" alt="OpenAI">OpenAI</div>
-        <div class="tech-tile"><img src="others/microsoft_azure_logo_icon_168977.png" alt="Azure">Azure</div>
-        <div class="tech-tile"><img src="others/javascript_vertical_logo_icon_168606.png" alt="JavaScript">JavaScript</div>
+        <div class="tech-tile"><img src="others/reactjs_logo_icon_170805.png" alt="React" loading="lazy" decoding="async">React</div>
+        <div class="tech-tile"><img src="others/python_vertical_logo_icon_168039.png" alt="Python" loading="lazy" decoding="async">Python</div>
+        <div class="tech-tile"><img src="others/file_type_flutter_icon_130599.png" alt="Flutter" loading="lazy" decoding="async">Flutter</div>
+        <div class="tech-tile"><img src="others/fastapi_api_icon_265226.png" alt="FastAPI" loading="lazy" decoding="async">FastAPI</div>
+        <div class="tech-tile"><img src="others/node_icon_198061.png" alt="Node.js" loading="lazy" decoding="async">Node.js</div>
+        <div class="tech-tile"><img src="others/postgresql_plain_wordmark_logo_icon_146390.png" alt="PostgreSQL" loading="lazy" decoding="async">PostgreSQL</div>
+        <div class="tech-tile"><img src="others/docker_plain_wordmark_logo_icon_146555.png" alt="Docker" loading="lazy" decoding="async">Docker</div>
+        <div class="tech-tile"><img src="others/file_type_typescript_icon_130108.png" alt="TypeScript" loading="lazy" decoding="async">TypeScript</div>
+        <div class="tech-tile"><img src="others/amazon_aws_logo_icon_145507.png" alt="AWS" loading="lazy" decoding="async">AWS</div>
+        <div class="tech-tile"><img src="others/1702059505open-ai-logo.png" alt="OpenAI" loading="lazy" decoding="async">OpenAI</div>
+        <div class="tech-tile"><img src="others/microsoft_azure_logo_icon_168977.png" alt="Azure" loading="lazy" decoding="async">Azure</div>
+        <div class="tech-tile"><img src="others/javascript_vertical_logo_icon_168606.png" alt="JavaScript" loading="lazy" decoding="async">JavaScript</div>
       </div>
     </div>
   </div>
@@ -919,12 +921,12 @@
         <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;font-style:italic;">"We went from paper records and manual scheduling to a fully digital clinic management system with AI analytics built in. Our team adapted faster than I expected, and the billing accuracy alone has already paid for the system several times over."</p>
         <div style="height:1px;background:var(--gray-200);"></div>
         <div style="display:flex;align-items:center;gap:14px;">
-          <img src="/others/client-steven-mugabe.png" alt="Dr. Steven Mugabe" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);">
+          <img src="/others/client-steven-mugabe.png" alt="Dr. Steven Mugabe" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);" loading="lazy" decoding="async">
           <div>
             <div style="font-weight:700;font-size:14px;color:var(--gray-800);font-family:var(--font-heading);">Dr. Steven Mugabe</div>
             <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">Founder & Lead Dentist</div>
           </div>
-          <img src="/others/logo-code-clinic.png" alt="Code Clinic" style="height:32px;width:auto;object-fit:contain;margin-left:auto;opacity:0.85;">
+          <img src="/others/logo-code-clinic.png" alt="Code Clinic" style="height:32px;width:auto;object-fit:contain;margin-left:auto;opacity:0.85;" loading="lazy" decoding="async">
         </div>
         <div style="background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;">⚙️ Dental Practice Management System</div>
       </div>
@@ -934,12 +936,12 @@
         <p style="font-size:15px;color:rgba(255,255,255,0.8);line-height:1.75;flex:1;font-style:italic;">"Our inbox was a nightmare — the team was spending 4+ hours a day just triaging emails. Since we deployed the AI email agent, 80% of responses go out automatically and accurately. It's like hiring a full-time person who never sleeps."</p>
         <div style="height:1px;background:rgba(255,255,255,0.1);"></div>
         <div style="display:flex;align-items:center;gap:14px;">
-          <img src="/others/client-timothy-kasasa.png" alt="Timothy Kasasa" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(255,255,255,0.2);">
+          <img src="/others/client-timothy-kasasa.png" alt="Timothy Kasasa" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(255,255,255,0.2);" loading="lazy" decoding="async">
           <div>
             <div style="font-weight:700;font-size:14px;color:white;font-family:var(--font-heading);">Timothy Kasasa</div>
             <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px;">CEO, ioTec</div>
           </div>
-          <img src="/others/logo-iotec.png" alt="ioTec" style="height:28px;width:auto;object-fit:contain;margin-left:auto;opacity:0.9;filter:brightness(0) invert(1);">
+          <img src="/others/logo-iotec.png" alt="ioTec" style="height:28px;width:auto;object-fit:contain;margin-left:auto;opacity:0.9;filter:brightness(0) invert(1);" loading="lazy" decoding="async">
         </div>
         <div style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;border:1px solid rgba(255,255,255,0.12);">🤖 AI Email Agent System</div>
       </div>
@@ -949,12 +951,12 @@
         <p style="font-size:15px;color:var(--gray-700);line-height:1.75;flex:1;font-style:italic;">"The conversational AI agent we got from elyrac AI handles inbound calls and texts from dental patients completely on its own — booking appointments, answering questions, following up. It's changed how our entire product works. Patients love it."</p>
         <div style="height:1px;background:var(--gray-200);"></div>
         <div style="display:flex;align-items:center;gap:14px;">
-          <img src="/others/client-daniel-trivox.jpg" alt="Daniel" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);">
+          <img src="/others/client-daniel-trivox.jpg" alt="Daniel" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--blue-light);" loading="lazy" decoding="async">
           <div>
             <div style="font-weight:700;font-size:14px;color:var(--gray-800);font-family:var(--font-heading);">Daniel</div>
             <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">Founder, Trivox</div>
           </div>
-          <img src="/others/logo-trivox.png" alt="Trivox" style="height:28px;width:auto;object-fit:contain;margin-left:auto;opacity:0.85;">
+          <img src="/others/logo-trivox.png" alt="Trivox" style="height:28px;width:auto;object-fit:contain;margin-left:auto;opacity:0.85;" loading="lazy" decoding="async">
         </div>
         <div style="background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;border-radius:100px;padding:5px 14px;display:inline-block;align-self:flex-start;letter-spacing:0.05em;">🎙️ Conversational AI Voice & Chat Agent</div>
       </div>
@@ -1152,27 +1154,54 @@
       setTimeout(() => panel.classList.remove('open'), 2000);
     }, 1000);
 
-    // Chat replies
-    const replies = [
-      "Great question! We build fully custom AI systems — not off-the-shelf tools. Every project is engineered around your specific business.",
-      "I'd recommend booking a free 30-minute strategy call. You'll get honest, personalised advice with no commitment required.",
-      "We've built AI systems for healthcare, government, e-commerce, finance, and more. What industry are you in?",
-      "Most projects take 4–12 weeks. We scope everything upfront so there are no surprises.",
-      "You can reach us at ceo@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
+    var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
+    var knowledge = [
+      { keys: ['price','cost','how much','pricing','rates'], reply: "Our pricing depends on the scope of your project. Most custom AI systems range from small automations to full enterprise platforms. The best next step is a free 30-minute strategy call where we scope your project honestly. Book here: calendly.com/ceo-elyracai/30min" },
+      { keys: ['attendtrack','attendance','gps','payroll','workforce'], reply: "AttendTrack is our workforce management platform \u2014 AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot. It's live and serving clients. Want to see a demo?" },
+      { keys: ['iotec','email agent','email automation','inbox'], reply: "We built an intelligent email agent for ioTec Ltd that handles 80% of emails autonomously \u2014 categorizing, drafting responses, and escalating complex cases. Your team reclaims hours daily." },
+      { keys: ['code clinic','clinic','dental','healthcare','hospital'], reply: "Code Clinic is our healthcare practice management platform \u2014 patient records, appointments, billing, payroll, live patient flow, and analytics. Built for dental and general practices." },
+      { keys: ['trivox','receptionist','dental receptionist','voice agent'], reply: "Trivox AI is our conversational dental receptionist \u2014 it books appointments, answers patient queries, and follows up 24/7. Clients see +40% more bookings with zero missed outreaches." },
+      { keys: ['winopay','fintech','payment','financial'], reply: "WinoPay is a full-stack fintech platform we architected from scratch \u2014 backend APIs, transaction processing, security layer, RBAC, and multi-service integrations." },
+      { keys: ['fraud','ml','machine learning','detection'], reply: "We've built ML fraud detection systems for financial institutions \u2014 full pipeline from data ingestion to real-time inference, with audit trails for regulatory compliance." },
+      { keys: ['timeline','how long','duration','weeks'], reply: "Most projects take 4\u201312 weeks depending on scope. We always scope everything upfront so there are no surprises. Want to discuss your project timeline?" },
+      { keys: ['technology','stack','tools','built with'], reply: "We build with Python, FastAPI, Node.js, React, PostgreSQL, Claude AI, OpenAI, and cloud infrastructure on AWS and Vercel. We choose the right tool for each problem." },
+      { keys: ['who are you','about','team','company'], reply: "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more." },
+      { keys: ['contact','reach','email','call','talk'], reply: "You can reach us at info@elyracai.com or book a direct call: calendly.com/ceo-elyracai/30min \u2014 our founder Vine Samuel will personally respond." },
+      { keys: ['hi','hello','hey','good morning','good afternoon'], reply: "Hi there! \uD83D\uDC4B I'm Maya, elyrac AI's assistant. I can answer questions about our AI solutions, past projects, pricing, or help you book a strategy call. What can I help you with?" },
+      { keys: ['bye','goodbye','thanks','thank you'], reply: "You're welcome! Feel free to reach out anytime at info@elyracai.com or book a call at calendly.com/ceo-elyracai/30min. We'd love to build something great together! \uD83D\uDE80" },
     ];
-    let idx = 0;
-    const MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
     window.sendChat = function() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
+      var input = document.getElementById('chat-input');
+      var msg = input.value.trim();
       if (!msg) return;
-      const msgs = document.getElementById('chat-messages');
-      msgs.innerHTML += `<div class="chat-bubble user"><div class="bubble-text">${msg}</div></div>`;
+      var msgs = document.getElementById('chat-messages');
+      msgs.innerHTML += '<div class="chat-bubble user"><div class="bubble-text">' + msg + '</div></div>';
       input.value = '';
       msgs.scrollTop = msgs.scrollHeight;
-      setTimeout(() => {
-        msgs.innerHTML += `<div class="chat-bubble">${MINI_AVATAR}<div class="bubble-text">${replies[idx++ % replies.length]}</div></div>`;
+      if (!window._chatNotified) {
+        window._chatNotified = true;
+        fetch('https://formspree.io/f/xpwzgqna', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ _replyto: 'vinsamuel16@gmail.com', email: 'info@elyracai.com', subject: 'New Chat Started on elyracai.com', message: 'A visitor started a chat. First message: ' + msg + '\nPage: ' + window.location.href }) }).catch(function(){});
+      }
+      var lowerMsg = msg.toLowerCase();
+      var reply = null;
+      for (var i = 0; i < knowledge.length; i++) {
+        for (var j = 0; j < knowledge[i].keys.length; j++) {
+          if (lowerMsg.includes(knowledge[i].keys[j])) { reply = knowledge[i].reply; break; }
+        }
+        if (reply) break;
+      }
+      var escalationKeywords = ['build','develop','project','hire','work with','proposal','budget','enterprise','urgent','need help'];
+      var shouldEscalate = escalationKeywords.some(function(k){ return lowerMsg.includes(k); });
+      if (!reply) { reply = "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min \u2014 or email us at info@elyracai.com. We respond within 24 hours."; }
+      setTimeout(function() {
+        msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + reply + '</div></div>';
         msgs.scrollTop = msgs.scrollHeight;
+        if (shouldEscalate) {
+          setTimeout(function() {
+            msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">It sounds like you might have a project in mind! \uD83D\uDE80 Want me to connect you directly with our team? You can email <strong>info@elyracai.com</strong> or <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" style="color:#4A90E2;font-weight:600;">book a free call here</a>.</div></div>';
+            msgs.scrollTop = msgs.scrollHeight;
+          }, 1200);
+        }
       }, 820);
     };
 

@@ -8,9 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Why RAG Beats Fine-Tuning for Most Business AI — elyrac AI</title>
 <meta name="description" content="The debate between retrieval-augmented generation and fine-tuning. Here's how to choose the right approach for your specific use case."/>
-<meta http-equiv="Cache-Control" content="max-age=31536000">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://i.pravatar.cc">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://i.pravatar.cc" crossorigin>
 <link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
 <link rel="stylesheet" href="css/shared.css">
 <style>
@@ -144,16 +143,21 @@
   <a class="mobile-cta" href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener">Book a Call</a>
 </div>
 
-<!-- PAGE HERO (minimal) -->
-<div class="page-hero" style="min-height:36vh;padding:120px 48px 60px">
+<!-- PAGE HERO -->
+<div class="page-hero" style="background:linear-gradient(135deg,#060e2b 0%,#0d1b6e 60%,#1a0a4e 100%);min-height:320px;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 48px 60px;">
   <div class="page-hero-lines">
     <svg viewBox="0 0 800 600" fill="none" preserveAspectRatio="none">
       <path d="M0 400 Q200 200 400 300 T800 150" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none"/>
+      <path d="M0 450 Q200 250 400 350 T800 200" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
     </svg>
   </div>
-  <div class="page-hero-inner">
-    <div class="section-label">LLM DEVELOPMENT</div>
-    <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:0;animation:none">April 2, 2025 &nbsp;·&nbsp; 6 min read &nbsp;·&nbsp; <a href="/blog" style="color:rgba(255,255,255,0.65)">← Back to Blog</a></p>
+  <div class="page-hero-inner" style="max-width:780px;">
+    <a href="/blog" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);padding:6px 16px;border-radius:999px;font-size:13px;font-weight:500;text-decoration:none;margin-bottom:24px;">← Back to Blog</a>
+    <div style="display:block;background:rgba(26,86,240,0.3);border:1px solid rgba(113,199,214,0.3);color:#71C7D6;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 14px;border-radius:100px;margin-bottom:16px;width:fit-content;margin-left:auto;margin-right:auto;">LLM Development</div>
+    <h1 style="font-family:var(--font-heading);font-size:clamp(22px,3.5vw,42px);font-weight:500;color:white;line-height:1.2;letter-spacing:-0.03em;margin-bottom:18px;animation:fadeUp 0.8s ease both;">Why RAG Beats Fine-Tuning for Most Business AI Applications</h1>
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;font-size:13px;color:rgba(255,255,255,0.5);flex-wrap:wrap;">
+      <span>April 2, 2025</span><span>·</span><span>6 min read</span><span>·</span><span>by Vine Samuel</span>
+    </div>
   </div>
 </div>
 
@@ -172,7 +176,7 @@
         <h1>Why RAG Beats Fine-Tuning for Most Business AI Applications</h1>
         <p class="article-lede">The debate between retrieval-augmented generation and fine-tuning isn't as complicated as it sounds. Here's how to choose the right approach — and why most businesses get this decision wrong.</p>
         <div class="article-author">
-          <img src="others/author-vine.jpg" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;" alt="Vine Samuel">
+          <img src="others/author-vine.jpg" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;" alt="Vine Samuel" loading="lazy" decoding="async">
           <div>
             <div class="author-name">Vine Samuel</div>
             <div class="author-title">AI Solutions Architect &amp; Founder, elyrac AI</div>
@@ -181,6 +185,17 @@
       </div>
 
       <div class="article-body">
+        <!-- Quick Takeaways -->
+        <div style="background:linear-gradient(135deg,#0d1b6e,#1a56f0 150%);border-radius:14px;padding:28px 32px;margin-bottom:32px;">
+          <div style="font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#71C7D6;margin-bottom:14px;">⚡ QUICK TAKEAWAYS</div>
+          <ul style="margin:0;padding-left:20px;">
+            <li style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:8px;">RAG and fine-tuning solve <strong style="color:white;">different problems</strong> — most businesses actually have the RAG problem.</li>
+            <li style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:8px;">RAG is faster, cheaper, and keeps your data <strong style="color:white;">always up-to-date</strong> without costly retraining.</li>
+            <li style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:8px;">Fine-tuning shines for <strong style="color:white;">style, tone, and specialized tasks</strong> — but only with millions of examples.</li>
+            <li style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;">Start with RAG. Add fine-tuning only after identifying specific failure modes retrieval can't solve.</li>
+          </ul>
+        </div>
+
         <p>When businesses start exploring custom AI, one of the first technical questions they inevitably hit is: <strong>should we fine-tune a model, or use retrieval-augmented generation (RAG)?</strong></p>
         <p>It's a legitimate question — and the answer has significant implications for cost, accuracy, maintenance burden, and how quickly you can actually go live. After building AI systems across 30+ projects, here's what we've learned.</p>
 
@@ -206,6 +221,12 @@
             <tr><td>Best for</td><td>Style, tone, specialized tasks</td><td>Knowledge Q&A, document search</td></tr>
           </tbody>
         </table>
+
+        <!-- Did You Know -->
+        <div style="background:linear-gradient(135deg,#e8f8f0,#d1fae5);border-left:4px solid #16a34a;border-radius:0 12px 12px 0;padding:22px 28px;margin:28px 0;">
+          <div style="font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#16a34a;margin-bottom:10px;">💡 DID YOU KNOW?</div>
+          <p style="font-size:14px;color:#166534;line-height:1.7;margin:0;">Over <strong>78% of enterprise AI deployments</strong> in 2024 used RAG as their primary architecture — not fine-tuning. The reason? Data freshness and traceability requirements that fine-tuned models simply can't meet.</p>
+        </div>
 
         <h2 id="when-rag">When RAG Wins (Most of the Time)</h2>
         <p>For the majority of business use cases, RAG is the right choice. Here's why:</p>
@@ -237,6 +258,14 @@
         <p>If you're evaluating AI approaches for your business, <a href="https://calendly.com/ceo-elyracai/30min" target="_blank">book a free call</a> and we'll give you an honest assessment of which approach fits your specific situation — and why.</p>
       </div>
 
+      <!-- Article CTA -->
+      <div style="background:linear-gradient(135deg,#060e2b 0%,#0d1b6e 100%);border-radius:16px;padding:40px;margin:48px 0 0;text-align:center;">
+        <div style="font-size:40px;margin-bottom:16px;">🚀</div>
+        <h3 style="color:white;font-size:22px;font-weight:700;margin-bottom:12px;line-height:1.3;">Ready to Build Your Own AI System?</h3>
+        <p style="color:rgba(255,255,255,0.65);font-size:14px;line-height:1.7;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Whether RAG, fine-tuning, or a hybrid — we'll architect the right solution for your business. No fluff, no buzzwords. Just a system that actually works.</p>
+        <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:white;color:#060e2b;padding:14px 28px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;">📅 Book a Free Strategy Call</a>
+      </div>
+
       <!-- Share buttons -->
       <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--gray-100);">
         <div style="font-size:12px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Share this article</div>
@@ -259,35 +288,35 @@
 
     <!-- Sidebar -->
     <aside class="article-sidebar">
-      <div class="sidebar-card">
-        <h4>Table of Contents</h4>
+      <div class="sidebar-card" style="background:linear-gradient(135deg,#060e2b,#0d2260);border-color:transparent;">
+        <h4 style="color:white;">Table of Contents</h4>
         <ul class="toc-list">
-          <li><a href="#what-is">What Are We Comparing?</a></li>
-          <li><a href="#comparison">The Honest Comparison</a></li>
-          <li><a href="#when-rag">When RAG Wins</a></li>
-          <li><a href="#when-finetune">When Fine-Tuning Makes Sense</a></li>
-          <li><a href="#hybrid">The Hybrid Approach</a></li>
-          <li><a href="#conclusion">The Bottom Line</a></li>
+          <li><a href="#what-is" style="color:rgba(255,255,255,0.6);">What Are We Comparing?</a></li>
+          <li><a href="#comparison" style="color:rgba(255,255,255,0.6);">The Honest Comparison</a></li>
+          <li><a href="#when-rag" style="color:rgba(255,255,255,0.6);">When RAG Wins</a></li>
+          <li><a href="#when-finetune" style="color:rgba(255,255,255,0.6);">When Fine-Tuning Makes Sense</a></li>
+          <li><a href="#hybrid" style="color:rgba(255,255,255,0.6);">The Hybrid Approach</a></li>
+          <li><a href="#conclusion" style="color:rgba(255,255,255,0.6);">The Bottom Line</a></li>
         </ul>
       </div>
       <div class="sidebar-card">
         <h4>Related Articles</h4>
-        <div class="related-post">
-          <div class="related-icon">⚙️</div>
+        <div class="related-post" style="transition:transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
+          <div class="related-icon" style="background:linear-gradient(135deg,#dcfce7,#a7f3d0);color:#16a34a;">⚙️</div>
           <div>
             <div class="related-title"><a href="/blog-post">The 3 Business Processes Most Ready for AI Automation</a></div>
             <div class="related-tag">Automation · 5 min</div>
           </div>
         </div>
-        <div class="related-post">
-          <div class="related-icon">🤖</div>
+        <div class="related-post" style="transition:transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
+          <div class="related-icon" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#7c3aed;">🤖</div>
           <div>
             <div class="related-title"><a href="/blog-post">AI Agents in 2025: What They Can Actually Do</a></div>
             <div class="related-tag">AI Agents · 8 min</div>
           </div>
         </div>
-        <div class="related-post">
-          <div class="related-icon">📊</div>
+        <div class="related-post" style="transition:transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
+          <div class="related-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a);color:#b45309;">📊</div>
           <div>
             <div class="related-title"><a href="/blog-post">How to Write an AI Brief That Gets Built Correctly</a></div>
             <div class="related-tag">Strategy · 7 min</div>
@@ -406,15 +435,22 @@
     var mobileClose = document.getElementById('mobile-close');
     if (hamburger) hamburger.addEventListener('click', function() { mobileMenu.classList.add('open'); });
     if (mobileClose) mobileClose.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
-    var replies = [
-      "Great question! We build fully custom AI systems — not off-the-shelf tools. Every project is engineered around your specific business.",
-      "I'd recommend booking a free 30-minute strategy call. You'll get honest, personalised advice with no commitment required.",
-      "We've built AI systems for healthcare, government, e-commerce, finance, and more. What industry are you in?",
-      "Most projects take 4–12 weeks. We scope everything upfront so there are no surprises.",
-      "You can reach us at info@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
-    ];
-    var idx = 0;
     var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
+    var knowledge = [
+      { keys: ['price','cost','how much','pricing','rates'], reply: "Our pricing depends on the scope of your project. Most custom AI systems range from small automations to full enterprise platforms. The best next step is a free 30-minute strategy call where we scope your project honestly. Book here: calendly.com/ceo-elyracai/30min" },
+      { keys: ['attendtrack','attendance','gps','payroll','workforce'], reply: "AttendTrack is our workforce management platform — AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot. It's live and serving clients. Want to see a demo?" },
+      { keys: ['iotec','email agent','email automation','inbox'], reply: "We built an intelligent email agent for ioTec Ltd that handles 80% of emails autonomously — categorizing, drafting responses, and escalating complex cases. Your team reclaims hours daily." },
+      { keys: ['code clinic','clinic','dental','healthcare','hospital'], reply: "Code Clinic is our healthcare practice management platform — patient records, appointments, billing, payroll, live patient flow, and analytics. Built for dental and general practices." },
+      { keys: ['trivox','receptionist','dental receptionist','voice agent'], reply: "Trivox AI is our conversational dental receptionist — it books appointments, answers patient queries, and follows up 24/7. Clients see +40% more bookings with zero missed outreaches." },
+      { keys: ['winopay','fintech','payment','financial'], reply: "WinoPay is a full-stack fintech platform we architected from scratch — backend APIs, transaction processing, security layer, RBAC, and multi-service integrations." },
+      { keys: ['fraud','ml','machine learning','detection'], reply: "We've built ML fraud detection systems for financial institutions — full pipeline from data ingestion to real-time inference, with audit trails for regulatory compliance." },
+      { keys: ['timeline','how long','duration','weeks'], reply: "Most projects take 4–12 weeks depending on scope. We always scope everything upfront so there are no surprises. Want to discuss your project timeline?" },
+      { keys: ['technology','stack','tools','built with'], reply: "We build with Python, FastAPI, Node.js, React, PostgreSQL, Claude AI, OpenAI, and cloud infrastructure on AWS and Vercel. We choose the right tool for each problem." },
+      { keys: ['who are you','about','team','company'], reply: "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more." },
+      { keys: ['contact','reach','email','call','talk'], reply: "You can reach us at info@elyracai.com or book a direct call: calendly.com/ceo-elyracai/30min — our founder Vine Samuel will personally respond." },
+      { keys: ['hi','hello','hey','good morning','good afternoon'], reply: "Hi there! 👋 I'm Maya, elyrac AI's assistant. I can answer questions about our AI solutions, past projects, pricing, or help you book a strategy call. What can I help you with?" },
+      { keys: ['bye','goodbye','thanks','thank you'], reply: "You're welcome! Feel free to reach out anytime at info@elyracai.com or book a call at calendly.com/ceo-elyracai/30min. We'd love to build something great together! 🚀" },
+    ];
     window.sendChat = function() {
       var input = document.getElementById('chat-input');
       var msg = input.value.trim();
@@ -423,9 +459,44 @@
       msgs.innerHTML += '<div class="chat-bubble user"><div class="bubble-text">' + msg + '</div></div>';
       input.value = '';
       msgs.scrollTop = msgs.scrollHeight;
+      if (!window._chatNotified) {
+        window._chatNotified = true;
+        fetch('https://formspree.io/f/xpwzgqna', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            _replyto: 'vinsamuel16@gmail.com',
+            email: 'info@elyracai.com',
+            subject: 'New Chat Started on elyracai.com',
+            message: 'A visitor started a chat. First message: ' + msg + '\nPage: ' + window.location.href
+          })
+        }).catch(function(){});
+      }
+      var lowerMsg = msg.toLowerCase();
+      var reply = null;
+      for (var i = 0; i < knowledge.length; i++) {
+        for (var j = 0; j < knowledge[i].keys.length; j++) {
+          if (lowerMsg.includes(knowledge[i].keys[j])) {
+            reply = knowledge[i].reply;
+            break;
+          }
+        }
+        if (reply) break;
+      }
+      var escalationKeywords = ['build','develop','project','hire','work with','proposal','budget','enterprise','urgent','need help'];
+      var shouldEscalate = escalationKeywords.some(function(k){ return lowerMsg.includes(k); });
+      if (!reply) {
+        reply = "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.";
+      }
       setTimeout(function() {
-        msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + replies[idx++ % replies.length] + '</div></div>';
+        msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + reply + '</div></div>';
         msgs.scrollTop = msgs.scrollHeight;
+        if (shouldEscalate) {
+          setTimeout(function() {
+            msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">It sounds like you might have a project in mind! 🚀 Want me to connect you directly with our team? You can email <strong>info@elyracai.com</strong> or <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" style="color:#4A90E2;font-weight:600;">book a free call here</a>.</div></div>';
+            msgs.scrollTop = msgs.scrollHeight;
+          }, 1200);
+        }
       }, 820);
     };
     var dragging = false, startX, startY, origRight, origBottom;

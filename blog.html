@@ -8,9 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — elyrac AI</title>
 <meta name="description" content="Insights on AI development, automation, and building custom AI systems for business."/>
-<meta http-equiv="Cache-Control" content="max-age=31536000">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://i.pravatar.cc">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://i.pravatar.cc" crossorigin>
 <link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
 <link rel="stylesheet" href="css/shared.css">
 <style>
@@ -68,9 +67,18 @@
   .blog-card.featured .blog-body { padding: 36px; }
   .blog-card.featured .blog-title { font-size: 22px; }
 
+  /* Blog hero overrides */
+  .page-hero { min-height: 100vh !important; justify-content: flex-start !important; text-align: left !important; padding: 140px 8% 80px !important; gap: 60px; }
+  .page-hero-inner { max-width: 560px; }
+  .page-hero-inner .section-label { justify-content: flex-start; }
+
+  /* Right-side image container */
+  .blog-hero-right { position: relative; height: 520px; flex: 1; min-width: 280px; }
+
   /* Blog hero floating images */
   @keyframes floatA { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
   @keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  @keyframes floatC { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
   .blog-hero-stats { display:flex; gap:10px; margin-top:28px; flex-wrap:wrap; }
   .blog-stat-tag {
     background: rgba(255,255,255,0.1);
@@ -81,6 +89,22 @@
     backdrop-filter: blur(8px);
   }
 
+  /* Filter pill row in blog section */
+  .blog-filter-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; margin-bottom: -12px; }
+  .blog-filter-pill {
+    background: rgba(6,14,43,0.08); border: 1px solid rgba(26,86,240,0.2);
+    color: var(--gray-700); padding: 8px 18px; border-radius: 999px;
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .blog-filter-pill:hover, .blog-filter-pill.active {
+    background: var(--blue); color: white; border-color: var(--blue);
+  }
+
+  /* Featured card thumb fix */
+  .blog-card.featured .blog-thumb { height: 280px; }
+
   /* CTA card in grid */
   .blog-card-cta {
     background: linear-gradient(135deg, #060e2b 0%, #0d1b6e 100%);
@@ -88,7 +112,7 @@
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     text-align: center; padding: 40px 28px;
-    min-height: 300px;
+    height: 100%; min-height: 500px;
     border: 1px solid rgba(255,255,255,0.08);
   }
   .blog-card-cta-icon { font-size: 36px; margin-bottom: 16px; }
@@ -96,7 +120,8 @@
   .blog-card-cta p { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.65; margin-bottom: 24px; }
 
   @media (max-width: 900px) {
-    .blog-hero-floating { display: none !important; }
+    .blog-hero-floating, .blog-hero-right { display: none !important; }
+    .page-hero { min-height: 70vh !important; padding: 140px 24px 60px !important; }
   }
 
   /* ── RESPONSIVE ── */
@@ -157,12 +182,11 @@
       <span class="blog-stat-tag">📊 Strategy</span>
     </div>
   </div>
-  <!-- Floating blog images -->
-  <div class="blog-hero-floating" style="position:absolute;top:18%;right:5%;z-index:2;animation:floatA 4.5s ease-in-out infinite;">
-    <img src="others/blog-hero-robot.png" alt="" style="width:210px;height:148px;object-fit:cover;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,0.5);display:block;">
-  </div>
-  <div class="blog-hero-floating" style="position:absolute;bottom:16%;right:9%;z-index:2;animation:floatB 5.5s 1s ease-in-out infinite;">
-    <img src="others/blog-hero-man.png" alt="" style="width:175px;height:118px;object-fit:cover;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,0.5);display:block;">
+  <!-- Right-side floating image container -->
+  <div class="blog-hero-right">
+    <img src="others/blog-hero-robot.png" alt="" loading="lazy" decoding="async" style="position:absolute;right:0;top:0;width:280px;height:380px;object-fit:cover;object-position:center top;border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:floatA 4s ease-in-out infinite;">
+    <img src="others/blog-hero-man2.jpg" alt="" loading="lazy" decoding="async" style="position:absolute;right:200px;bottom:20px;width:240px;height:320px;object-fit:cover;border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:floatB 3.5s ease-in-out 0.5s infinite;">
+    <img src="others/blog-hero-phone.jpg" alt="" loading="lazy" decoding="async" style="position:absolute;right:120px;top:20px;width:180px;height:240px;object-fit:cover;border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:floatC 4.5s ease-in-out 1s infinite;opacity:0.9;">
   </div>
 </div>
 
@@ -172,12 +196,22 @@
     <div class="section-label">LATEST ARTICLES</div>
     <h2 class="section-title">What We're Writing About</h2>
 
+    <div class="blog-filter-row">
+      <button class="blog-filter-pill active">All Articles</button>
+      <button class="blog-filter-pill">LLM &amp; RAG</button>
+      <button class="blog-filter-pill">Automation</button>
+      <button class="blog-filter-pill">Strategy</button>
+      <button class="blog-filter-pill">Security</button>
+      <button class="blog-filter-pill">AI Agents</button>
+      <button class="blog-filter-pill">ROI</button>
+    </div>
+
     <div class="blog-grid">
 
       <!-- Featured article -->
       <a href="/blog-post" class="blog-card featured">
         <div class="blog-thumb">
-          <img src="others/blog-rag-finetuning.jpg" alt="RAG vs Fine-Tuning">
+          <img src="others/blog-rag-finetuning.jpg" alt="RAG vs Fine-Tuning" loading="lazy" decoding="async">
         </div>
         <div class="blog-body">
           <span class="blog-tag">LLM Development</span>
@@ -191,7 +225,7 @@
       <!-- Article 2 -->
       <a href="/blog-post" class="blog-card">
         <div class="blog-thumb">
-          <img src="others/blog-business-processes.jpg" alt="AI Business Processes">
+          <img src="others/blog-business-processes.jpg" alt="AI Business Processes" loading="lazy" decoding="async">
         </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#e8f8f0;color:#16a34a">Automation</span>
@@ -205,7 +239,7 @@
       <!-- Article 3 -->
       <a href="/blog-post" class="blog-card">
         <div class="blog-thumb">
-          <img src="others/blog-ai-brief.jpg" alt="AI Brief">
+          <img src="others/blog-ai-brief.jpg" alt="AI Brief" loading="lazy" decoding="async">
         </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#fef3c7;color:#b45309">Strategy</span>
@@ -219,7 +253,7 @@
       <!-- Article 4 -->
       <a href="/blog-post" class="blog-card">
         <div class="blog-thumb">
-          <img src="others/blog-data-privacy.jpg" alt="Data Privacy in AI">
+          <img src="others/blog-data-privacy.jpg" alt="Data Privacy in AI" loading="lazy" decoding="async">
         </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#fce7f3;color:#be185d">Security</span>
@@ -233,7 +267,7 @@
       <!-- Article 5 -->
       <a href="/blog-post" class="blog-card">
         <div class="blog-thumb">
-          <img src="others/blog-ai-agents.jpg" alt="AI Agents">
+          <img src="others/blog-ai-agents.jpg" alt="AI Agents" loading="lazy" decoding="async">
         </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#ede9fe;color:#7c3aed">AI Agents</span>
@@ -247,7 +281,7 @@
       <!-- Article 6 -->
       <a href="/blog-post" class="blog-card">
         <div class="blog-thumb">
-          <img src="others/blog-roi.jpg" alt="AI ROI">
+          <img src="others/blog-roi.jpg" alt="AI ROI" loading="lazy" decoding="async">
         </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#dcfce7;color:#16a34a">ROI</span>
@@ -393,15 +427,22 @@
     var mobileClose = document.getElementById('mobile-close');
     if (hamburger) hamburger.addEventListener('click', function() { mobileMenu.classList.add('open'); });
     if (mobileClose) mobileClose.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
-    var replies = [
-      "Great question! We build fully custom AI systems — not off-the-shelf tools. Every project is engineered around your specific business.",
-      "I'd recommend booking a free 30-minute strategy call. You'll get honest, personalised advice with no commitment required.",
-      "We've built AI systems for healthcare, government, e-commerce, finance, and more. What industry are you in?",
-      "Most projects take 4–12 weeks. We scope everything upfront so there are no surprises.",
-      "You can reach us at info@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
-    ];
-    var idx = 0;
     var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
+    var knowledge = [
+      { keys: ['price','cost','how much','pricing','rates'], reply: "Our pricing depends on the scope of your project. Most custom AI systems range from small automations to full enterprise platforms. The best next step is a free 30-minute strategy call where we scope your project honestly. Book here: calendly.com/ceo-elyracai/30min" },
+      { keys: ['attendtrack','attendance','gps','payroll','workforce'], reply: "AttendTrack is our workforce management platform — AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot. It's live and serving clients. Want to see a demo?" },
+      { keys: ['iotec','email agent','email automation','inbox'], reply: "We built an intelligent email agent for ioTec Ltd that handles 80% of emails autonomously — categorizing, drafting responses, and escalating complex cases. Your team reclaims hours daily." },
+      { keys: ['code clinic','clinic','dental','healthcare','hospital'], reply: "Code Clinic is our healthcare practice management platform — patient records, appointments, billing, payroll, live patient flow, and analytics. Built for dental and general practices." },
+      { keys: ['trivox','receptionist','dental receptionist','voice agent'], reply: "Trivox AI is our conversational dental receptionist — it books appointments, answers patient queries, and follows up 24/7. Clients see +40% more bookings with zero missed outreaches." },
+      { keys: ['winopay','fintech','payment','financial'], reply: "WinoPay is a full-stack fintech platform we architected from scratch — backend APIs, transaction processing, security layer, RBAC, and multi-service integrations." },
+      { keys: ['fraud','ml','machine learning','detection'], reply: "We've built ML fraud detection systems for financial institutions — full pipeline from data ingestion to real-time inference, with audit trails for regulatory compliance." },
+      { keys: ['timeline','how long','duration','weeks'], reply: "Most projects take 4–12 weeks depending on scope. We always scope everything upfront so there are no surprises. Want to discuss your project timeline?" },
+      { keys: ['technology','stack','tools','built with'], reply: "We build with Python, FastAPI, Node.js, React, PostgreSQL, Claude AI, OpenAI, and cloud infrastructure on AWS and Vercel. We choose the right tool for each problem." },
+      { keys: ['who are you','about','team','company'], reply: "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more." },
+      { keys: ['contact','reach','email','call','talk'], reply: "You can reach us at info@elyracai.com or book a direct call: calendly.com/ceo-elyracai/30min — our founder Vine Samuel will personally respond." },
+      { keys: ['hi','hello','hey','good morning','good afternoon'], reply: "Hi there! 👋 I'm Maya, elyrac AI's assistant. I can answer questions about our AI solutions, past projects, pricing, or help you book a strategy call. What can I help you with?" },
+      { keys: ['bye','goodbye','thanks','thank you'], reply: "You're welcome! Feel free to reach out anytime at info@elyracai.com or book a call at calendly.com/ceo-elyracai/30min. We'd love to build something great together! 🚀" },
+    ];
     window.sendChat = function() {
       var input = document.getElementById('chat-input');
       var msg = input.value.trim();
@@ -410,9 +451,44 @@
       msgs.innerHTML += '<div class="chat-bubble user"><div class="bubble-text">' + msg + '</div></div>';
       input.value = '';
       msgs.scrollTop = msgs.scrollHeight;
+      if (!window._chatNotified) {
+        window._chatNotified = true;
+        fetch('https://formspree.io/f/xpwzgqna', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            _replyto: 'vinsamuel16@gmail.com',
+            email: 'info@elyracai.com',
+            subject: 'New Chat Started on elyracai.com',
+            message: 'A visitor started a chat. First message: ' + msg + '\nPage: ' + window.location.href
+          })
+        }).catch(function(){});
+      }
+      var lowerMsg = msg.toLowerCase();
+      var reply = null;
+      for (var i = 0; i < knowledge.length; i++) {
+        for (var j = 0; j < knowledge[i].keys.length; j++) {
+          if (lowerMsg.includes(knowledge[i].keys[j])) {
+            reply = knowledge[i].reply;
+            break;
+          }
+        }
+        if (reply) break;
+      }
+      var escalationKeywords = ['build','develop','project','hire','work with','proposal','budget','enterprise','urgent','need help'];
+      var shouldEscalate = escalationKeywords.some(function(k){ return lowerMsg.includes(k); });
+      if (!reply) {
+        reply = "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.";
+      }
       setTimeout(function() {
-        msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + replies[idx++ % replies.length] + '</div></div>';
+        msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + reply + '</div></div>';
         msgs.scrollTop = msgs.scrollHeight;
+        if (shouldEscalate) {
+          setTimeout(function() {
+            msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">It sounds like you might have a project in mind! 🚀 Want me to connect you directly with our team? You can email <strong>info@elyracai.com</strong> or <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" style="color:#4A90E2;font-weight:600;">book a free call here</a>.</div></div>';
+            msgs.scrollTop = msgs.scrollHeight;
+          }, 1200);
+        }
       }, 820);
     };
     var dragging = false, startX, startY, origRight, origBottom;

@@ -8,9 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — elyrac AI</title>
 <meta name="description" content="Book a free 30-minute strategy call or send us a message. Let's build something great together."/>
-<meta http-equiv="Cache-Control" content="max-age=31536000">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://i.pravatar.cc">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://i.pravatar.cc" crossorigin>
 <link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
 <link rel="stylesheet" href="css/shared.css">
 <style>
@@ -356,15 +355,22 @@
     var mobileClose = document.getElementById('mobile-close');
     if (hamburger) hamburger.addEventListener('click', function() { mobileMenu.classList.add('open'); });
     if (mobileClose) mobileClose.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
-    var replies = [
-      "Great question! We build fully custom AI systems — not off-the-shelf tools. Every project is engineered around your specific business.",
-      "I'd recommend booking a free 30-minute strategy call. You'll get honest, personalised advice with no commitment required.",
-      "We've built AI systems for healthcare, government, e-commerce, finance, and more. What industry are you in?",
-      "Most projects take 4–12 weeks. We scope everything upfront so there are no surprises.",
-      "You can reach us at info@elyracai.com, or book a call directly at calendly.com/ceo-elyracai/30min"
-    ];
-    var idx = 0;
     var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
+    var knowledge = [
+      { keys: ['price','cost','how much','pricing','rates'], reply: "Our pricing depends on the scope of your project. Most custom AI systems range from small automations to full enterprise platforms. The best next step is a free 30-minute strategy call where we scope your project honestly. Book here: calendly.com/ceo-elyracai/30min" },
+      { keys: ['attendtrack','attendance','gps','payroll','workforce'], reply: "AttendTrack is our workforce management platform — AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot. It's live and serving clients. Want to see a demo?" },
+      { keys: ['iotec','email agent','email automation','inbox'], reply: "We built an intelligent email agent for ioTec Ltd that handles 80% of emails autonomously — categorizing, drafting responses, and escalating complex cases. Your team reclaims hours daily." },
+      { keys: ['code clinic','clinic','dental','healthcare','hospital'], reply: "Code Clinic is our healthcare practice management platform — patient records, appointments, billing, payroll, live patient flow, and analytics. Built for dental and general practices." },
+      { keys: ['trivox','receptionist','dental receptionist','voice agent'], reply: "Trivox AI is our conversational dental receptionist — it books appointments, answers patient queries, and follows up 24/7. Clients see +40% more bookings with zero missed outreaches." },
+      { keys: ['winopay','fintech','payment','financial'], reply: "WinoPay is a full-stack fintech platform we architected from scratch — backend APIs, transaction processing, security layer, RBAC, and multi-service integrations." },
+      { keys: ['fraud','ml','machine learning','detection'], reply: "We've built ML fraud detection systems for financial institutions — full pipeline from data ingestion to real-time inference, with audit trails for regulatory compliance." },
+      { keys: ['timeline','how long','duration','weeks'], reply: "Most projects take 4–12 weeks depending on scope. We always scope everything upfront so there are no surprises. Want to discuss your project timeline?" },
+      { keys: ['technology','stack','tools','built with'], reply: "We build with Python, FastAPI, Node.js, React, PostgreSQL, Claude AI, OpenAI, and cloud infrastructure on AWS and Vercel. We choose the right tool for each problem." },
+      { keys: ['who are you','about','team','company'], reply: "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more." },
+      { keys: ['contact','reach','email','call','talk'], reply: "You can reach us at info@elyracai.com or book a direct call: calendly.com/ceo-elyracai/30min — our founder Vine Samuel will personally respond." },
+      { keys: ['hi','hello','hey','good morning','good afternoon'], reply: "Hi there! 👋 I'm Maya, elyrac AI's assistant. I can answer questions about our AI solutions, past projects, pricing, or help you book a strategy call. What can I help you with?" },
+      { keys: ['bye','goodbye','thanks','thank you'], reply: "You're welcome! Feel free to reach out anytime at info@elyracai.com or book a call at calendly.com/ceo-elyracai/30min. We'd love to build something great together! 🚀" },
+    ];
     window.sendChat = function() {
       var input = document.getElementById('chat-input');
       var msg = input.value.trim();
@@ -373,9 +379,44 @@
       msgs.innerHTML += '<div class="chat-bubble user"><div class="bubble-text">' + msg + '</div></div>';
       input.value = '';
       msgs.scrollTop = msgs.scrollHeight;
+      if (!window._chatNotified) {
+        window._chatNotified = true;
+        fetch('https://formspree.io/f/xpwzgqna', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            _replyto: 'vinsamuel16@gmail.com',
+            email: 'info@elyracai.com',
+            subject: 'New Chat Started on elyracai.com',
+            message: 'A visitor started a chat. First message: ' + msg + '\nPage: ' + window.location.href
+          })
+        }).catch(function(){});
+      }
+      var lowerMsg = msg.toLowerCase();
+      var reply = null;
+      for (var i = 0; i < knowledge.length; i++) {
+        for (var j = 0; j < knowledge[i].keys.length; j++) {
+          if (lowerMsg.includes(knowledge[i].keys[j])) {
+            reply = knowledge[i].reply;
+            break;
+          }
+        }
+        if (reply) break;
+      }
+      var escalationKeywords = ['build','develop','project','hire','work with','proposal','budget','enterprise','urgent','need help'];
+      var shouldEscalate = escalationKeywords.some(function(k){ return lowerMsg.includes(k); });
+      if (!reply) {
+        reply = "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.";
+      }
       setTimeout(function() {
-        msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + replies[idx++ % replies.length] + '</div></div>';
+        msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + reply + '</div></div>';
         msgs.scrollTop = msgs.scrollHeight;
+        if (shouldEscalate) {
+          setTimeout(function() {
+            msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">It sounds like you might have a project in mind! 🚀 Want me to connect you directly with our team? You can email <strong>info@elyracai.com</strong> or <a href="https://calendly.com/ceo-elyracai/30min" target="_blank" style="color:#4A90E2;font-weight:600;">book a free call here</a>.</div></div>';
+            msgs.scrollTop = msgs.scrollHeight;
+          }, 1200);
+        }
       }, 820);
     };
     var dragging = false, startX, startY, origRight, origBottom;
