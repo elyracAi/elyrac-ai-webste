@@ -449,7 +449,7 @@
   #chatbot-widget { cursor: grab; }
   #chatbot-widget:active { cursor: grabbing; }
   #chat-panel { cursor: default; }
-  .chat-toggle { animation: chatBounce 3s ease-in-out infinite !important; }
+  .chat-toggle { animation: simpleBounce 4s ease-in-out infinite !important; }
 
   /* ── SECTION BACKGROUNDS — break up the white monotony ── */
   .clients  { background: #F0F5FF !important; }
@@ -482,16 +482,9 @@
       linear-gradient(135deg, var(--navy) 0%, #0a1d52 55%, #1a4db8 100%);
   }
 
-  /* ── CHATBOT: continuous bounce ── */
-  .chat-toggle {
-    animation: chatBounce 3s ease-in-out infinite, pulseGlow 2.5s ease-in-out infinite !important;
-  }
-  @keyframes chatBounce {
-    0%, 100% { transform: translateY(0) scale(1); }
-    30%  { transform: translateY(-12px) scale(1.05); }
-    50%  { transform: translateY(-6px) scale(1.02); }
-    70%  { transform: translateY(-10px) scale(1.04); }
-  }
+  /* ── CHATBOT: simple bounce ── */
+  .chat-toggle { animation: simpleBounce 4s ease-in-out infinite !important; }
+  @keyframes simpleBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
   /* ── FOOTER TEXT OVERRIDES ── */
   footer .footer-col h4 { color: #000000 !important; font-size: 13px !important; font-weight: 700 !important; }
@@ -524,46 +517,9 @@
     .tools-ticker-wrap { margin: 0 -16px; }
   }
 
-  /* ── BRAND COLOR OVERRIDES — force reduce white ── */
   body { background: #F5F8FF !important; }
-  .problems-section,
-  .how-section,
-  .stats-section,
-  .tools-section,
-  .portfolio-section,
-  .industry-section,
-  [class*="section"]:not(.hero-section):not(.cta-section) {
-    background: #F0F5FF;
-  }
-  .stats-wrap, .stats-section, .counter-section,
-  section:has(.counter), section:has(.stat-number) {
-    background: linear-gradient(135deg, #060e2b 0%, #0d2260 100%) !important;
-    color: white !important;
-  }
-  .ticker-section, section:has(.ticker-wrap) {
-    background: #F0F5FF !important;
-    border-top: 1px solid #C7DEFF !important;
-    border-bottom: 1px solid #C7DEFF !important;
-  }
-  .hero-section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 15% 50%, rgba(113,199,214,0.15) 0%, transparent 50%),
-      radial-gradient(circle at 85% 20%, rgba(58,114,184,0.2) 0%, transparent 40%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  body { background: #F5F8FF !important; }
-  @keyframes chatBounce {
-    0%, 100% { transform: translateY(0) scale(1); }
-    30% { transform: translateY(-12px) scale(1.05); }
-    50% { transform: translateY(-6px) scale(1.02); }
-    70% { transform: translateY(-10px) scale(1.04); }
-  }
   #chatbot-widget .chat-toggle {
-    animation: chatBounce 3s ease-in-out infinite !important;
+    animation: simpleBounce 4s ease-in-out infinite !important;
     width: 64px !important; height: 64px !important;
     border: 3px solid white !important;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
@@ -575,7 +531,7 @@
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
-    <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI" style="height:75px;width:auto;object-fit:contain;">
+    <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI" style="height:52px;width:auto;object-fit:contain;">
   </a>
   <ul class="nav-links">
     <li><a href="/about">About Us</a></li>
@@ -737,7 +693,7 @@
 </section>
 
 <!-- PROBLEMS -->
-<section class="problems">
+<section class="problems" style="background:#F0F5FF">
   <div class="problems-inner">
     <div style="text-align:center">
       <div class="section-label">WHY BUSINESSES STRUGGLE WITH AI</div>
@@ -817,7 +773,7 @@
 </section>
 
 <!-- TOOLS -->
-<section class="tools">
+<section class="tools" style="background:#F0F5FF;border-top:1px solid #C7DEFF;border-bottom:1px solid #C7DEFF;">
   <div class="tools-inner">
     <div class="tools-intro">
       <div class="section-label">TOOLS WE USE</div>
@@ -870,7 +826,7 @@
 </section>
 
 <!-- PORTFOLIO -->
-<section class="portfolio" id="portfolio">
+<section class="portfolio" id="portfolio" style="background:#F8FBFF">
   <div class="portfolio-inner">
     <div class="section-label" style="justify-content:center;display:flex">RECENT WORK</div>
     <h2 class="section-title portfolio-title">AI Systems We've Built</h2>
@@ -1215,7 +1171,13 @@
         <div class="bubble-text">I can answer questions about our services, or help you book a free strategy call with our founder.</div>
       </div>
     </div>
-    <div class="chat-input-row">
+          <div class="chat-attach-row">
+        <button class="chat-attach-btn" onclick="startVoiceRecord()" id="voice-btn">🎤 Voice</button>
+        <button class="chat-attach-btn" onclick="document.getElementById('chat-file-input').click()">📎 Attach</button>
+        <input type="file" id="chat-file-input" style="display:none" accept="image/*,.pdf,.doc,.docx,.txt" onchange="handleFileAttach(event)">
+        <span id="voice-status" style="font-size:11px;color:var(--gray-500);padding-left:4px;"></span>
+      </div>
+      <div class="chat-input-row">
       <input type="text" id="chat-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
       <button class="chat-send-btn" onclick="sendChat()">↑</button>
     </div>
@@ -1232,6 +1194,7 @@
     const widget = document.getElementById('chatbot-widget');
 
     // Toggle open/close
+    setTimeout(function(){ var t=document.getElementById('chat-toggle'); if(t){t.style.cssText+=';animation:simpleBounce 4s ease-in-out infinite!important;width:64px!important;height:64px!important;';} }, 500);
     toggle.addEventListener('click', () => panel.classList.toggle('open'));
     document.getElementById('chat-close').addEventListener('click', () => panel.classList.remove('open'));
 

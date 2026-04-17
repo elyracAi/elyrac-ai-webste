@@ -60,7 +60,7 @@
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
-    <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI" style="height:75px;width:auto;object-fit:contain;">
+    <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI" style="height:52px;width:auto;object-fit:contain;">
   </a>
   <ul class="nav-links">
     <li><a href="/about">About Us</a></li>
@@ -368,7 +368,13 @@
         <div class="bubble-text">I can answer questions about our services, or help you book a free strategy call with our founder.</div>
       </div>
     </div>
-    <div class="chat-input-row">
+          <div class="chat-attach-row">
+        <button class="chat-attach-btn" onclick="startVoiceRecord()" id="voice-btn">🎤 Voice</button>
+        <button class="chat-attach-btn" onclick="document.getElementById('chat-file-input').click()">📎 Attach</button>
+        <input type="file" id="chat-file-input" style="display:none" accept="image/*,.pdf,.doc,.docx,.txt" onchange="handleFileAttach(event)">
+        <span id="voice-status" style="font-size:11px;color:var(--gray-500);padding-left:4px;"></span>
+      </div>
+      <div class="chat-input-row">
       <input type="text" id="chat-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
       <button class="chat-send-btn" onclick="sendChat()">↑</button>
     </div>
@@ -383,6 +389,7 @@
     var panel = document.getElementById('chat-panel');
     var toggle = document.getElementById('chat-toggle');
     var widget = document.getElementById('chatbot-widget');
+    setTimeout(function(){ var t=document.getElementById('chat-toggle'); if(t){t.style.cssText+=';animation:simpleBounce 4s ease-in-out infinite!important;width:64px!important;height:64px!important;';} }, 500);
     toggle.addEventListener('click', function() { panel.classList.toggle('open'); });
     document.getElementById('chat-close').addEventListener('click', function() { panel.classList.remove('open'); });
     var hamburger = document.getElementById('hamburger');
