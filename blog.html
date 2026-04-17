@@ -32,11 +32,14 @@
   .blog-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.09); }
 
   .blog-thumb {
-    height: 180px;
+    height: 220px;
     display: flex; align-items: center; justify-content: center;
     font-size: 52px;
     background: linear-gradient(135deg, var(--blue-light), #c3d7ff);
+    overflow: hidden;
   }
+  .blog-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .blog-card:hover .blog-thumb img { transform: scale(1.06); }
 
   .blog-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
   .blog-tag {
@@ -54,11 +57,47 @@
   }
   .blog-card:hover .blog-read-more { gap: 8px; }
 
+  /* Full-card anchor */
+  a.blog-card { text-decoration: none; color: inherit; }
+
   /* Featured card spans 2 columns */
   .blog-card.featured { grid-column: span 2; flex-direction: row; }
-  .blog-card.featured .blog-thumb { width: 45%; height: auto; min-height: 240px; flex-shrink: 0; }
+  .blog-card.featured .blog-thumb { width: 45%; min-height: 260px; flex-shrink: 0; position: relative; overflow: hidden; }
+  .blog-card.featured .blog-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .blog-card.featured:hover .blog-thumb img { transform: scale(1.06); }
   .blog-card.featured .blog-body { padding: 36px; }
   .blog-card.featured .blog-title { font-size: 22px; }
+
+  /* Blog hero floating images */
+  @keyframes floatA { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+  @keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .blog-hero-stats { display:flex; gap:10px; margin-top:28px; flex-wrap:wrap; }
+  .blog-stat-tag {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px; padding: 5px 14px;
+    font-size: 12px; font-weight: 600;
+    color: rgba(255,255,255,0.82);
+    backdrop-filter: blur(8px);
+  }
+
+  /* CTA card in grid */
+  .blog-card-cta {
+    background: linear-gradient(135deg, #060e2b 0%, #0d1b6e 100%);
+    border-radius: var(--radius);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 40px 28px;
+    min-height: 300px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .blog-card-cta-icon { font-size: 36px; margin-bottom: 16px; }
+  .blog-card-cta h3 { color: white; font-size: 20px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+  .blog-card-cta p { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.65; margin-bottom: 24px; }
+
+  @media (max-width: 900px) {
+    .blog-hero-floating { display: none !important; }
+  }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
@@ -109,8 +148,21 @@
   </div>
   <div class="page-hero-inner">
     <div class="section-label">INSIGHTS</div>
-    <h1>Insights on <em>AI &amp; Business.</em></h1>
+    <h1>Insights on AI &amp; Business.</h1>
     <p>Practical thinking on building AI systems, automating business operations, and the decisions that make or break a custom AI project.</p>
+    <div class="blog-hero-stats">
+      <span class="blog-stat-tag">✍️ 6 Articles</span>
+      <span class="blog-stat-tag">🧠 LLM &amp; RAG</span>
+      <span class="blog-stat-tag">⚡ Automation</span>
+      <span class="blog-stat-tag">📊 Strategy</span>
+    </div>
+  </div>
+  <!-- Floating blog images -->
+  <div class="blog-hero-floating" style="position:absolute;top:18%;right:5%;z-index:2;animation:floatA 4.5s ease-in-out infinite;">
+    <img src="others/blog-hero-robot.png" alt="" style="width:210px;height:148px;object-fit:cover;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,0.5);display:block;">
+  </div>
+  <div class="blog-hero-floating" style="position:absolute;bottom:16%;right:9%;z-index:2;animation:floatB 5.5s 1s ease-in-out infinite;">
+    <img src="others/blog-hero-man.png" alt="" style="width:175px;height:118px;object-fit:cover;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,0.5);display:block;">
   </div>
 </div>
 
@@ -123,75 +175,95 @@
     <div class="blog-grid">
 
       <!-- Featured article -->
-      <div class="blog-card featured">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#e8f0fe,#c3d7ff)">🧠</div>
+      <a href="/blog-post" class="blog-card featured">
+        <div class="blog-thumb">
+          <img src="others/blog-rag-finetuning.jpg" alt="RAG vs Fine-Tuning">
+        </div>
         <div class="blog-body">
           <span class="blog-tag">LLM Development</span>
           <div class="blog-meta">April 2, 2025 · 6 min read</div>
           <h3 class="blog-title">Why RAG Beats Fine-Tuning for Most Business AI Applications</h3>
           <p class="blog-excerpt">The debate between retrieval-augmented generation and fine-tuning isn't as complicated as it sounds. Here's how to choose the right approach for your specific use case — and why most businesses get this decision wrong.</p>
-          <a class="blog-read-more" href="/blog-post">Read Article →</a>
+          <span class="blog-read-more">Read Article →</span>
         </div>
-      </div>
+      </a>
 
       <!-- Article 2 -->
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#edfaf4,#c8f0de)">⚙️</div>
+      <a href="/blog-post" class="blog-card">
+        <div class="blog-thumb">
+          <img src="others/blog-business-processes.jpg" alt="AI Business Processes">
+        </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#e8f8f0;color:#16a34a">Automation</span>
           <div class="blog-meta">March 28, 2025 · 5 min read</div>
           <h3 class="blog-title">The 3 Business Processes Most Ready for AI Automation Right Now</h3>
           <p class="blog-excerpt">Not all automation is created equal. These three workflows have the highest ROI and the lowest risk — and most businesses have all three.</p>
-          <a class="blog-read-more" href="/blog-post">Read Article →</a>
+          <span class="blog-read-more">Read Article →</span>
         </div>
-      </div>
+      </a>
 
       <!-- Article 3 -->
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#fff8e8,#fde68a)">📊</div>
+      <a href="/blog-post" class="blog-card">
+        <div class="blog-thumb">
+          <img src="others/blog-ai-brief.jpg" alt="AI Brief">
+        </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#fef3c7;color:#b45309">Strategy</span>
           <div class="blog-meta">March 15, 2025 · 7 min read</div>
           <h3 class="blog-title">How to Write an AI Brief That Actually Gets Built Correctly</h3>
           <p class="blog-excerpt">Most AI projects fail not because of bad technology — but because the requirements were vague. Here's what a good AI brief looks like.</p>
-          <a class="blog-read-more" href="/blog-post">Read Article →</a>
+          <span class="blog-read-more">Read Article →</span>
         </div>
-      </div>
+      </a>
 
       <!-- Article 4 -->
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)">🔒</div>
+      <a href="/blog-post" class="blog-card">
+        <div class="blog-thumb">
+          <img src="others/blog-data-privacy.jpg" alt="Data Privacy in AI">
+        </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#fce7f3;color:#be185d">Security</span>
           <div class="blog-meta">March 5, 2025 · 4 min read</div>
           <h3 class="blog-title">Data Privacy in Custom AI: What Your Vendor Should Be Doing</h3>
           <p class="blog-excerpt">Before you give an AI company access to your business data, there are 6 questions you should always ask. Most companies never ask any of them.</p>
-          <a class="blog-read-more" href="/blog-post">Read Article →</a>
+          <span class="blog-read-more">Read Article →</span>
         </div>
-      </div>
+      </a>
 
       <!-- Article 5 -->
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe)">🤖</div>
+      <a href="/blog-post" class="blog-card">
+        <div class="blog-thumb">
+          <img src="others/blog-ai-agents.jpg" alt="AI Agents">
+        </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#ede9fe;color:#7c3aed">AI Agents</span>
           <div class="blog-meta">February 20, 2025 · 8 min read</div>
           <h3 class="blog-title">AI Agents in 2025: What They Can Actually Do for Your Business</h3>
           <p class="blog-excerpt">The hype around AI agents is real — and so are the limitations. Here's an honest look at what autonomous agents can and can't do today.</p>
-          <a class="blog-read-more" href="/blog-post">Read Article →</a>
+          <span class="blog-read-more">Read Article →</span>
         </div>
-      </div>
+      </a>
 
       <!-- Article 6 -->
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0)">💰</div>
+      <a href="/blog-post" class="blog-card">
+        <div class="blog-thumb">
+          <img src="others/blog-roi.jpg" alt="AI ROI">
+        </div>
         <div class="blog-body">
           <span class="blog-tag" style="background:#dcfce7;color:#16a34a">ROI</span>
           <div class="blog-meta">February 10, 2025 · 5 min read</div>
           <h3 class="blog-title">How to Calculate the ROI of a Custom AI Project Before You Start</h3>
           <p class="blog-excerpt">Every AI investment should have a clear business case. Here's the simple framework we use with clients to estimate ROI before a single line of code is written.</p>
-          <a class="blog-read-more" href="/blog-post">Read Article →</a>
+          <span class="blog-read-more">Read Article →</span>
         </div>
+      </a>
+
+      <!-- CTA card -->
+      <div class="blog-card-cta">
+        <div class="blog-card-cta-icon">✍️</div>
+        <h3>Have an AI insight to share?</h3>
+        <p>We collaborate with operators, founders, and engineers working at the intersection of AI and business. If you have a perspective worth publishing, let's talk.</p>
+        <a href="/contact" class="btn-blue">Get in Touch →</a>
       </div>
 
     </div>
