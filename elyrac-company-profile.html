@@ -31,7 +31,7 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
   box-shadow: 0 2px 24px rgba(0,0,0,0.4);
 }
 .topbar-logo { display: flex; align-items: center; gap: 10px; }
-.topbar-logo img { height: 32px; width: auto; }
+.topbar-logo img { height: 56px; width: auto; }
 .topbar-logo span { color: rgba(255,255,255,0.7); font-size: 13px; font-family: var(--font-b); }
 .topbar-actions { display: flex; align-items: center; gap: 16px; }
 .btn-pdf {
@@ -281,11 +281,11 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
   padding: 56px 64px; display: flex; align-items: center; justify-content: space-between;
   position: relative; overflow: hidden; min-height: 180px;
 }
-.back-cover::before { content: ''; position: absolute; width: 320px; height: 320px; border-radius: 50%; background: var(--teal); opacity: 0.07; right: -60px; top: -80px; filter: blur(40px); }
+.back-cover::before { content: ''; position: absolute; width: 320px; height: 320px; border-radius: 50%; background: rgba(113,199,214,0.07); right: -60px; top: -80px; }
 .back-cover-text { position: relative; z-index: 1; }
 .back-cover-text h3 { font-family: var(--font-h); font-size: 22px; font-weight: 800; color: white; margin-bottom: 6px; }
 .back-cover-text p { font-size: 13px; color: rgba(255,255,255,0.5); font-family: var(--font-b); }
-.back-cover img { height: 44px; width: auto; position: relative; z-index: 1; }
+.back-cover img { height: 80px; width: auto; position: relative; z-index: 1; }
 
 /* ══════════════════════════
    PRINT
@@ -319,7 +319,7 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
   </div>
   <div class="topbar-actions">
     <a href="/ourwork" class="btn-back">← Back to Our Work</a>
-    <button class="btn-pdf" onclick="window.print()">⬇ Download PDF</button>
+    <button class="btn-pdf" id="print-btn">⬇ Download PDF</button>
   </div>
 </div>
 
@@ -382,7 +382,7 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
         <p class="body-p">Our motto is <strong>Grace in Design</strong> — the best AI systems are not just technically excellent, but thoughtfully crafted, intuitive to use, and built to last. We have delivered over 30 AI projects across healthcare, fintech, HR tech, NGOs, and enterprise operations.</p>
       </div>
       <div class="split-photo">
-        <img src="/others/server-farm-manager-supervising-engineer-looking-data-analysis-graph.jpg" alt="AI Engineering" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="/others/server-farm-manager-supervising-engineer-looking-data-analysis-graph.jpg" alt="AI Engineering" style="width:100%;height:100%;object-fit:cover;">
       </div>
     </div>
 
@@ -434,9 +434,9 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
     </div>
     <!-- 3 photos below the text -->
     <div class="photo-grid-3">
-      <div><img src="/others/businesswoman-interacting-with-ai-hologram-office.jpg" alt="AI Vision"></div>
-      <div><img src="/others/people-working-html-codes.jpg" alt="Engineering"></div>
-      <div><img src="/others/conversational-ai-hologram.jpg" alt="Conversational AI"></div>
+      <div><img loading="lazy" src="/others/businesswoman-interacting-with-ai-hologram-office.jpg" alt="AI Vision"></div>
+      <div><img loading="lazy" src="/others/people-working-html-codes.jpg" alt="Engineering"></div>
+      <div><img loading="lazy" src="/others/conversational-ai-hologram.jpg" alt="Conversational AI"></div>
     </div>
   </div>
 
@@ -477,7 +477,7 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
         </div>
       </div>
       <div class="split-photo">
-        <img src="/others/robotic-arms-modern-factory-setting.jpg" alt="AI Systems" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="/others/robotic-arms-modern-factory-setting.jpg" alt="AI Systems" style="width:100%;height:100%;object-fit:cover;">
       </div>
     </div>
   </div>
@@ -511,15 +511,15 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
       <!-- Dashboard previews -->
       <div class="dash-grid" style="margin-bottom:28px;">
         <div class="dash-item">
-          <img src="/others/iotec-dashboard.png" alt="ioTec Dashboard">
+          <img loading="lazy" src="/others/iotec-dashboard.png" alt="ioTec Dashboard">
           <div class="dash-label">ioTec Email Agent</div>
         </div>
         <div class="dash-item">
-          <img src="/others/attendtrack-copilot.jpeg" alt="AttendTrack">
+          <img loading="lazy" src="/others/attendtrack-copilot.jpeg" alt="AttendTrack">
           <div class="dash-label">AttendTrack Platform</div>
         </div>
         <div class="dash-item">
-          <img src="/others/codeclinic-dashboard.png" alt="Code Clinic">
+          <img loading="lazy" src="/others/codeclinic-dashboard.png" alt="Code Clinic">
           <div class="dash-label">Code Clinic System</div>
         </div>
       </div>
@@ -590,15 +590,15 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
 
       <div class="dash-grid" style="margin-bottom:28px;">
         <div class="dash-item">
-          <img src="/others/winopay-app.png" alt="WinoPay">
+          <img loading="lazy" src="/others/winopay-app.png" alt="WinoPay">
           <div class="dash-label">WinoPay Platform</div>
         </div>
         <div class="dash-item">
-          <img src="/others/trivox-dental.png" alt="Trivox">
+          <img loading="lazy" src="/others/trivox-dental.png" alt="Trivox">
           <div class="dash-label">Trivox AI Receptionist</div>
         </div>
         <div class="dash-item">
-          <img src="/others/fraud-detection-team.jpg" alt="Fraud Detection" style="object-fit:cover;">
+          <img loading="lazy" src="/others/fraud-detection-team.jpg" alt="Fraud Detection" style="object-fit:cover;">
           <div class="dash-label">ML Fraud Detection</div>
         </div>
       </div>
@@ -652,7 +652,7 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
     </div>
     <div class="split">
       <div class="split-photo">
-        <img src="/others/business-person-using-laptop-multitasking-finish-daily-startup-tasks.jpg" alt="Why elyrac AI" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="/others/business-person-using-laptop-multitasking-finish-daily-startup-tasks.jpg" alt="Why elyrac AI" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="split-text">
         <div class="sec-eyebrow">The elyrac Difference</div>
@@ -751,5 +751,40 @@ body { font-family: var(--font-b); background: #d0d8e8; color: #1F2937; }
   </div>
 
 </div>
+<script>
+(function() {
+  /* Deferred print — gives browser time to render before dialog opens */
+  var btn = document.getElementById('print-btn');
+  if (btn) {
+    btn.addEventListener('click', function() {
+      btn.textContent = 'Preparing…';
+      btn.disabled = true;
+      setTimeout(function() {
+        window.print();
+        setTimeout(function() {
+          btn.textContent = '⬇ Download PDF';
+          btn.disabled = false;
+        }, 1000);
+      }, 300);
+    });
+  }
+
+  /* Lazy-load full-bleed background images — only load when near viewport */
+  var bleedPages = document.querySelectorAll('.pg-fullbleed, .pg-cover, .contact-right');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          var el = e.target;
+          var lazy = el.getAttribute('data-bg');
+          if (lazy) { el.style.backgroundImage = "url('" + lazy + "')"; el.removeAttribute('data-bg'); }
+          io.unobserve(el);
+        }
+      });
+    }, { rootMargin: '200px' });
+    bleedPages.forEach(function(el) { io.observe(el); });
+  }
+})();
+</script>
 </body>
 </html>
