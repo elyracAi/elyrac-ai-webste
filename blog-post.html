@@ -8,8 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Why RAG Beats Fine-Tuning for Most Business AI — elyrac AI</title>
 <meta name="description" content="The debate between retrieval-augmented generation and fine-tuning. Here's how to choose the right approach for your specific use case."/>
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://i.pravatar.cc" crossorigin>
+
+
 <link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
 <link rel="stylesheet" href="css/shared.css">
 <style>
@@ -123,7 +123,7 @@
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
-    <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI" style="height:52px;width:auto;object-fit:contain;">
+    <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI" style="height:52px;width:auto;object-fit:contain;" loading="eager" decoding="async">
   </a>
   <ul class="nav-links">
     <li><a href="/about">About Us</a></li>
@@ -340,7 +340,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="/" aria-label="Back to top"><div class="logo"><img src="/others/Elyrac Ai-06.png" alt="elyrac AI" style="height:140px;width:auto;cursor:pointer;">
+      <a href="/" aria-label="Back to top"><div class="logo"><img src="/others/Elyrac Ai-06.png" alt="elyrac AI" style="height:140px;width:auto;cursor:pointer;" loading="eager" decoding="async">
       </div></a>
       <p style="color:#111111;font-size:15px;font-weight:500;">Custom AI software engineered for your specific business. Not off-the-shelf. Not generic. Yours.</p>
       <div class="social-links" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:16px;">
@@ -396,7 +396,7 @@
   <div class="chat-panel" id="chat-panel">
     <div class="chat-header">
       <div class="chat-header-avatar">
-        <img src="/others/linked_profile_pic-Photoroom.png" alt="Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+        <img src="/others/linked_profile_pic-Photoroom.png" alt="Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" loading="eager" decoding="async">
       </div>
       <div class="chat-header-info">
         <div class="chat-header-name">Maya</div>
@@ -406,11 +406,11 @@
     </div>
     <div class="chat-messages" id="chat-messages">
       <div class="chat-bubble">
-        <img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">
+        <img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya" loading="eager" decoding="async">
         <div class="bubble-text">Hi! I'm Maya, elyrac AI's assistant. How can I help you today? 👋</div>
       </div>
       <div class="chat-bubble">
-        <img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">
+        <img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya" loading="eager" decoding="async">
         <div class="bubble-text">I can answer questions about our services, or help you book a free strategy call with our founder.</div>
       </div>
     </div>
@@ -426,7 +426,7 @@
     </div>
   </div>
   <button class="chat-toggle" id="chat-toggle">
-    <img src="/others/linked_profile_pic-Photoroom.png" alt="Chat with Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+    <img src="/others/linked_profile_pic-Photoroom.png" alt="Chat with Maya" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" loading="eager" decoding="async">
     <span class="chat-badge"></span>
   </button>
 </div>
@@ -443,7 +443,7 @@
     var mobileClose = document.getElementById('mobile-close');
     if (hamburger) hamburger.addEventListener('click', function() { mobileMenu.classList.add('open'); });
     if (mobileClose) mobileClose.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
-    var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
+    var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya" loading="eager" decoding="async">';
     var knowledge = [
       { keys: ['price','cost','how much','pricing','rates'], reply: "Our pricing depends on the scope of your project. Most custom AI systems range from small automations to full enterprise platforms. The best next step is a free 30-minute strategy call where we scope your project honestly. Book here: calendly.com/ceo-elyracai/30min" },
       { keys: ['attendtrack','attendance','gps','payroll','workforce'], reply: "AttendTrack is our workforce management platform — AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot. It's live and serving clients. Want to see a demo?" },

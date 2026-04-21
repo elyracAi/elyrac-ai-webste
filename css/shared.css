@@ -515,8 +515,14 @@ footer {
 .faq-a.open { max-height: 300px; }
 .faq-a p { font-size: 14px; color: var(--gray-600); line-height: 1.7; padding-bottom: 20px; }
 
-/* ── PERFORMANCE: will-change only on chatbot toggle ── */
+/* ── PERFORMANCE ── */
 .chat-toggle { will-change: transform; }
+/* Ticker tracks: GPU layer isolation so scrolling repaints don't touch the rest of the page */
+.ind-ticker-track,
+.tools-ticker-track { will-change: transform; contain: layout style; }
+/* Ticker wrappers: contain overflow so browser clips cheaply */
+.ind-ticker-wrap,
+.tools-ticker-wrap { contain: layout style; }
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
