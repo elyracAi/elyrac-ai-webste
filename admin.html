@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Portal — elyrac AI</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+    }
+    .login-card {
+      background: white; border-radius: 16px; padding: 48px 40px;
+      width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .login-logo { text-align: center; margin-bottom: 20px; }
+    .login-logo img { height: 48px; width: auto; }
+    .login-card h2 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+    .login-card .subtitle { text-align: center; font-size: 13px; color: #6b7280; margin-bottom: 32px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .field input { width: 100%; padding: 12px 16px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .field input:focus { border-color: #2563eb; }
+    .btn-login { width: 100%; padding: 13px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+    .btn-login:hover { background: #1d4ed8; }
+    .btn-login:disabled { background: #93c5fd; cursor: not-allowed; }
+    #login-error { color: #dc2626; font-size: 13px; text-align: center; margin-top: 12px; min-height: 20px; }
+
+    /* ── DASHBOARD ── */
+    #dashboard { display: none; min-height: 100vh; }
+
+    .top-bar {
+      background: #0f0f23; color: white; padding: 0 32px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 14px; }
+    .top-bar-left img { height: 36px; width: auto; }
+    .top-bar-title { font-size: 15px; font-weight: 600; }
+    .top-bar-right { display: flex; align-items: center; gap: 14px; }
+    .user-badge { font-size: 13px; color: #9ca3af; }
+    .btn-logout { padding: 7px 16px; background: transparent; color: #9ca3af; border: 1px solid #374151; border-radius: 6px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+    .btn-logout:hover { color: white; border-color: #6b7280; }
+    .btn-refresh { padding: 7px 16px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+    .btn-refresh:hover { background: #1d4ed8; }
+
+    .main { max-width: 1300px; margin: 0 auto; padding: 32px 24px; }
+    .page-title { font-size: 24px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .page-sub { font-size: 13px; color: #9ca3af; margin-bottom: 28px; }
+
+    /* ── STATS ── */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .stat-card { background: white; border-radius: 12px; padding: 20px 24px; border: 1px solid #e5e7eb; }
+    .stat-label { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .stat-value { font-size: 32px; font-weight: 700; color: #1a1a2e; line-height: 1; }
+    .stat-value.sm { font-size: 18px; padding-top: 6px; }
+
+    /* ── TOOLBAR ── */
+    .toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-wrap input { width: 100%; padding: 10px 16px 10px 38px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; background: white; outline: none; transition: border-color 0.2s; }
+    .search-wrap input:focus { border-color: #2563eb; }
+    .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+    .filter-select { padding: 10px 14px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; background: white; outline: none; cursor: pointer; color: #374151; }
+    .filter-select:focus { border-color: #2563eb; }
+
+    /* ── TABLE ── */
+    .table-wrap { background: white; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: #f9fafb; border-bottom: 1px solid #e5e7eb; }
+    th { padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+    td { padding: 14px 16px; font-size: 14px; color: #374151; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafafa; }
+
+    .td-name { font-weight: 600; color: #1a1a2e; white-space: nowrap; }
+    .td-email a { color: #2563eb; text-decoration: none; }
+    .td-email a:hover { text-decoration: underline; }
+    .td-date { white-space: nowrap; color: #9ca3af; font-size: 13px; }
+    .td-message { max-width: 280px; white-space: pre-wrap; word-break: break-word; color: #6b7280; font-size: 13px; line-height: 1.5; }
+
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+    .badge-llm        { background: #eff6ff; color: #1d4ed8; }
+    .badge-automation { background: #f0fdf4; color: #15803d; }
+    .badge-chatbot    { background: #fdf4ff; color: #7e22ce; }
+    .badge-analytics  { background: #fff7ed; color: #c2410c; }
+    .badge-vision     { background: #fef2f2; color: #b91c1c; }
+    .badge-saas       { background: #ecfdf5; color: #065f46; }
+    .badge-other      { background: #f9fafb; color: #6b7280; }
+
+    .empty-state { text-align: center; padding: 60px 24px; color: #9ca3af; }
+    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+
+    .table-footer { font-size: 13px; color: #9ca3af; padding: 12px 16px; border-top: 1px solid #f3f4f6; }
+
+    @media (max-width: 768px) {
+      .top-bar { padding: 0 16px; }
+      .user-badge { display: none; }
+      .main { padding: 20px 16px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      th, td { padding: 10px 12px; }
+      .td-message { max-width: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
+    </div>
+    <h2>Team Portal</h2>
+    <p class="subtitle">Sign in with your elyrac AI account</p>
+    <form id="login-form">
+      <div class="field">
+        <label for="l-email">Email</label>
+        <input type="email" id="l-email" placeholder="you@elyracai.com" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="l-pass">Password</label>
+        <input type="password" id="l-pass" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button class="btn-login" type="submit" id="login-btn">Sign In</button>
+      <p id="login-error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ── -->
+<div id="dashboard">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
+      <span class="top-bar-title">Admin Portal</span>
+    </div>
+    <div class="top-bar-right">
+      <span class="user-badge" id="user-email-badge"></span>
+      <button class="btn-refresh" id="refresh-btn">↻ Refresh</button>
+      <button class="btn-logout" id="logout-btn">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="page-title">Contact Submissions</div>
+    <div class="page-sub" id="last-updated"></div>
+
+    <div class="stats-grid" id="stats-grid"></div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search by name, email, company or message...">
+      </div>
+      <select class="filter-select" id="interest-filter">
+        <option value="">All interests</option>
+        <option value="llm">LLM / RAG Systems</option>
+        <option value="automation">Process Automation</option>
+        <option value="chatbot">Conversational AI</option>
+        <option value="analytics">Predictive Analytics</option>
+        <option value="vision">Computer Vision</option>
+        <option value="saas">AI SaaS Product</option>
+        <option value="other">Not sure yet</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Company</th>
+            <th>Interest</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+      <div class="table-footer" id="row-count"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const { createClient } = supabase;
+  const db = createClient(
+    'https://ucbyaknfjrtoitrzamca.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjYnlha25manJ0b2l0cnphbWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDYxMzgsImV4cCI6MjA5MzMyMjEzOH0.HNIVUkC0xiZoqGe1L7uYAegbjCgWCW9qjEJS0VI6gYw'
+  );
+
+  const INTEREST_LABELS = {
+    llm:        'LLM / RAG Systems',
+    automation: 'Process Automation',
+    chatbot:    'Conversational AI',
+    analytics:  'Predictive Analytics',
+    vision:     'Computer Vision',
+    saas:       'AI SaaS Product',
+    other:      'Not sure yet'
+  };
+
+  let allRows = [];
+
+  function esc(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── AUTH CHECK ON LOAD ──
+  async function init() {
+    const { data: { session } } = await db.auth.getSession();
+    if (session) showDashboard(session.user);
+  }
+
+  // ── LOGIN ──
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('login-btn');
+    const errEl = document.getElementById('login-error');
+    btn.disabled = true;
+    btn.textContent = 'Signing in...';
+    errEl.textContent = '';
+
+    const { data, error } = await db.auth.signInWithPassword({
+      email: document.getElementById('l-email').value.trim(),
+      password: document.getElementById('l-pass').value
+    });
+
+    if (error) {
+      errEl.textContent = 'Invalid email or password.';
+      btn.disabled = false;
+      btn.textContent = 'Sign In';
+    } else {
+      showDashboard(data.user);
+    }
+  });
+
+  // ── LOGOUT ──
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await db.auth.signOut();
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('login-btn').disabled = false;
+    document.getElementById('login-btn').textContent = 'Sign In';
+    document.getElementById('l-email').value = '';
+    document.getElementById('l-pass').value = '';
+  });
+
+  // ── REFRESH ──
+  document.getElementById('refresh-btn').addEventListener('click', loadSubmissions);
+
+  // ── SHOW DASHBOARD ──
+  async function showDashboard(user) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('user-email-badge').textContent = user.email;
+    await loadSubmissions();
+    setupFilters();
+  }
+
+  // ── LOAD DATA ──
+  async function loadSubmissions() {
+    document.getElementById('table-body').innerHTML =
+      '<tr><td colspan="6" style="text-align:center;padding:40px;color:#9ca3af;">Loading...</td></tr>';
+
+    const { data, error } = await db
+      .from('contact_submissions')
+      .select('*')
+      .order('submitted_at', { ascending: false });
+
+    if (error) {
+      document.getElementById('table-body').innerHTML =
+        '<tr><td colspan="6" style="text-align:center;color:#dc2626;padding:40px;">Failed to load data. Check your connection.</td></tr>';
+      return;
+    }
+
+    allRows = data || [];
+    renderStats(allRows);
+    renderTable(allRows);
+
+    const updated = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+    document.getElementById('last-updated').textContent = `Last refreshed: ${updated}`;
+
+    document.getElementById('search-input').value = '';
+    document.getElementById('interest-filter').value = '';
+  }
+
+  // ── STATS ──
+  function renderStats(rows) {
+    const total = rows.length;
+
+    const thisMonth = rows.filter(r => {
+      const d = new Date(r.submitted_at);
+      const now = new Date();
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    }).length;
+
+    const counts = {};
+    rows.forEach(r => { if (r.interest) counts[r.interest] = (counts[r.interest] || 0) + 1; });
+    const topEntry = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+    const topInterest = topEntry ? (INTEREST_LABELS[topEntry[0]] || topEntry[0]) : '—';
+
+    document.getElementById('stats-grid').innerHTML = `
+      <div class="stat-card">
+        <div class="stat-label">Total Submissions</div>
+        <div class="stat-value">${total}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">This Month</div>
+        <div class="stat-value">${thisMonth}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Top Interest</div>
+        <div class="stat-value sm">${topInterest}</div>
+      </div>
+    `;
+  }
+
+  // ── RENDER TABLE ──
+  function renderTable(rows) {
+    const tbody = document.getElementById('table-body');
+    document.getElementById('row-count').textContent =
+      `Showing ${rows.length} submission${rows.length !== 1 ? 's' : ''}`;
+
+    if (!rows.length) {
+      tbody.innerHTML = `
+        <tr><td colspan="6">
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p>No submissions match your search.</p>
+          </div>
+        </td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = rows.map(r => {
+      const date = new Date(r.submitted_at).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+      const badgeClass = 'badge badge-' + (r.interest || 'other');
+      const label = r.interest ? (INTEREST_LABELS[r.interest] || r.interest) : '—';
+      return `
+        <tr>
+          <td class="td-date">${date}</td>
+          <td class="td-name">${esc(r.name)}</td>
+          <td class="td-email"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
+          <td>${esc(r.company || '—')}</td>
+          <td><span class="${badgeClass}">${label}</span></td>
+          <td class="td-message">${esc(r.message)}</td>
+        </tr>`;
+    }).join('');
+  }
+
+  // ── SEARCH & FILTER ──
+  function setupFilters() {
+    const searchInput = document.getElementById('search-input');
+    const interestFilter = document.getElementById('interest-filter');
+
+    function applyFilters() {
+      const q = searchInput.value.toLowerCase();
+      const interest = interestFilter.value;
+      const filtered = allRows.filter(r => {
+        const matchesSearch = !q || [r.name, r.email, r.company, r.message]
+          .some(v => v && v.toLowerCase().includes(q));
+        const matchesInterest = !interest || r.interest === interest;
+        return matchesSearch && matchesInterest;
+      });
+      renderTable(filtered);
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    interestFilter.addEventListener('change', applyFilters);
+  }
+
+  init();
+</script>
+</body>
+</html>

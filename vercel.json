@@ -13,7 +13,8 @@
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/faq", "destination": "/faq.html" },
     { "source": "/elyrac-company-profile", "destination": "/elyrac-company-profile.html" },
-    { "source": "/sitemap.xml", "destination": "/sitemap.xml" }
+    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
+    { "source": "/admin", "destination": "/admin.html" }
   ],
   "headers": [
     {
