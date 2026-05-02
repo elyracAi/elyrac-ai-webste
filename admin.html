@@ -329,6 +329,11 @@
   let allRows = [];
   let currentUser = null;
 
+  // Capture invite flag immediately — before anything clears the URL hash
+  const _initParams = new URLSearchParams(window.location.hash.replace('#', ''));
+  const _isInviteFlow = _initParams.get('type') === 'invite';
+  if (_isInviteFlow) window.history.replaceState(null, '', '/admin');
+
   function esc(str) {
     if (!str) return '';
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -358,25 +363,17 @@
 
   /* ─── INIT ─── */
   async function init() {
-    // Handle invite link hash (e.g. /admin#access_token=...&type=invite)
-    const hash = new URLSearchParams(window.location.hash.replace('#', ''));
-    if (hash.get('type') === 'invite') {
-      window.history.replaceState(null, '', '/admin');
-      // onAuthStateChange will fire and detect the session
-      return;
-    }
+    if (_isInviteFlow) return; // onAuthStateChange handles invite flow
     const { data: { session } } = await db.auth.getSession();
     if (session) await showDashboard(session.user);
   }
 
   db.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session) {
-      // Detect if this is from an invite link
-      const wasInvite = document.getElementById('set-password-screen').style.display === 'flex'
-        || window.location.hash.includes('type=invite');
-      if (wasInvite && !currentUser) {
-        showSetPassword();
+      if (_isInviteFlow) {
+        // Always show set-password for invite links, regardless of existing session
         currentUser = session.user;
+        showSetPassword();
         return;
       }
       if (!currentUser) await showDashboard(session.user);
