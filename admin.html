@@ -8,31 +8,38 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
 
-    /* ── LOGIN ── */
-    #login-screen {
+    /* ── LOGIN / SET-PASSWORD SCREENS ── */
+    #login-screen, #set-password-screen {
       min-height: 100vh; display: flex; align-items: center;
       justify-content: center;
       background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
     }
-    .login-card {
+    #set-password-screen { display: none; }
+
+    .auth-card {
       background: white; border-radius: 16px; padding: 48px 40px;
       width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
-    .login-logo { text-align: center; margin-bottom: 20px; }
-    .login-logo img { height: 48px; width: auto; }
-    .login-card h2 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 4px; }
-    .login-card .subtitle { text-align: center; font-size: 13px; color: #6b7280; margin-bottom: 32px; }
+    .auth-logo { text-align: center; margin-bottom: 20px; }
+    .auth-logo img { height: 48px; width: auto; }
+    .auth-card h2 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+    .auth-card .subtitle { text-align: center; font-size: 13px; color: #6b7280; margin-bottom: 32px; line-height: 1.5; }
+
     .field { margin-bottom: 16px; }
     .field label { display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
     .field input { width: 100%; padding: 12px 16px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; }
     .field input:focus { border-color: #2563eb; }
-    .btn-login { width: 100%; padding: 13px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
-    .btn-login:hover { background: #1d4ed8; }
-    .btn-login:disabled { background: #93c5fd; cursor: not-allowed; }
-    #login-error { color: #dc2626; font-size: 13px; text-align: center; margin-top: 12px; min-height: 20px; }
+
+    .btn-primary { width: 100%; padding: 13px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-primary:disabled { background: #93c5fd; cursor: not-allowed; }
+
+    .auth-error { color: #dc2626; font-size: 13px; text-align: center; margin-top: 12px; min-height: 20px; }
+    .auth-success { color: #16a34a; font-size: 13px; text-align: center; margin-top: 12px; min-height: 20px; }
+
+    .password-rules { font-size: 12px; color: #9ca3af; margin-top: 6px; line-height: 1.5; }
 
     /* ── DASHBOARD ── */
     #dashboard { display: none; min-height: 100vh; }
@@ -41,26 +48,34 @@
       background: #0f0f23; color: white; padding: 0 32px; height: 60px;
       display: flex; align-items: center; justify-content: space-between;
       position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
     .top-bar-left { display: flex; align-items: center; gap: 14px; }
     .top-bar-left img { height: 36px; width: auto; }
     .top-bar-title { font-size: 15px; font-weight: 600; }
-    .top-bar-right { display: flex; align-items: center; gap: 14px; }
-    .user-badge { font-size: 13px; color: #9ca3af; }
-    .btn-logout { padding: 7px 16px; background: transparent; color: #9ca3af; border: 1px solid #374151; border-radius: 6px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
-    .btn-logout:hover { color: white; border-color: #6b7280; }
-    .btn-refresh { padding: 7px 16px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; transition: background 0.2s; }
-    .btn-refresh:hover { background: #1d4ed8; }
+    .top-bar-right { display: flex; align-items: center; gap: 10px; }
+    .user-badge { font-size: 13px; color: #9ca3af; margin-right: 4px; }
+
+    .btn-topbar {
+      padding: 7px 14px; border-radius: 6px; font-size: 13px;
+      cursor: pointer; transition: all 0.2s; border: 1px solid transparent;
+    }
+    .btn-ghost-bar { background: transparent; color: #9ca3af; border-color: #374151; }
+    .btn-ghost-bar:hover { color: white; border-color: #6b7280; }
+    .btn-blue-bar { background: #2563eb; color: white; border-color: #2563eb; }
+    .btn-blue-bar:hover { background: #1d4ed8; }
+    .btn-invite-bar { background: #16a34a; color: white; border-color: #16a34a; }
+    .btn-invite-bar:hover { background: #15803d; }
 
     .main { max-width: 1300px; margin: 0 auto; padding: 32px 24px; }
-    .page-title { font-size: 24px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .page-title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
     .page-sub { font-size: 13px; color: #9ca3af; margin-bottom: 28px; }
 
     /* ── STATS ── */
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
     .stat-card { background: white; border-radius: 12px; padding: 20px 24px; border: 1px solid #e5e7eb; }
     .stat-label { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-    .stat-value { font-size: 32px; font-weight: 700; color: #1a1a2e; line-height: 1; }
+    .stat-value { font-size: 32px; font-weight: 700; line-height: 1; }
     .stat-value.sm { font-size: 18px; padding-top: 6px; }
 
     /* ── TOOLBAR ── */
@@ -80,7 +95,6 @@
     td { padding: 14px 16px; font-size: 14px; color: #374151; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
     tr:last-child td { border-bottom: none; }
     tr:hover td { background: #fafafa; }
-
     .td-name { font-weight: 600; color: #1a1a2e; white-space: nowrap; }
     .td-email a { color: #2563eb; text-decoration: none; }
     .td-email a:hover { text-decoration: underline; }
@@ -98,16 +112,53 @@
 
     .empty-state { text-align: center; padding: 60px 24px; color: #9ca3af; }
     .empty-icon { font-size: 40px; margin-bottom: 12px; }
-
     .table-footer { font-size: 13px; color: #9ca3af; padding: 12px 16px; border-top: 1px solid #f3f4f6; }
 
+    /* ── MODALS ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55); z-index: 500;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: white; border-radius: 16px; padding: 36px 40px;
+      width: 100%; max-width: 440px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+      position: relative;
+    }
+    .modal h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .modal .modal-sub { font-size: 13px; color: #6b7280; margin-bottom: 24px; line-height: 1.5; }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      background: none; border: none; font-size: 20px;
+      cursor: pointer; color: #9ca3af; line-height: 1;
+    }
+    .modal-close:hover { color: #374151; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .btn-modal-primary { flex: 1; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-modal-primary:hover { background: #1d4ed8; }
+    .btn-modal-primary:disabled { background: #93c5fd; cursor: not-allowed; }
+    .btn-modal-secondary { flex: 1; padding: 12px; background: white; color: #374151; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-modal-secondary:hover { border-color: #9ca3af; }
+    .btn-modal-green { background: #16a34a; }
+    .btn-modal-green:hover { background: #15803d; }
+    .modal-msg { font-size: 13px; text-align: center; margin-top: 12px; min-height: 18px; }
+    .modal-msg.error { color: #dc2626; }
+    .modal-msg.success { color: #16a34a; }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .top-bar { padding: 0 16px; }
+      .top-bar { padding: 0 16px; gap: 8px; }
       .user-badge { display: none; }
+      .top-bar-title { display: none; }
       .main { padding: 20px 16px; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       th, td { padding: 10px 12px; }
-      .td-message { max-width: 160px; }
+      .td-message { max-width: 150px; }
+      .modal { padding: 28px 24px; margin: 16px; }
+      .auth-card { padding: 36px 28px; margin: 16px; }
     }
   </style>
 </head>
@@ -115,10 +166,8 @@
 
 <!-- ── LOGIN ── -->
 <div id="login-screen">
-  <div class="login-card">
-    <div class="login-logo">
-      <img src="/others/Elyrac_Ai-03.png" alt="elyrac AI">
-    </div>
+  <div class="auth-card">
+    <div class="auth-logo"><img src="/others/Elyrac_Ai-03.png" alt="elyrac AI"></div>
     <h2>Team Portal</h2>
     <p class="subtitle">Sign in with your elyrac AI account</p>
     <form id="login-form">
@@ -130,8 +179,31 @@
         <label for="l-pass">Password</label>
         <input type="password" id="l-pass" placeholder="••••••••" required autocomplete="current-password">
       </div>
-      <button class="btn-login" type="submit" id="login-btn">Sign In</button>
-      <p id="login-error"></p>
+      <button class="btn-primary" type="submit" id="login-btn">Sign In</button>
+      <p class="auth-error" id="login-error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ── SET PASSWORD (invited users) ── -->
+<div id="set-password-screen">
+  <div class="auth-card">
+    <div class="auth-logo"><img src="/others/Elyrac_Ai-03.png" alt="elyrac AI"></div>
+    <h2>Welcome to elyrac AI</h2>
+    <p class="subtitle">You've been invited to the team portal. Set a password to activate your account.</p>
+    <form id="set-password-form">
+      <div class="field">
+        <label for="sp-pass">New Password</label>
+        <input type="password" id="sp-pass" placeholder="At least 8 characters" required minlength="8" autocomplete="new-password">
+        <p class="password-rules">Minimum 8 characters.</p>
+      </div>
+      <div class="field">
+        <label for="sp-confirm">Confirm Password</label>
+        <input type="password" id="sp-confirm" placeholder="Repeat your password" required minlength="8" autocomplete="new-password">
+      </div>
+      <button class="btn-primary" type="submit" id="sp-btn">Activate Account</button>
+      <p class="auth-error" id="sp-error"></p>
+      <p class="auth-success" id="sp-success"></p>
     </form>
   </div>
 </div>
@@ -145,8 +217,10 @@
     </div>
     <div class="top-bar-right">
       <span class="user-badge" id="user-email-badge"></span>
-      <button class="btn-refresh" id="refresh-btn">↻ Refresh</button>
-      <button class="btn-logout" id="logout-btn">Sign Out</button>
+      <button class="btn-topbar btn-ghost-bar" id="refresh-btn">↻ Refresh</button>
+      <button class="btn-topbar btn-ghost-bar" id="change-pass-btn">🔑 Password</button>
+      <button class="btn-topbar btn-invite-bar" id="invite-btn" style="display:none">+ Invite User</button>
+      <button class="btn-topbar btn-ghost-bar" id="logout-btn">Sign Out</button>
     </div>
   </div>
 
@@ -177,18 +251,62 @@
       <table>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Company</th>
-            <th>Interest</th>
-            <th>Message</th>
+            <th>Date</th><th>Name</th><th>Email</th>
+            <th>Company</th><th>Interest</th><th>Message</th>
           </tr>
         </thead>
         <tbody id="table-body"></tbody>
       </table>
       <div class="table-footer" id="row-count"></div>
     </div>
+  </div>
+</div>
+
+<!-- ── MODAL: Change Password ── -->
+<div class="modal-overlay" id="modal-password">
+  <div class="modal">
+    <button class="modal-close" data-close="modal-password">✕</button>
+    <h3>Change Password</h3>
+    <p class="modal-sub">Enter your current password to verify, then choose a new one.</p>
+    <form id="change-pass-form">
+      <div class="field">
+        <label for="cp-current">Current Password</label>
+        <input type="password" id="cp-current" placeholder="Your current password" required autocomplete="current-password">
+      </div>
+      <div class="field">
+        <label for="cp-new">New Password</label>
+        <input type="password" id="cp-new" placeholder="At least 8 characters" required minlength="8" autocomplete="new-password">
+      </div>
+      <div class="field">
+        <label for="cp-confirm">Confirm New Password</label>
+        <input type="password" id="cp-confirm" placeholder="Repeat new password" required minlength="8" autocomplete="new-password">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-modal-secondary" data-close="modal-password">Cancel</button>
+        <button type="submit" class="btn-modal-primary" id="cp-btn">Update Password</button>
+      </div>
+      <p class="modal-msg" id="cp-msg"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ── MODAL: Invite User (CEO only) ── -->
+<div class="modal-overlay" id="modal-invite">
+  <div class="modal">
+    <button class="modal-close" data-close="modal-invite">✕</button>
+    <h3>Invite Team Member</h3>
+    <p class="modal-sub">Enter their email address. They'll receive a link to set their own password and access this portal.</p>
+    <form id="invite-form">
+      <div class="field">
+        <label for="inv-email">Email Address</label>
+        <input type="email" id="inv-email" placeholder="colleague@elyracai.com" required autocomplete="off">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-modal-secondary" data-close="modal-invite">Cancel</button>
+        <button type="submit" class="btn-modal-primary btn-modal-green" id="inv-btn">Send Invite</button>
+      </div>
+      <p class="modal-msg" id="inv-msg"></p>
+    </form>
   </div>
 </div>
 
@@ -199,37 +317,78 @@
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjYnlha25manJ0b2l0cnphbWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDYxMzgsImV4cCI6MjA5MzMyMjEzOH0.HNIVUkC0xiZoqGe1L7uYAegbjCgWCW9qjEJS0VI6gYw'
   );
 
+  const CEO_EMAIL       = 'ceo@elyracai.com';
+  const INVITE_ENDPOINT = 'https://ucbyaknfjrtoitrzamca.supabase.co/functions/v1/invite-user';
+
   const INTEREST_LABELS = {
-    llm:        'LLM / RAG Systems',
-    automation: 'Process Automation',
-    chatbot:    'Conversational AI',
-    analytics:  'Predictive Analytics',
-    vision:     'Computer Vision',
-    saas:       'AI SaaS Product',
-    other:      'Not sure yet'
+    llm: 'LLM / RAG Systems', automation: 'Process Automation',
+    chatbot: 'Conversational AI', analytics: 'Predictive Analytics',
+    vision: 'Computer Vision', saas: 'AI SaaS Product', other: 'Not sure yet'
   };
 
   let allRows = [];
+  let currentUser = null;
 
   function esc(str) {
     if (!str) return '';
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  // ── AUTH CHECK ON LOAD ──
-  async function init() {
-    const { data: { session } } = await db.auth.getSession();
-    if (session) showDashboard(session.user);
+  /* ─── SCREENS ─── */
+  function showLogin() {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('set-password-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'none';
+  }
+  function showSetPassword() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('set-password-screen').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+  }
+  async function showDashboard(user) {
+    currentUser = user;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('set-password-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('user-email-badge').textContent = user.email;
+    document.getElementById('invite-btn').style.display = user.email === CEO_EMAIL ? 'inline-block' : 'none';
+    await loadSubmissions();
+    setupFilters();
   }
 
-  // ── LOGIN ──
+  /* ─── INIT ─── */
+  async function init() {
+    // Handle invite link hash (e.g. /admin#access_token=...&type=invite)
+    const hash = new URLSearchParams(window.location.hash.replace('#', ''));
+    if (hash.get('type') === 'invite') {
+      window.history.replaceState(null, '', '/admin');
+      // onAuthStateChange will fire and detect the session
+      return;
+    }
+    const { data: { session } } = await db.auth.getSession();
+    if (session) await showDashboard(session.user);
+  }
+
+  db.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_IN' && session) {
+      // Detect if this is from an invite link
+      const wasInvite = document.getElementById('set-password-screen').style.display === 'flex'
+        || window.location.hash.includes('type=invite');
+      if (wasInvite && !currentUser) {
+        showSetPassword();
+        currentUser = session.user;
+        return;
+      }
+      if (!currentUser) await showDashboard(session.user);
+    }
+  });
+
+  /* ─── LOGIN ─── */
   document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('login-btn');
     const errEl = document.getElementById('login-error');
-    btn.disabled = true;
-    btn.textContent = 'Signing in...';
-    errEl.textContent = '';
+    btn.disabled = true; btn.textContent = 'Signing in…'; errEl.textContent = '';
 
     const { data, error } = await db.auth.signInWithPassword({
       email: document.getElementById('l-email').value.trim(),
@@ -238,40 +397,178 @@
 
     if (error) {
       errEl.textContent = 'Invalid email or password.';
-      btn.disabled = false;
-      btn.textContent = 'Sign In';
+      btn.disabled = false; btn.textContent = 'Sign In';
     } else {
-      showDashboard(data.user);
+      await showDashboard(data.user);
     }
   });
 
-  // ── LOGOUT ──
-  document.getElementById('logout-btn').addEventListener('click', async () => {
-    await db.auth.signOut();
-    document.getElementById('dashboard').style.display = 'none';
-    document.getElementById('login-screen').style.display = 'flex';
-    document.getElementById('login-btn').disabled = false;
-    document.getElementById('login-btn').textContent = 'Sign In';
-    document.getElementById('l-email').value = '';
-    document.getElementById('l-pass').value = '';
+  /* ─── SET PASSWORD (invited users) ─── */
+  document.getElementById('set-password-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('sp-btn');
+    const errEl = document.getElementById('sp-error');
+    const okEl  = document.getElementById('sp-success');
+    const pass  = document.getElementById('sp-pass').value;
+    const conf  = document.getElementById('sp-confirm').value;
+
+    errEl.textContent = ''; okEl.textContent = '';
+
+    if (pass !== conf) { errEl.textContent = 'Passwords do not match.'; return; }
+    if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters.'; return; }
+
+    btn.disabled = true; btn.textContent = 'Activating…';
+
+    const { error } = await db.auth.updateUser({ password: pass });
+    if (error) {
+      errEl.textContent = error.message;
+      btn.disabled = false; btn.textContent = 'Activate Account';
+    } else {
+      okEl.textContent = 'Password set! Taking you to the portal…';
+      setTimeout(async () => {
+        const { data: { session } } = await db.auth.getSession();
+        if (session) await showDashboard(session.user);
+      }, 1200);
+    }
   });
 
-  // ── REFRESH ──
+  /* ─── LOGOUT ─── */
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await db.auth.signOut();
+    currentUser = null;
+    document.getElementById('l-email').value = '';
+    document.getElementById('l-pass').value = '';
+    document.getElementById('login-btn').disabled = false;
+    document.getElementById('login-btn').textContent = 'Sign In';
+    document.getElementById('login-error').textContent = '';
+    showLogin();
+  });
+
+  /* ─── REFRESH ─── */
   document.getElementById('refresh-btn').addEventListener('click', loadSubmissions);
 
-  // ── SHOW DASHBOARD ──
-  async function showDashboard(user) {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('user-email-badge').textContent = user.email;
-    await loadSubmissions();
-    setupFilters();
-  }
+  /* ─── CHANGE PASSWORD MODAL ─── */
+  document.getElementById('change-pass-btn').addEventListener('click', () => {
+    document.getElementById('change-pass-form').reset();
+    document.getElementById('cp-msg').textContent = '';
+    document.getElementById('cp-msg').className = 'modal-msg';
+    document.getElementById('cp-btn').disabled = false;
+    document.getElementById('cp-btn').textContent = 'Update Password';
+    document.getElementById('modal-password').classList.add('open');
+  });
 
-  // ── LOAD DATA ──
+  document.getElementById('change-pass-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn    = document.getElementById('cp-btn');
+    const msgEl  = document.getElementById('cp-msg');
+    const current = document.getElementById('cp-current').value;
+    const newPass = document.getElementById('cp-new').value;
+    const confirm = document.getElementById('cp-confirm').value;
+
+    msgEl.textContent = ''; msgEl.className = 'modal-msg';
+
+    if (newPass !== confirm) {
+      msgEl.textContent = 'New passwords do not match.';
+      msgEl.classList.add('error'); return;
+    }
+    if (newPass.length < 8) {
+      msgEl.textContent = 'Password must be at least 8 characters.';
+      msgEl.classList.add('error'); return;
+    }
+
+    btn.disabled = true; btn.textContent = 'Updating…';
+
+    // Re-authenticate to verify current password
+    const { error: reAuthErr } = await db.auth.signInWithPassword({
+      email: currentUser.email, password: current
+    });
+    if (reAuthErr) {
+      msgEl.textContent = 'Current password is incorrect.';
+      msgEl.classList.add('error');
+      btn.disabled = false; btn.textContent = 'Update Password'; return;
+    }
+
+    const { error } = await db.auth.updateUser({ password: newPass });
+    if (error) {
+      msgEl.textContent = error.message;
+      msgEl.classList.add('error');
+      btn.disabled = false; btn.textContent = 'Update Password';
+    } else {
+      msgEl.textContent = '✅ Password updated successfully!';
+      msgEl.classList.add('success');
+      btn.textContent = 'Updated';
+      setTimeout(() => {
+        document.getElementById('modal-password').classList.remove('open');
+        document.getElementById('change-pass-form').reset();
+        btn.disabled = false; btn.textContent = 'Update Password';
+      }, 1800);
+    }
+  });
+
+  /* ─── INVITE MODAL (CEO only) ─── */
+  document.getElementById('invite-btn').addEventListener('click', () => {
+    document.getElementById('invite-form').reset();
+    document.getElementById('inv-msg').textContent = '';
+    document.getElementById('inv-msg').className = 'modal-msg';
+    document.getElementById('inv-btn').disabled = false;
+    document.getElementById('inv-btn').textContent = 'Send Invite';
+    document.getElementById('modal-invite').classList.add('open');
+  });
+
+  document.getElementById('invite-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn   = document.getElementById('inv-btn');
+    const msgEl = document.getElementById('inv-msg');
+    const email = document.getElementById('inv-email').value.trim();
+
+    msgEl.textContent = ''; msgEl.className = 'modal-msg';
+    btn.disabled = true; btn.textContent = 'Sending…';
+
+    try {
+      const { data: { session } } = await db.auth.getSession();
+      const res = await fetch(INVITE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + session.access_token
+        },
+        body: JSON.stringify({ email })
+      });
+      const json = await res.json();
+
+      if (!res.ok) throw new Error(json.error || 'Failed to send invite.');
+
+      msgEl.textContent = `✅ Invite sent to ${email}`;
+      msgEl.classList.add('success');
+      btn.textContent = 'Sent!';
+      setTimeout(() => {
+        document.getElementById('modal-invite').classList.remove('open');
+        document.getElementById('invite-form').reset();
+        btn.disabled = false; btn.textContent = 'Send Invite';
+      }, 2000);
+    } catch (err) {
+      msgEl.textContent = err.message;
+      msgEl.classList.add('error');
+      btn.disabled = false; btn.textContent = 'Send Invite';
+    }
+  });
+
+  /* ─── CLOSE MODALS ─── */
+  document.querySelectorAll('[data-close]').forEach(el => {
+    el.addEventListener('click', () => {
+      document.getElementById(el.dataset.close).classList.remove('open');
+    });
+  });
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+  });
+
+  /* ─── LOAD DATA ─── */
   async function loadSubmissions() {
     document.getElementById('table-body').innerHTML =
-      '<tr><td colspan="6" style="text-align:center;padding:40px;color:#9ca3af;">Loading...</td></tr>';
+      '<tr><td colspan="6" style="text-align:center;padding:40px;color:#9ca3af;">Loading…</td></tr>';
 
     const { data, error } = await db
       .from('contact_submissions')
@@ -280,70 +577,52 @@
 
     if (error) {
       document.getElementById('table-body').innerHTML =
-        '<tr><td colspan="6" style="text-align:center;color:#dc2626;padding:40px;">Failed to load data. Check your connection.</td></tr>';
+        '<tr><td colspan="6" style="text-align:center;color:#dc2626;padding:40px;">Failed to load data.</td></tr>';
       return;
     }
 
     allRows = data || [];
     renderStats(allRows);
     renderTable(allRows);
-
-    const updated = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
-    document.getElementById('last-updated').textContent = `Last refreshed: ${updated}`;
-
     document.getElementById('search-input').value = '';
     document.getElementById('interest-filter').value = '';
+    const updated = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+    document.getElementById('last-updated').textContent = `Last refreshed: ${updated}`;
   }
 
-  // ── STATS ──
+  /* ─── STATS ─── */
   function renderStats(rows) {
     const total = rows.length;
-
+    const now = new Date();
     const thisMonth = rows.filter(r => {
       const d = new Date(r.submitted_at);
-      const now = new Date();
       return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
     }).length;
-
     const counts = {};
     rows.forEach(r => { if (r.interest) counts[r.interest] = (counts[r.interest] || 0) + 1; });
-    const topEntry = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-    const topInterest = topEntry ? (INTEREST_LABELS[topEntry[0]] || topEntry[0]) : '—';
+    const top = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+    const topInterest = top ? (INTEREST_LABELS[top[0]] || top[0]) : '—';
 
     document.getElementById('stats-grid').innerHTML = `
-      <div class="stat-card">
-        <div class="stat-label">Total Submissions</div>
-        <div class="stat-value">${total}</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">This Month</div>
-        <div class="stat-value">${thisMonth}</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Top Interest</div>
-        <div class="stat-value sm">${topInterest}</div>
-      </div>
-    `;
+      <div class="stat-card"><div class="stat-label">Total Submissions</div><div class="stat-value">${total}</div></div>
+      <div class="stat-card"><div class="stat-label">This Month</div><div class="stat-value">${thisMonth}</div></div>
+      <div class="stat-card"><div class="stat-label">Top Interest</div><div class="stat-value sm">${topInterest}</div></div>`;
   }
 
-  // ── RENDER TABLE ──
+  /* ─── RENDER TABLE ─── */
   function renderTable(rows) {
-    const tbody = document.getElementById('table-body');
     document.getElementById('row-count').textContent =
       `Showing ${rows.length} submission${rows.length !== 1 ? 's' : ''}`;
 
     if (!rows.length) {
-      tbody.innerHTML = `
-        <tr><td colspan="6">
-          <div class="empty-state">
-            <div class="empty-icon">📭</div>
-            <p>No submissions match your search.</p>
-          </div>
-        </td></tr>`;
+      document.getElementById('table-body').innerHTML = `
+        <tr><td colspan="6"><div class="empty-state">
+          <div class="empty-icon">📭</div><p>No submissions match your search.</p>
+        </div></td></tr>`;
       return;
     }
 
-    tbody.innerHTML = rows.map(r => {
+    document.getElementById('table-body').innerHTML = rows.map(r => {
       const date = new Date(r.submitted_at).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
       const badgeClass = 'badge badge-' + (r.interest || 'other');
       const label = r.interest ? (INTEREST_LABELS[r.interest] || r.interest) : '—';
@@ -359,23 +638,19 @@
     }).join('');
   }
 
-  // ── SEARCH & FILTER ──
+  /* ─── SEARCH & FILTER ─── */
   function setupFilters() {
-    const searchInput = document.getElementById('search-input');
+    const searchInput    = document.getElementById('search-input');
     const interestFilter = document.getElementById('interest-filter');
-
     function applyFilters() {
       const q = searchInput.value.toLowerCase();
       const interest = interestFilter.value;
-      const filtered = allRows.filter(r => {
-        const matchesSearch = !q || [r.name, r.email, r.company, r.message]
-          .some(v => v && v.toLowerCase().includes(q));
-        const matchesInterest = !interest || r.interest === interest;
-        return matchesSearch && matchesInterest;
-      });
-      renderTable(filtered);
+      renderTable(allRows.filter(r => {
+        const matchSearch   = !q || [r.name, r.email, r.company, r.message].some(v => v && v.toLowerCase().includes(q));
+        const matchInterest = !interest || r.interest === interest;
+        return matchSearch && matchInterest;
+      }));
     }
-
     searchInput.addEventListener('input', applyFilters);
     interestFilter.addEventListener('change', applyFilters);
   }
