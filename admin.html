@@ -567,27 +567,36 @@
 
   /* ─── LOAD DATA ─── */
   async function loadSubmissions() {
-    document.getElementById('table-body').innerHTML =
-      '<tr><td colspan="6" style="text-align:center;padding:40px;color:#9ca3af;">Loading…</td></tr>';
+    const tbody = document.getElementById('table-body');
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;color:#9ca3af;">Loading…</td></tr>';
 
-    const { data, error } = await db
-      .from('contact_submissions')
-      .select('*')
-      .order('submitted_at', { ascending: false });
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Request timed out. Your Supabase project may be paused — check your Supabase dashboard.')), 12000)
+    );
 
-    if (error) {
-      document.getElementById('table-body').innerHTML =
-        '<tr><td colspan="6" style="text-align:center;color:#dc2626;padding:40px;">Failed to load data.</td></tr>';
-      return;
+    try {
+      const { data, error } = await Promise.race([
+        db.from('contact_submissions').select('*').order('submitted_at', { ascending: false }),
+        timeout
+      ]);
+
+      if (error) throw new Error(error.message);
+
+      allRows = data || [];
+      renderStats(allRows);
+      renderTable(allRows);
+      document.getElementById('search-input').value = '';
+      document.getElementById('interest-filter').value = '';
+      const updated = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+      document.getElementById('last-updated').textContent = `Last refreshed: ${updated}`;
+    } catch (err) {
+      console.error('loadSubmissions error:', err);
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#dc2626;padding:40px;line-height:1.7;">
+        ⚠️ ${err.message}<br>
+        <span style="font-size:12px;color:#9ca3af;">Open your Supabase dashboard to check the project status, then click Refresh.</span>
+      </td></tr>`;
+      document.getElementById('stats-grid').innerHTML = '';
     }
-
-    allRows = data || [];
-    renderStats(allRows);
-    renderTable(allRows);
-    document.getElementById('search-input').value = '';
-    document.getElementById('interest-filter').value = '';
-    const updated = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
-    document.getElementById('last-updated').textContent = `Last refreshed: ${updated}`;
   }
 
   /* ─── STATS ─── */
