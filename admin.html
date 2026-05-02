@@ -149,16 +149,62 @@
     .modal-msg.success { color: #16a34a; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .table-wrap { overflow-x: auto; }
+    }
+
     @media (max-width: 768px) {
-      .top-bar { padding: 0 16px; gap: 8px; }
-      .user-badge { display: none; }
+      .top-bar { padding: 0 14px; height: 56px; }
       .top-bar-title { display: none; }
-      .main { padding: 20px 16px; }
+      .user-badge { display: none; }
+      .btn-label { display: none; }
+      .btn-topbar { padding: 7px 10px; font-size: 15px; }
+      .main { padding: 16px 14px; }
+      .page-title { font-size: 20px; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+      .stat-card { padding: 14px 16px; }
+      .stat-value { font-size: 26px; }
+      .stat-value.sm { font-size: 15px; }
+      .stat-label { font-size: 10px; }
+      .toolbar { gap: 8px; margin-bottom: 12px; }
+      .filter-select { width: 100%; }
+      .search-wrap { min-width: 100%; }
+      .modal { padding: 28px 20px; margin: 12px; max-height: 90vh; overflow-y: auto; }
+      .auth-card { padding: 32px 24px; margin: 16px; }
+      .modal-actions { flex-direction: column; }
+    }
+
+    /* ── CARD LAYOUT FOR TABLE ON MOBILE ── */
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .table-wrap { background: transparent; border: none; box-shadow: none; overflow: visible; }
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      tbody tr {
+        background: white; border-radius: 12px;
+        border: 1px solid #e5e7eb; margin-bottom: 12px;
+        padding: 16px; position: relative;
+      }
+      tbody tr:hover td { background: transparent; }
+      td { padding: 0; border: none; margin-bottom: 10px; font-size: 14px; }
+      td:last-child { margin-bottom: 0; }
+      td::before {
+        content: attr(data-label);
+        display: block; font-size: 10px; font-weight: 700;
+        color: #9ca3af; text-transform: uppercase;
+        letter-spacing: 0.06em; margin-bottom: 3px;
+      }
+      .td-date { color: #9ca3af; font-size: 12px; margin-bottom: 12px !important; }
+      .td-date::before { display: none; }
+      .td-name { font-size: 16px; }
+      .td-message { max-width: 100%; }
+      .table-footer { padding: 12px 0; background: transparent; border: none; }
+    }
+
+    @media (max-width: 380px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      th, td { padding: 10px 12px; }
-      .td-message { max-width: 150px; }
-      .modal { padding: 28px 24px; margin: 16px; }
-      .auth-card { padding: 36px 28px; margin: 16px; }
+      .stat-card:last-child { grid-column: span 2; }
+      .top-bar-left img { height: 28px; }
     }
   </style>
 </head>
@@ -217,10 +263,10 @@
     </div>
     <div class="top-bar-right">
       <span class="user-badge" id="user-email-badge"></span>
-      <button class="btn-topbar btn-ghost-bar" id="refresh-btn">↻ Refresh</button>
-      <button class="btn-topbar btn-ghost-bar" id="change-pass-btn">🔑 Password</button>
-      <button class="btn-topbar btn-invite-bar" id="invite-btn" style="display:none">+ Invite User</button>
-      <button class="btn-topbar btn-ghost-bar" id="logout-btn">Sign Out</button>
+      <button class="btn-topbar btn-ghost-bar" id="refresh-btn">↻ <span class="btn-label">Refresh</span></button>
+      <button class="btn-topbar btn-ghost-bar" id="change-pass-btn">🔑 <span class="btn-label">Password</span></button>
+      <button class="btn-topbar btn-invite-bar" id="invite-btn" style="display:none">+ <span class="btn-label">Invite User</span></button>
+      <button class="btn-topbar btn-ghost-bar" id="logout-btn">⎋ <span class="btn-label">Sign Out</span></button>
     </div>
   </div>
 
@@ -634,12 +680,12 @@
       const label = r.interest ? (INTEREST_LABELS[r.interest] || r.interest) : '—';
       return `
         <tr>
-          <td class="td-date">${date}</td>
-          <td class="td-name">${esc(r.name)}</td>
-          <td class="td-email"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
-          <td>${esc(r.company || '—')}</td>
-          <td><span class="${badgeClass}">${label}</span></td>
-          <td class="td-message">${esc(r.message)}</td>
+          <td class="td-date" data-label="Date">${date}</td>
+          <td class="td-name" data-label="Name">${esc(r.name)}</td>
+          <td class="td-email" data-label="Email"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
+          <td data-label="Company">${esc(r.company || '—')}</td>
+          <td data-label="Interest"><span class="${badgeClass}">${label}</span></td>
+          <td class="td-message" data-label="Message">${esc(r.message)}</td>
         </tr>`;
     }).join('');
   }
