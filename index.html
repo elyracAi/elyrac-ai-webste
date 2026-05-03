@@ -13,8 +13,8 @@
 
 
 <link rel="preload" as="image" href="others/Elyrac_Ai-03.png">
-<link rel="preload" as="image" href="others/businesswoman-interacting-with-ai-hologram-office.jpg">
 <link rel="stylesheet" href="css/shared.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 
   /* ── HOMEPAGE NAV: STICKY ── */
@@ -515,6 +515,61 @@
     .tools-ticker-wrap { margin: 0 -16px; }
   }
 
+  /* ── HERO CONTACT FORM CARD ── */
+  .hero-form-card {
+    background: white; border-radius: 20px;
+    padding: 28px 26px;
+    box-shadow: 0 28px 80px rgba(0,0,0,0.38), 0 0 0 1px rgba(255,255,255,0.06);
+    width: 100%; max-width: 400px;
+    position: relative; z-index: 2;
+  }
+  .hero-form-card h3 {
+    font-size: 19px; font-weight: 700; color: #0f1f3d;
+    margin-bottom: 3px; font-family: 'Sora', sans-serif;
+  }
+  .hfc-sub { font-size: 12px; color: #6b7280; margin-bottom: 16px; line-height: 1.5; }
+  .hf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .hf-field { margin-bottom: 8px; }
+  .hf-row .hf-field { margin-bottom: 0; }
+  .hf-field input, .hf-field select, .hf-field textarea {
+    width: 100%; padding: 9px 12px;
+    border: 1.5px solid #e5e7eb; border-radius: 8px;
+    font-size: 13px; font-family: var(--font-body);
+    color: #374151; outline: none;
+    transition: border-color 0.2s; background: #fafafa;
+    box-sizing: border-box;
+  }
+  .hf-field input:focus, .hf-field select:focus, .hf-field textarea:focus {
+    border-color: #2563eb; background: white;
+  }
+  .hf-field select { cursor: pointer; }
+  .hf-field textarea { resize: none; height: 74px; line-height: 1.5; }
+  .hf-submit {
+    width: 100%; padding: 11px; margin-top: 4px;
+    background: #2563eb; color: white; border: none;
+    border-radius: 8px; font-size: 14px; font-weight: 600;
+    font-family: var(--font-body); cursor: pointer;
+    transition: background 0.2s;
+  }
+  .hf-submit:hover { background: #1d4ed8; }
+  .hf-submit:disabled { background: #93c5fd; cursor: not-allowed; }
+  .hf-success {
+    display: none; margin-top: 10px; padding: 11px 14px;
+    background: #f0fdf4; border: 1px solid #bbf7d0;
+    border-radius: 8px; color: #15803d;
+    font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5;
+  }
+  .hf-success.show { display: block; }
+  .hf-trust { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; font-size: 11px; color: #9ca3af; }
+
+  @media (max-width: 900px) {
+    .hero-form-card { max-width: 100%; }
+  }
+  @media (max-width: 600px) {
+    .hero-form-card { padding: 22px 18px; }
+    .hf-row { grid-template-columns: 1fr; }
+  }
+
   body { background: #F5F8FF !important; }
   #chatbot-widget .chat-toggle {
     animation: simpleBounce 4s ease-in-out infinite !important;
@@ -601,38 +656,42 @@
     </div>
   </div>
 
-  <!-- RIGHT: Phone mockup + floating cards -->
+  <!-- RIGHT: Contact form -->
   <div class="hero-right">
-    <!-- Phone -->
-    <div class="phone-mockup">
-      <img src="others/businesswoman-interacting-with-ai-hologram-office.jpg" alt="AI in business" loading="eager" decoding="async">
-    </div>
-
-    <!-- Card 1: Pill — 95% Client Retention — top right -->
-    <div class="hfc hfc-pill hfc-1">
-      <span>📈</span>
-      <span>95% Client Retention</span>
-    </div>
-
-    <!-- Card 2: Pill — Custom-built — middle right -->
-    <div class="hfc hfc-pill hfc-2">
-      <span>✅</span>
-      <span>Custom-built, not off-the-shelf</span>
-    </div>
-
-    <!-- Card 3: Glass — 30+ Systems — bottom right -->
-    <div class="hfc hfc-glass hfc-3">
-      <div class="hfc-glass-num" data-count="30" data-suffix="+">30+</div>
-      <div class="hfc-glass-label">AI Systems Built</div>
-    </div>
-
-    <!-- Card 4: Glass — 4.9 Rating — lower left -->
-    <div class="hfc hfc-glass hfc-4">
-      <div style="color:#f59e0b;font-size:13px;line-height:1">⭐⭐⭐⭐⭐</div>
-      <div style="display:flex;align-items:baseline;gap:5px;margin-top:5px">
-        <span style="font-size:20px;font-weight:800;color:white" data-count="4.9" data-suffix="">4.9</span>
-        <span style="font-size:11px;color:rgba(255,255,255,0.7)">/ 100% Satisfied</span>
-      </div>
+    <div class="hero-form-card">
+      <h3>Start Your AI Project</h3>
+      <p class="hfc-sub">Tell us about your business — we'll reply within 24 hours.</p>
+      <form id="h-contact-form" onsubmit="heroHandleSubmit(event)">
+        <div class="hf-row">
+          <div class="hf-field">
+            <input type="text" id="h-name" placeholder="Your name" required autocomplete="name">
+          </div>
+          <div class="hf-field">
+            <input type="email" id="h-email" placeholder="Email address" required autocomplete="email">
+          </div>
+        </div>
+        <div class="hf-field">
+          <input type="text" id="h-company" placeholder="Company (optional)" autocomplete="organization">
+        </div>
+        <div class="hf-field">
+          <select id="h-interest">
+            <option value="" disabled selected>What are you interested in?</option>
+            <option value="llm">LLM / RAG Systems</option>
+            <option value="automation">Process Automation</option>
+            <option value="chatbot">Conversational AI</option>
+            <option value="analytics">Predictive Analytics</option>
+            <option value="vision">Computer Vision</option>
+            <option value="saas">AI SaaS Product</option>
+            <option value="other">Not sure yet</option>
+          </select>
+        </div>
+        <div class="hf-field">
+          <textarea id="h-message" placeholder="Briefly describe your challenge or what you'd like to build…" required></textarea>
+        </div>
+        <button type="submit" class="hf-submit" id="h-submit-btn">Send Message →</button>
+      </form>
+      <div class="hf-success" id="h-form-success">✅ Message received! We'll be in touch within 24 hours.</div>
+      <p class="hf-trust">🔒 No spam, ever &nbsp;·&nbsp; Replies within 24 hrs</p>
     </div>
   </div>
 </section>
@@ -1169,6 +1228,60 @@
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
+</script>
+
+<script>
+  // ── HERO CONTACT FORM ──
+  const _SB_URL  = 'https://ucbyaknfjrtoitrzamca.supabase.co';
+  const _SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjYnlha25manJ0b2l0cnphbWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDYxMzgsImV4cCI6MjA5MzMyMjEzOH0.HNIVUkC0xiZoqGe1L7uYAegbjCgWCW9qjEJS0VI6gYw';
+
+  emailjs.init('_qzqkvOG-jE1Wr8CH');
+
+  async function heroHandleSubmit(e) {
+    e.preventDefault();
+    const btn       = document.getElementById('h-submit-btn');
+    const successEl = document.getElementById('h-form-success');
+    const name      = document.getElementById('h-name').value.trim();
+    const email     = document.getElementById('h-email').value.trim();
+    const company   = document.getElementById('h-company').value.trim();
+    const interest  = document.getElementById('h-interest').value;
+    const message   = document.getElementById('h-message').value.trim();
+
+    btn.disabled = true; btn.textContent = 'Sending…';
+    successEl.classList.remove('show');
+
+    try {
+      const res = await fetch(_SB_URL + '/rest/v1/contact_submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': _SB_KEY,
+          'Authorization': 'Bearer ' + _SB_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ name, email, company: company || null, interest: interest || null, message })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || 'Submission failed');
+      }
+
+      emailjs.send('service_v0l6mpz', 'template_swpydxs', {
+        from_name: name, from_email: email,
+        company: company || 'N/A', interest: interest || 'Not specified',
+        message, to_email: email
+      }).catch(err => console.error('Email error:', err));
+
+      successEl.classList.add('show');
+      e.target.reset();
+      btn.textContent = 'Send Message →';
+    } catch (err) {
+      btn.textContent = 'Failed — please try again';
+      console.error('Hero form error:', err);
+    }
+    btn.disabled = false;
+  }
 </script>
 
 <!-- ── FLOATING CHATBOT ── -->
