@@ -669,17 +669,19 @@
   /* ─── INIT ─── */
   async function init() {
     if (_isInviteFlow) return; // onAuthStateChange handles invite flow
-    const { data: { session } } = await db.auth.getSession();
     if (_invitedViaLink) {
-      // Invite link clicked — sign out whoever is logged in and show fresh login
-      if (session) await db.auth.signOut();
+      // Sign out immediately — before getSession() — so onAuthStateChange
+      // never gets a chance to flash the wrong dashboard
+      await db.auth.signOut();
       showLogin();
       return;
     }
+    const { data: { session } } = await db.auth.getSession();
     if (session && !_dashboardInitiated) await showDashboard(session.user);
   }
 
   db.auth.onAuthStateChange(async (event, session) => {
+    if (_invitedViaLink) return; // invite link flow — init() handles everything
     if (event === 'SIGNED_IN' && session) {
       if (_isInviteFlow || session.user?.user_metadata?.invite_pending) {
         if (!currentUser) { currentUser = session.user; showSetPassword(); }
