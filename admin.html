@@ -514,7 +514,7 @@
   let lastVisitTime  = null;   // Date of previous login (from localStorage)
   let realtimeChannel = null;
   let rtBannerTimer  = null;
-  let _initialLoadDone = false; // guard: only show new-visit bar on first load
+  let _dashboardInitiated = false; // prevent race between init() and onAuthStateChange
 
   // Capture invite flag immediately — before anything clears the URL hash
   const _initParams = new URLSearchParams(window.location.hash.replace('#', ''));
@@ -642,9 +642,10 @@
     document.getElementById('dashboard').style.display = 'none';
   }
   async function showDashboard(user) {
+    if (_dashboardInitiated) return;
+    _dashboardInitiated = true;
     currentUser = user;
     lastVisitTime = recordAndGetLastVisit(); // capture BEFORE loading data
-    _initialLoadDone = false;               // reset so new-visit bar shows on this login
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('set-password-screen').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
@@ -653,13 +654,19 @@
     await loadSubmissions();
     setupFilters();
     setupRealtime();
+    // Show summary popup and new-visit bar exactly once per login, after data is loaded
+    const newRows = lastVisitTime
+      ? allRows.filter(r => new Date(r.submitted_at) > lastVisitTime)
+      : [];
+    showNewVisitBar(newRows.length);
+    showSummaryPopup(newRows);
   }
 
   /* ─── INIT ─── */
   async function init() {
     if (_isInviteFlow) return; // onAuthStateChange handles invite flow
     const { data: { session } } = await db.auth.getSession();
-    if (session) await showDashboard(session.user);
+    if (session && !_dashboardInitiated) await showDashboard(session.user);
   }
 
   db.auth.onAuthStateChange(async (event, session) => {
@@ -727,9 +734,10 @@
     teardownRealtime();
     dismissRtBanner();
     dismissNewVisitBar();
+    dismissSummaryPopup();
     await db.auth.signOut();
     currentUser = null;
-    _initialLoadDone = false;
+    _dashboardInitiated = false;
     document.getElementById('l-email').value = '';
     document.getElementById('l-pass').value = '';
     document.getElementById('login-btn').disabled = false;
@@ -890,15 +898,6 @@
       const updated = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
       document.getElementById('last-updated').textContent = 'Last refreshed: ' + updated;
 
-      // Show new-since-last-visit bar and summary popup on first load only
-      if (!_initialLoadDone) {
-        _initialLoadDone = true;
-        const newRows = lastVisitTime
-          ? allRows.filter(r => new Date(r.submitted_at) > lastVisitTime)
-          : [];
-        showNewVisitBar(newRows.length);
-        showSummaryPopup(newRows);
-      }
     } catch (err) {
       console.error('loadSubmissions error:', err);
       tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#dc2626;padding:40px;line-height:1.7;">
