@@ -521,6 +521,10 @@
   const _isInviteFlow = _initParams.get('type') === 'invite';
   if (_isInviteFlow) window.history.replaceState(null, '', '/admin');
 
+  // Detect ?invited=1 link from invite email — force fresh login
+  const _invitedViaLink = new URLSearchParams(window.location.search).get('invited') === '1';
+  if (_invitedViaLink) window.history.replaceState(null, '', '/admin');
+
   function esc(str) {
     if (!str) return '';
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -666,6 +670,12 @@
   async function init() {
     if (_isInviteFlow) return; // onAuthStateChange handles invite flow
     const { data: { session } } = await db.auth.getSession();
+    if (_invitedViaLink) {
+      // Invite link clicked — sign out whoever is logged in and show fresh login
+      if (session) await db.auth.signOut();
+      showLogin();
+      return;
+    }
     if (session && !_dashboardInitiated) await showDashboard(session.user);
   }
 
