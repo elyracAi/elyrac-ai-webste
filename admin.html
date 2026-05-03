@@ -68,6 +68,43 @@
     .btn-invite-bar { background: #16a34a; color: white; border-color: #16a34a; }
     .btn-invite-bar:hover { background: #15803d; }
 
+    /* ── REAL-TIME NOTIFICATION BANNER ── */
+    #rt-banner { position: sticky; top: 60px; z-index: 99; }
+    .rt-banner {
+      background: #1d4ed8; color: white;
+      padding: 11px 24px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      font-size: 14px; font-weight: 500;
+      animation: slideDown 0.3s ease;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .rt-banner-close {
+      background: none; border: none; color: white;
+      cursor: pointer; font-size: 16px; opacity: 0.7; line-height: 1;
+      margin-left: 4px;
+    }
+    .rt-banner-close:hover { opacity: 1; }
+
+    /* ── NEW-SINCE-LAST-VISIT BAR ── */
+    .new-visit-bar {
+      background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;
+      padding: 10px 16px; margin-bottom: 16px;
+      font-size: 13px; color: #1d4ed8;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .new-visit-close {
+      background: none; border: none; color: #93c5fd;
+      cursor: pointer; margin-left: auto; font-size: 14px; line-height: 1;
+    }
+    .new-visit-close:hover { color: #1d4ed8; }
+
+    /* ── NEW ROW HIGHLIGHT ── */
+    tr.row-new td { background: #eff6ff !important; }
+    tr.row-new:hover td { background: #dbeafe !important; }
+
     .main { max-width: 1300px; margin: 0 auto; padding: 32px 24px; }
     .page-title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
     .page-sub { font-size: 13px; color: #9ca3af; margin-bottom: 28px; }
@@ -173,6 +210,8 @@
       .modal { padding: 28px 20px; margin: 12px; max-height: 90vh; overflow-y: auto; }
       .auth-card { padding: 32px 24px; margin: 16px; }
       .modal-actions { flex-direction: column; }
+      #rt-banner { top: 56px; }
+      .rt-banner { padding: 10px 16px; font-size: 13px; }
     }
 
     /* ── CARD LAYOUT FOR TABLE ON MOBILE ── */
@@ -186,7 +225,9 @@
         border: 1px solid #e5e7eb; margin-bottom: 12px;
         padding: 16px; position: relative;
       }
+      tbody tr.row-new { background: #eff6ff; border-color: #93c5fd; }
       tbody tr:hover td { background: transparent; }
+      tbody tr.row-new td { background: transparent !important; }
       td { padding: 0; border: none; margin-bottom: 10px; font-size: 14px; }
       td:last-child { margin-bottom: 0; }
       td::before {
@@ -271,9 +312,23 @@
     </div>
   </div>
 
+  <!-- Real-time new submission banner (sticky below top-bar) -->
+  <div id="rt-banner" style="display:none">
+    <div class="rt-banner">
+      🔔 <span id="rt-banner-text">New submission received</span>
+      <button class="rt-banner-close" onclick="dismissRtBanner()">✕</button>
+    </div>
+  </div>
+
   <div class="main">
     <div class="page-title">Contact Submissions</div>
     <div class="page-sub" id="last-updated"></div>
+
+    <!-- New-since-last-visit info bar -->
+    <div id="new-visit-bar" style="display:none" class="new-visit-bar">
+      🆕 <span id="new-visit-text"></span>
+      <button class="new-visit-close" onclick="dismissNewVisitBar()">✕</button>
+    </div>
 
     <div class="stats-grid" id="stats-grid"></div>
 
@@ -375,8 +430,12 @@
     vision: 'Computer Vision', saas: 'AI SaaS Product', other: 'Not sure yet'
   };
 
-  let allRows = [];
-  let currentUser = null;
+  let allRows        = [];
+  let currentUser    = null;
+  let lastVisitTime  = null;   // Date of previous login (from localStorage)
+  let realtimeChannel = null;
+  let rtBannerTimer  = null;
+  let _initialLoadDone = false; // guard: only show new-visit bar on first load
 
   // Capture invite flag immediately — before anything clears the URL hash
   const _initParams = new URLSearchParams(window.location.hash.replace('#', ''));
@@ -386,6 +445,68 @@
   function esc(str) {
     if (!str) return '';
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ─── LAST-VISIT HELPERS ─── */
+  function recordAndGetLastVisit() {
+    const stored = localStorage.getItem('elyrac_admin_last_visit');
+    localStorage.setItem('elyrac_admin_last_visit', new Date().toISOString());
+    return stored ? new Date(stored) : null;
+  }
+
+  function showNewVisitBar(count) {
+    if (!count) return;
+    const bar = document.getElementById('new-visit-bar');
+    document.getElementById('new-visit-text').textContent =
+      count + ' new submission' + (count !== 1 ? 's' : '') + ' since your last visit';
+    bar.style.display = 'flex';
+  }
+
+  function dismissNewVisitBar() {
+    document.getElementById('new-visit-bar').style.display = 'none';
+  }
+
+  /* ─── REAL-TIME BANNER HELPERS ─── */
+  function showRtBanner(name) {
+    const label = name ? 'New submission from ' + name : 'New submission received';
+    document.getElementById('rt-banner-text').textContent = label;
+    document.getElementById('rt-banner').style.display = 'block';
+    if (rtBannerTimer) clearTimeout(rtBannerTimer);
+    rtBannerTimer = setTimeout(dismissRtBanner, 6000);
+  }
+
+  function dismissRtBanner() {
+    document.getElementById('rt-banner').style.display = 'none';
+    if (rtBannerTimer) { clearTimeout(rtBannerTimer); rtBannerTimer = null; }
+  }
+
+  /* ─── REAL-TIME SUBSCRIPTION ─── */
+  function setupRealtime() {
+    teardownRealtime();
+    realtimeChannel = db
+      .channel('contact_submissions_rt')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'contact_submissions' },
+        (payload) => {
+          const newRow = payload.new;
+          allRows = [newRow, ...allRows];
+          renderStats(allRows);
+          applyFilters();
+          showRtBanner(newRow.name || '');
+          // Update last-updated timestamp
+          const updated = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+          document.getElementById('last-updated').textContent = 'Last updated: ' + updated;
+        }
+      )
+      .subscribe();
+  }
+
+  function teardownRealtime() {
+    if (realtimeChannel) {
+      db.removeChannel(realtimeChannel);
+      realtimeChannel = null;
+    }
   }
 
   /* ─── SCREENS ─── */
@@ -401,6 +522,8 @@
   }
   async function showDashboard(user) {
     currentUser = user;
+    lastVisitTime = recordAndGetLastVisit(); // capture BEFORE loading data
+    _initialLoadDone = false;               // reset so new-visit bar shows on this login
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('set-password-screen').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
@@ -408,6 +531,7 @@
     document.getElementById('invite-btn').style.display = user.email === CEO_EMAIL ? 'inline-block' : 'none';
     await loadSubmissions();
     setupFilters();
+    setupRealtime();
   }
 
   /* ─── INIT ─── */
@@ -420,7 +544,6 @@
   db.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session) {
       if (_isInviteFlow) {
-        // Always show set-password for invite links, regardless of existing session
         currentUser = session.user;
         showSetPassword();
         return;
@@ -480,8 +603,12 @@
 
   /* ─── LOGOUT ─── */
   document.getElementById('logout-btn').addEventListener('click', async () => {
+    teardownRealtime();
+    dismissRtBanner();
+    dismissNewVisitBar();
     await db.auth.signOut();
     currentUser = null;
+    _initialLoadDone = false;
     document.getElementById('l-email').value = '';
     document.getElementById('l-pass').value = '';
     document.getElementById('login-btn').disabled = false;
@@ -524,7 +651,6 @@
 
     btn.disabled = true; btn.textContent = 'Updating…';
 
-    // Re-authenticate to verify current password
     const { error: reAuthErr } = await db.auth.signInWithPassword({
       email: currentUser.email, password: current
     });
@@ -571,7 +697,6 @@
     btn.disabled = true; btn.textContent = 'Sending…';
 
     try {
-      // Always refresh session before calling edge function
       const { data: refreshed } = await db.auth.refreshSession();
       const session = refreshed?.session;
       if (!session) throw new Error('Session expired. Please sign out and sign in again.');
@@ -587,13 +712,12 @@
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || 'Failed to create user.');
 
-      // Send invite email via EmailJS using template_gx5zowt
       await emailjs.send('service_v0l6mpz', 'template_gx5zowt', {
         to_email: email,
         temp_password: json.tempPassword
       });
 
-      msgEl.textContent = `✅ Invite sent to ${email}`;
+      msgEl.textContent = '✅ Invite sent to ' + email;
       msgEl.classList.add('success');
       btn.textContent = 'Sent!';
       setTimeout(() => {
@@ -643,7 +767,16 @@
       document.getElementById('search-input').value = '';
       document.getElementById('interest-filter').value = '';
       const updated = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
-      document.getElementById('last-updated').textContent = `Last refreshed: ${updated}`;
+      document.getElementById('last-updated').textContent = 'Last refreshed: ' + updated;
+
+      // Show new-since-last-visit bar on first load only
+      if (!_initialLoadDone) {
+        _initialLoadDone = true;
+        const newCount = lastVisitTime
+          ? allRows.filter(r => new Date(r.submitted_at) > lastVisitTime).length
+          : 0;
+        showNewVisitBar(newCount);
+      }
     } catch (err) {
       console.error('loadSubmissions error:', err);
       tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#dc2626;padding:40px;line-height:1.7;">
@@ -676,7 +809,7 @@
   /* ─── RENDER TABLE ─── */
   function renderTable(rows) {
     document.getElementById('row-count').textContent =
-      `Showing ${rows.length} submission${rows.length !== 1 ? 's' : ''}`;
+      'Showing ' + rows.length + ' submission' + (rows.length !== 1 ? 's' : '');
 
     if (!rows.length) {
       document.getElementById('table-body').innerHTML = `
@@ -690,8 +823,9 @@
       const date = new Date(r.submitted_at).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
       const badgeClass = 'badge badge-' + (r.interest || 'other');
       const label = r.interest ? (INTEREST_LABELS[r.interest] || r.interest) : '—';
+      const isNew = lastVisitTime && new Date(r.submitted_at) > lastVisitTime;
       return `
-        <tr>
+        <tr${isNew ? ' class="row-new"' : ''}>
           <td class="td-date" data-label="Date">${date}</td>
           <td class="td-name" data-label="Name">${esc(r.name)}</td>
           <td class="td-email" data-label="Email"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
@@ -703,20 +837,19 @@
   }
 
   /* ─── SEARCH & FILTER ─── */
+  function applyFilters() {
+    const q        = document.getElementById('search-input').value.toLowerCase();
+    const interest = document.getElementById('interest-filter').value;
+    renderTable(allRows.filter(r => {
+      const matchSearch   = !q || [r.name, r.email, r.company, r.message].some(v => v && v.toLowerCase().includes(q));
+      const matchInterest = !interest || r.interest === interest;
+      return matchSearch && matchInterest;
+    }));
+  }
+
   function setupFilters() {
-    const searchInput    = document.getElementById('search-input');
-    const interestFilter = document.getElementById('interest-filter');
-    function applyFilters() {
-      const q = searchInput.value.toLowerCase();
-      const interest = interestFilter.value;
-      renderTable(allRows.filter(r => {
-        const matchSearch   = !q || [r.name, r.email, r.company, r.message].some(v => v && v.toLowerCase().includes(q));
-        const matchInterest = !interest || r.interest === interest;
-        return matchSearch && matchInterest;
-      }));
-    }
-    searchInput.addEventListener('input', applyFilters);
-    interestFilter.addEventListener('change', applyFilters);
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('interest-filter').addEventListener('change', applyFilters);
   }
 
   init();
