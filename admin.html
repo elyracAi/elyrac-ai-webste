@@ -6,6 +6,7 @@
   <title>Team Portal — elyrac AI</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
@@ -366,6 +367,8 @@
   const CEO_EMAIL       = 'ceo@elyracai.com';
   const INVITE_ENDPOINT = 'https://ucbyaknfjrtoitrzamca.supabase.co/functions/v1/invite-user';
 
+  emailjs.init('_qzqkvOG-jE1Wr8CH');
+
   const INTEREST_LABELS = {
     llm: 'LLM / RAG Systems', automation: 'Process Automation',
     chatbot: 'Conversational AI', analytics: 'Predictive Analytics',
@@ -568,7 +571,11 @@
     btn.disabled = true; btn.textContent = 'Sending…';
 
     try {
-      const { data: { session } } = await db.auth.getSession();
+      // Always refresh session before calling edge function
+      const { data: refreshed } = await db.auth.refreshSession();
+      const session = refreshed?.session;
+      if (!session) throw new Error('Session expired. Please sign out and sign in again.');
+
       const res = await fetch(INVITE_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -578,8 +585,13 @@
         body: JSON.stringify({ email })
       });
       const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Failed to create user.');
 
-      if (!res.ok) throw new Error(json.error || 'Failed to send invite.');
+      // Send invite email via EmailJS using template_gx5zowt
+      await emailjs.send('service_v0l6mpz', 'template_gx5zowt', {
+        to_email: email,
+        temp_password: json.tempPassword
+      });
 
       msgEl.textContent = `✅ Invite sent to ${email}`;
       msgEl.classList.add('success');

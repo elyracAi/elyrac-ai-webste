@@ -350,10 +350,8 @@
         message   : message
       };
 
-      Promise.all([
-        emailjs.send('service_v0l6mpz', 'template_gx5zowt', emailParams),
-        emailjs.send('service_v0l6mpz', 'template_swpydxs', { ...emailParams, to_email: email })
-      ]).catch(err => console.error('Email error:', err));
+      emailjs.send('service_v0l6mpz', 'template_swpydxs', { ...emailParams, to_email: email })
+        .catch(err => console.error('Email error:', err));
 
       successEl.classList.add('show');
       e.target.reset();
