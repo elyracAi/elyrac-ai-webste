@@ -671,9 +671,8 @@
 
   db.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session) {
-      if (_isInviteFlow) {
-        currentUser = session.user;
-        showSetPassword();
+      if (_isInviteFlow || session.user?.user_metadata?.invite_pending) {
+        if (!currentUser) { currentUser = session.user; showSetPassword(); }
         return;
       }
       if (!currentUser) await showDashboard(session.user);
@@ -696,7 +695,12 @@
       errEl.textContent = 'Invalid email or password.';
       btn.disabled = false; btn.textContent = 'Sign In';
     } else {
-      await showDashboard(data.user);
+      if (data.user?.user_metadata?.invite_pending) {
+        currentUser = data.user;
+        showSetPassword();
+      } else {
+        await showDashboard(data.user);
+      }
     }
   });
 
@@ -716,13 +720,14 @@
 
     btn.disabled = true; btn.textContent = 'Activating…';
 
-    const { error } = await db.auth.updateUser({ password: pass });
+    const { error } = await db.auth.updateUser({ password: pass, data: { invite_pending: false } });
     if (error) {
       errEl.textContent = error.message;
       btn.disabled = false; btn.textContent = 'Activate Account';
     } else {
       okEl.textContent = 'Password set! Taking you to the portal…';
       setTimeout(async () => {
+        _dashboardInitiated = false; // allow showDashboard to run for the first time
         const { data: { session } } = await db.auth.getSession();
         if (session) await showDashboard(session.user);
       }, 1200);
