@@ -1340,7 +1340,7 @@
     }, 1000);
 
     var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya" loading="eager" decoding="async">';
-        var knowledge = [
+            var knowledge = [
       { id: 'pricing', keys: ['price','cost','how much','pricing','rates','budget','afford'],
         replies: [
           "Our pricing depends on the scope of your project — a focused automation looks very different from a full enterprise platform. The honest answer is we scope it properly on a free 30-minute call rather than guess. Book here: calendly.com/ceo-elyracai/30min",
@@ -1398,7 +1398,7 @@
         ],
         followUp: "If you have a specific stack requirement or an existing system to integrate with, that's exactly the kind of thing we scope on a call."
       },
-      { id: 'about', keys: ['who are you','about','team','company','elyrac'],
+      { id: 'about', keys: ['who are you','about','elyrac'],
         replies: [
           "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more."
         ],
@@ -1499,6 +1499,93 @@
       return entry.replies[count % entry.replies.length];
     }
 
+    var _CORPUS_URL = '/chat-corpus.json';
+    var _corpusPromise = null;
+    var _corpusIndex = null;
+    var _STOPWORDS = {'the':1,'a':1,'an':1,'and':1,'or':1,'but':1,'is':1,'are':1,'was':1,'were':1,'be':1,'been':1,'to':1,'of':1,'in':1,'on':1,'for':1,'with':1,'at':1,'by':1,'this':1,'that':1,'it':1,'as':1,'we':1,'you':1,'your':1,'our':1,'i':1,'do':1,'does':1,'did':1,'have':1,'has':1,'had':1,'can':1,'will':1,'would':1,'could':1,'should':1,'what':1,'which':1,'who':1,'how':1,'why':1};
+
+    function _tokenize(str) {
+      return str.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(function(t) { return t.length > 1 && !_STOPWORDS[t]; });
+    }
+
+    var _TITLE_WEIGHT = 3;
+    function _buildCorpusIndex(docs) {
+      var df = {};
+      var docTokenParts = docs.map(function(d) {
+        return { title: _tokenize(d.title), body: _tokenize(d.text) };
+      });
+      docTokenParts.forEach(function(dt) {
+        var seen = {};
+        dt.title.concat(dt.body).forEach(function(t) { if (!seen[t]) { seen[t] = 1; df[t] = (df[t] || 0) + 1; } });
+      });
+      var N = docs.length;
+      var idf = {};
+      Object.keys(df).forEach(function(t) { idf[t] = Math.log((N + 1) / (df[t] + 1)) + 1; });
+
+      var vectors = docTokenParts.map(function(dt) {
+        var tf = {};
+        dt.title.forEach(function(t) { tf[t] = (tf[t] || 0) + _TITLE_WEIGHT; });
+        dt.body.forEach(function(t) { tf[t] = (tf[t] || 0) + 1; });
+        var vec = {}, norm = 0;
+        Object.keys(tf).forEach(function(t) {
+          var w = tf[t] * (idf[t] || 0);
+          vec[t] = w;
+          norm += w * w;
+        });
+        return { vec: vec, norm: Math.sqrt(norm) };
+      });
+
+      return { docs: docs, idf: idf, vectors: vectors };
+    }
+
+    function _loadCorpus() {
+      if (_corpusPromise) return _corpusPromise;
+      _corpusPromise = fetch(_CORPUS_URL)
+        .then(function(r) { return r.ok ? r.json() : []; })
+        .then(function(docs) { _corpusIndex = _buildCorpusIndex(docs); return _corpusIndex; })
+        .catch(function() { _corpusIndex = _buildCorpusIndex([]); return _corpusIndex; });
+      return _corpusPromise;
+    }
+    _loadCorpus();
+
+    function _searchCorpus(query) {
+      if (!_corpusIndex || !_corpusIndex.docs.length) return null;
+      var qTokens = _tokenize(query);
+      if (!qTokens.length) return null;
+      var qtf = {};
+      qTokens.forEach(function(t) { qtf[t] = (qtf[t] || 0) + 1; });
+      var qvec = {}, qnorm = 0;
+      Object.keys(qtf).forEach(function(t) {
+        var w = qtf[t] * (_corpusIndex.idf[t] || 0);
+        qvec[t] = w;
+        qnorm += w * w;
+      });
+      qnorm = Math.sqrt(qnorm);
+      if (qnorm === 0) return null;
+
+      var best = -1, bestScore = 0;
+      var qKeys = Object.keys(qvec);
+      for (var i = 0; i < _corpusIndex.vectors.length; i++) {
+        var dv = _corpusIndex.vectors[i];
+        if (dv.norm === 0) continue;
+        var dot = 0;
+        for (var k = 0; k < qKeys.length; k++) {
+          var t = qKeys[k];
+          if (dv.vec[t]) dot += qvec[t] * dv.vec[t];
+        }
+        var sim = dot / (qnorm * dv.norm);
+        if (sim > bestScore) { bestScore = sim; best = i; }
+      }
+      if (best === -1 || bestScore < 0.14) return null;
+      return { doc: _corpusIndex.docs[best], score: bestScore };
+    }
+
+    function _extractAnswer(doc) {
+      // Every corpus document is already concise (one paragraph or less), so
+      // the full text is the answer — no truncation/summarization needed.
+      return doc.text.trim();
+    }
+
     var _CHAT_SB_URL = 'https://ucbyaknfjrtoitrzamca.supabase.co';
     var _CHAT_SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjYnlha25manJ0b2l0cnphbWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDYxMzgsImV4cCI6MjA5MzMyMjEzOH0.HNIVUkC0xiZoqGe1L7uYAegbjCgWCW9qjEJS0VI6gYw';
     var _chatSessionId = sessionStorage.getItem('elyrac_chat_session');
@@ -1517,7 +1604,7 @@
       }).catch(function(){});
     }
 
-    window.sendChat = function() {
+    window.sendChat = async function() {
       var input = document.getElementById('chat-input');
       var msg = input.value.trim();
       if (!msg) return;
@@ -1545,7 +1632,18 @@
       }
       var escalationKeywords = ['build','develop','project','hire','work with','proposal','budget','enterprise','urgent','need help'];
       var shouldEscalate = escalationKeywords.some(function(k){ return lowerMsg.includes(k); });
-      var reply = best ? _pickReply(best) : "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.";
+
+      var reply;
+      if (best) {
+        reply = _pickReply(best);
+      } else {
+        await _loadCorpus();
+        var hit = _searchCorpus(msg);
+        reply = hit
+          ? _extractAnswer(hit.doc)
+          : "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.";
+      }
+
       setTimeout(function() {
         msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + reply + '</div></div>';
         logChatMessage('bot', reply);

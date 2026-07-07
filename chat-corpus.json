@@ -1,0 +1,326 @@
+[
+  {
+    "id": "d0",
+    "page": "/faq",
+    "title": "What does elyrac AI actually do?",
+    "text": "We build fully customized AI software systems for businesses. Unlike AI tool resellers or consultancies, we write actual code — building AI pipelines, training models on your data, integrating with your existing systems, and deploying production-ready software that your team uses every day."
+  },
+  {
+    "id": "d1",
+    "page": "/faq",
+    "title": "How do I know if AI is right for my business?",
+    "text": "If your team is doing repetitive, data-heavy tasks — reading documents, writing similar emails, analyzing reports, answering the same questions — there's almost certainly an AI solution that saves significant time and cost. Book a free call and we'll give you an honest assessment."
+  },
+  {
+    "id": "d2",
+    "page": "/faq",
+    "title": "What's the first step to work with you?",
+    "text": "Book a free 30-minute strategy call. We'll listen to your business challenge, assess technical feasibility, and give you honest feedback on what's achievable — including realistic timelines and cost ranges. No sales pitch, no commitment required."
+  },
+  {
+    "id": "d3",
+    "page": "/faq",
+    "title": "How long does a project typically take?",
+    "text": "Most projects take 4–12 weeks depending on complexity. Simple automations can be live in 3–4 weeks. Complex multi-system AI platforms may take 3–4 months. We agree on a clear timeline in the scoping phase before any work begins."
+  },
+  {
+    "id": "d4",
+    "page": "/faq",
+    "title": "How involved does my team need to be?",
+    "text": "We handle all the technical work, but we need your input to do it right. Expect 2–3 hours per week for feedback, domain knowledge sharing, and review sessions. We work iteratively, so your team sees progress weekly — not just at the end."
+  },
+  {
+    "id": "d5",
+    "page": "/faq",
+    "title": "What if my requirements change mid-project?",
+    "text": "We plan for this. We use an iterative delivery model where we check in weekly and adjust based on what we learn. Small scope changes are absorbed; significant pivots are re-scoped with transparent communication about impact on timeline and cost."
+  },
+  {
+    "id": "d6",
+    "page": "/faq",
+    "title": "Do you work with our existing data and systems?",
+    "text": "Always. We integrate with your databases, CRMs, ERPs, email systems, APIs, and internal tools. We never ask you to change how you work — we make AI work within your existing stack. Data security and compliance are handled from day one."
+  },
+  {
+    "id": "d7",
+    "page": "/faq",
+    "title": "Do you use OpenAI / ChatGPT, or build custom models?",
+    "text": "Both, depending on what's right for your use case. We leverage OpenAI, Anthropic, and other leading models when they're the best fit — and build custom or fine-tuned models when the task requires domain-specific accuracy or data privacy constraints."
+  },
+  {
+    "id": "d8",
+    "page": "/faq",
+    "title": "How do you handle data privacy and security?",
+    "text": "We follow security best practices: data minimization, encrypted storage and transmission, access controls, and deployment in your own cloud environment when required. For regulated industries (healthcare, finance, legal), we design with specific compliance requirements in mind."
+  },
+  {
+    "id": "d9",
+    "page": "/faq",
+    "title": "What technologies do you use?",
+    "text": "Python, FastAPI, LangChain, OpenAI, Anthropic, React, Flutter, PostgreSQL, AWS, Docker, TypeScript, Redis, and more. We choose the right tool for your specific use case — not whatever's trendiest at the moment."
+  },
+  {
+    "id": "d10",
+    "page": "/faq",
+    "title": "How much does a project cost?",
+    "text": "Projects are scoped and priced individually based on complexity and timeline. Simple automations start from a few thousand dollars. Complex AI platforms range significantly higher. We provide detailed, fixed-price proposals after the discovery phase — no hidden fees."
+  },
+  {
+    "id": "d11",
+    "page": "/faq",
+    "title": "Do you offer ongoing support after launch?",
+    "text": "Yes. We offer monthly retainer plans for monitoring, maintenance, and iteration. Most clients keep us on retainer because the first project reveals more opportunities — and we know the system better than anyone."
+  },
+  {
+    "id": "d12",
+    "page": "/faq",
+    "title": "Who owns the code and AI models built?",
+    "text": "You do — completely. All code, models, and IP are transferred to you at project completion. We never retain rights to anything we build for you, and we don't use your data or models for other clients."
+  },
+  {
+    "id": "d13",
+    "page": "/solutions",
+    "title": "How long does it take to build a custom AI system?",
+    "text": "Most projects are delivered in 4–12 weeks depending on complexity. We define a clear timeline during our strategy session before any work begins, so you always know exactly when to expect delivery."
+  },
+  {
+    "id": "d14",
+    "page": "/solutions",
+    "title": "Do I need to understand AI to work with you?",
+    "text": "Not at all. Most of our clients come to us with a business problem, not a technical brief. Our job is to translate your challenge into the right AI solution — you just need to understand your business. We handle the rest."
+  },
+  {
+    "id": "d15",
+    "page": "/solutions",
+    "title": "Will the AI system connect with our existing tools?",
+    "text": "Yes — always. We build systems that integrate with your existing CRMs, ERPs, databases, and internal tools. We never ask you to change how your business works. We make AI fit around your current stack."
+  },
+  {
+    "id": "d16",
+    "page": "/solutions",
+    "title": "What happens after the system is delivered?",
+    "text": "We train your team, monitor the system, and remain available for support and iteration. Most clients stay with us on a retainer because the first project always reveals more opportunities — and we know the system inside out."
+  },
+  {
+    "id": "d17",
+    "page": "/solutions",
+    "title": "How do I know this will actually return value for my business?",
+    "text": "We run an AI audit of your business before recommending anything. We only proceed when there's a clear, measurable outcome — like hours saved, revenue increased, or costs reduced. If we don't believe it will return value, we'll tell you honestly."
+  },
+  {
+    "id": "d18",
+    "page": "/solutions",
+    "title": "How much does a custom AI system cost?",
+    "text": "Every project is scoped individually because every business is different. The best way to get a clear number is to book a free 30-minute strategy call — we'll assess your challenge and give you a realistic picture of cost and timeline, no commitment required."
+  },
+  {
+    "id": "d19",
+    "page": "/ourwork",
+    "title": "Intelligent Email Agent for ioTec Ltd",
+    "text": "CHALLENGE: The team was spending 4+ hours daily on email triage, categorization, and drafting responses to routine enquiries. The inbox had become a bottleneck, slowing down sales and support cycles. SOLUTION: We built a custom AI email agent that reads incoming emails, categorizes them by intent, drafts appropriate responses, and escalates complex cases to the right team member — fully integrated with their existing inbox. RESULT: 80% of routine emails are now handled autonomously. The team reclaimed 3+ hours daily, response times dropped from hours to minutes, and customer satisfaction improved significantly."
+  },
+  {
+    "id": "d20",
+    "page": "/ourwork",
+    "title": "AttendTrack — Workforce Management System",
+    "text": "CHALLENGE: Manual attendance tracking and zero visibility into field worker locations. HR teams relied on spreadsheets and guesswork, causing payroll errors and no accountability for field teams. SOLUTION: We engineered a full workforce management platform with AI-powered attendance tracking, real-time GPS geofencing for field agents, automated payroll calculation (NSSF, PAYE), and an integrated AI Copilot powered by Claude Sonnet that answers HR questions in natural language. RESULT: 100% attendance accuracy. 3 hours saved daily on HR admin. Full real-time visibility across every field team. Payroll errors eliminated completely."
+  },
+  {
+    "id": "d21",
+    "page": "/ourwork",
+    "title": "Code Clinic — Healthcare Practice Management",
+    "text": "CHALLENGE: A growing dental and general practice was running on fragmented tools with no unified system. Patient records, appointments, billing, and staff management were all handled separately with no real-time visibility. SOLUTION: We built a comprehensive clinic management platform covering patient records, live appointment scheduling, real-time patient flow tracking, invoicing, payroll, staff management, and a full analytics dashboard — all in one system. RESULT: 24 appointments managed daily with full visibility. Revenue tracked in real-time (UGX 31.2M monthly). 790 active patients managed seamlessly. Admin workload reduced by 60%."
+  },
+  {
+    "id": "d22",
+    "page": "/ourwork",
+    "title": "WinoPay — Full-Stack Fintech Platform",
+    "text": "CHALLENGE: Building a production-grade financial platform from scratch demands the highest standards of security, data integrity, and regulatory compliance. The client needed a complete system handling real-money transactions across multiple services with zero tolerance for errors. SOLUTION: As Lead Engineer, we owned the full system architecture end-to-end — backend API design, database structure, transaction processing logic, and the complete security layer including audit logging, role-based access control, and encryption. The platform integrates flights, hotels, bill pay, insurance, and retail — all processing real financial transactions with live users. RESULT: A fully operational fintech platform serving live users with real payment transactions. Meets the same data integrity and compliance standards required by regulated financial institutions. Zero critical transaction failures since launch."
+  },
+  {
+    "id": "d23",
+    "page": "/ourwork",
+    "title": "Trivox AI — Intelligent Dental Receptionist",
+    "text": "CHALLENGE: Dental clinics were losing patients due to missed calls, slow booking responses, and overwhelmed front desk staff. After-hours enquiries went completely unanswered, directly impacting new patient acquisition and revenue. SOLUTION: We built Trivox AI — a fully conversational AI receptionist trained on dental clinic workflows. It handles appointment booking, patient enquiries, follow-up reminders, and proactive outreach 24/7. Fully integrated with the clinic's existing calendar and patient management systems. RESULT: +40% more bookings captured. 24/7 availability with zero missed outreaches. Front desk workload cut in half, freeing staff to focus entirely on in-clinic patient care quality."
+  },
+  {
+    "id": "d24",
+    "page": "/ourwork",
+    "title": "AI/ML Fraud Detection — Financial Services",
+    "text": "CHALLENGE: Financial institutions face growing fraud risk as transaction volumes outpace human review capacity. Legacy rule-based systems generated too many false positives while missing sophisticated emerging fraud patterns — a compliance and financial liability risk. SOLUTION: We engineered a purpose-built ML fraud detection pipeline — data ingestion from transaction systems, feature engineering, model training and evaluation, and real-time inference integration. The system identifies anomalous transactional behaviour with high precision, generates compliance alerts with full explanations, and maintains a complete audit trail of every detection event for regulatory review. RESULT: Real-time fraud detection at transaction scale. Full audit trail for regulatory compliance. Significant reduction in false positives. The model continuously improves as new transaction data flows in."
+  },
+  {
+    "id": "d25",
+    "page": "/ourwork",
+    "title": "Women Microfinance Initiative — Soroti, Uganda",
+    "text": "CHALLENGE: A Uganda-based NGO running a microfinance program for women entrepreneurs in Soroti had no digital system. Member records, loan tracking, and financial reporting were entirely paper-based — slow, error-prone, and unscalable. SOLUTION: We developed a purpose-built cooperative financial management system covering member profiles, loan applications and approvals, repayment schedules with automated tracking, overdue alerts, and instant financial reporting — designed specifically for grassroots microfinance operations. RESULT: Fully digitized operations for the cooperative. Loan repayment tracking fully automated. Financial reports now generated in seconds. Program administrators freed from manual record-keeping to focus on community impact."
+  },
+  {
+    "id": "d26",
+    "page": "/solutions",
+    "title": "LLM Applications & RAG Systems",
+    "text": "Custom large language model applications built on your proprietary data. We design retrieval-augmented systems that give AI accurate, current, business-specific knowledge. Document intelligence & semantic search. Knowledge base Q&A with source citations. Automated report and content generation. Multi-document summarization pipelines"
+  },
+  {
+    "id": "d27",
+    "page": "/solutions",
+    "title": "Intelligent Process Automation",
+    "text": "AI that replaces manual, repetitive work across your operations — not just rule-based automation, but systems that handle exceptions and edge cases intelligently. Email triage and automated response drafting. Document classification and data extraction. Multi-step workflow orchestration. Integration with CRMs, ERPs, and internal tools"
+  },
+  {
+    "id": "d28",
+    "page": "/solutions",
+    "title": "Conversational AI Agents",
+    "text": "Domain-trained chatbots and voice agents that understand your business context — not generic assistants, but agents that know your products, policies, and processes. Customer support bots with escalation logic. Internal employee Q&A assistants. Lead qualification and onboarding agents. Voice AI for phone and video interactions"
+  },
+  {
+    "id": "d29",
+    "page": "/solutions",
+    "title": "Predictive Analytics & AI Dashboards",
+    "text": "AI models that analyze your historical data to forecast trends, detect anomalies, and surface insights your team would otherwise miss — delivered through intuitive dashboards. Demand forecasting and inventory optimization. Churn prediction and customer segmentation. Anomaly detection in financial or operational data. Custom KPI dashboards with AI commentary"
+  },
+  {
+    "id": "d30",
+    "page": "/solutions",
+    "title": "Computer Vision Systems",
+    "text": "AI that sees and understands visual data from cameras, documents, or media — for quality control, identity verification, document processing, or content moderation. Object detection and visual inspection. Document scanning, OCR, and form extraction. Identity verification and facial recognition. Video analysis and real-time monitoring"
+  },
+  {
+    "id": "d31",
+    "page": "/solutions",
+    "title": "AI SaaS Products",
+    "text": "If you have an idea for an AI-powered product, we build it end-to-end — from architecture and backend to UI and deployment. Ship your AI SaaS in weeks, not months. Full-stack web and mobile development. Subscription billing and user management. Scalable cloud infrastructure on AWS or GCP. Ongoing iteration and feature development"
+  },
+  {
+    "id": "d32",
+    "page": "/about",
+    "title": "We Start With Your Problem",
+    "text": "Before a single line of code is written, we spend time understanding your business — your workflows, your bottlenecks, your customers. The AI solution comes after the diagnosis."
+  },
+  {
+    "id": "d33",
+    "page": "/about",
+    "title": "We Build From Scratch",
+    "text": "No templates. No off-the-shelf wrappers. Every system we deliver is engineered specifically for your use case — trained on your data, integrated into your stack, and optimised for your team."
+  },
+  {
+    "id": "d34",
+    "page": "/about",
+    "title": "We Stay Accountable to Results",
+    "text": "We don't disappear after launch. We measure performance, iterate on outcomes, and stand behind the work we deliver — because your success is how we build ours."
+  },
+  {
+    "id": "d35",
+    "page": "/about",
+    "title": "Our Vision",
+    "text": "To make artificial intelligence software systems accessible, ethical, and transformative for every business and individual worldwide."
+  },
+  {
+    "id": "d36",
+    "page": "/about",
+    "title": "Our Mission",
+    "text": "To empower businesses and individuals by providing strategic AI guidance, scalable development, continuous innovation, and practical education enabling sustainable growth through intelligent software systems."
+  },
+  {
+    "id": "d37",
+    "page": "/about",
+    "title": "Strategy Before Technology",
+    "text": "We never recommend AI for its own sake. Every solution starts with a clear problem statement, a measurable outcome, and a realistic path to value. We build what makes business sense — not what sounds impressive."
+  },
+  {
+    "id": "d38",
+    "page": "/about",
+    "title": "Engineering Excellence",
+    "text": "Our systems are built to production standards — scalable, secure, and maintainable. We don't ship prototypes dressed as products. Every deployment is engineered to perform under real conditions, at real scale."
+  },
+  {
+    "id": "d39",
+    "page": "/about",
+    "title": "Education & Transparency",
+    "text": "We believe clients should understand what they're building. We explain our decisions in plain language, share our reasoning, and make sure your team is equipped to own and operate the systems we deliver."
+  },
+  {
+    "id": "d40",
+    "page": "/about",
+    "title": "What Makes Us Different",
+    "text": "We don't patch together generic tools. We build bespoke AI systems — engineered around your specific business, your data, and your goals."
+  },
+  {
+    "id": "d41",
+    "page": "/about",
+    "title": "Vision & Mission Our Vision To make artificial intelligence software systems accessible, ethical, and transformative for every business and individual worldwide. Our Mission To empower businesses and individuals by providing strategic AI guidance, scalable development, continuous innovation, and practical education enabling sustainable growth through intelligent software systems. WHAT WE STAND FOR Core Values Strategy Before Technology We never recommend AI for its own sake. Every solution starts with a clear problem statement, a measurable outcome, and a realistic path to value. We build what makes business sense — not what sounds impressive. Engineering Excellence Our systems are built to production standards — scalable, secure, and maintainable. We don't ship prototypes dressed as products. Every deployment is engineered to perform under real conditions, at real scale. Education & Transparency We believe clients should understand what they're building. We explain our decisions in plain language, share our reasoning, and make sure your team is equipped to own and operate the systems we deliver. THE PEOPLE BEHIND THE WORK Meet the Team",
+    "text": "A small, focused team of AI engineers, strategists, and operators — each one deeply invested in the outcomes we build together."
+  },
+  {
+    "id": "d42",
+    "page": "/elyrac-company-profile",
+    "title": "THE VISION OF OUR COMPANY",
+    "text": "To be Africa's most trusted AI engineering partner — building the intelligent infrastructure that powers the next generation of businesses across the continent and beyond. We envision a future where every organisation, regardless of geography, has access to AI built specifically for them."
+  },
+  {
+    "id": "d43",
+    "page": "/elyrac-company-profile",
+    "title": "OBJECTIVES OF OUR COMPANY",
+    "text": "To provide quality AI systems that give clients measurable value for their investment. Build strong long-term partnerships. Expand into new markets and industries. Continuously improve the craft of AI engineering and set a new standard for what custom AI can achieve in African markets."
+  },
+  {
+    "id": "d44",
+    "page": "/elyrac-company-profile",
+    "title": "OUR MISSION & CORE VALUES",
+    "text": "To democratise access to world-class AI engineering — making it possible for businesses of every size to benefit from custom AI systems. We work honestly, rigorously, and with genuine care for every client's outcome. Grace in Design is not just our motto — it is our standard."
+  },
+  {
+    "id": "d45",
+    "page": "/elyrac-company-profile",
+    "title": "Ready to build your AI system?",
+    "text": "Book a free 30-minute strategy call with our CEO Vine Samuel. We will scope your project honestly, tell you exactly what's possible, and outline a clear path forward. No commitment required. We respond within 24 hours."
+  },
+  {
+    "id": "d46",
+    "page": "/elyrac-company-profile",
+    "title": "elyrac AI — Grace in Design.",
+    "text": "Custom AI systems engineered for real business impact · info@elyracai.com"
+  },
+  {
+    "id": "d47",
+    "page": "/about",
+    "title": "Meet the Team",
+    "text": "Vine Samuel — CEO & Ai Solutions Architect: The architect behind every AI strategy we build.. Prossy Lumusu — Chief Operations Officer: Turning client vision into operational reality.. Joel Katuula — Chief Technology Officer: Engineering the systems that power our clients' growth.. Doris Lukotanyi — AI Automation Engineer: Automating the work so your team can focus on what matters.. Abraham Ndyamuhaki — Full Stack AI Software Engineer: Building the full stack that brings AI to life.. Mercy Mirembe — Chief Financial Officer: Keeping the business sharp so the mission stays strong.. Brenda Marie — Customer Success Manager: Making sure every client feels supported from day one to delivery.. Allan Joseph Bukenya — Business Development Manager: Connecting the right businesses to the AI solutions that transform them.. James Hudson — International Business Developer: Opening new markets and partnerships that expand elyrac's global footprint."
+  },
+  {
+    "id": "d48",
+    "page": "/blog",
+    "title": "Why RAG Beats Fine-Tuning for Most Business AI Applications",
+    "text": "The debate between retrieval-augmented generation and fine-tuning isn't as complicated as it sounds. Here's how to choose the right approach for your specific use case — and why most businesses get this decision wrong."
+  },
+  {
+    "id": "d49",
+    "page": "/blog",
+    "title": "The 3 Business Processes Most Ready for AI Automation Right Now",
+    "text": "Not all automation is created equal. These three workflows have the highest ROI and the lowest risk — and most businesses have all three."
+  },
+  {
+    "id": "d50",
+    "page": "/blog",
+    "title": "How to Write an AI Brief That Actually Gets Built Correctly",
+    "text": "Most AI projects fail not because of bad technology — but because the requirements were vague. Here's what a good AI brief looks like."
+  },
+  {
+    "id": "d51",
+    "page": "/blog",
+    "title": "Data Privacy in Custom AI: What Your Vendor Should Be Doing",
+    "text": "Before you give an AI company access to your business data, there are 6 questions you should always ask. Most companies never ask any of them."
+  },
+  {
+    "id": "d52",
+    "page": "/blog",
+    "title": "AI Agents in 2025: What They Can Actually Do for Your Business",
+    "text": "The hype around AI agents is real — and so are the limitations. Here's an honest look at what autonomous agents can and can't do today."
+  },
+  {
+    "id": "d53",
+    "page": "/blog",
+    "title": "How to Calculate the ROI of a Custom AI Project Before You Start",
+    "text": "Every AI investment should have a clear business case. Here's the simple framework we use with clients to estimate ROI before a single line of code is written."
+  }
+]
