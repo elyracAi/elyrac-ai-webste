@@ -808,16 +808,36 @@
   ];
   var idx = 0;
   var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya">';
-  window.sendChat = function() {
+      var _CHAT_SB_URL = 'https://ucbyaknfjrtoitrzamca.supabase.co';
+    var _CHAT_SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjYnlha25manJ0b2l0cnphbWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDYxMzgsImV4cCI6MjA5MzMyMjEzOH0.HNIVUkC0xiZoqGe1L7uYAegbjCgWCW9qjEJS0VI6gYw';
+    var _chatSessionId = sessionStorage.getItem('elyrac_chat_session');
+    if (!_chatSessionId) {
+      _chatSessionId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+      sessionStorage.setItem('elyrac_chat_session', _chatSessionId);
+    }
+    function logChatMessage(sender, text) {
+      fetch(_CHAT_SB_URL + '/rest/v1/chat_messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': _CHAT_SB_KEY, 'Authorization': 'Bearer ' + _CHAT_SB_KEY, 'Prefer': 'return=minimal' },
+        body: JSON.stringify({ session_id: _chatSessionId, sender: sender, message: text, page: window.location.pathname })
+      }).catch(function(){});
+    }
+    window.sendChat = function() {
     var input = document.getElementById('chat-input');
     var msg = input.value.trim();
     if (!msg) return;
     var msgs = document.getElementById('chat-messages');
     msgs.innerHTML += '<div class="chat-bubble user"><div class="bubble-text">' + msg + '</div></div>';
+      logChatMessage('user', msg);
     input.value = '';
     msgs.scrollTop = msgs.scrollHeight;
     setTimeout(function() {
-      msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + replies[idx++ % replies.length] + '</div></div>';
+      var _botReply = replies[idx++ % replies.length];
+      logChatMessage('bot', _botReply);
+      msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + _botReply + '</div></div>';
       msgs.scrollTop = msgs.scrollHeight;
     }, 820);
   };
