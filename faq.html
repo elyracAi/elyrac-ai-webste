@@ -410,22 +410,166 @@
     if (hamburger) hamburger.addEventListener('click', function() { mobileMenu.classList.add('open'); });
     if (mobileClose) mobileClose.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
     var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya" loading="eager" decoding="async">';
-    var knowledge = [
-      { keys: ['price','cost','how much','pricing','rates'], reply: "Our pricing depends on the scope of your project. Most custom AI systems range from small automations to full enterprise platforms. The best next step is a free 30-minute strategy call where we scope your project honestly. Book here: calendly.com/ceo-elyracai/30min" },
-      { keys: ['attendtrack','attendance','gps','payroll','workforce'], reply: "AttendTrack is our workforce management platform — AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot. It's live and serving clients. Want to see a demo?" },
-      { keys: ['iotec','email agent','email automation','inbox'], reply: "We built an intelligent email agent for ioTec Ltd that handles 80% of emails autonomously — categorizing, drafting responses, and escalating complex cases. Your team reclaims hours daily." },
-      { keys: ['code clinic','clinic','dental','healthcare','hospital'], reply: "Code Clinic is our healthcare practice management platform — patient records, appointments, billing, payroll, live patient flow, and analytics. Built for dental and general practices." },
-      { keys: ['trivox','receptionist','dental receptionist','voice agent'], reply: "Trivox AI is our conversational dental receptionist — it books appointments, answers patient queries, and follows up 24/7. Clients see +40% more bookings with zero missed outreaches." },
-      { keys: ['winopay','fintech','payment','financial'], reply: "WinoPay is a full-stack fintech platform we architected from scratch — backend APIs, transaction processing, security layer, RBAC, and multi-service integrations." },
-      { keys: ['fraud','ml','machine learning','detection'], reply: "We've built ML fraud detection systems for financial institutions — full pipeline from data ingestion to real-time inference, with audit trails for regulatory compliance." },
-      { keys: ['timeline','how long','duration','weeks'], reply: "Most projects take 4–12 weeks depending on scope. We always scope everything upfront so there are no surprises. Want to discuss your project timeline?" },
-      { keys: ['technology','stack','tools','built with'], reply: "We build with Python, FastAPI, Node.js, React, PostgreSQL, Claude AI, OpenAI, and cloud infrastructure on AWS and Vercel. We choose the right tool for each problem." },
-      { keys: ['who are you','about','team','company'], reply: "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more." },
-      { keys: ['contact','reach','email','call','talk'], reply: "You can reach us at info@elyracai.com or book a direct call: calendly.com/ceo-elyracai/30min — our founder Vine Samuel will personally respond." },
-      { keys: ['hi','hello','hey','good morning','good afternoon'], reply: "Hi there! 👋 I'm Maya, elyrac AI's assistant. I can answer questions about our AI solutions, past projects, pricing, or help you book a strategy call. What can I help you with?" },
-      { keys: ['bye','goodbye','thanks','thank you'], reply: "You're welcome! Feel free to reach out anytime at info@elyracai.com or book a call at calendly.com/ceo-elyracai/30min. We'd love to build something great together! 🚀" },
+        var knowledge = [
+      { id: 'pricing', keys: ['price','cost','how much','pricing','rates','budget','afford'],
+        replies: [
+          "Our pricing depends on the scope of your project — a focused automation looks very different from a full enterprise platform. The honest answer is we scope it properly on a free 30-minute call rather than guess. Book here: calendly.com/ceo-elyracai/30min",
+          "Good question — and I'd rather give you a real number than a vague range. Most projects fall somewhere between a lean automation and a full platform build, and pricing follows scope. A quick call gets you an honest estimate: calendly.com/ceo-elyracai/30min"
+        ],
+        followUp: "To get you a real number, it helps to know what you're building — closer to a single automation, or a full platform like AttendTrack or WinoPay? Either way, calendly.com/ceo-elyracai/30min is the fastest path to a straight answer."
+      },
+      { id: 'attendtrack', keys: ['attendtrack','attendance','gps','payroll','workforce','geofenc'],
+        replies: [
+          "AttendTrack is our workforce management platform — AI-powered attendance, real-time GPS geofencing, automated payroll (NSSF/PAYE), and an AI Copilot. It's live and serving clients today. Want to see a demo?",
+          "That's AttendTrack, one of our flagship builds — automated clock-ins with GPS geofencing, payroll that handles NSSF/PAYE without spreadsheets, and an AI Copilot on top. Happy to walk you through how it'd fit your team."
+        ],
+        followUp: "AttendTrack can be tailored to your team size and payroll rules — want me to connect you with our founder to see if it fits?"
+      },
+      { id: 'iotec', keys: ['iotec','email agent','email automation','inbox'],
+        replies: [
+          "We built an intelligent email agent for ioTec Ltd that handles 80% of emails autonomously — categorizing, drafting responses, and escalating complex cases. Their team reclaims hours every day."
+        ],
+        followUp: "If inbox overload is your problem too, this kind of email agent is very replicable for other teams — want to talk specifics?"
+      },
+      { id: 'codeclinic', keys: ['code clinic','clinic','dental','healthcare','hospital'],
+        replies: [
+          "Code Clinic is our healthcare practice management platform — patient records, appointments, billing, payroll, live patient flow, and analytics. Built for dental and general practices."
+        ],
+        followUp: "Whether you run a single clinic or a multi-branch practice, Code Clinic scales to fit — want to see it in action?"
+      },
+      { id: 'trivox', keys: ['trivox','receptionist','dental receptionist','voice agent'],
+        replies: [
+          "Trivox AI is our conversational dental receptionist — it books appointments, answers patient queries, and follows up 24/7. Clients see +40% more bookings with zero missed outreaches."
+        ],
+        followUp: "Trivox works especially well for practices that lose bookings after hours — want to see how it'd handle your call volume?"
+      },
+      { id: 'winopay', keys: ['winopay','fintech','payment','financial'],
+        replies: [
+          "WinoPay is a full-stack fintech platform we architected from scratch — backend APIs, transaction processing, a full security layer, RBAC, and multi-service integrations."
+        ],
+        followUp: "If you're building something in fintech, WinoPay is a good reference point for how we approach security and compliance — want to discuss your idea?"
+      },
+      { id: 'fraud', keys: ['fraud','ml','machine learning','detection'],
+        replies: [
+          "We've built ML fraud detection systems for financial institutions — the full pipeline, from data ingestion to real-time inference, with audit trails for regulatory compliance."
+        ],
+        followUp: "Fraud and ML work is highly domain-specific — happy to go deeper on your exact use case on a call."
+      },
+      { id: 'timeline', keys: ['timeline','how long','duration','weeks','when can'],
+        replies: [
+          "Most projects take 4–12 weeks depending on scope. We always scope everything upfront so there are no surprises down the line.",
+          "Timelines usually land between 4 and 12 weeks — shorter for a focused automation, longer for a full platform. We'll give you a real number after scoping your project."
+        ],
+        followUp: "Want to talk through your specific project so we can give you a realistic timeline instead of a range? calendly.com/ceo-elyracai/30min"
+      },
+      { id: 'techstack', keys: ['technology','stack','tools','built with','programming language'],
+        replies: [
+          "We build with Python, FastAPI, Node.js, React, PostgreSQL, Claude AI, OpenAI, and cloud infrastructure on AWS and Vercel — we pick the right tool for each problem rather than forcing one stack everywhere."
+        ],
+        followUp: "If you have a specific stack requirement or an existing system to integrate with, that's exactly the kind of thing we scope on a call."
+      },
+      { id: 'about', keys: ['who are you','about','team','company','elyrac'],
+        replies: [
+          "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more."
+        ],
+        followUp: "Want me to point you to a couple of our projects, or connect you directly with our founder?"
+      },
+      { id: 'contact', keys: ['contact','reach','email','call','talk to someone','speak to'],
+        replies: [
+          "You can reach us at info@elyracai.com or book a direct call: calendly.com/ceo-elyracai/30min — our founder Vine Samuel will personally respond."
+        ],
+        followUp: "Booking a call is usually the fastest way to get real answers: calendly.com/ceo-elyracai/30min"
+      },
+      { id: 'greeting', keys: ['hi','hello','hey','good morning','good afternoon','good evening'],
+        replies: [
+          "Hi there! 👋 I'm Maya, elyrac AI's assistant. I can answer questions about our AI solutions, past projects, pricing, or help you book a strategy call. What can I help you with?",
+          "Hey again! 👋 Good to hear from you — what would you like to dig into this time?"
+        ]
+      },
+      { id: 'farewell', keys: ['bye','goodbye','thanks','thank you','cheers'],
+        replies: [
+          "You're welcome! Feel free to reach out anytime at info@elyracai.com or book a call at calendly.com/ceo-elyracai/30min. We'd love to build something great together! 🚀",
+          "Anytime! If anything else comes to mind, I'm right here — or reach the team directly at info@elyracai.com."
+        ]
+      },
+      { id: 'howareyou', keys: ['how are you','how are things','how you doing'],
+        replies: [
+          "I'm doing great, thanks for asking! 😊 Ready to help you explore what elyrac AI can build for you — what's on your mind?"
+        ]
+      },
+      { id: 'isbot', keys: ['are you real','are you human','are you a bot','are you ai','are you a robot'],
+        replies: [
+          "I'm Maya — a virtual assistant built by elyrac AI to give you quick, useful answers. For anything that needs a human touch, I'll gladly connect you with our founder directly."
+        ]
+      },
+      { id: 'capabilities', keys: ['what can you do','help me','what do you do','can you help'],
+        replies: [
+          "I can tell you about our services, walk through past projects like AttendTrack, Trivox AI, WinoPay, and Code Clinic, talk pricing and timelines, or get you booked on a call with our founder. What would you like to explore?"
+        ]
+      }
     ];
-        var _CHAT_SB_URL = 'https://ucbyaknfjrtoitrzamca.supabase.co';
+
+    function _levenshtein(a, b) {
+      var m = a.length, n = b.length;
+      if (m === 0) return n;
+      if (n === 0) return m;
+      var prev = new Array(n + 1), curr = new Array(n + 1);
+      for (var j = 0; j <= n; j++) prev[j] = j;
+      for (var i = 1; i <= m; i++) {
+        curr[0] = i;
+        for (var j = 1; j <= n; j++) {
+          var cost = a[i - 1] === b[j - 1] ? 0 : 1;
+          curr[j] = Math.min(curr[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
+        }
+        var tmp = prev; prev = curr; curr = tmp;
+      }
+      return prev[n];
+    }
+
+    function _scoreEntry(lowerMsg, words, entry) {
+      var score = 0;
+      for (var i = 0; i < entry.keys.length; i++) {
+        var k = entry.keys[i];
+        if (k.indexOf(' ') === -1) {
+          // Single-word keyword: require a whole-word match so short words like
+          // "hi" don't false-positive inside unrelated words like "hire".
+          if (words.indexOf(k) !== -1) { score += k.length * 2; continue; }
+          if (k.length >= 4) {
+            for (var w = 0; w < words.length; w++) {
+              var word = words[w];
+              if (Math.abs(word.length - k.length) <= 2) {
+                var tolerance = k.length <= 5 ? 1 : 2;
+                if (_levenshtein(word, k) <= tolerance) { score += k.length; break; }
+              }
+            }
+          }
+        } else {
+          // Multi-word phrase: match if every word of the phrase appears
+          // somewhere in the message, even if not contiguous (handles natural
+          // phrasing like "are you a real person" matching "are you real").
+          var subWords = k.split(' ');
+          var allPresent = true;
+          for (var sw = 0; sw < subWords.length; sw++) {
+            if (words.indexOf(subWords[sw]) === -1) { allPresent = false; break; }
+          }
+          if (allPresent) score += k.length * 2;
+        }
+      }
+      return score;
+    }
+
+    var _affirmWords = ['yes','yeah','yep','sure','ok','okay','please','more','go on','continue'];
+    var _topicMemory = {};
+    var _lastTopicId = null;
+    function _pickReply(entry) {
+      var count = _topicMemory[entry.id] || 0;
+      _topicMemory[entry.id] = count + 1;
+      _lastTopicId = entry.id;
+      if (count >= entry.replies.length && entry.followUp) return entry.followUp;
+      return entry.replies[count % entry.replies.length];
+    }
+
+    var _CHAT_SB_URL = 'https://ucbyaknfjrtoitrzamca.supabase.co';
     var _CHAT_SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjYnlha25manJ0b2l0cnphbWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDYxMzgsImV4cCI6MjA5MzMyMjEzOH0.HNIVUkC0xiZoqGe1L7uYAegbjCgWCW9qjEJS0VI6gYw';
     var _chatSessionId = sessionStorage.getItem('elyrac_chat_session');
     if (!_chatSessionId) {
@@ -442,6 +586,7 @@
         body: JSON.stringify({ session_id: _chatSessionId, sender: sender, message: text, page: window.location.pathname })
       }).catch(function(){});
     }
+
     window.sendChat = function() {
       var input = document.getElementById('chat-input');
       var msg = input.value.trim();
@@ -453,33 +598,24 @@
       msgs.scrollTop = msgs.scrollHeight;
       if (!window._chatNotified) {
         window._chatNotified = true;
-        fetch('https://formspree.io/f/xpwzgqna', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            _replyto: 'vinsamuel16@gmail.com',
-            email: 'info@elyracai.com',
-            subject: 'New Chat Started on elyracai.com',
-            message: 'A visitor started a chat. First message: ' + msg + '\nPage: ' + window.location.href
-          })
-        }).catch(function(){});
+        fetch('https://formspree.io/f/xpwzgqna', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ _replyto: 'vinsamuel16@gmail.com', email: 'info@elyracai.com', subject: 'New Chat Started on elyracai.com', message: 'A visitor started a chat. First message: ' + msg + '\nPage: ' + window.location.href }) }).catch(function(){});
       }
       var lowerMsg = msg.toLowerCase();
-      var reply = null;
+      var words = lowerMsg.replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean);
+      var best = null, bestScore = 0;
       for (var i = 0; i < knowledge.length; i++) {
-        for (var j = 0; j < knowledge[i].keys.length; j++) {
-          if (lowerMsg.includes(knowledge[i].keys[j])) {
-            reply = knowledge[i].reply;
-            break;
-          }
+        var s = _scoreEntry(lowerMsg, words, knowledge[i]);
+        if (s > bestScore) { bestScore = s; best = knowledge[i]; }
+      }
+      if (!best && words.length <= 4 && _lastTopicId) {
+        var isFollowUp = _affirmWords.some(function(a){ return lowerMsg.indexOf(a) !== -1; });
+        if (isFollowUp) {
+          for (var i = 0; i < knowledge.length; i++) { if (knowledge[i].id === _lastTopicId) { best = knowledge[i]; break; } }
         }
-        if (reply) break;
       }
       var escalationKeywords = ['build','develop','project','hire','work with','proposal','budget','enterprise','urgent','need help'];
       var shouldEscalate = escalationKeywords.some(function(k){ return lowerMsg.includes(k); });
-      if (!reply) {
-        reply = "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.";
-      }
+      var reply = best ? _pickReply(best) : "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.";
       setTimeout(function() {
         msgs.innerHTML += '<div class="chat-bubble">' + MINI_AVATAR + '<div class="bubble-text">' + reply + '</div></div>';
         logChatMessage('bot', reply);
