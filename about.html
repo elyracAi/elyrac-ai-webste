@@ -507,7 +507,7 @@ body { background: #F5F8FF; }
     document.getElementById('hamburger').addEventListener('click', function() { document.getElementById('mobile-menu').classList.add('open'); });
     document.getElementById('mobile-close').addEventListener('click', function() { document.getElementById('mobile-menu').classList.remove('open'); });
     var MINI_AVATAR = '<img class="bubble-avatar" src="/others/linked_profile_pic-Photoroom.png" alt="Maya" loading="eager" decoding="async">';
-            var knowledge = [
+                var knowledge = [
       { id: 'pricing', keys: ['price','cost','how much','pricing','rates','budget','afford'],
         replies: [
           "Our pricing depends on the scope of your project — a focused automation looks very different from a full enterprise platform. The honest answer is we scope it properly on a free 30-minute call rather than guess. Book here: calendly.com/ceo-elyracai/30min",
@@ -524,31 +524,36 @@ body { background: #F5F8FF; }
       },
       { id: 'iotec', keys: ['iotec','email agent','email automation','inbox'],
         replies: [
-          "We built an intelligent email agent for ioTec Ltd that handles 80% of emails autonomously — categorizing, drafting responses, and escalating complex cases. Their team reclaims hours every day."
+          "We built an intelligent email agent for ioTec Ltd that handles 80% of emails autonomously — categorizing, drafting responses, and escalating complex cases. Their team reclaims hours every day.",
+          "That one's close to my heart — ioTec's inbox used to be a bottleneck. Now our email agent reads, categorizes, and drafts responses for them automatically, and only escalates the genuinely tricky stuff to a human."
         ],
         followUp: "If inbox overload is your problem too, this kind of email agent is very replicable for other teams — want to talk specifics?"
       },
       { id: 'codeclinic', keys: ['code clinic','clinic','dental','healthcare','hospital'],
         replies: [
-          "Code Clinic is our healthcare practice management platform — patient records, appointments, billing, payroll, live patient flow, and analytics. Built for dental and general practices."
+          "Code Clinic is our healthcare practice management platform — patient records, appointments, billing, payroll, live patient flow, and analytics. Built for dental and general practices.",
+          "Code Clinic is one I'm proud of — it's a full practice management system for clinics: records, scheduling, billing, payroll, and live patient flow, all in one place."
         ],
         followUp: "Whether you run a single clinic or a multi-branch practice, Code Clinic scales to fit — want to see it in action?"
       },
       { id: 'trivox', keys: ['trivox','receptionist','dental receptionist','voice agent'],
         replies: [
-          "Trivox AI is our conversational dental receptionist — it books appointments, answers patient queries, and follows up 24/7. Clients see +40% more bookings with zero missed outreaches."
+          "Trivox AI is our conversational dental receptionist — it books appointments, answers patient queries, and follows up 24/7. Clients see +40% more bookings with zero missed outreaches.",
+          "Trivox is a fun one — she's an AI receptionist for dental practices, handling bookings and patient questions round the clock. Practices using her have seen +40% more bookings with nothing falling through the cracks."
         ],
         followUp: "Trivox works especially well for practices that lose bookings after hours — want to see how it'd handle your call volume?"
       },
       { id: 'winopay', keys: ['winopay','fintech','payment','financial'],
         replies: [
-          "WinoPay is a full-stack fintech platform we architected from scratch — backend APIs, transaction processing, a full security layer, RBAC, and multi-service integrations."
+          "WinoPay is a full-stack fintech platform we architected from scratch — backend APIs, transaction processing, a full security layer, RBAC, and multi-service integrations.",
+          "WinoPay was a ground-up build — real transaction processing, proper security and role-based access, and a handful of service integrations, all engineered to fintech-grade standards."
         ],
         followUp: "If you're building something in fintech, WinoPay is a good reference point for how we approach security and compliance — want to discuss your idea?"
       },
       { id: 'fraud', keys: ['fraud','ml','machine learning','detection'],
         replies: [
-          "We've built ML fraud detection systems for financial institutions — the full pipeline, from data ingestion to real-time inference, with audit trails for regulatory compliance."
+          "We've built ML fraud detection systems for financial institutions — the full pipeline, from data ingestion to real-time inference, with audit trails for regulatory compliance.",
+          "That's one of our deeper technical builds — real-time fraud detection for financial institutions, covering everything from data ingestion to inference, with the audit trails regulators expect."
         ],
         followUp: "Fraud and ML work is highly domain-specific — happy to go deeper on your exact use case on a call."
       },
@@ -561,19 +566,22 @@ body { background: #F5F8FF; }
       },
       { id: 'techstack', keys: ['technology','stack','tools','built with','programming language'],
         replies: [
-          "We build with Python, FastAPI, Node.js, React, PostgreSQL, Claude AI, OpenAI, and cloud infrastructure on AWS and Vercel — we pick the right tool for each problem rather than forcing one stack everywhere."
+          "We build with Python, FastAPI, Node.js, React, PostgreSQL, Claude AI, OpenAI, and cloud infrastructure on AWS and Vercel — we pick the right tool for each problem rather than forcing one stack everywhere.",
+          "No fixed stack, honestly — Python and FastAPI on the backend a lot of the time, React up front, Postgres for data, and whichever AI model (Claude, OpenAI, or otherwise) actually fits the job. Deployed on AWS or Vercel depending on the project."
         ],
         followUp: "If you have a specific stack requirement or an existing system to integrate with, that's exactly the kind of thing we scope on a call."
       },
       { id: 'about', keys: ['who are you','about','elyrac'],
         replies: [
-          "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more."
+          "elyrac AI is a custom AI engineering company based in Uganda, building real AI systems for real businesses. Our motto: Grace in Design. We've delivered 30+ AI projects across healthcare, fintech, HR, and more.",
+          "We're elyrac AI — a team of engineers (not resellers) who build custom AI systems from scratch for real businesses, based in Uganda with clients across healthcare, fintech, HR, and beyond. Grace in Design is our motto — it shows in the work."
         ],
         followUp: "Want me to point you to a couple of our projects, or connect you directly with our founder?"
       },
       { id: 'contact', keys: ['contact','reach','email','call','talk to someone','speak to'],
         replies: [
-          "You can reach us at info@elyracai.com or book a direct call: calendly.com/ceo-elyracai/30min — our founder Vine Samuel will personally respond."
+          "You can reach us at info@elyracai.com or book a direct call: calendly.com/ceo-elyracai/30min — our founder Vine Samuel will personally respond.",
+          "Easiest way is a quick call: calendly.com/ceo-elyracai/30min. Or drop a line to info@elyracai.com — our founder Vine Samuel reads and replies to these personally."
         ],
         followUp: "Booking a call is usually the fastest way to get real answers: calendly.com/ceo-elyracai/30min"
       },
@@ -591,17 +599,32 @@ body { background: #F5F8FF; }
       },
       { id: 'howareyou', keys: ['how are you','how are things','how you doing'],
         replies: [
-          "I'm doing great, thanks for asking! 😊 Ready to help you explore what elyrac AI can build for you — what's on your mind?"
+          "I'm doing great, thanks for asking! 😊 Ready to help you explore what elyrac AI can build for you — what's on your mind?",
+          "Can't complain — I run on good code, not coffee. 😄 What can I help you with today?"
         ]
       },
       { id: 'isbot', keys: ['are you real','are you human','are you a bot','are you ai','are you a robot'],
         replies: [
-          "I'm Maya — a virtual assistant built by elyrac AI to give you quick, useful answers. For anything that needs a human touch, I'll gladly connect you with our founder directly."
+          "I'm Maya — a virtual assistant built by elyrac AI to give you quick, useful answers. For anything that needs a human touch, I'll gladly connect you with our founder directly.",
+          "Fair question — I'm an AI, built by the elyrac AI team to help visitors like you quickly. I'm honest about my limits though, so anything nuanced gets handed straight to a real person on the team."
         ]
       },
       { id: 'capabilities', keys: ['what can you do','help me','what do you do','can you help'],
         replies: [
-          "I can tell you about our services, walk through past projects like AttendTrack, Trivox AI, WinoPay, and Code Clinic, talk pricing and timelines, or get you booked on a call with our founder. What would you like to explore?"
+          "I can tell you about our services, walk through past projects like AttendTrack, Trivox AI, WinoPay, and Code Clinic, talk pricing and timelines, or get you booked on a call with our founder. What would you like to explore?",
+          "Quite a bit, actually — ask me about pricing, timelines, our tech stack, or any of our past builds (AttendTrack, Trivox AI, WinoPay, Code Clinic, and more). Or I can just get you straight to a call with our founder. Where do you want to start?"
+        ]
+      },
+      { id: 'joke', keys: ['joke','funny','make me laugh'],
+        replies: [
+          "Why did the AI cross the road? To optimize the chicken's route. 🐔 Okay, back to business — what can I help you with?",
+          "I tried to write my own joke once, but it kept overfitting to the training data. 🤖 Anyway — what brought you here today?"
+        ]
+      },
+      { id: 'compliment', keys: ['amazing','awesome','impressive','brilliant','clever','fantastic','great job','love this'],
+        replies: [
+          "That's kind of you to say! 😊 The credit really goes to the team behind me — want to see the kind of work they do?",
+          "Aw, thank you! I'll pass that along to the team who built me. Anything I can help you find out about elyrac AI?"
         ]
       }
     ];
@@ -657,6 +680,7 @@ body { background: #F5F8FF; }
 
     var _affirmWords = ['yes','yeah','yep','sure','ok','okay','please','more','go on','continue'];
     var _topicMemory = {};
+    var _fallbackCount = 0;
     var _lastTopicId = null;
     function _pickReply(entry) {
       var count = _topicMemory[entry.id] || 0;
@@ -747,10 +771,21 @@ body { background: #F5F8FF; }
       return { doc: _corpusIndex.docs[best], score: bestScore };
     }
 
+    var _corpusLeadIns = [
+      "Good question — here's what I know: ",
+      "Here's the relevant bit: ",
+      "From what's on our site: ",
+      ''
+    ];
+    var _corpusHitCount = 0;
     function _extractAnswer(doc) {
       // Every corpus document is already concise (one paragraph or less), so
       // the full text is the answer — no truncation/summarization needed.
-      return doc.text.trim();
+      // A rotating, sometimes-empty lead-in keeps repeated lookups from
+      // always sounding like the exact same canned opener.
+      var leadIn = _corpusLeadIns[_corpusHitCount % _corpusLeadIns.length];
+      _corpusHitCount++;
+      return (leadIn + doc.text).trim();
     }
 
     var _CHAT_SB_URL = 'https://ucbyaknfjrtoitrzamca.supabase.co';
@@ -806,9 +841,17 @@ body { background: #F5F8FF; }
       } else {
         await _loadCorpus();
         var hit = _searchCorpus(msg);
-        reply = hit
-          ? _extractAnswer(hit.doc)
-          : "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.";
+        if (hit) {
+          reply = _extractAnswer(hit.doc);
+        } else {
+          var _fallbacks = [
+            "That's a great question! For the most accurate answer, I'd recommend booking a free 30-minute call with our founder at calendly.com/ceo-elyracai/30min — or email us at info@elyracai.com. We respond within 24 hours.",
+            "I don't want to guess on that one — our founder can give you a proper answer. Book a free 30 minutes here: calendly.com/ceo-elyracai/30min, or email info@elyracai.com.",
+            "Hmm, that's outside what I can speak to confidently. Let's get you a real answer from the team: info@elyracai.com, or grab a slot at calendly.com/ceo-elyracai/30min."
+          ];
+          reply = _fallbacks[_fallbackCount % _fallbacks.length];
+          _fallbackCount++;
+        }
       }
 
       setTimeout(function() {
