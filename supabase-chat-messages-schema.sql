@@ -30,6 +30,12 @@ create policy "Allow authenticated read" on public.chat_messages
   to authenticated
   using (true);
 
+-- Only logged-in team members can delete conversations (from the admin dashboard)
+create policy "Allow authenticated delete" on public.chat_messages
+  for delete
+  to authenticated
+  using (true);
+
 -- Lets the admin dashboard get live updates when a new chat message comes in,
 -- the same way it already does for contact_submissions
 alter publication supabase_realtime add table public.chat_messages;
